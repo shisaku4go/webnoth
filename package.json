@@ -1,0 +1,23 @@
+{
+  "name": "webnoth",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Wesnoth on the Web — Experimental implementations of Wesnoth features in React",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r exec tsc --noEmit",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --write ."
+  },
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=11"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15"
+  }
+}

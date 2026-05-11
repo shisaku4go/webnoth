@@ -1,0 +1,12 @@
+{
+  "extends": "../config/tsconfig/react.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "paths": {
+      "@webnoth/ui/*": ["./src/*"]
+    },
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
+  },
+  "include": ["src"]
+}
