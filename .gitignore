@@ -142,5 +142,14 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 
+# TypeScript composite build outputs (tsc -b)
+vite.config.js
+vite.config.d.ts
+vite.config.d.ts.map
+vite.config.js.map
+
+# TanStack Router temporary files
+.tanstack/
+
 # Agent files
 .agents/
