@@ -168,8 +168,6 @@ export interface WesnothProvenance {
   revision: string;
   /** Extraction timestamp in ISO 8601 format */
   extractedAt: string;
-  /** Local wesnoth repository root path used during extraction */
-  wesnothRoot: string;
   /** List of all source files processed */
   sourceFiles: ProvenanceSourceFile[];
   /** Statistics about copied image assets */

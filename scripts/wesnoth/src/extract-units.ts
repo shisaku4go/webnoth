@@ -486,7 +486,6 @@ function writeProvenanceFile(
   const provenance = {
     revision,
     extractedAt: new Date().toISOString(),
-    wesnothRoot: basename(wesnothRoot),
     sourceFiles,
     imageStats: {
       totalFiles: 0,

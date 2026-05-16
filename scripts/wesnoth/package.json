@@ -9,8 +9,7 @@
     "extract:all": "npm run extract && npm run extract:images"
   },
   "devDependencies": {
-    "tsx": "^4.19.4",
     "@types/node": "^22.15.18",
-    "glob": "^11.0.2"
+    "tsx": "^4.19.4"
   }
 }
