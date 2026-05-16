@@ -1,0 +1,28 @@
+{
+  "name": "@webnoth/wesnoth-data",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./units": {
+      "development": "./src/generated/units.ts",
+      "default": "./src/generated/units.ts"
+    },
+    "./races": {
+      "development": "./src/generated/races.ts",
+      "default": "./src/generated/races.ts"
+    },
+    "./movetypes": {
+      "development": "./src/generated/movetypes.ts",
+      "default": "./src/generated/movetypes.ts"
+    },
+    "./provenance": {
+      "development": "./src/generated/provenance.ts",
+      "default": "./src/generated/provenance.ts"
+    }
+  }
+}
