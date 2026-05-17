@@ -5,7 +5,7 @@ import type { WesnothProvenance } from "../types.ts";
 
 export const provenance: WesnothProvenance = {
   "revision": "d9530833c676288f906548d7da58c83b45384745",
-  "extractedAt": "2026-05-17T16:31:40.854Z",
+  "extractedAt": "2026-05-17T17:49:09.843Z",
   "sourceFiles": [
     {
       "relativePath": "data/core/macros/abilities.cfg",

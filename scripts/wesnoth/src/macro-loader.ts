@@ -115,7 +115,7 @@ function extractSimpleMacros(
     if (body.startsWith('{') && body.includes(' ') && body.endsWith('}'))
       continue;
 
-    // This is a simple constant macro
-    dictionary.set(macroName, body);
+    // This is a simple constant macro (no parameters)
+    dictionary.set(macroName, { params: [], body });
   }
 }
