@@ -5,10 +5,10 @@
  * TypeScript source files into packages/wesnoth-data/src/generated/.
  *
  * Usage:
- *   npx tsx scripts/wesnoth/src/extract-units.ts --wesnoth-root ~/repos/wesnoth
+ *   npx tsx scripts/wesnoth/src/extract-units.ts --wesnoth-root <path-to-wesnoth>
  *
  * Or from scripts/wesnoth/:
- *   npm run extract -- --wesnoth-root ~/repos/wesnoth
+ *   npm run extract -- --wesnoth-root <path-to-wesnoth>
  */
 
 import { execSync } from "node:child_process";
