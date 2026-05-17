@@ -89,13 +89,15 @@ function parseMacroArgs(argsString: string): string[] {
 }
 
 /**
- * Parse a #define line to extract macro name, parameters, and optional inline body.
+ * Parse the portion of a #define line after the macro name,
+ * extracting parameter names and any inline body.
  *
- * Examples:
- *   "#define MY_MACRO"             → { name: "MY_MACRO", params: [], rest: "" }
- *   "#define MY_MACRO PARAM1 PARAM2" → { name: "MY_MACRO", params: ["PARAM1", "PARAM2"], rest: "" }
- *   "#define MY_MACRO PARAM foo={PARAM}#enddef"
- *     → { name: "MY_MACRO", params: ["PARAM"], rest: "foo={PARAM}#enddef" }
+ * @param restAfterName - The text following the macro name on the #define line
+ *
+ * Examples (input → output):
+ *   ""                       → { params: [], bodyStart: "" }
+ *   " PARAM1 PARAM2"         → { params: ["PARAM1", "PARAM2"], bodyStart: "" }
+ *   " PARAM foo={PARAM}#enddef" → { params: ["PARAM"], bodyStart: "foo={PARAM}#enddef" }
  */
 function parseDefineLine(
   restAfterName: string,
