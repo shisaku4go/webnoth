@@ -21,14 +21,14 @@ This project is a fan-made browser project that utilizes official assets from *T
 ### 1. Source Code
 All original and modified program code (TypeScript, JavaScript, etc.) created for this project is licensed under the **GNU General Public License v2.0 or later (GPL-2.0-or-later)**.
 
-### 2. Game Assets
-The copyrights for all official game assets (images, units, backgrounds, UI, etc.) included in this repository belong to the original creators (**The Battle for Wesnoth Project** and its contributors).
+### 2. Game Assets (Images, UI, Audio)
+The copyrights for all official game assets included in this repository belong to the original creators (**The Battle for Wesnoth Project** and its contributors).
 
-These assets are used and distributed under either of the following licenses:
-- **GNU General Public License v2.0 or later (GPL-2.0-or-later)**
-- **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**
+According to Wesnoth's official licensing policy, these assets are distributed under either of the following open-source licenses:
+- **GNU General Public License v2.0 or later (GPL-2.0-or-later)** (The default license for the vast majority of core art, stories, and older assets)
+- **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)** (Applicable to newer visual and audio contributions)
 
-For detailed author and license attribution for each individual asset file, please refer to the official [Wesnoth Copyrights CSV](https://github.com/wesnoth/wesnoth/blob/master/copyrights.csv).
+For more detailed information on Wesnoth's official copyright guidelines, please refer to the [Official Wesnoth Copyrights Wiki](https://wiki.wesnoth.org/Wesnoth:Copyrights) and the official repository's [copyrights.csv](https://github.com/wesnoth/wesnoth/blob/master/copyrights.csv) for specific audio tracking.
 
 ---
 
