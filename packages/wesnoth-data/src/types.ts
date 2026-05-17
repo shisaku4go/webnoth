@@ -18,14 +18,14 @@
 // === Damage & Attack ===
 
 export type DamageType =
-  | "blade"
-  | "pierce"
-  | "impact"
-  | "fire"
-  | "cold"
-  | "arcane";
+  | 'blade'
+  | 'pierce'
+  | 'impact'
+  | 'fire'
+  | 'cold'
+  | 'arcane';
 
-export type AttackRange = "melee" | "ranged";
+export type AttackRange = 'melee' | 'ranged';
 
 export interface WesnothAttack {
   name: string;
@@ -56,12 +56,7 @@ export interface WesnothAnimationFrame {
   sound?: string;
 }
 
-export type AnimationType =
-  | "standing"
-  | "idle"
-  | "death"
-  | "attack"
-  | "defend";
+export type AnimationType = 'standing' | 'idle' | 'death' | 'attack' | 'defend';
 
 export interface WesnothAnimation {
   type: AnimationType;
@@ -74,7 +69,7 @@ export interface WesnothAnimation {
 
 // === Unit Type ===
 
-export type Alignment = "lawful" | "neutral" | "chaotic" | "liminal";
+export type Alignment = 'lawful' | 'neutral' | 'chaotic' | 'liminal';
 
 export interface WesnothUnitType {
   id: string;

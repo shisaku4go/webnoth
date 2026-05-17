@@ -20,4 +20,4 @@ export type {
   WesnothProvenance,
   WesnothRace,
   WesnothUnitType,
-} from "./types.ts";
+} from './types.ts';

@@ -3,20 +3,11 @@
   "compilerOptions": {
     "noEmit": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
-    "types": [
-      "vite/client",
-      "vitest/globals",
-      "@testing-library/jest-dom"
-    ]
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": [
-    "src",
-    "vitest.setup.ts"
-  ],
+  "include": ["src", "vitest.setup.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -19,7 +19,7 @@ Parses WML files and outputs the following data to `packages/wesnoth-data/src/ge
 - `provenance.ts` — Extraction source info (Git revision, file list)
 
 ```bash
-npx tsx src/extract-units.ts --wesnoth-root <path-to-wesnoth>
+pnpm run extract -- --wesnoth-root <path-to-wesnoth>
 ```
 
 ### `extract-images.ts` — Image Asset Extraction
@@ -27,7 +27,7 @@ npx tsx src/extract-units.ts --wesnoth-root <path-to-wesnoth>
 Copies image assets from the Wesnoth repository to `packages/wesnoth-data/assets/`:
 
 ```bash
-npx tsx src/extract-images.ts --wesnoth-root <path-to-wesnoth>
+pnpm run extract:images -- --wesnoth-root <path-to-wesnoth>
 ```
 
 ### Extract All (`extract:all`)
@@ -35,7 +35,7 @@ npx tsx src/extract-images.ts --wesnoth-root <path-to-wesnoth>
 Runs both scripts sequentially:
 
 ```bash
-npm run extract:all -- --wesnoth-root <path-to-wesnoth>
+pnpm run extract:all -- --wesnoth-root <path-to-wesnoth>
 ```
 
 ## About the WML Parser

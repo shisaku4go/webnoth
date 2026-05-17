@@ -34,21 +34,26 @@ export function parseWml(
   content: string,
   macroDictionary?: MacroDictionary,
 ): WmlNode {
-  const root: WmlNode = { tag: "root", attributes: {}, children: [], macros: [] };
+  const root: WmlNode = {
+    tag: 'root',
+    attributes: {},
+    children: [],
+    macros: [],
+  };
   const stack: WmlNode[] = [root];
-  const lines = content.split("\n");
+  const lines = content.split('\n');
   let inDefine = false;
-  let multiLineKey = "";
-  let multiLineValue = "";
+  let multiLineKey = '';
+  let multiLineValue = '';
   let multiLineQuoteOpen = false;
 
   for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
+    const line = lines[i];
 
     // Handle #define / #enddef blocks — skip them (loaded by macro-loader)
     if (/^\s*#define\b/.test(line)) {
       // Check if #enddef is on the same line (e.g., single-line macros aren't common here but be safe)
-      if (line.includes("#enddef")) {
+      if (line.includes('#enddef')) {
         continue;
       }
       inDefine = true;
@@ -56,7 +61,7 @@ export function parseWml(
     }
     if (inDefine) {
       // #enddef can appear anywhere on the line, e.g.: `value#enddef` or `value #enddef`
-      if (line.includes("#enddef")) {
+      if (line.includes('#enddef')) {
         inDefine = false;
       }
       continue;
@@ -67,7 +72,7 @@ export function parseWml(
 
     // Handle multi-line string continuation
     if (multiLineQuoteOpen) {
-      multiLineValue += "\n" + line;
+      multiLineValue += '\n' + line;
       // Check if quote closes on this line
       if (hasClosingQuote(line)) {
         multiLineQuoteOpen = false;
@@ -76,15 +81,15 @@ export function parseWml(
           multiLineValue,
           macroDictionary,
         );
-        multiLineKey = "";
-        multiLineValue = "";
+        multiLineKey = '';
+        multiLineValue = '';
       }
       continue;
     }
 
     // Trim for tag/key detection
     const trimmed = line.trim();
-    if (trimmed === "") continue;
+    if (trimmed === '') continue;
 
     // Closing tag: [/tagname]
     const closeMatch = trimmed.match(/^\[\/(\w+)\]$/);
@@ -134,12 +139,12 @@ export function parseWml(
 
     // Macro invocation: {MACRO_NAME ...}
     const macroMatch = trimmed.match(/^\{(.+)\}$/);
-    if (macroMatch && !trimmed.includes("=")) {
+    if (macroMatch && !trimmed.includes('=')) {
       const macroContent = macroMatch[1].trim();
       const macroName = macroContent.split(/\s+/)[0];
 
       // Try to expand simple constant macros
-      if (macroDictionary?.has(macroName) && !macroContent.includes(" ")) {
+      if (macroDictionary?.has(macroName) && !macroContent.includes(' ')) {
         const expansion = macroDictionary.get(macroName)!;
         // Re-parse the expanded content
         const expandedNode = parseWml(expansion, macroDictionary);
@@ -163,7 +168,7 @@ export function parseWml(
     const kvMatch = line.match(/^\s*(\w+)\s*=\s*(.*)/);
     if (kvMatch) {
       const key = kvMatch[1];
-      let value = kvMatch[2];
+      const value = kvMatch[2];
 
       // Check for multi-line strings (unclosed quote)
       if (hasOpenQuote(value)) {
@@ -179,7 +184,7 @@ export function parseWml(
     }
 
     // Lines with inline macros within other content — record as macros
-    if (trimmed.startsWith("{") && trimmed.endsWith("}")) {
+    if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
       const currentNode = stack[stack.length - 1];
       currentNode.macros.push(trimmed.slice(1, -1).trim());
     }
@@ -194,7 +199,7 @@ export function parseWml(
 function hasOpenQuote(s: string): boolean {
   let inQuote = false;
   for (let i = 0; i < s.length; i++) {
-    if (s[i] === '"' && (i === 0 || s[i - 1] !== "\\")) {
+    if (s[i] === '"' && (i === 0 || s[i - 1] !== '\\')) {
       inQuote = !inQuote;
     }
   }
@@ -207,7 +212,7 @@ function hasOpenQuote(s: string): boolean {
 function hasClosingQuote(s: string): boolean {
   let quoteCount = 0;
   for (let i = 0; i < s.length; i++) {
-    if (s[i] === '"' && (i === 0 || s[i - 1] !== "\\")) {
+    if (s[i] === '"' && (i === 0 || s[i - 1] !== '\\')) {
       quoteCount++;
     }
   }
@@ -230,7 +235,7 @@ function cleanValue(raw: string, macros?: MacroDictionary): string {
 
   // Handle string concatenation: pieces joined with +
   // Example: _ "part1" + "\n\n" + _ "part2"
-  if (value.includes('" +') || value.includes("+ _") || value.includes('+ "')) {
+  if (value.includes('" +') || value.includes('+ _') || value.includes('+ "')) {
     return cleanConcatenatedString(value, macros);
   }
 
@@ -262,17 +267,17 @@ function cleanConcatenatedString(
 ): string {
   // Split on + that's outside of quotes
   const parts: string[] = [];
-  let current = "";
+  let current = '';
   let inQuote = false;
 
   for (let i = 0; i < raw.length; i++) {
     const ch = raw[i];
-    if (ch === '"' && (i === 0 || raw[i - 1] !== "\\")) {
+    if (ch === '"' && (i === 0 || raw[i - 1] !== '\\')) {
       inQuote = !inQuote;
       current += ch;
-    } else if (ch === "+" && !inQuote) {
+    } else if (ch === '+' && !inQuote) {
       parts.push(current.trim());
-      current = "";
+      current = '';
     } else {
       current += ch;
     }
@@ -295,7 +300,7 @@ function cleanConcatenatedString(
       }
       return p;
     })
-    .join("");
+    .join('');
 }
 
 /**
@@ -304,9 +309,9 @@ function cleanConcatenatedString(
 function stripInlineComment(s: string): string {
   let inQuote = false;
   for (let i = 0; i < s.length; i++) {
-    if (s[i] === '"' && (i === 0 || s[i - 1] !== "\\")) {
+    if (s[i] === '"' && (i === 0 || s[i - 1] !== '\\')) {
       inQuote = !inQuote;
-    } else if (s[i] === "#" && !inQuote) {
+    } else if (s[i] === '#' && !inQuote) {
       return s.slice(0, i).trimEnd();
     }
   }
@@ -351,7 +356,7 @@ export function getListAttr(node: WmlNode, key: string): string[] {
   const v = node.attributes[key];
   if (!v) return [];
   return v
-    .split(",")
+    .split(',')
     .map((s) => s.trim())
     .filter((s) => s.length > 0);
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "extract": "tsx src/extract-units.ts",
     "extract:images": "tsx src/extract-images.ts",
-    "extract:all": "npm run extract && npm run extract:images"
+    "extract:all": "pnpm run extract && pnpm run extract:images"
   },
   "devDependencies": {
     "@types/node": "^22.15.18",

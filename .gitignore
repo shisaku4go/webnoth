@@ -155,3 +155,4 @@ vite.config.js.map
 .agents
 .agents/packages/wesnoth-data/assets/
 !packages/wesnoth-data/assets/.gitkeep
+skills-lock.json
