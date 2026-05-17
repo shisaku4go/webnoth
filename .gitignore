@@ -152,5 +152,6 @@ vite.config.js.map
 .tanstack/
 
 # Agent files
+.agents
 .agents/packages/wesnoth-data/assets/
 !packages/wesnoth-data/assets/.gitkeep
