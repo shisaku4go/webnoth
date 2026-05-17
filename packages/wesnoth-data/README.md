@@ -1,83 +1,83 @@
 # @webnoth/wesnoth-data
 
-Wesnoth のゲームデータ（ユニット、種族、移動タイプ）を TypeScript オブジェクトとして提供する共有パッケージ。
+A shared package providing Wesnoth game data (units, races, movetypes) as TypeScript objects.
 
-## 概要
+## Overview
 
-[Battle for Wesnoth](https://wesnoth.org/) の WML (Wesnoth Markup Language) ファイルから抽出した構造化データ。以下のプロジェクトで利用予定：
+Structured data extracted from the WML (Wesnoth Markup Language) files of [Battle for Wesnoth](https://wesnoth.org/). Planned for use in the following projects:
 
-- **ユニット図鑑** — 全ユニットのパラメータ・画像・アニメーション表示
-- **バトルシミュレーター** — 戦闘パラメータを用いた模擬戦闘
-- **Web版 Wesnoth** — フル実装のブラウザ版ゲーム
+- **Unit Encyclopedia** — Display all unit parameters, images, and animations
+- **Battle Simulator** — Mock battles using combat parameters
+- **Web-based Wesnoth** — Full implementation of the browser game
 
-## 使い方
+## Usage
 
 ```typescript
-// 全データの型定義
+// Type definitions for all data
 import type { WesnothUnitType, WesnothRace, WesnothMovetype } from '@webnoth/wesnoth-data';
 
-// 個別データのインポート（tree-shaking対応）
+// Import individual data modules (supports tree-shaking)
 import { unitTypes } from '@webnoth/wesnoth-data/units';
 import { races } from '@webnoth/wesnoth-data/races';
 import { movetypes } from '@webnoth/wesnoth-data/movetypes';
 import { provenance } from '@webnoth/wesnoth-data/provenance';
 ```
 
-## データ内容
+## Data Content
 
-| データ | 件数 | 説明 |
+| Data | Count | Description |
 |--------|------|------|
-| `unitTypes` | 328 | ユニットタイプ（攻撃・アビリティ・アニメーション含む） |
-| `races` | 24 | 種族定義 |
-| `movetypes` | 38 | 移動タイプ（地形コスト・防御・耐性） |
-| `provenance` | 1 | 抽出元情報（Git revision, ファイル一覧等） |
+| `unitTypes` | 328 | Unit types (including attacks, abilities, and animations) |
+| `races` | 24 | Race definitions |
+| `movetypes` | 38 | Move types (terrain costs, defenses, and resistances) |
+| `provenance` | 1 | Extraction source info (Git revision, file list, etc.) |
 
-## 画像アセット
+## Image Assets
 
-`assets/` ディレクトリに全ユニット関連画像を格納：
+All unit-related images are stored in the `assets/` directory:
 
-| ディレクトリ | 内容 | サイズ |
+| Directory | Content | Size |
 |-------------|------|--------|
-| `assets/units/` | ユニットスプライト・アニメーションフレーム | ~8.5 MB |
-| `assets/portraits/` | ポートレート画像 | ~32 MB |
-| `assets/attacks/` | 攻撃アイコン | ~937 KB |
-| `assets/projectiles/` | 飛び道具アニメーション | ~842 KB |
+| `assets/units/` | Unit sprites and animation frames | ~8.5 MB |
+| `assets/portraits/` | Portrait images | ~32 MB |
+| `assets/attacks/` | Attack icons | ~937 KB |
+| `assets/projectiles/` | Projectile animations | ~842 KB |
 
-> **Note:** 画像アセットは合計 42MB+ あります。将来的に Git LFS への移行、またはパッケージからの分離を検討中です。
+> **Note:** Image assets total over 42MB. Migrating to Git LFS or separating them from the package is being considered for the future.
 
-## データの更新
+## Updating Data
 
-Wesnoth リポジトリのデータを再抽出するには：
+To re-extract data from the Wesnoth repository:
 
 ```bash
-# scripts/wesnoth/ から実行
+# Execute from scripts/wesnoth/
 cd scripts/wesnoth
 
-# ユニットデータの抽出
-npx tsx src/extract-units.ts --wesnoth-root ~/repos/wesnoth
+# Extract unit data
+npx tsx src/extract-units.ts --wesnoth-root <path-to-wesnoth>
 
-# 画像アセットの抽出
-npx tsx src/extract-images.ts --wesnoth-root ~/repos/wesnoth
+# Extract image assets
+npx tsx src/extract-images.ts --wesnoth-root <path-to-wesnoth>
 ```
 
-## 将来の拡張（次フェーズ）
+## Future Extensions (Next Phases)
 
-### Era / Faction データ
-`data/multiplayer/eras.cfg` および `data/multiplayer/factions/` からマルチプレイヤーの Era・Faction 情報を抽出予定。Faction は `leader` と `recruit` フィールドでユニットID (`WesnothUnitType.id`) を参照するため、本パッケージのユニットデータと自然に統合可能。
+### Era / Faction Data
+Planning to extract multiplayer Era/Faction information from `data/multiplayer/eras.cfg` and `data/multiplayer/factions/`. Factions refer to unit IDs (`WesnothUnitType.id`) in their `leader` and `recruit` fields, so they can naturally integrate with this package's unit data.
 
-### Terrain データ
-`data/core/terrain.cfg` からの地形定義抽出。Movetype のキー（`shallow_water`, `forest` 等）と対応。
+### Terrain Data
+Extracting terrain definitions from `data/core/terrain.cfg`. Maps to Movetype keys (e.g., `shallow_water`, `forest`).
 
-### マクロ展開の拡充
-現在、引数なし定数マクロのみ展開。将来的に以下を検討：
-- `{TRAIT_STRONG}`, `{TRAIT_QUICK}` 等のトレイトマクロ展開
-- `{ABILITY_HEALS}` 等のアビリティマクロ展開
-- `{DEFENSE_ANIM ...}` 等のアニメーションマクロ展開
+### Expanded Macro Expansion
+Currently, only constant macros without arguments are expanded. Future considerations:
+- Trait macros like `{TRAIT_STRONG}`, `{TRAIT_QUICK}`
+- Ability macros like `{ABILITY_HEALS}`
+- Animation macros like `{DEFENSE_ANIM ...}`
 
-### `specials_list` vs `[specials]` ブロック
-現在は `specials_list` の簡略記法（カンマ区切り文字列）のみパース。`[specials]` ブロック形式は全327ユニットファイル中わずか2ファイル（Ant Queen系）でのみ使用されており、マクロ名として記録。
+### `specials_list` vs `[specials]` Blocks
+Currently, only the shorthand `specials_list` (comma-separated strings) is parsed. The `[specials]` block format is used in only 2 out of 327 unit files (Ant Queen variants) and is recorded as a macro name.
 
-### 画像アセットの最適化
-- Git LFS 導入
-- WebP 変換・圧縮
-- スプライトシート生成
+### Image Asset Optimization
+- Git LFS integration
+- WebP conversion/compression
+- Sprite sheet generation

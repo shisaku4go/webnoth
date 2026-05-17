@@ -1,67 +1,69 @@
 # Wesnoth Data Extraction Scripts
 
-Wesnoth の WML ファイルから TypeScript オブジェクトを生成するスクリプト群。
+A suite of scripts that generate TypeScript objects from Wesnoth WML files.
 
-## 前提条件
+## Prerequisites
 
 - Node.js 24+
-- [Wesnoth リポジトリ](https://github.com/wesnoth/wesnoth) のローカルクローン
+- A local clone of the [Wesnoth repository](https://github.com/wesnoth/wesnoth)
 
-## スクリプト一覧
+## Scripts
 
-### `extract-units.ts` — ユニットデータ抽出
+### `extract-units.ts` — Unit Data Extraction
 
-WML ファイルをパースし、以下のデータを `packages/wesnoth-data/src/generated/` に出力：
+Parses WML files and outputs the following data to `packages/wesnoth-data/src/generated/`:
 
-- `units.ts` — 全ユニットタイプ（攻撃、アビリティ、アニメーション含む）
-- `races.ts` — 全種族定義
-- `movetypes.ts` — 全移動タイプ（地形コスト、防御、耐性）
-- `provenance.ts` — 抽出元情報（Git revision、ファイル一覧）
-
-```bash
-npx tsx src/extract-units.ts --wesnoth-root ~/repos/wesnoth
-```
-
-### `extract-images.ts` — 画像アセット抽出
-
-Wesnoth リポジトリから画像アセットを `packages/wesnoth-data/assets/` にコピー：
+- `units.ts` — All unit types (including attacks, abilities, and animations)
+- `races.ts` — All race definitions
+- `movetypes.ts` — All move types (terrain costs, defenses, and resistances)
+- `provenance.ts` — Extraction source info (Git revision, file list)
 
 ```bash
-npx tsx src/extract-images.ts --wesnoth-root ~/repos/wesnoth
+npx tsx src/extract-units.ts --wesnoth-root <path-to-wesnoth>
 ```
 
-### 全て一括実行
+### `extract-images.ts` — Image Asset Extraction
+
+Copies image assets from the Wesnoth repository to `packages/wesnoth-data/assets/`:
 
 ```bash
-npm run extract:all -- --wesnoth-root ~/repos/wesnoth
+npx tsx src/extract-images.ts --wesnoth-root <path-to-wesnoth>
 ```
 
-## WML パーサーについて
+### Extract All (`extract:all`)
 
-`src/wml-parser.ts` は WML の以下の構文をサポート：
+Runs both scripts sequentially:
 
-| 構文 | サポート | 備考 |
+```bash
+npm run extract:all -- --wesnoth-root <path-to-wesnoth>
+```
+
+## About the WML Parser
+
+`src/wml-parser.ts` supports the following WML syntax:
+
+| Syntax | Supported | Notes |
 |------|---------|------|
-| `[tag]` / `[/tag]` ネスト | ✅ | |
-| `key=value` ペア | ✅ | 翻訳マーカー `_ "..."` の除去含む |
-| `{MACRO}` 引数なし定数マクロ | ✅ | マクロ辞書で展開 |
-| `{MACRO args...}` パラメータ付きマクロ | ⚠️ | マクロ名として記録（未展開） |
-| `[+tag]` マージ構文 | ✅ | |
-| 文字列連結 (`+`) | ✅ | |
-| 複数行文字列 | ✅ | |
-| `#define` / `#enddef` | ✅ | スキップ（macro-loader で別途処理） |
-| `#ifdef` / `#else` / `#endif` | ❌ | 未対応 |
-| WML 式 `$(...)` | ❌ | 未対応 |
+| `[tag]` / `[/tag]` nesting | ✅ | |
+| `key=value` pairs | ✅ | Includes removing translation markers `_ "..."` |
+| `{MACRO}` constant macros without args | ✅ | Expanded using the macro dictionary |
+| `{MACRO args...}` macros with parameters | ⚠️ | Recorded as macro names (unexpanded) |
+| `[+tag]` merge syntax | ✅ | |
+| String concatenation (`+`) | ✅ | |
+| Multi-line strings | ✅ | |
+| `#define` / `#enddef` | ✅ | Skipped (handled separately by macro-loader) |
+| `#ifdef` / `#else` / `#endif` | ❌ | Not supported |
+| WML expressions `$(...)` | ❌ | Not supported |
 
-### マクロ展開方針
+### Macro Expansion Policy
 
-`src/macro-loader.ts` が `data/core/macros/` から引数なし・1行定義の定数マクロを辞書として読み込み、パース時にインライン展開します。
+`src/macro-loader.ts` reads parameter-less, single-line constant macros from `data/core/macros/` into a dictionary and expands them inline during parsing.
 
-**展開されるマクロの例：**
+**Examples of expanded macros:**
 - `{SOUND_LIST:HUMAN_DIE}` → `"human-die-[1~3].ogg"`
 - `{SOUND_LIST:SWORD_SWISH}` → `"sword-1.ogg"`
 
-**展開されないマクロの例（名前のみ記録）：**
-- `{AMLA_DEFAULT}` — 複数行のアドバンスメント定義
-- `{DEFENSE_ANIM "img1.png" "img2.png" sound.ogg}` — パラメータ付きアニメーション
-- `{TRAIT_STRONG}` — トレイト定義（複数行）
+**Examples of unexpanded macros (only names are recorded):**
+- `{AMLA_DEFAULT}` — Multi-line advancement definitions
+- `{DEFENSE_ANIM "img1.png" "img2.png" sound.ogg}` — Animations with parameters
+- `{TRAIT_STRONG}` — Trait definitions (multi-line)

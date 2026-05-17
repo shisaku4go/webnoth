@@ -11,7 +11,7 @@
  *   - data/core/images/projectiles/ → assets/projectiles/
  *
  * Usage:
- *   npx tsx scripts/wesnoth/src/extract-images.ts --wesnoth-root ~/repos/wesnoth
+ *   npx tsx scripts/wesnoth/src/extract-images.ts --wesnoth-root <path-to-wesnoth>
  *
  * NOTE: Total asset size is 60MB+. Currently committed to Git as regular files.
  * Future considerations:
