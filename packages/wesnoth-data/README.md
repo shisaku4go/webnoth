@@ -42,8 +42,11 @@ All unit-related images are stored in the `assets/` directory:
 | `assets/portraits/` | Portrait images | ~32 MB |
 | `assets/attacks/` | Attack icons | ~937 KB |
 | `assets/projectiles/` | Projectile animations | ~842 KB |
+| `assets/scenery/` | Scenery and terrain background images | ~1.5 MB |
+| `assets/halo/` | Halo and glow animation effects | ~4.2 MB |
+| `assets/misc/` | Miscellaneous UI and hex images | ~1.2 MB |
 
-> **Note:** Image assets total over 42MB. Migrating to Git LFS or separating them from the package is being considered for the future.
+> **Note:** Image assets total over 50MB. Migrating to Git LFS or separating them from the package is being considered for the future.
 
 ## Updating Data
 
@@ -69,7 +72,7 @@ Planning to extract multiplayer Era/Faction information from `data/multiplayer/e
 Extracting terrain definitions from `data/core/terrain.cfg`. Maps to Movetype keys (e.g., `shallow_water`, `forest`).
 
 ### Expanded Macro Expansion
-Currently, only constant macros without arguments are expanded. Future considerations:
+Currently, constant macros without arguments, local `#define` / `#undef` blocks, recursive macro expansions, and Image Path Function (IPF) cleaning are fully supported. Future considerations:
 - Trait macros like `{TRAIT_STRONG}`, `{TRAIT_QUICK}`
 - Ability macros like `{ABILITY_HEALS}`
 - Animation macros like `{DEFENSE_ANIM ...}`

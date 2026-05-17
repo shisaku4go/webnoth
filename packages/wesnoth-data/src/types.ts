@@ -18,14 +18,14 @@
 // === Damage & Attack ===
 
 export type DamageType =
-  | "blade"
-  | "pierce"
-  | "impact"
-  | "fire"
-  | "cold"
-  | "arcane";
+  | 'blade'
+  | 'pierce'
+  | 'impact'
+  | 'fire'
+  | 'cold'
+  | 'arcane';
 
-export type AttackRange = "melee" | "ranged";
+export type AttackRange = 'melee' | 'ranged';
 
 export interface WesnothAttack {
   name: string;
@@ -56,12 +56,7 @@ export interface WesnothAnimationFrame {
   sound?: string;
 }
 
-export type AnimationType =
-  | "standing"
-  | "idle"
-  | "death"
-  | "attack"
-  | "defend";
+export type AnimationType = 'standing' | 'idle' | 'death' | 'attack' | 'defend';
 
 export interface WesnothAnimation {
   type: AnimationType;
@@ -74,7 +69,7 @@ export interface WesnothAnimation {
 
 // === Unit Type ===
 
-export type Alignment = "lawful" | "neutral" | "chaotic" | "liminal";
+export type Alignment = 'lawful' | 'neutral' | 'chaotic' | 'liminal';
 
 export interface WesnothUnitType {
   id: string;
@@ -119,10 +114,14 @@ export interface WesnothUnitType {
    * Example: Ant Queen overrides fungus movement cost.
    */
   movementCostOverrides?: Record<string, number>;
-  /**
-   * Inline defense overrides.
-   */
+  /** Inline defense overrides. */
   defenseOverrides?: Record<string, number>;
+  /** ID of the base unit this unit inherits from */
+  baseUnitId?: string;
+  /** Whether this unit is hidden from the help/encyclopedia */
+  hideHelp?: boolean;
+  /** Whether this unit is excluded from encyclopedia listings */
+  doNotList?: boolean;
   /** WML source file path relative to wesnoth repo root */
   sourceFile: string;
 }

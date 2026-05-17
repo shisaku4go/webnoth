@@ -12,9 +12,9 @@
  * into the dictionary — they will be recorded as unexpanded macro names during parsing.
  */
 
-import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
-import type { MacroDictionary } from "./wml-parser.ts";
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import type { MacroDictionary } from './wml-parser.ts';
 
 /**
  * Load all simple constant macros from a directory of .cfg files.
@@ -24,7 +24,7 @@ export function loadMacroDictionary(macroDir: string): MacroDictionary {
   const files = collectCfgFiles(macroDir);
 
   for (const filePath of files) {
-    const content = readFileSync(filePath, "utf-8");
+    const content = readFileSync(filePath, 'utf-8');
     extractSimpleMacros(content, dictionary);
   }
 
@@ -46,7 +46,7 @@ function collectCfgFiles(dir: string): string[] {
       const stat = statSync(fullPath);
       if (stat.isDirectory()) {
         results.push(...collectCfgFiles(fullPath));
-      } else if (entry.endsWith(".cfg")) {
+      } else if (entry.endsWith('.cfg')) {
         results.push(fullPath);
       }
     }
@@ -72,7 +72,7 @@ function extractSimpleMacros(
   content: string,
   dictionary: MacroDictionary,
 ): void {
-  const lines = content.split("\n");
+  const lines = content.split('\n');
 
   for (let i = 0; i < lines.length; i++) {
     const defineMatch = lines[i].match(/^\s*#define\s+(\S+)\s*$/);
@@ -108,14 +108,15 @@ function extractSimpleMacros(
     const body = bodyLines[0].trim();
 
     // Skip if body contains tags or complex content
-    if (body.startsWith("[") || body.includes("[/")) continue;
+    if (body.startsWith('[') || body.includes('[/')) continue;
 
     // Skip if body contains macro parameters (starts with { and contains space suggesting args)
     // But allow simple macro references like {OTHER_MACRO}
-    if (body.startsWith("{") && body.includes(" ") && body.endsWith("}"))
+    if (body.startsWith('{') && body.includes(' ') && body.endsWith('}'))
       continue;
 
-    // This is a simple constant macro
-    dictionary.set(macroName, body);
+    // This is a simple constant macro (no parameters)
+    dictionary.set(macroName, { params: [], body });
   }
 }
+

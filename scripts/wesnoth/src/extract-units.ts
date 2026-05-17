@@ -5,26 +5,33 @@
  * TypeScript source files into packages/wesnoth-data/src/generated/.
  *
  * Usage:
- *   npx tsx scripts/wesnoth/src/extract-units.ts --wesnoth-root <path-to-wesnoth>
+ *   pnpm --filter @webnoth/scripts-wesnoth run extract -- --wesnoth-root <path-to-wesnoth>
  *
  * Or from scripts/wesnoth/:
- *   npm run extract -- --wesnoth-root <path-to-wesnoth>
+ *   pnpm run extract -- --wesnoth-root <path-to-wesnoth>
  */
 
-import { execSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
-import { basename, join, relative, resolve } from "node:path";
-import { loadMacroDictionary } from "./macro-loader.ts";
+import { execSync } from 'node:child_process';
 import {
-  type MacroDictionary,
-  type WmlNode,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from 'node:fs';
+import { basename, join, relative, resolve } from 'node:path';
+import { loadMacroDictionary } from './macro-loader.ts';
+import {
   findChild,
   findChildren,
   getAttr,
   getListAttr,
   getNumAttr,
+  type MacroDictionary,
   parseWml,
-} from "./wml-parser.ts";
+  type WmlNode,
+} from './wml-parser.ts';
 
 // ---------------------------------------------------------------------------
 // CLI
@@ -32,22 +39,22 @@ import {
 
 function parseArgs(): { wesnothRoot: string } {
   const args = process.argv.slice(2);
-  let wesnothRoot = "";
+  let wesnothRoot = '';
 
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === "--wesnoth-root" && args[i + 1]) {
+    if (args[i] === '--wesnoth-root' && args[i + 1]) {
       wesnothRoot = args[i + 1];
       i++;
     }
   }
 
   if (!wesnothRoot) {
-    console.error("Usage: npx tsx extract-units.ts --wesnoth-root <path>");
+    console.error('Usage: pnpm run extract -- --wesnoth-root <path>');
     process.exit(1);
   }
 
   wesnothRoot = resolve(wesnothRoot);
-  if (!existsSync(join(wesnothRoot, "data", "core", "units.cfg"))) {
+  if (!existsSync(join(wesnothRoot, 'data', 'core', 'units.cfg'))) {
     console.error(`Error: ${wesnothRoot} does not look like a wesnoth repo`);
     process.exit(1);
   }
@@ -82,12 +89,12 @@ function collectCfgFiles(dir: string): string[] {
   if (!existsSync(dir)) return results;
   const entries = readdirSync(dir);
   for (const entry of entries) {
-    if (entry.startsWith(".")) continue;
+    if (entry.startsWith('.')) continue;
     const fullPath = join(dir, entry);
     const stat = statSync(fullPath);
     if (stat.isDirectory()) {
       results.push(...collectCfgFiles(fullPath));
-    } else if (entry.endsWith(".cfg")) {
+    } else if (entry.endsWith('.cfg')) {
       results.push(fullPath);
     }
   }
@@ -113,32 +120,30 @@ interface RaceData {
 }
 
 function extractRace(node: WmlNode): RaceData | null {
-  const id = getAttr(node, "id");
+  const id = getAttr(node, 'id');
   if (!id) return null;
 
   // Extract trait macros
   const traits = node.macros
-    .filter((m) => m.startsWith("TRAIT_"))
+    .filter((m) => m.startsWith('TRAIT_'))
     .map((m) => m.split(/\s+/)[0]);
 
   // Name handling: 'name' or 'male_name'
-  const name = getAttr(node, "name") ?? getAttr(node, "male_name") ?? id;
+  const name = getAttr(node, 'name') ?? getAttr(node, 'male_name') ?? id;
 
   return {
     id,
     name: cleanTranslation(name),
-    femaleName: cleanTranslation(getAttr(node, "female_name")),
-    pluralName: cleanTranslation(
-      getAttr(node, "plural_name") ?? `${name}s`,
-    ),
-    description: cleanTranslation(getAttr(node, "description") ?? ""),
-    numTraits: getNumAttr(node, "num_traits") ?? 0,
-    undeadVariation: getAttr(node, "undead_variation"),
+    femaleName: cleanTranslation(getAttr(node, 'female_name')),
+    pluralName: cleanTranslation(getAttr(node, 'plural_name') ?? `${name}s`),
+    description: cleanTranslation(getAttr(node, 'description') ?? ''),
+    numTraits: getNumAttr(node, 'num_traits') ?? 0,
+    undeadVariation: getAttr(node, 'undead_variation'),
     traits: traits.length > 0 ? traits : undefined,
     ignoreGlobalTraits:
-      getAttr(node, "ignore_global_traits") === "yes" || undefined,
-    helpTaxonomy: getAttr(node, "help_taxonomy"),
-    markovChainSize: getNumAttr(node, "markov_chain_size"),
+      getAttr(node, 'ignore_global_traits') === 'yes' || undefined,
+    helpTaxonomy: getAttr(node, 'help_taxonomy'),
+    markovChainSize: getNumAttr(node, 'markov_chain_size'),
   };
 }
 
@@ -158,17 +163,17 @@ function extractMovetype(
   node: WmlNode,
   _macros: MacroDictionary,
 ): MovetypeData | null {
-  const name = getAttr(node, "name");
+  const name = getAttr(node, 'name');
   if (!name) return null;
 
-  const flyingAttr = getAttr(node, "flying") ?? getAttr(node, "flies");
-  const flying = flyingAttr === "yes" ? true : undefined;
+  const flyingAttr = getAttr(node, 'flying') ?? getAttr(node, 'flies');
+  const flying = flyingAttr === 'yes' ? true : undefined;
 
   const movementCosts: Record<string, number> = {};
   const defense: Record<string, number> = {};
   const resistance: Record<string, number> = {};
 
-  const mcNode = findChild(node, "movement_costs");
+  const mcNode = findChild(node, 'movement_costs');
   if (mcNode) {
     for (const [k, v] of Object.entries(mcNode.attributes)) {
       const n = Number(v);
@@ -176,7 +181,7 @@ function extractMovetype(
     }
   }
 
-  const defNode = findChild(node, "defense");
+  const defNode = findChild(node, 'defense');
   if (defNode) {
     for (const [k, v] of Object.entries(defNode.attributes)) {
       const n = Number(v);
@@ -184,7 +189,7 @@ function extractMovetype(
     }
   }
 
-  const resNode = findChild(node, "resistance");
+  const resNode = findChild(node, 'resistance');
   if (resNode) {
     for (const [k, v] of Object.entries(resNode.attributes)) {
       const n = Number(v);
@@ -252,29 +257,55 @@ interface UnitTypeData {
   sourceFile: string;
 }
 
+function cleanImagePath(s: string | undefined): string | undefined {
+  if (!s) return s;
+  let cleaned = s.trim();
+
+  // If there's a ~BLIT onto a shadow/halo/misc image, prefer the blitted image
+  if ((cleaned.includes('shadow') || cleaned.includes('halo') || cleaned.includes('misc')) && cleaned.includes('~BLIT(')) {
+    const match = cleaned.match(/~BLIT\s*\(\s*"?([^"~)]+)/);
+    if (match && match[1]) {
+      cleaned = match[1].trim();
+    }
+  }
+
+  // Remove any remaining Image Path Functions starting with ~
+  const tildeIndex = cleaned.indexOf('~');
+  if (tildeIndex !== -1) {
+    cleaned = cleaned.slice(0, tildeIndex);
+  }
+
+  // Remove trailing garbage like quotes, closing parens, or animation durations
+  cleaned = cleaned.replace(/(:[0-9*~,\[\]]+)?["')]+$/, '').trim();
+  cleaned = cleaned.replace(/:[0-9*~,\[\]]+$/, '').trim();
+
+  return cleaned;
+}
+
 function extractAttack(node: WmlNode): AttackData {
-  const specials = getListAttr(node, "specials_list");
+  const specials = getListAttr(node, 'specials_list');
   return {
-    name: getAttr(node, "name") ?? "",
-    description: cleanTranslation(getAttr(node, "description") ?? ""),
-    type: getAttr(node, "type") ?? "",
-    range: getAttr(node, "range") ?? "",
-    damage: getNumAttr(node, "damage") ?? 0,
-    number: getNumAttr(node, "number") ?? 0,
-    icon: getAttr(node, "icon"),
+    name: getAttr(node, 'name') ?? '',
+    description: cleanTranslation(getAttr(node, 'description') ?? ''),
+    type: getAttr(node, 'type') ?? '',
+    range: getAttr(node, 'range') ?? '',
+    damage: getNumAttr(node, 'damage') ?? 0,
+    number: getNumAttr(node, 'number') ?? 0,
+    icon: cleanImagePath(getAttr(node, 'icon')),
     specials: specials.length > 0 ? specials : undefined,
   };
 }
 
 function extractAnimationFrames(node: WmlNode): AnimationFrameData[] {
   const frames: AnimationFrameData[] = [];
-  for (const frameNode of findChildren(node, "frame")) {
-    const image = getAttr(frameNode, "image");
+  const frameNodes = node.children.filter((c) => c.tag.endsWith('frame'));
+  for (const frameNode of frameNodes) {
+    const image = cleanImagePath(getAttr(frameNode, 'image'));
     if (!image) continue;
     frames.push({
       image,
-      duration: getNumAttr(frameNode, "duration"),
-      sound: getAttr(frameNode, "sound"),
+      duration: getNumAttr(frameNode, 'duration'),
+      sound: getAttr(frameNode, 'sound'),
     });
   }
   return frames;
@@ -284,46 +315,46 @@ function extractAnimations(node: WmlNode): AnimationData[] {
   const animations: AnimationData[] = [];
 
   // Standing animations
-  for (const anim of findChildren(node, "standing_anim")) {
+  for (const anim of findChildren(node, 'standing_anim')) {
     const frames = extractAnimationFrames(anim);
     if (frames.length > 0) {
       animations.push({
-        type: "standing",
-        direction: getAttr(anim, "direction"),
+        type: 'standing',
+        direction: getAttr(anim, 'direction'),
         frames,
       });
     }
   }
 
   // Idle animations
-  for (const anim of findChildren(node, "idle_anim")) {
+  for (const anim of findChildren(node, 'idle_anim')) {
     const frames = extractAnimationFrames(anim);
     if (frames.length > 0) {
       animations.push({
-        type: "idle",
-        direction: getAttr(anim, "direction"),
+        type: 'idle',
+        direction: getAttr(anim, 'direction'),
         frames,
       });
     }
   }
 
   // Death animations
-  for (const anim of findChildren(node, "death")) {
+  for (const anim of findChildren(node, 'death')) {
     const frames = extractAnimationFrames(anim);
     if (frames.length > 0) {
-      animations.push({ type: "death", frames });
+      animations.push({ type: 'death', frames });
     }
   }
 
   // Attack animations
-  for (const anim of findChildren(node, "attack_anim")) {
-    const filterNode = findChild(anim, "filter_attack");
-    const filterAttack = filterNode ? getAttr(filterNode, "name") : undefined;
+  for (const anim of findChildren(node, 'attack_anim')) {
+    const filterNode = findChild(anim, 'filter_attack');
+    const filterAttack = filterNode ? getAttr(filterNode, 'name') : undefined;
     const frames = extractAnimationFrames(anim);
     if (frames.length > 0) {
       animations.push({
-        type: "attack",
-        direction: getAttr(anim, "direction"),
+        type: 'attack',
+        direction: getAttr(anim, 'direction'),
         filterAttack,
         frames,
       });
@@ -338,16 +369,16 @@ function extractUnitType(
   sourceFile: string,
   wesnothRoot: string,
 ): UnitTypeData | null {
-  const id = getAttr(node, "id");
+  const id = getAttr(node, 'id');
   if (!id) return null;
 
-  const attacks = findChildren(node, "attack").map(extractAttack);
+  const attacks = findChildren(node, 'attack').map(extractAttack);
   const animations = extractAnimations(node);
-  const abilities = getListAttr(node, "abilities_list");
+  const abilities = getListAttr(node, 'abilities_list');
 
   // Check for inline movement_costs / defense overrides
-  const mcOverride = findChild(node, "movement_costs");
-  const defOverride = findChild(node, "defense");
+  const mcOverride = findChild(node, 'movement_costs');
+  const defOverride = findChild(node, 'defense');
   let movementCostOverrides: Record<string, number> | undefined;
   let defenseOverrides: Record<string, number> | undefined;
 
@@ -366,31 +397,32 @@ function extractUnitType(
       const n = Number(v);
       if (!Number.isNaN(n)) defenseOverrides[k] = n;
     }
-    if (Object.keys(defenseOverrides).length === 0) defenseOverrides = undefined;
+    if (Object.keys(defenseOverrides).length === 0)
+      defenseOverrides = undefined;
   }
 
   // Filter macros: exclude name-generation macros and known-processed ones
   const significantMacros = node.macros.filter(
     (m) =>
-      !m.includes("_NAMES") &&
-      !m.startsWith("SOUND_LIST:") &&
-      !m.startsWith("SOUND:") &&
-      !m.startsWith("wmllint:") &&
-      !m.startsWith("wmlscope:"),
+      !m.includes('_NAMES') &&
+      !m.startsWith('SOUND_LIST:') &&
+      !m.startsWith('SOUND:') &&
+      !m.startsWith('wmllint:') &&
+      !m.startsWith('wmlscope:'),
   );
 
   // Female variant
   let female: Partial<UnitTypeData> | undefined;
-  const femaleNode = findChild(node, "female");
+  const femaleNode = findChild(node, 'female');
   if (femaleNode) {
     const femaleAnims = extractAnimations(femaleNode);
     female = {
-      name: cleanTranslation(getAttr(femaleNode, "name")),
-      gender: ["female"],
-      image: getAttr(femaleNode, "image"),
-      profile: getAttr(femaleNode, "profile"),
-      smallProfile: getAttr(femaleNode, "small_profile"),
-      dieSound: getAttr(femaleNode, "die_sound"),
+      name: cleanTranslation(getAttr(femaleNode, 'name')),
+      gender: ['female'],
+      image: cleanImagePath(getAttr(femaleNode, 'image')),
+      profile: cleanImagePath(getAttr(femaleNode, 'profile')),
+      smallProfile: cleanImagePath(getAttr(femaleNode, 'small_profile')),
+      dieSound: getAttr(femaleNode, 'die_sound'),
       animations: femaleAnims.length > 0 ? femaleAnims : undefined,
     };
     // Remove undefined fields
@@ -398,32 +430,48 @@ function extractUnitType(
     if (Object.keys(female).length === 0) female = undefined;
   }
 
+  const baseUnitNode = findChild(node, 'base_unit');
+  const baseUnitId = baseUnitNode ? getAttr(baseUnitNode, 'id') : undefined;
+  const hideHelp = getAttr(node, 'hide_help') === 'yes' || undefined;
+  const doNotList = getAttr(node, 'do_not_list') === 'yes' || undefined;
+
+  let image = cleanImagePath(getAttr(node, 'image')) ?? '';
+  if (!image || image.includes('blank-hex') || image.includes('halo/')) {
+    const betterFrame = animations.flatMap((a) => a.frames).find((f) => f.image && !f.image.includes('blank-hex') && !f.image.includes('halo/'));
+    if (betterFrame) {
+      image = betterFrame.image;
+    }
+  }
+
   return {
     id,
-    name: cleanTranslation(getAttr(node, "name") ?? id),
-    race: getAttr(node, "race") ?? "",
-    gender: getListAttr(node, "gender"),
-    image: getAttr(node, "image") ?? "",
-    profile: getAttr(node, "profile"),
-    smallProfile: getAttr(node, "small_profile"),
-    hitpoints: getNumAttr(node, "hitpoints") ?? 0,
-    movementType: getAttr(node, "movement_type") ?? "",
-    movement: getNumAttr(node, "movement") ?? 0,
-    experience: getNumAttr(node, "experience") ?? 0,
-    level: getNumAttr(node, "level") ?? 0,
-    alignment: getAttr(node, "alignment") ?? "neutral",
-    advancesTo: getListAttr(node, "advances_to"),
-    cost: getNumAttr(node, "cost") ?? 0,
-    usage: getAttr(node, "usage"),
-    description: cleanTranslation(getAttr(node, "description") ?? ""),
+    name: cleanTranslation(getAttr(node, 'name') ?? id),
+    race: getAttr(node, 'race') ?? '',
+    gender: getListAttr(node, 'gender'),
+    image,
+    profile: cleanImagePath(getAttr(node, 'profile')),
+    smallProfile: cleanImagePath(getAttr(node, 'small_profile')),
+    hitpoints: getNumAttr(node, 'hitpoints') ?? 0,
+    movementType: getAttr(node, 'movement_type') ?? '',
+    movement: getNumAttr(node, 'movement') ?? 0,
+    experience: getNumAttr(node, 'experience') ?? 0,
+    level: getNumAttr(node, 'level') ?? 0,
+    alignment: getAttr(node, 'alignment') ?? 'neutral',
+    advancesTo: getListAttr(node, 'advances_to'),
+    cost: getNumAttr(node, 'cost') ?? 0,
+    usage: getAttr(node, 'usage'),
+    description: cleanTranslation(getAttr(node, 'description') ?? ''),
     attacks,
     abilities: abilities.length > 0 ? abilities : undefined,
     animations: animations.length > 0 ? animations : undefined,
-    dieSound: getAttr(node, "die_sound"),
+    dieSound: getAttr(node, 'die_sound'),
     female,
     macros: significantMacros.length > 0 ? significantMacros : undefined,
     movementCostOverrides,
     defenseOverrides,
+    baseUnitId,
+    hideHelp,
+    doNotList,
     sourceFile: relative(wesnothRoot, sourceFile),
   };
 }
@@ -435,13 +483,15 @@ function extractUnitType(
 function cleanTranslation(s: string | undefined): string | undefined {
   if (s === undefined) return undefined;
   // Remove race^ and female^ prefixes from translated names
-  let cleaned = s.replace(/^(race|female|race\+female|race\+plural)\^/, "");
+  let cleaned = s.replace(/^(race|female|race\+female|race\+plural)\^/, '');
   // Remove any remaining WML markup
-  cleaned = cleaned.replace(/<[^>]+>/g, "");
+  cleaned = cleaned.replace(/<[^>]+>/g, '');
   return cleaned;
 }
 
-function removeUndefined(obj: Record<string, unknown>): Record<string, unknown> {
+function removeUndefined(
+  obj: Record<string, unknown>,
+): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(obj)) {
     if (value !== undefined) {
@@ -466,15 +516,23 @@ function stringifyData(data: unknown): string {
   return JSON.stringify(data, null, 2);
 }
 
-function writeGeneratedFile(outDir: string, filename: string, varName: string, typeName: string, data: unknown): void {
-  const importPath = "../types.ts";
+function writeGeneratedFile(
+  outDir: string,
+  filename: string,
+  varName: string,
+  typeName: string,
+  data: unknown,
+): void {
+  const importPath = '../types.ts';
   const content = `${generateTypeImport()}
 import type { ${typeName} } from "${importPath}";
 
 export const ${varName}: ${typeName}[] = ${stringifyData(data)};
 `;
-  writeFileSync(join(outDir, filename), content, "utf-8");
-  console.log(`  Written: ${filename} (${Array.isArray(data) ? data.length : 0} entries)`);
+  writeFileSync(join(outDir, filename), content, 'utf-8');
+  console.log(
+    `  Written: ${filename} (${Array.isArray(data) ? data.length : 0} entries)`,
+  );
 }
 
 function writeProvenanceFile(
@@ -482,7 +540,7 @@ function writeProvenanceFile(
   wesnothRoot: string,
   revision: string,
 ): void {
-  const importPath = "../types.ts";
+  const importPath = '../types.ts';
   const provenance = {
     revision,
     extractedAt: new Date().toISOString(),
@@ -499,8 +557,8 @@ import type { WesnothProvenance } from "${importPath}";
 
 export const provenance: WesnothProvenance = ${stringifyData(provenance)};
 `;
-  writeFileSync(join(outDir, "provenance.ts"), content, "utf-8");
-  console.log("  Written: provenance.ts");
+  writeFileSync(join(outDir, 'provenance.ts'), content, 'utf-8');
+  console.log('  Written: provenance.ts');
 }
 
 // ---------------------------------------------------------------------------
@@ -512,44 +570,49 @@ function main() {
   console.log(`\nWesnoth root: ${wesnothRoot}`);
 
   // Determine output directory
-  const scriptDir = new URL(".", import.meta.url).pathname;
-  const projectRoot = resolve(scriptDir, "..", "..", "..");
-  const outDir = join(projectRoot, "packages", "wesnoth-data", "src", "generated");
+  const scriptDir = new URL('.', import.meta.url).pathname;
+  const projectRoot = resolve(scriptDir, '..', '..', '..');
+  const outDir = join(
+    projectRoot,
+    'packages',
+    'wesnoth-data',
+    'src',
+    'generated',
+  );
   mkdirSync(outDir, { recursive: true });
 
   // Get git revision
-  let revision = "unknown";
+  let revision = 'unknown';
   try {
-    revision = execSync("git rev-parse HEAD", { cwd: wesnothRoot })
+    revision = execSync('git rev-parse HEAD', { cwd: wesnothRoot })
       .toString()
       .trim();
   } catch {
-    console.warn("  Warning: Could not determine git revision");
+    console.warn('  Warning: Could not determine git revision');
   }
   console.log(`Wesnoth revision: ${revision}`);
 
   // Load macro dictionary
-  console.log("\nPhase 1: Loading macro dictionary...");
-  const macroDir = join(wesnothRoot, "data", "core", "macros");
+  console.log('\nPhase 1: Loading macro dictionary...');
+  const macroDir = join(wesnothRoot, 'data', 'core', 'macros');
   const macros = loadMacroDictionary(macroDir);
   // Track macro files
   for (const file of collectCfgFiles(macroDir)) {
-    trackFile(wesnothRoot, file, "macro");
+    trackFile(wesnothRoot, file, 'macro');
   }
 
   // Parse units.cfg for races, movetypes, etc.
-  console.log("\nPhase 2: Parsing units.cfg...");
-  const unitsCfgPath = join(wesnothRoot, "data", "core", "units.cfg");
-  const unitsCfgContent = readFileSync(unitsCfgPath, "utf-8");
-  trackFile(wesnothRoot, unitsCfgPath, "units_cfg");
+  console.log('\nPhase 2: Parsing units.cfg...');
+  const unitsCfgPath = join(wesnothRoot, 'data', 'core', 'units.cfg');
+  const unitsCfgContent = readFileSync(unitsCfgPath, 'utf-8');
+  trackFile(wesnothRoot, unitsCfgPath, 'units_cfg');
 
   const unitsCfgTree = parseWml(unitsCfgContent, macros);
-  const unitsRoot =
-    findChild(unitsCfgTree, "units") ?? unitsCfgTree;
+  const unitsRoot = findChild(unitsCfgTree, 'units') ?? unitsCfgTree;
 
   // Extract races
   const races: RaceData[] = [];
-  for (const raceNode of findChildren(unitsRoot, "race")) {
+  for (const raceNode of findChildren(unitsRoot, 'race')) {
     const race = extractRace(raceNode);
     if (race) races.push(race);
   }
@@ -557,15 +620,15 @@ function main() {
 
   // Extract movetypes
   const movetypes: MovetypeData[] = [];
-  for (const mtNode of findChildren(unitsRoot, "movetype")) {
+  for (const mtNode of findChildren(unitsRoot, 'movetype')) {
     const mt = extractMovetype(mtNode, macros);
     if (mt) movetypes.push(mt);
   }
   console.log(`  Found ${movetypes.length} movetypes`);
 
   // Parse individual unit files
-  console.log("\nPhase 3: Parsing unit files...");
-  const unitsDir = join(wesnothRoot, "data", "core", "units");
+  console.log('\nPhase 3: Parsing unit files...');
+  const unitsDir = join(wesnothRoot, 'data', 'core', 'units');
   const unitFiles = collectCfgFiles(unitsDir);
   console.log(`  Found ${unitFiles.length} .cfg files`);
 
@@ -574,12 +637,12 @@ function main() {
 
   for (const filePath of unitFiles) {
     try {
-      const content = readFileSync(filePath, "utf-8");
+      const content = readFileSync(filePath, 'utf-8');
       const tree = parseWml(content, macros);
-      trackFile(wesnothRoot, filePath, "unit_type");
+      trackFile(wesnothRoot, filePath, 'unit_type');
 
       // Find all [unit_type] nodes (usually 1 per file)
-      const unitTypeNodes = findChildren(tree, "unit_type");
+      const unitTypeNodes = findChildren(tree, 'unit_type');
       for (const utNode of unitTypeNodes) {
         const ut = extractUnitType(utNode, filePath, wesnothRoot);
         if (ut) unitTypes.push(ut);
@@ -590,7 +653,39 @@ function main() {
     }
   }
 
-  console.log(`  Extracted ${unitTypes.length} unit types (${parseErrors} errors)`);
+  console.log(
+    `  Extracted ${unitTypes.length} unit types (${parseErrors} errors)`,
+  );
+
+  // Phase 3b: Resolve [base_unit] inheritance
+  console.log('\nPhase 3b: Resolving [base_unit] inheritance...');
+  const unitMap = new Map<string, UnitTypeData>();
+  for (const ut of unitTypes) {
+    unitMap.set(ut.id, ut);
+  }
+
+  for (const ut of unitTypes) {
+    if (ut.baseUnitId) {
+      const baseUt = unitMap.get(ut.baseUnitId);
+      if (baseUt) {
+        if (!ut.race) ut.race = baseUt.race;
+        if (!ut.image) ut.image = baseUt.image;
+        if (!ut.profile) ut.profile = baseUt.profile;
+        if (!ut.smallProfile) ut.smallProfile = baseUt.smallProfile;
+        if (!ut.hitpoints) ut.hitpoints = baseUt.hitpoints;
+        if (!ut.movementType) ut.movementType = baseUt.movementType;
+        if (!ut.movement) ut.movement = baseUt.movement;
+        if (!ut.experience) ut.experience = baseUt.experience;
+        if (!ut.level) ut.level = baseUt.level;
+        if (!ut.alignment || ut.alignment === 'neutral') ut.alignment = baseUt.alignment;
+        if (!ut.cost) ut.cost = baseUt.cost;
+        if (!ut.usage) ut.usage = baseUt.usage;
+        if (!ut.description) ut.description = baseUt.description;
+        if (ut.attacks.length === 0) ut.attacks = [...baseUt.attacks];
+        if (!ut.animations) ut.animations = baseUt.animations ? [...baseUt.animations] : undefined;
+      }
+    }
+  }
 
   // Sort unit types by id for stable output
   unitTypes.sort((a, b) => a.id.localeCompare(b.id));
@@ -598,13 +693,25 @@ function main() {
   movetypes.sort((a, b) => a.name.localeCompare(b.name));
 
   // Write output files
-  console.log("\nPhase 4: Writing output...");
-  writeGeneratedFile(outDir, "units.ts", "unitTypes", "WesnothUnitType", unitTypes);
-  writeGeneratedFile(outDir, "races.ts", "races", "WesnothRace", races);
-  writeGeneratedFile(outDir, "movetypes.ts", "movetypes", "WesnothMovetype", movetypes);
+  console.log('\nPhase 4: Writing output...');
+  writeGeneratedFile(
+    outDir,
+    'units.ts',
+    'unitTypes',
+    'WesnothUnitType',
+    unitTypes,
+  );
+  writeGeneratedFile(outDir, 'races.ts', 'races', 'WesnothRace', races);
+  writeGeneratedFile(
+    outDir,
+    'movetypes.ts',
+    'movetypes',
+    'WesnothMovetype',
+    movetypes,
+  );
   writeProvenanceFile(outDir, wesnothRoot, revision);
 
-  console.log("\nDone! ✓");
+  console.log('\nDone! ✓');
   console.log(`  Output directory: ${outDir}`);
   console.log(`  Unit types: ${unitTypes.length}`);
   console.log(`  Races: ${races.length}`);

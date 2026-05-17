@@ -9,9 +9,12 @@
  *   - data/core/images/portraits/  → assets/portraits/   (~33MB)
  *   - data/core/images/attacks/    → assets/attacks/      (~1.3MB)
  *   - data/core/images/projectiles/ → assets/projectiles/
+ *   - data/core/images/scenery/    → assets/scenery/
+ *   - data/core/images/halo/       → assets/halo/
+ *   - data/core/images/misc/       → assets/misc/
  *
  * Usage:
- *   npx tsx scripts/wesnoth/src/extract-images.ts --wesnoth-root <path-to-wesnoth>
+ *   pnpm run extract:images -- --wesnoth-root <path-to-wesnoth>
  *
  * NOTE: Total asset size is 60MB+. Currently committed to Git as regular files.
  * Future considerations:
@@ -24,12 +27,12 @@ import {
   copyFileSync,
   existsSync,
   mkdirSync,
-  readFileSync,
   readdirSync,
+  readFileSync,
   statSync,
   writeFileSync,
-} from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+} from 'node:fs';
+import { dirname, join, relative, resolve } from 'node:path';
 
 // ---------------------------------------------------------------------------
 // CLI
@@ -37,24 +40,22 @@ import { dirname, join, relative, resolve } from "node:path";
 
 function parseArgs(): { wesnothRoot: string } {
   const args = process.argv.slice(2);
-  let wesnothRoot = "";
+  let wesnothRoot = '';
 
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === "--wesnoth-root" && args[i + 1]) {
+    if (args[i] === '--wesnoth-root' && args[i + 1]) {
       wesnothRoot = args[i + 1];
       i++;
     }
   }
 
   if (!wesnothRoot) {
-    console.error(
-      "Usage: npx tsx extract-images.ts --wesnoth-root <path>",
-    );
+    console.error('Usage: pnpm run extract:images -- --wesnoth-root <path>');
     process.exit(1);
   }
 
   wesnothRoot = resolve(wesnothRoot);
-  if (!existsSync(join(wesnothRoot, "data", "core", "images"))) {
+  if (!existsSync(join(wesnothRoot, 'data', 'core', 'images'))) {
     console.error(`Error: ${wesnothRoot}/data/core/images/ not found`);
     process.exit(1);
   }
@@ -85,7 +86,7 @@ function copyDirectoryRecursive(
   const entries = readdirSync(src);
 
   for (const entry of entries) {
-    if (entry.startsWith(".")) continue;
+    if (entry.startsWith('.')) continue;
 
     const srcPath = join(src, entry);
     const destPath = join(dest, entry);
@@ -119,11 +120,11 @@ function updateProvenanceImageStats(
   directories: string[],
 ): void {
   if (!existsSync(provenancePath)) {
-    console.warn("  Warning: provenance.ts not found, skipping update");
+    console.warn('  Warning: provenance.ts not found, skipping update');
     return;
   }
 
-  let content = readFileSync(provenancePath, "utf-8");
+  let content = readFileSync(provenancePath, 'utf-8');
 
   // Replace the imageStats block
   const imageStatsStr = JSON.stringify(
@@ -142,8 +143,8 @@ function updateProvenanceImageStats(
     `"imageStats": ${imageStatsStr}`,
   );
 
-  writeFileSync(provenancePath, content, "utf-8");
-  console.log("  Updated provenance.ts with image stats");
+  writeFileSync(provenancePath, content, 'utf-8');
+  console.log('  Updated provenance.ts with image stats');
 }
 
 // ---------------------------------------------------------------------------
@@ -154,22 +155,25 @@ function main() {
   const { wesnothRoot } = parseArgs();
   console.log(`\nWesnoth root: ${wesnothRoot}`);
 
-  const scriptDir = new URL(".", import.meta.url).pathname;
-  const projectRoot = resolve(scriptDir, "..", "..", "..");
-  const assetsDir = join(projectRoot, "packages", "wesnoth-data", "assets");
+  const scriptDir = new URL('.', import.meta.url).pathname;
+  const projectRoot = resolve(scriptDir, '..', '..', '..');
+  const assetsDir = join(projectRoot, 'packages', 'wesnoth-data', 'assets');
 
   // Directories to copy
   const imageDirs = [
-    { src: "data/core/images/units", dest: "units" },
-    { src: "data/core/images/portraits", dest: "portraits" },
-    { src: "data/core/images/attacks", dest: "attacks" },
-    { src: "data/core/images/projectiles", dest: "projectiles" },
+    { src: 'data/core/images/units', dest: 'units' },
+    { src: 'data/core/images/portraits', dest: 'portraits' },
+    { src: 'data/core/images/attacks', dest: 'attacks' },
+    { src: 'data/core/images/projectiles', dest: 'projectiles' },
+    { src: 'data/core/images/scenery', dest: 'scenery' },
+    { src: 'data/core/images/halo', dest: 'halo' },
+    { src: 'data/core/images/misc', dest: 'misc' },
   ];
 
   const totalStats: CopyStats = { files: 0, bytes: 0 };
   const copiedDirs: string[] = [];
 
-  console.log("\nCopying image assets...");
+  console.log('\nCopying image assets...');
 
   for (const { src, dest } of imageDirs) {
     const srcPath = join(wesnothRoot, src);
@@ -183,9 +187,7 @@ function main() {
     const dirStats: CopyStats = { files: 0, bytes: 0 };
     console.log(`  Copying ${src}/ → assets/${dest}/`);
     copyDirectoryRecursive(srcPath, destPath, dirStats);
-    console.log(
-      `    ${dirStats.files} files, ${formatBytes(dirStats.bytes)}`,
-    );
+    console.log(`    ${dirStats.files} files, ${formatBytes(dirStats.bytes)}`);
 
     totalStats.files += dirStats.files;
     totalStats.bytes += dirStats.bytes;
@@ -199,15 +201,15 @@ function main() {
   // Update provenance
   const provenancePath = join(
     projectRoot,
-    "packages",
-    "wesnoth-data",
-    "src",
-    "generated",
-    "provenance.ts",
+    'packages',
+    'wesnoth-data',
+    'src',
+    'generated',
+    'provenance.ts',
   );
   updateProvenanceImageStats(provenancePath, totalStats, copiedDirs);
 
-  console.log("\nDone! ✓");
+  console.log('\nDone! ✓');
 }
 
 main();
