@@ -114,10 +114,14 @@ export interface WesnothUnitType {
    * Example: Ant Queen overrides fungus movement cost.
    */
   movementCostOverrides?: Record<string, number>;
-  /**
-   * Inline defense overrides.
-   */
+  /** Inline defense overrides. */
   defenseOverrides?: Record<string, number>;
+  /** ID of the base unit this unit inherits from */
+  baseUnitId?: string;
+  /** Whether this unit is hidden from the help/encyclopedia */
+  hideHelp?: boolean;
+  /** Whether this unit is excluded from encyclopedia listings */
+  doNotList?: boolean;
   /** WML source file path relative to wesnoth repo root */
   sourceFile: string;
 }

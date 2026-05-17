@@ -16,8 +16,16 @@ function RootLayout() {
             to="/"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             activeProps={{ className: 'text-foreground font-medium' }}
+            activeOptions={{ exact: true }}
           >
             Experiments
+          </Link>
+          <Link
+            to="/encyclopedia"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            activeProps={{ className: 'text-foreground font-medium' }}
+          >
+            Encyclopedia
           </Link>
         </nav>
       </header>

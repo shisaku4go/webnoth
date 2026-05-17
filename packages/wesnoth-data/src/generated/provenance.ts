@@ -5,7 +5,7 @@ import type { WesnothProvenance } from "../types.ts";
 
 export const provenance: WesnothProvenance = {
   "revision": "d9530833c676288f906548d7da58c83b45384745",
-  "extractedAt": "2026-05-17T10:41:18.881Z",
+  "extractedAt": "2026-05-17T16:31:40.854Z",
   "sourceFiles": [
     {
       "relativePath": "data/core/macros/abilities.cfg",
@@ -1445,13 +1445,8 @@ export const provenance: WesnothProvenance = {
     }
   ],
   "imageStats": {
-    "totalFiles": 7733,
-    "totalSizeBytes": 44456848,
-    "directories": [
-        "units",
-        "portraits",
-        "attacks",
-        "projectiles"
-    ]
-}
+    "totalFiles": 0,
+    "totalSizeBytes": 0,
+    "directories": []
+  }
 };

@@ -257,6 +257,31 @@ interface UnitTypeData {
   sourceFile: string;
 }
 
+function cleanImagePath(s: string | undefined): string | undefined {
+  if (!s) return s;
+  let cleaned = s.trim();
+
+  // If there's a ~BLIT onto a shadow/halo/misc image, prefer the blitted image
+  if ((cleaned.includes('shadow') || cleaned.includes('halo') || cleaned.includes('misc')) && cleaned.includes('~BLIT(')) {
+    const match = cleaned.match(/~BLIT\s*\(\s*"?([^"~)]+)/);
+    if (match && match[1]) {
+      cleaned = match[1].trim();
+    }
+  }
+
+  // Remove any remaining Image Path Functions starting with ~
+  const tildeIndex = cleaned.indexOf('~');
+  if (tildeIndex !== -1) {
+    cleaned = cleaned.slice(0, tildeIndex);
+  }
+
+  // Remove trailing garbage like quotes, closing parens, or animation durations
+  cleaned = cleaned.replace(/(:[0-9*~,\[\]]+)?["')]+$/, '').trim();
+  cleaned = cleaned.replace(/:[0-9*~,\[\]]+$/, '').trim();
+
+  return cleaned;
+}
+
 function extractAttack(node: WmlNode): AttackData {
   const specials = getListAttr(node, 'specials_list');
   return {
@@ -266,15 +291,16 @@ function extractAttack(node: WmlNode): AttackData {
     range: getAttr(node, 'range') ?? '',
     damage: getNumAttr(node, 'damage') ?? 0,
     number: getNumAttr(node, 'number') ?? 0,
-    icon: getAttr(node, 'icon'),
+    icon: cleanImagePath(getAttr(node, 'icon')),
     specials: specials.length > 0 ? specials : undefined,
   };
 }
 
 function extractAnimationFrames(node: WmlNode): AnimationFrameData[] {
   const frames: AnimationFrameData[] = [];
-  for (const frameNode of findChildren(node, 'frame')) {
-    const image = getAttr(frameNode, 'image');
+  const frameNodes = node.children.filter((c) => c.tag.endsWith('frame'));
+  for (const frameNode of frameNodes) {
+    const image = cleanImagePath(getAttr(frameNode, 'image'));
     if (!image) continue;
     frames.push({
       image,
@@ -393,9 +419,9 @@ function extractUnitType(
     female = {
       name: cleanTranslation(getAttr(femaleNode, 'name')),
       gender: ['female'],
-      image: getAttr(femaleNode, 'image'),
-      profile: getAttr(femaleNode, 'profile'),
-      smallProfile: getAttr(femaleNode, 'small_profile'),
+      image: cleanImagePath(getAttr(femaleNode, 'image')),
+      profile: cleanImagePath(getAttr(femaleNode, 'profile')),
+      smallProfile: cleanImagePath(getAttr(femaleNode, 'small_profile')),
       dieSound: getAttr(femaleNode, 'die_sound'),
       animations: femaleAnims.length > 0 ? femaleAnims : undefined,
     };
@@ -404,14 +430,27 @@ function extractUnitType(
     if (Object.keys(female).length === 0) female = undefined;
   }
 
+  const baseUnitNode = findChild(node, 'base_unit');
+  const baseUnitId = baseUnitNode ? getAttr(baseUnitNode, 'id') : undefined;
+  const hideHelp = getAttr(node, 'hide_help') === 'yes' || undefined;
+  const doNotList = getAttr(node, 'do_not_list') === 'yes' || undefined;
+
+  let image = cleanImagePath(getAttr(node, 'image')) ?? '';
+  if (!image || image.includes('blank-hex') || image.includes('halo/')) {
+    const betterFrame = animations.flatMap((a) => a.frames).find((f) => f.image && !f.image.includes('blank-hex') && !f.image.includes('halo/'));
+    if (betterFrame) {
+      image = betterFrame.image;
+    }
+  }
+
   return {
     id,
     name: cleanTranslation(getAttr(node, 'name') ?? id),
     race: getAttr(node, 'race') ?? '',
     gender: getListAttr(node, 'gender'),
-    image: getAttr(node, 'image') ?? '',
-    profile: getAttr(node, 'profile'),
-    smallProfile: getAttr(node, 'small_profile'),
+    image,
+    profile: cleanImagePath(getAttr(node, 'profile')),
+    smallProfile: cleanImagePath(getAttr(node, 'small_profile')),
     hitpoints: getNumAttr(node, 'hitpoints') ?? 0,
     movementType: getAttr(node, 'movement_type') ?? '',
     movement: getNumAttr(node, 'movement') ?? 0,
@@ -430,6 +469,9 @@ function extractUnitType(
     macros: significantMacros.length > 0 ? significantMacros : undefined,
     movementCostOverrides,
     defenseOverrides,
+    baseUnitId,
+    hideHelp,
+    doNotList,
     sourceFile: relative(wesnothRoot, sourceFile),
   };
 }
@@ -614,6 +656,36 @@ function main() {
   console.log(
     `  Extracted ${unitTypes.length} unit types (${parseErrors} errors)`,
   );
+
+  // Phase 3b: Resolve [base_unit] inheritance
+  console.log('\nPhase 3b: Resolving [base_unit] inheritance...');
+  const unitMap = new Map<string, UnitTypeData>();
+  for (const ut of unitTypes) {
+    unitMap.set(ut.id, ut);
+  }
+
+  for (const ut of unitTypes) {
+    if (ut.baseUnitId) {
+      const baseUt = unitMap.get(ut.baseUnitId);
+      if (baseUt) {
+        if (!ut.race) ut.race = baseUt.race;
+        if (!ut.image) ut.image = baseUt.image;
+        if (!ut.profile) ut.profile = baseUt.profile;
+        if (!ut.smallProfile) ut.smallProfile = baseUt.smallProfile;
+        if (!ut.hitpoints) ut.hitpoints = baseUt.hitpoints;
+        if (!ut.movementType) ut.movementType = baseUt.movementType;
+        if (!ut.movement) ut.movement = baseUt.movement;
+        if (!ut.experience) ut.experience = baseUt.experience;
+        if (!ut.level) ut.level = baseUt.level;
+        if (!ut.alignment || ut.alignment === 'neutral') ut.alignment = baseUt.alignment;
+        if (!ut.cost) ut.cost = baseUt.cost;
+        if (!ut.usage) ut.usage = baseUt.usage;
+        if (!ut.description) ut.description = baseUt.description;
+        if (ut.attacks.length === 0) ut.attacks = [...baseUt.attacks];
+        if (!ut.animations) ut.animations = baseUt.animations ? [...baseUt.animations] : undefined;
+      }
+    }
+  }
 
   // Sort unit types by id for stable output
   unitTypes.sort((a, b) => a.id.localeCompare(b.id));

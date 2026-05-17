@@ -79,13 +79,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "chill tempest",
         "frames": [
           {
-            "image": "units/undead-necromancers/ancient-lich-magic-[1,2].png:75"
+            "image": "units/undead-necromancers/ancient-lich-magic-[1,2].png"
           },
           {
             "image": "units/undead-necromancers/ancient-lich-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/ancient-lich-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/ancient-lich-magic-[2,1].png"
           }
         ]
       },
@@ -94,19 +94,19 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shadow wave",
         "frames": [
           {
-            "image": "units/undead-necromancers/ancient-lich-magic-[1,2].png:75"
+            "image": "units/undead-necromancers/ancient-lich-magic-[1,2].png"
           },
           {
             "image": "units/undead-necromancers/ancient-lich-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/ancient-lich-magic-3.png:200"
+            "image": "units/undead-necromancers/ancient-lich-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/ancient-lich-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/ancient-lich-magic-[2,1].png"
           },
           {
-            "image": "units/undead-necromancers/ancient-lich.png:50"
+            "image": "units/undead-necromancers/ancient-lich.png"
           }
         ]
       },
@@ -115,16 +115,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "touch",
         "frames": [
           {
-            "image": "units/undead-necromancers/ancient-lich.png:50"
+            "image": "units/undead-necromancers/ancient-lich.png"
           },
           {
-            "image": "units/undead-necromancers/ancient-lich-melee-[1~2].png:[100,200]"
+            "image": "units/undead-necromancers/ancient-lich-melee-[1"
           },
           {
-            "image": "units/undead-necromancers/ancient-lich-magic-1.png:75"
+            "image": "units/undead-necromancers/ancient-lich-magic-1.png"
           },
           {
-            "image": "units/undead-necromancers/ancient-lich.png:75"
+            "image": "units/undead-necromancers/ancient-lich.png"
           }
         ]
       }
@@ -178,7 +178,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/woses/wose-ancient-die-fall-[1~15].png:100"
+            "image": "units/woses/wose-ancient-die-fall-[1"
           }
         ]
       },
@@ -187,7 +187,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crush",
         "frames": [
           {
-            "image": "units/woses/wose-ancient-attack-[1,2,1].png:[400,200,100]"
+            "image": "units/woses/wose-ancient-attack-[1,2,1].png"
           }
         ]
       }
@@ -248,7 +248,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-magi/arch-mage-standing-[1~10].png:[150*4,200,150*5]"
+            "image": "units/human-magi/arch-mage-standing-[1"
           }
         ]
       },
@@ -256,7 +256,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-magi/arch-mage.png:200"
+            "image": "units/human-magi/arch-mage.png"
           }
         ]
       },
@@ -264,7 +264,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-magi/arch-mage-idle-[1~5,4~1].png:[100*4,2000,100*4]"
+            "image": "units/human-magi/arch-mage-idle-[1"
           }
         ]
       },
@@ -273,17 +273,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fireball",
         "frames": [
           {
-            "image": "units/human-magi/arch-mage.png:50"
+            "image": "units/human-magi/arch-mage.png"
           },
           {
-            "image": "units/human-magi/arch-mage-attack-magic-1.png:100"
+            "image": "units/human-magi/arch-mage-attack-magic-1.png"
           },
           {
-            "image": "units/human-magi/arch-mage-attack-magic-[2,1].png:[150,75]",
+            "image": "units/human-magi/arch-mage-attack-magic-[2,1].png",
             "sound": "fire.wav"
           },
           {
-            "image": "units/human-magi/arch-mage.png:75"
+            "image": "units/human-magi/arch-mage.png"
           }
         ]
       },
@@ -292,16 +292,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/human-magi/arch-mage.png:50"
+            "image": "units/human-magi/arch-mage.png"
           },
           {
-            "image": "units/human-magi/arch-mage-attack-staff-[1~2].png:[100,200]"
+            "image": "units/human-magi/arch-mage-attack-staff-[1"
           },
           {
-            "image": "units/human-magi/arch-mage-attack-magic-1.png:75"
+            "image": "units/human-magi/arch-mage-attack-magic-1.png"
           },
           {
-            "image": "units/human-magi/arch-mage.png:75"
+            "image": "units/human-magi/arch-mage.png"
           }
         ]
       }
@@ -320,7 +320,7 @@ export const unitTypes: WesnothUnitType[] = [
           "type": "standing",
           "frames": [
             {
-              "image": "units/human-magi/arch-mage+female.png:200"
+              "image": "units/human-magi/arch-mage+female.png"
             }
           ]
         },
@@ -328,7 +328,7 @@ export const unitTypes: WesnothUnitType[] = [
           "type": "standing",
           "frames": [
             {
-              "image": "units/human-magi/arch-mage+female.png:200"
+              "image": "units/human-magi/arch-mage+female.png"
             }
           ]
         },
@@ -336,7 +336,7 @@ export const unitTypes: WesnothUnitType[] = [
           "type": "idle",
           "frames": [
             {
-              "image": "units/human-magi/arch-mage+female-idle-[1~9,9~1].png:140"
+              "image": "units/human-magi/arch-mage+female-idle-[1"
             }
           ]
         },
@@ -345,16 +345,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "fireball",
           "frames": [
             {
-              "image": "units/human-magi/arch-mage+female.png:50"
+              "image": "units/human-magi/arch-mage+female.png"
             },
             {
-              "image": "units/human-magi/arch-mage+female-attack-magic-1.png:100"
+              "image": "units/human-magi/arch-mage+female-attack-magic-1.png"
             },
             {
-              "image": "units/human-magi/arch-mage+female-attack-magic-[2,1].png:[150,75]"
+              "image": "units/human-magi/arch-mage+female-attack-magic-[2,1].png"
             },
             {
-              "image": "units/human-magi/arch-mage+female.png:75"
+              "image": "units/human-magi/arch-mage+female.png"
             }
           ]
         },
@@ -363,16 +363,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "staff",
           "frames": [
             {
-              "image": "units/human-magi/arch-mage+female.png:50"
+              "image": "units/human-magi/arch-mage+female.png"
             },
             {
-              "image": "units/human-magi/arch-mage+female-attack-staff-[1~2].png:[100,200]"
+              "image": "units/human-magi/arch-mage+female-attack-staff-[1"
             },
             {
-              "image": "units/human-magi/arch-mage+female-attack-magic-1.png:75"
+              "image": "units/human-magi/arch-mage+female-attack-magic-1.png"
             },
             {
-              "image": "units/human-magi/arch-mage+female.png:75"
+              "image": "units/human-magi/arch-mage+female.png"
             }
           ]
         }
@@ -431,7 +431,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "battle claws",
         "frames": [
           {
-            "image": "units/drakes/armageddon-melee-[1~6].png:100"
+            "image": "units/drakes/armageddon-melee-[1"
           }
         ]
       }
@@ -513,10 +513,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "throwing knives",
         "frames": [
           {
-            "image": "units/human-outlaws/assassin-throwknife[1~2].png:[250,150]"
+            "image": "projectiles/dagger-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-outlaws/assassin.png:100"
+            "image": "units/human-outlaws/assassin-throwknife[1"
+          },
+          {
+            "image": "units/human-outlaws/assassin.png"
           }
         ]
       },
@@ -525,13 +529,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-outlaws/assassin.png:25"
+            "image": "units/human-outlaws/assassin.png"
           },
           {
-            "image": "units/human-outlaws/assassin-melee-2-[1~2].png:[100,250]"
+            "image": "units/human-outlaws/assassin-melee-2-[1"
           },
           {
-            "image": "units/human-outlaws/assassin.png:50"
+            "image": "units/human-outlaws/assassin.png"
           }
         ]
       },
@@ -540,13 +544,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-outlaws/assassin.png:25"
+            "image": "units/human-outlaws/assassin.png"
           },
           {
-            "image": "units/human-outlaws/assassin-melee-1-[1~2].png:[100,250]"
+            "image": "units/human-outlaws/assassin-melee-1-[1"
           },
           {
-            "image": "units/human-outlaws/assassin.png:50"
+            "image": "units/human-outlaws/assassin.png"
           }
         ]
       }
@@ -566,10 +570,10 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "throwing knives",
           "frames": [
             {
-              "image": "units/human-outlaws/assassin+female-throwknife[1~2].png:[250,150]"
+              "image": "units/human-outlaws/assassin+female-throwknife[1"
             },
             {
-              "image": "units/human-outlaws/assassin+female.png:100"
+              "image": "units/human-outlaws/assassin+female.png"
             }
           ]
         },
@@ -578,13 +582,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "dagger",
           "frames": [
             {
-              "image": "units/human-outlaws/assassin+female.png:25"
+              "image": "units/human-outlaws/assassin+female.png"
             },
             {
-              "image": "units/human-outlaws/assassin+female-melee-2-[1~2].png:[100,250]"
+              "image": "units/human-outlaws/assassin+female-melee-2-[1"
             },
             {
-              "image": "units/human-outlaws/assassin+female.png:50"
+              "image": "units/human-outlaws/assassin+female.png"
             }
           ]
         },
@@ -593,13 +597,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "dagger",
           "frames": [
             {
-              "image": "units/human-outlaws/assassin+female.png:25"
+              "image": "units/human-outlaws/assassin+female.png"
             },
             {
-              "image": "units/human-outlaws/assassin+female-melee-1-[1~2].png:[100,250]"
+              "image": "units/human-outlaws/assassin+female-melee-1-[1"
             },
             {
-              "image": "units/human-outlaws/assassin+female.png:50"
+              "image": "units/human-outlaws/assassin+female.png"
             }
           ]
         }
@@ -645,7 +649,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-outlaws/bandit-idle-[1~6,5,4,3,2,1].png:200"
+            "image": "units/human-outlaws/bandit-idle-[1"
           }
         ]
       },
@@ -654,7 +658,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace-spiked",
         "frames": [
           {
-            "image": "units/human-outlaws/bandit-melee-[1~8].png:100"
+            "image": "units/human-outlaws/bandit-melee-[1"
           }
         ]
       }
@@ -713,13 +717,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/undead-skeletal/banebow-bow.png:65"
+            "image": "projectiles/bone-n.png",
+            "duration": 150
           },
           {
-            "image": "units/undead-skeletal/banebow-bow-attack-[1~4].png:[75*2,100,130]"
+            "image": "units/undead-skeletal/banebow-bow.png"
           },
           {
-            "image": "units/undead-skeletal/banebow-bow.png:65"
+            "image": "units/undead-skeletal/banebow-bow-attack-[1"
+          },
+          {
+            "image": "units/undead-skeletal/banebow-bow.png"
           }
         ]
       },
@@ -728,13 +736,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/undead-skeletal/banebow-melee-defend-1.png:50"
+            "image": "units/undead-skeletal/banebow-melee-defend-1.png"
           },
           {
-            "image": "units/undead-skeletal/banebow-melee-attack-[1~4].png:100"
+            "image": "units/undead-skeletal/banebow-melee-attack-[1"
           },
           {
-            "image": "units/undead-skeletal/banebow-melee-defend-1.png:50"
+            "image": "units/undead-skeletal/banebow-melee-defend-1.png"
           }
         ]
       }
@@ -783,11 +791,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hooves",
         "frames": [
           {
-            "image": "units/monsters/horse/horse-attack[1~7].png:[100*4,80,70,260]",
+            "image": "units/monsters/horse/horse-attack[1",
             "sound": "horse-elf-canter.wav"
           },
           {
-            "image": "units/monsters/horse/horse.png:60"
+            "image": "units/monsters/horse/horse.png"
           }
         ]
       }
@@ -809,7 +817,7 @@ export const unitTypes: WesnothUnitType[] = [
       "male",
       "female"
     ],
-    "image": "units/monsters/horse/horse-larger.png{HORSE_BLACK_IPF}",
+    "image": "units/monsters/horse/horse-larger.png",
     "hitpoints": 48,
     "movementType": "mounted",
     "movement": 8,
@@ -839,7 +847,7 @@ export const unitTypes: WesnothUnitType[] = [
         "range": "ranged",
         "damage": 4,
         "number": 3,
-        "icon": "attacks/fangs-horse.png~GS()~CS(-30,-5,35)"
+        "icon": "attacks/fangs-horse.png"
       }
     ],
     "animations": [
@@ -848,11 +856,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hooves",
         "frames": [
           {
-            "image": "units/monsters/horse/horse-larger-attack[1~7].png{HORSE_BLACK_IPF}:[100*4,80,70,260]",
+            "image": "units/monsters/horse/horse-larger-attack[1",
             "sound": "horse-elf-canter.wav"
           },
           {
-            "image": "units/monsters/horse/horse-larger.png{HORSE_BLACK_IPF}:60"
+            "image": "units/monsters/horse/horse-larger.png"
           }
         ]
       },
@@ -861,7 +869,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "whinny",
         "frames": [
           {
-            "image": "units/monsters/horse/horse-larger.png{HORSE_BLACK_IPF}:60"
+            "image": "units/monsters/horse/horse-larger.png"
           }
         ]
       }
@@ -872,7 +880,7 @@ export const unitTypes: WesnothUnitType[] = [
       "gender": [
         "female"
       ],
-      "image": "units/monsters/horse/horse-larger+female.png{HORSE_BLACK_IPF}",
+      "image": "units/monsters/horse/horse-larger+female.png",
       "profile": "portraits/monsters/nightmare.webp"
     },
     "macros": [
@@ -895,7 +903,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/bats/bloodbat-se-3.png",
     "profile": "portraits/monsters/bat-red.webp",
-    "smallProfile": "portraits/monsters/bat-red.webp~CROP(0,0,500,300)",
+    "smallProfile": "portraits/monsters/bat-red.webp",
     "hitpoints": 27,
     "movementType": "smallfly",
     "movement": 9,
@@ -928,7 +936,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,se,sw",
         "frames": [
           {
-            "image": "units/bats/bloodbat-se-[3~1,2~5,4].png:[50,60,80,60,50,60,80,60]"
+            "image": "units/bats/bloodbat-se-[3"
           }
         ]
       },
@@ -937,7 +945,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,ne,nw",
         "frames": [
           {
-            "image": "units/bats/bloodbat-ne-[3~1,2~5,4].png:[50,60,80,60,50,60,80,60]"
+            "image": "units/bats/bloodbat-ne-[3"
           }
         ]
       },
@@ -947,14 +955,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/bats/bloodbat-se-[3,2].png:30"
+            "image": "units/bats/bloodbat-se-[3,2].png"
           },
           {
-            "image": "units/bats/bloodbat-se-1.png:30",
+            "image": "units/bats/bloodbat-se-1.png",
             "sound": "bat-flapping.wav"
           },
           {
-            "image": "units/bats/bloodbat-se-[2~4,3,2,3].png:[30*2,70,50*2,40]"
+            "image": "units/bats/bloodbat-se-[2"
           }
         ]
       },
@@ -964,14 +972,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/bats/bloodbat-ne-[3,2].png:30"
+            "image": "units/bats/bloodbat-ne-[3,2].png"
           },
           {
-            "image": "units/bats/bloodbat-ne-1.png:30",
+            "image": "units/bats/bloodbat-ne-1.png",
             "sound": "bat-flapping.wav"
           },
           {
-            "image": "units/bats/bloodbat-ne-[2~4,3,2,3].png:[30*2,70,50*2,40]"
+            "image": "units/bats/bloodbat-ne-[2"
           }
         ]
       }
@@ -1008,6 +1016,8 @@ export const unitTypes: WesnothUnitType[] = [
     "macros": [
       "AMLA_DEFAULT"
     ],
+    "hideHelp": true,
+    "doNotList": true,
     "sourceFile": "data/core/units/boats/Legacy_Boat.cfg"
   },
   {
@@ -1060,10 +1070,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-skeletal/boneknight.png:650"
+            "image": "units/undead-skeletal/boneknight.png"
           },
           {
-            "image": "units/undead-skeletal/boneknight-bob[1~5].png:[250*2,300,160,200]"
+            "image": "units/undead-skeletal/boneknight-bob[1"
           }
         ]
       },
@@ -1071,10 +1081,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-skeletal/boneknight.png:650"
+            "image": "units/undead-skeletal/boneknight.png"
           },
           {
-            "image": "units/undead-skeletal/boneknight-s[1,2,1].png:[650*3]"
+            "image": "units/undead-skeletal/boneknight-s[1,2,1].png"
           }
         ]
       },
@@ -1083,10 +1093,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/undead-skeletal/boneknight-[attack,attack2].png:[300,200]"
+            "image": "units/undead-skeletal/boneknight-[attack,attack2].png"
           },
           {
-            "image": "units/undead-skeletal/boneknight.png:150"
+            "image": "units/undead-skeletal/boneknight.png"
           }
         ]
       },
@@ -1095,10 +1105,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trample",
         "frames": [
           {
-            "image": "units/undead-skeletal/boneknight-trample[1~4].png:[150*3,350]"
+            "image": "units/undead-skeletal/boneknight-trample[1"
           },
           {
-            "image": "units/undead-skeletal/boneknight.png:100"
+            "image": "units/undead-skeletal/boneknight.png"
           }
         ]
       }
@@ -1171,7 +1181,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-skeletal/bone-shooter-bob-[1~8].png:[150*3,200,150*4]"
+            "image": "units/undead-skeletal/bone-shooter-bob-[1"
           }
         ]
       },
@@ -1180,13 +1190,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/undead-skeletal/bone-shooter-bow.png:65"
+            "image": "projectiles/bone-n.png",
+            "duration": 150
           },
           {
-            "image": "units/undead-skeletal/bone-shooter-bow-attack-[1~4].png:[75*2,100,130]"
+            "image": "units/undead-skeletal/bone-shooter-bow.png"
           },
           {
-            "image": "units/undead-skeletal/bone-shooter-bow.png:65"
+            "image": "units/undead-skeletal/bone-shooter-bow-attack-[1"
+          },
+          {
+            "image": "units/undead-skeletal/bone-shooter-bow.png"
           }
         ]
       },
@@ -1195,13 +1209,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/undead-skeletal/bone-shooter-melee-defend-1.png:50"
+            "image": "units/undead-skeletal/bone-shooter-melee-defend-1.png"
           },
           {
-            "image": "units/undead-skeletal/bone-shooter-melee-attack-[1~4].png:100"
+            "image": "units/undead-skeletal/bone-shooter-melee-attack-[1"
           },
           {
-            "image": "units/undead-skeletal/bone-shooter-melee-defend-1.png:50"
+            "image": "units/undead-skeletal/bone-shooter-melee-defend-1.png"
           }
         ]
       }
@@ -1256,16 +1270,26 @@ export const unitTypes: WesnothUnitType[] = [
     "animations": [
       {
         "type": "attack",
+        "filterAttack": "bow",
+        "frames": [
+          {
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          }
+        ]
+      },
+      {
+        "type": "attack",
         "filterAttack": "short sword",
         "frames": [
           {
-            "image": "units/human-loyalists/bowman-melee-defend-1.png:50"
+            "image": "units/human-loyalists/bowman-melee-defend-1.png"
           },
           {
-            "image": "units/human-loyalists/bowman-melee-attack-[1~4].png:100"
+            "image": "units/human-loyalists/bowman-melee-attack-[1"
           },
           {
-            "image": "units/human-loyalists/bowman-melee-defend-1.png:50"
+            "image": "units/human-loyalists/bowman-melee-defend-1.png"
           }
         ]
       }
@@ -1306,7 +1330,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raft/canoe-bob[0,1"
+          },
+          {
+            "image": "units/transport/raft/canoe-flag[1"
           }
         ]
       },
@@ -1314,7 +1344,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raft/canoe-bob[0,1"
+          },
+          {
+            "image": "units/transport/raft/canoe-flag[1"
           }
         ]
       },
@@ -1322,7 +1358,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raft/canoe-bob0.png"
+          },
+          {
+            "image": "units/transport/raft/canoe-flag[1"
           }
         ]
       }
@@ -1351,7 +1393,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Caribe",
     "race": "monster",
     "gender": [],
-    "image": "{CARIBE_IMAGE_PATH}/caribe-shadow.png~BLIT(\"{CARIBE_IMAGE_PATH}/caribe-small-default.png\")",
+    "image": "units/monsters/caribe/caribe-small-default.png",
     "profile": "portraits/monsters/caribe.webp",
     "hitpoints": 38,
     "movementType": "deepsea",
@@ -1384,7 +1426,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-shadow.png:1600"
+            "image": "units/monsters/caribe/caribe-small-[hi,default,lo,default].png"
+          },
+          {
+            "image": "units/monsters/caribe/caribe-shadow.png"
           }
         ]
       },
@@ -1392,7 +1437,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-small-land.png"
+            "image": "units/monsters/caribe/caribe-small-land.png"
           }
         ]
       },
@@ -1401,7 +1446,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-small-[default,attack-1,attack-2,default].png~MASK({CARIBE_IMAGE_PATH}/caribe-mask.png):[50,125,150,175]"
+            "image": "units/monsters/caribe/caribe-small-[default,attack-1,attack-2,default].png"
           }
         ]
       },
@@ -1410,7 +1455,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-small-[land,attack-1,attack-2,land].png:[50,125,150,175]"
+            "image": "units/monsters/caribe/caribe-small-[land,attack-1,attack-2,land].png"
           }
         ]
       }
@@ -1462,7 +1507,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/cavalier/cavalier-breeze-s-[1~3,2,3~1].png:300"
+            "image": "units/human-loyalists/cavalier/cavalier-breeze-s-[1"
           }
         ]
       },
@@ -1471,7 +1516,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/human-loyalists/cavalier/cavalier.png:[100*5,200,300]"
+            "image": "units/human-loyalists/cavalier/cavalier.png"
+          },
+          {
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           }
         ]
       },
@@ -1480,14 +1529,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/cavalier/cavalier-melee[1~4].png:[90*4]"
+            "image": "units/human-loyalists/cavalier/cavalier-melee[1"
           },
           {
-            "image": "units/human-loyalists/cavalier/cavalier-melee[5,6,7].png:[90,120,150]",
+            "image": "units/human-loyalists/cavalier/cavalier-melee[5,6,7].png",
             "sound": "horse-canter.wav"
           },
           {
-            "image": "units/human-loyalists/cavalier/cavalier.png:100"
+            "image": "units/human-loyalists/cavalier/cavalier.png"
           }
         ]
       }
@@ -1534,10 +1583,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/cavalryman/cavalryman.png:250"
+            "image": "units/human-loyalists/cavalryman/cavalryman.png"
           },
           {
-            "image": "units/human-loyalists/cavalryman/cavalryman-breeze[1~3,2,1].png:250"
+            "image": "units/human-loyalists/cavalryman/cavalryman-breeze[1"
           }
         ]
       },
@@ -1545,7 +1594,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/cavalryman/cavalryman-bob[1~3,2,1].png:[350,250,550,650,700]"
+            "image": "units/human-loyalists/cavalryman/cavalryman-bob[1"
           }
         ]
       },
@@ -1553,7 +1602,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/human-loyalists/cavalryman/cavalryman.png:200"
+            "image": "units/human-loyalists/cavalryman/cavalryman.png"
           }
         ]
       },
@@ -1562,14 +1611,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/cavalryman/cavalryman-attack1.png:80"
+            "image": "units/human-loyalists/cavalryman/cavalryman-attack1.png"
           },
           {
-            "image": "units/human-loyalists/cavalryman/cavalryman-attack[2~6].png:[70,100,100,150,150]",
+            "image": "units/human-loyalists/cavalryman/cavalryman-attack[2",
             "sound": "horse-canter.wav"
           },
           {
-            "image": "units/human-loyalists/cavalryman/cavalryman.png:25"
+            "image": "units/human-loyalists/cavalryman/cavalryman.png"
           }
         ]
       }
@@ -1624,7 +1673,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/bear/bear.png:50"
+            "image": "units/monsters/bear/bear.png"
           }
         ]
       },
@@ -1632,7 +1681,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/bear/bear-water.png:50"
+            "image": "units/monsters/bear/bear-water.png"
           }
         ]
       },
@@ -1641,7 +1690,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/bear/bear-bite[1~6].png:[150,200,150,150,170,230]"
+            "image": "units/monsters/bear/bear-bite[1"
           }
         ]
       },
@@ -1650,7 +1699,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/bear/bear-claws[1~6].png:[100*6]"
+            "image": "units/monsters/bear/bear-claws[1"
           }
         ]
       },
@@ -1659,7 +1708,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/bear/bear-2claws[1~8].png:[100*8]"
+            "image": "units/monsters/bear/bear-2claws[1"
           }
         ]
       }
@@ -1716,10 +1765,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/undead-skeletal/chocobone-attack-[1~2].png:100"
+            "image": "units/undead-skeletal/chocobone-attack-[1"
           },
           {
-            "image": "units/undead-skeletal/chocobone-attack-[4,2,1].png:100"
+            "image": "units/undead-skeletal/chocobone-attack-[4,2,1].png"
           }
         ]
       }
@@ -1786,7 +1835,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1380"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raider/bob[1"
+          },
+          {
+            "image": "units/transport/raider/flag[1"
           }
         ]
       },
@@ -1794,7 +1849,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1380"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raider/bob[1"
+          },
+          {
+            "image": "units/transport/raider/flag[1"
           }
         ]
       },
@@ -1802,7 +1863,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1680"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raider/bob[1"
+          },
+          {
+            "image": "units/transport/raider/flag[1"
           }
         ]
       },
@@ -1810,7 +1877,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1680"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raider/bob1.png"
+          },
+          {
+            "image": "units/transport/raider/flag[1"
           }
         ]
       },
@@ -1818,7 +1891,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/transport/raider/die-[1~12].png:[90*12]"
+            "image": "units/transport/raider/die-[1"
           }
         ]
       }
@@ -1881,7 +1954,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/monsters/cuttlefish-die-[1~6].png:100"
+            "image": "units/monsters/cuttlefish-die-[1"
           }
         ]
       },
@@ -1890,7 +1963,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "ink",
         "frames": [
           {
-            "image": "units/monsters/cuttlefish-ranged-[1~6].png:100"
+            "image": "projectiles/ink.png",
+            "duration": 300
+          },
+          {
+            "image": "units/monsters/cuttlefish-ranged-[1"
           }
         ]
       },
@@ -1899,7 +1976,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tentacle",
         "frames": [
           {
-            "image": "units/monsters/cuttlefish-melee-[1~6].png:100"
+            "image": "units/monsters/cuttlefish-melee-[1"
           }
         ]
       },
@@ -1908,7 +1985,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tentacle",
         "frames": [
           {
-            "image": "units/monsters/cuttlefish-melee-a[1~5].png:100"
+            "image": "units/monsters/cuttlefish-melee-a[1"
           }
         ]
       }
@@ -1973,7 +2050,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/undead-necromancers/adept-idle-long-[1~21].png:125"
+            "image": "units/undead-necromancers/adept-idle-long-[1"
           }
         ]
       },
@@ -1981,7 +2058,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/undead-necromancers/adept-idle-[1~11].png:[125*11]"
+            "image": "units/undead-necromancers/adept-idle-[1"
           }
         ]
       },
@@ -1989,7 +2066,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/undead-necromancers/adept-die[1~8].png:[100*4,120*2,140,120]"
+            "image": "units/undead-necromancers/adept-die[1"
           }
         ]
       },
@@ -1998,16 +2075,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "chill wave",
         "frames": [
           {
-            "image": "units/undead-necromancers/adept.png:25"
+            "image": "units/undead-necromancers/adept.png"
           },
           {
-            "image": "units/undead-necromancers/adept-magic-[1~3].png:[35,75,15]"
+            "image": "units/undead-necromancers/adept-magic-[1"
           },
           {
             "image": "units/undead-necromancers/adept-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/adept-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/adept-magic-[2,1].png"
           },
           {
             "image": "units/undead-necromancers/adept.png",
@@ -2020,19 +2097,19 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shadow wave",
         "frames": [
           {
-            "image": "units/undead-necromancers/adept.png:25"
+            "image": "units/undead-necromancers/adept.png"
           },
           {
-            "image": "units/undead-necromancers/adept-magic-[1~3].png:[35,75,15]"
+            "image": "units/undead-necromancers/adept-magic-[1"
           },
           {
             "image": "units/undead-necromancers/adept-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/adept-magic-3.png:350"
+            "image": "units/undead-necromancers/adept-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/adept-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/adept-magic-[2,1].png"
           },
           {
             "image": "units/undead-necromancers/adept.png",
@@ -2055,7 +2132,7 @@ export const unitTypes: WesnothUnitType[] = [
           "type": "idle",
           "frames": [
             {
-              "image": "units/undead-necromancers/adept+female.png:150"
+              "image": "units/undead-necromancers/adept+female.png"
             }
           ]
         },
@@ -2063,7 +2140,7 @@ export const unitTypes: WesnothUnitType[] = [
           "type": "idle",
           "frames": [
             {
-              "image": "units/undead-necromancers/adept+female.png:150"
+              "image": "units/undead-necromancers/adept+female.png"
             }
           ]
         },
@@ -2072,16 +2149,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "chill wave",
           "frames": [
             {
-              "image": "units/undead-necromancers/adept+female.png:25"
+              "image": "units/undead-necromancers/adept+female.png"
             },
             {
-              "image": "units/undead-necromancers/adept+female-magic-[1~3].png:[35,75,20]"
+              "image": "units/undead-necromancers/adept+female-magic-[1"
             },
             {
               "image": "units/undead-necromancers/adept+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/adept+female-magic-[2,1].png:50"
+              "image": "units/undead-necromancers/adept+female-magic-[2,1].png"
             },
             {
               "image": "units/undead-necromancers/adept+female.png"
@@ -2093,19 +2170,19 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "shadow wave",
           "frames": [
             {
-              "image": "units/undead-necromancers/adept+female.png:25"
+              "image": "units/undead-necromancers/adept+female.png"
             },
             {
-              "image": "units/undead-necromancers/adept+female-magic-[1~3].png:[35,75,15]"
+              "image": "units/undead-necromancers/adept+female-magic-[1"
             },
             {
               "image": "units/undead-necromancers/adept+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/adept+female-magic-3.png:350"
+              "image": "units/undead-necromancers/adept+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/adept+female-magic-[2,1].png:50"
+              "image": "units/undead-necromancers/adept+female-magic-[2,1].png"
             },
             {
               "image": "units/undead-necromancers/adept+female.png"
@@ -2130,7 +2207,7 @@ export const unitTypes: WesnothUnitType[] = [
       "male",
       "female"
     ],
-    "image": "units/monsters/horse/horse.png{HORSE_BLACK_IPF}",
+    "image": "units/monsters/horse/horse.png",
     "profile": "portraits/monsters/dark-horse.webp",
     "hitpoints": 30,
     "movementType": "mounted",
@@ -2161,7 +2238,7 @@ export const unitTypes: WesnothUnitType[] = [
         "range": "ranged",
         "damage": 3,
         "number": 1,
-        "icon": "attacks/fangs-horse.png~GS()~CS(-30,-5,35)"
+        "icon": "attacks/fangs-horse.png"
       }
     ],
     "animations": [
@@ -2170,11 +2247,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hooves",
         "frames": [
           {
-            "image": "units/monsters/horse/horse-attack[1~7].png{HORSE_BLACK_IPF}:[100*4,80,70,260]",
+            "image": "units/monsters/horse/horse-attack[1",
             "sound": "horse-elf-canter.wav"
           },
           {
-            "image": "units/monsters/horse/horse.png{HORSE_BLACK_IPF}:60"
+            "image": "units/monsters/horse/horse.png"
           }
         ]
       },
@@ -2183,7 +2260,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "whinny",
         "frames": [
           {
-            "image": "units/monsters/horse/horse.png{HORSE_BLACK_IPF}:60"
+            "image": "units/monsters/horse/horse.png"
           }
         ]
       }
@@ -2253,7 +2330,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/raven/raven-shadow.png:4800"
+            "image": "units/monsters/raven/raven-shadow.png"
+          },
+          {
+            "image": "units/monsters/raven/herald-soar.png"
           }
         ]
       },
@@ -2262,7 +2342,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "beak",
         "frames": [
           {
-            "image": "units/monsters/raven/raven-shadow.png:700"
+            "image": "units/monsters/raven/raven-shadow.png"
+          },
+          {
+            "image": "units/monsters/raven/herald-soar.png"
           }
         ]
       },
@@ -2271,7 +2354,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lightning",
         "frames": [
           {
-            "image": "units/monsters/raven/herald.png:550"
+            "image": "units/monsters/raven/herald.png"
           }
         ]
       }
@@ -2343,13 +2426,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "chill wave",
         "frames": [
           {
-            "image": "units/undead-necromancers/dark-sorcerer-magic-[1,2].png:75"
+            "image": "units/undead-necromancers/dark-sorcerer-magic-[1,2].png"
           },
           {
             "image": "units/undead-necromancers/dark-sorcerer-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/dark-sorcerer-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/dark-sorcerer-magic-[2,1].png"
           }
         ]
       },
@@ -2358,19 +2441,19 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shadow wave",
         "frames": [
           {
-            "image": "units/undead-necromancers/dark-sorcerer-magic-[1,2].png:75"
+            "image": "units/undead-necromancers/dark-sorcerer-magic-[1,2].png"
           },
           {
             "image": "units/undead-necromancers/dark-sorcerer-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/dark-sorcerer-magic-3.png:200"
+            "image": "units/undead-necromancers/dark-sorcerer-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/dark-sorcerer-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/dark-sorcerer-magic-[2,1].png"
           },
           {
-            "image": "units/undead-necromancers/dark-sorcerer.png:50"
+            "image": "units/undead-necromancers/dark-sorcerer.png"
           }
         ]
       },
@@ -2379,16 +2462,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/undead-necromancers/dark-sorcerer.png:50"
+            "image": "units/undead-necromancers/dark-sorcerer.png"
           },
           {
-            "image": "units/undead-necromancers/dark-sorcerer-attack-staff-[1~2].png:[100,200]"
+            "image": "units/undead-necromancers/dark-sorcerer-attack-staff-[1"
           },
           {
-            "image": "units/undead-necromancers/dark-sorcerer-magic-1.png:75"
+            "image": "units/undead-necromancers/dark-sorcerer-magic-1.png"
           },
           {
-            "image": "units/undead-necromancers/dark-sorcerer.png:75"
+            "image": "units/undead-necromancers/dark-sorcerer.png"
           }
         ]
       }
@@ -2408,13 +2491,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "chill wave",
           "frames": [
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female-magic-[1,2].png:75"
+              "image": "units/undead-necromancers/dark-sorcerer+female-magic-[1,2].png"
             },
             {
               "image": "units/undead-necromancers/dark-sorcerer+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female-magic-[2,1].png:50"
+              "image": "units/undead-necromancers/dark-sorcerer+female-magic-[2,1].png"
             }
           ]
         },
@@ -2423,19 +2506,19 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "shadow wave",
           "frames": [
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female-magic-[1,2].png:75"
+              "image": "units/undead-necromancers/dark-sorcerer+female-magic-[1,2].png"
             },
             {
               "image": "units/undead-necromancers/dark-sorcerer+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female-magic-3.png:200"
+              "image": "units/undead-necromancers/dark-sorcerer+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female-magic-[2,1].png:50"
+              "image": "units/undead-necromancers/dark-sorcerer+female-magic-[2,1].png"
             },
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female.png:50"
+              "image": "units/undead-necromancers/dark-sorcerer+female.png"
             }
           ]
         },
@@ -2444,16 +2527,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "staff",
           "frames": [
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female.png:50"
+              "image": "units/undead-necromancers/dark-sorcerer+female.png"
             },
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female-attack-staff-[1~2].png:[100,200]"
+              "image": "units/undead-necromancers/dark-sorcerer+female-attack-staff-[1"
             },
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female-magic-1.png:75"
+              "image": "units/undead-necromancers/dark-sorcerer+female-magic-1.png"
             },
             {
-              "image": "units/undead-necromancers/dark-sorcerer+female.png:75"
+              "image": "units/undead-necromancers/dark-sorcerer+female.png"
             }
           ]
         }
@@ -2471,7 +2554,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/undead-skeletal/deathknight.png",
     "profile": "portraits/undead/death-knight.webp",
-    "smallProfile": "portraits/undead/death-knight.webp~CROP(0,0,400,400)",
+    "smallProfile": "portraits/undead/death-knight.webp",
     "hitpoints": 63,
     "movementType": "undeadfoot",
     "movement": 5,
@@ -2514,10 +2597,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/undead-skeletal/deathknight-crossbow.png:100"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/undead-skeletal/deathknight-crossbow-attack[1~2].png:150"
+            "image": "units/undead-skeletal/deathknight-crossbow.png"
+          },
+          {
+            "image": "units/undead-skeletal/deathknight-crossbow-attack[1"
           }
         ]
       },
@@ -2526,13 +2613,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "battle axe",
         "frames": [
           {
-            "image": "units/undead-skeletal/deathknight.png:50"
+            "image": "units/undead-skeletal/deathknight.png"
           },
           {
-            "image": "units/undead-skeletal/deathknight-melee-attack-[1~6].png:[50,100,75,100,50,75]"
+            "image": "units/undead-skeletal/deathknight-melee-attack-[1"
           },
           {
-            "image": "units/undead-skeletal/deathknight.png:75"
+            "image": "units/undead-skeletal/deathknight.png"
           }
         ]
       }
@@ -2585,10 +2672,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/undead-skeletal/deathsquire-attack-[1~6].png:[150*4,200,175]"
+            "image": "units/undead-skeletal/deathsquire-attack-[1"
           },
           {
-            "image": "units/undead-skeletal/deathsquire.png:25"
+            "image": "units/undead-skeletal/deathsquire.png"
           }
         ]
       }
@@ -2637,7 +2724,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/undead-skeletal/deathblade-idle-[1~5,4,5,4,2,1].png:100"
+            "image": "units/undead-skeletal/deathblade-idle-[1"
           }
         ]
       },
@@ -2645,7 +2732,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/undead-skeletal/deathblade-dying-[1~7].png:100"
+            "image": "units/undead-skeletal/deathblade-dying-[1"
           }
         ]
       },
@@ -2654,10 +2741,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/undead-skeletal/deathblade-attack[1~3].png:[100,150,100]"
+            "image": "units/undead-skeletal/deathblade-attack[1"
           },
           {
-            "image": "units/undead-skeletal/deathblade-defend-1.png:50"
+            "image": "units/undead-skeletal/deathblade-defend-1.png"
           }
         ]
       }
@@ -2707,7 +2794,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/derelict-galleon-rock-[port,center,starboard,center].png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-flag[1"
           }
         ]
       },
@@ -2715,7 +2808,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/derelict-galleon-rock-center.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-flag[1"
           }
         ]
       },
@@ -2723,7 +2822,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/derelict-galleon-rock-center.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-flag[1"
           }
         ]
       },
@@ -2731,7 +2836,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1400"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/derelict-galleon-hit-1.png"
+          },
+          {
+            "image": "units/transport/derelict-galleon-sink.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
           }
         ]
       }
@@ -2778,7 +2892,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/monsters/direwolf-idle-[1~4,3~1].png:[100*3,1000,100*3]"
+            "image": "units/monsters/direwolf-idle-[1"
           }
         ]
       },
@@ -2787,17 +2901,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/direwolf.png:100",
+            "image": "units/monsters/direwolf.png",
             "sound": "wolf-growl-[1~4].ogg"
           },
           {
-            "image": "units/monsters/direwolf-attack.png:200"
+            "image": "units/monsters/direwolf-attack.png"
           },
           {
-            "image": "units/monsters/direwolf-moving.png:250"
+            "image": "units/monsters/direwolf-moving.png"
           },
           {
-            "image": "units/monsters/direwolf.png:50"
+            "image": "units/monsters/direwolf.png"
           }
         ]
       }
@@ -2819,7 +2933,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/goblins/direwolver.png",
     "profile": "portraits/goblins/direwolver.webp",
-    "smallProfile": "portraits/goblins/direwolver.webp~CROP(60,0,390,390)",
+    "smallProfile": "portraits/goblins/direwolver.webp",
     "hitpoints": 61,
     "movementType": "orcishfoot",
     "movement": 10,
@@ -2860,7 +2974,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/goblins/direwolver-idle-[1~4,3~1].png:[100*3,1000,100*3]"
+            "image": "units/goblins/direwolver-idle-[1"
           }
         ]
       },
@@ -2869,20 +2983,20 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/goblins/direwolver.png:50",
+            "image": "units/goblins/direwolver.png",
             "sound": "wolf-growl-[1~4].ogg"
           },
           {
-            "image": "units/goblins/direwolver-moving.png:100"
+            "image": "units/goblins/direwolver-moving.png"
           },
           {
-            "image": "units/goblins/direwolver-attack.png:150"
+            "image": "units/goblins/direwolver-attack.png"
           },
           {
-            "image": "units/goblins/direwolver-moving.png:50"
+            "image": "units/goblins/direwolver-moving.png"
           },
           {
-            "image": "units/goblins/direwolver.png:100"
+            "image": "units/goblins/direwolver.png"
           }
         ]
       },
@@ -2891,17 +3005,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/goblins/direwolver.png:100",
+            "image": "units/goblins/direwolver.png",
             "sound": "wolf-growl-[1~4].ogg"
           },
           {
-            "image": "units/goblins/direwolver-attack.png:200"
+            "image": "units/goblins/direwolver-attack.png"
           },
           {
-            "image": "units/goblins/direwolver-moving.png:250"
+            "image": "units/goblins/direwolver-moving.png"
           },
           {
-            "image": "units/goblins/direwolver.png:50"
+            "image": "units/goblins/direwolver.png"
           }
         ]
       }
@@ -2952,7 +3066,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "se,s,sw",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/young/dragonfly-shadow.png:200"
+            "image": "units/monsters/dragonfly/young/dragonfly-shadow.png"
+          },
+          {
+            "image": "units/monsters/dragonfly/young/dragonfly-flying[1,2,1,2,1,2,1,2,1,2,1,2].png"
           }
         ]
       },
@@ -2961,7 +3078,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "nw,n,ne",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/young/dragonfly-n-shadow.png:200"
+            "image": "units/monsters/dragonfly/young/dragonfly-n-shadow.png"
+          },
+          {
+            "image": "units/monsters/dragonfly/young/dragonfly-n-flying[1,2,1,2,1,2,1,2,1,2,1,2].png"
           }
         ]
       }
@@ -3007,7 +3127,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/naiad/naiad.png:350"
+            "image": "units/monsters/dragonfly/naiad/naiad.png"
           }
         ]
       }
@@ -3091,7 +3211,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/dragoon/dragoon.png:250"
+            "image": "units/human-loyalists/dragoon/dragoon.png"
           }
         ]
       },
@@ -3099,10 +3219,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/dragoon/dragoon.png:550"
+            "image": "units/human-loyalists/dragoon/dragoon.png"
           },
           {
-            "image": "units/human-loyalists/dragoon/dragoon-bob[1~3,2,1].png:[350,400,400,650,700]"
+            "image": "units/human-loyalists/dragoon/dragoon-bob[1"
           }
         ]
       },
@@ -3110,7 +3230,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-loyalists/dragoon/dragoon.png:100"
+            "image": "units/human-loyalists/dragoon/dragoon.png"
           }
         ]
       },
@@ -3119,7 +3239,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/human-loyalists/dragoon/dragoon-xbow-[1~4,2~1].png:[130*2,440,100,160*2]"
+            "image": "units/human-loyalists/dragoon/dragoon-xbow-[1"
+          },
+          {
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           }
         ]
       },
@@ -3128,14 +3252,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/dragoon/dragoon-melee[1~4].png:[70*4]"
+            "image": "units/human-loyalists/dragoon/dragoon-melee[1"
           },
           {
-            "image": "units/human-loyalists/dragoon/dragoon-melee[5~8].png:[70*2,130,110]",
+            "image": "units/human-loyalists/dragoon/dragoon-melee[5",
             "sound": "horse-canter.wav"
           },
           {
-            "image": "units/human-loyalists/dragoon/dragoon.png:80"
+            "image": "units/human-loyalists/dragoon/dragoon.png"
           }
         ]
       }
@@ -3198,13 +3322,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/arbiter.png:50"
+            "image": "units/drakes/arbiter.png"
           },
           {
-            "image": "units/drakes/arbiter-pierce-se-[1~2].png:100,units/drakes/arbiter-pierce-s-[3~7].png:100"
+            "image": "units/drakes/arbiter-pierce-se-[1"
           },
           {
-            "image": "units/drakes/arbiter.png:100"
+            "image": "units/drakes/arbiter.png"
           }
         ]
       },
@@ -3214,13 +3338,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/arbiter.png:50"
+            "image": "units/drakes/arbiter.png"
           },
           {
-            "image": "units/drakes/arbiter-pierce-se-[1~7].png:100"
+            "image": "units/drakes/arbiter-pierce-se-[1"
           },
           {
-            "image": "units/drakes/arbiter.png:100"
+            "image": "units/drakes/arbiter.png"
           }
         ]
       },
@@ -3230,7 +3354,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/arbiter.png:100"
+            "image": "units/drakes/arbiter.png"
           }
         ]
       },
@@ -3240,13 +3364,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/arbiter.png:50"
+            "image": "units/drakes/arbiter.png"
           },
           {
-            "image": "units/drakes/arbiter-blade-se-[1~3].png:100,units/drakes/arbiter-blade-s-[4~6].png:100"
+            "image": "units/drakes/arbiter-blade-se-[1"
           },
           {
-            "image": "units/drakes/arbiter.png:100"
+            "image": "units/drakes/arbiter.png"
           }
         ]
       },
@@ -3256,13 +3380,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/arbiter.png:50"
+            "image": "units/drakes/arbiter.png"
           },
           {
-            "image": "units/drakes/arbiter-blade-se-[1~6].png:100"
+            "image": "units/drakes/arbiter-blade-se-[1"
           },
           {
-            "image": "units/drakes/arbiter.png:100"
+            "image": "units/drakes/arbiter.png"
           }
         ]
       },
@@ -3272,7 +3396,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/arbiter.png:100"
+            "image": "units/drakes/arbiter.png"
           }
         ]
       }
@@ -3337,7 +3461,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "war talon",
         "frames": [
           {
-            "image": "units/drakes/blademaster-melee-[1~6].png:100"
+            "image": "units/drakes/blademaster-melee-[1"
           }
         ]
       }
@@ -3414,7 +3538,7 @@ export const unitTypes: WesnothUnitType[] = [
             "image": "units/drakes/burner.png"
           },
           {
-            "image": "units/drakes/burner-melee-[1~6].png:100"
+            "image": "units/drakes/burner-melee-[1"
           },
           {
             "image": "units/drakes/burner.png"
@@ -3494,7 +3618,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/drakes/clasher-spear-se-1.png:100,units/drakes/clasher-spear-s-[2~6].png:100"
+            "image": "units/drakes/clasher-spear-se-1.png:100,units/drakes/clasher-spear-s-[2"
           }
         ]
       },
@@ -3504,7 +3628,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/drakes/clasher-spear-se-[1~6].png:100"
+            "image": "units/drakes/clasher-spear-se-[1"
           }
         ]
       },
@@ -3514,10 +3638,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/drakes/clasher.png:200"
+            "image": "units/drakes/clasher.png"
           },
           {
-            "image": "units/drakes/clasher.png:400"
+            "image": "units/drakes/clasher.png"
           }
         ]
       },
@@ -3526,13 +3650,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "war talon",
         "frames": [
           {
-            "image": "units/drakes/clasher-blade.png:25"
+            "image": "units/drakes/clasher-blade.png"
           },
           {
-            "image": "units/drakes/clasher-blade-[1~6].png:100"
+            "image": "units/drakes/clasher-blade-[1"
           },
           {
-            "image": "units/drakes/clasher-blade.png:100"
+            "image": "units/drakes/clasher-blade.png"
           }
         ]
       }
@@ -3607,7 +3731,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trident",
         "frames": [
           {
-            "image": "units/drakes/enforcer-spear-se-1.png,units/drakes/enforcer-spear-s-[2~6].png:100"
+            "image": "units/drakes/enforcer-spear-se-1.png,units/drakes/enforcer-spear-s-[2"
           }
         ]
       },
@@ -3617,7 +3741,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trident",
         "frames": [
           {
-            "image": "units/drakes/enforcer-spear-se-[1~6].png:100"
+            "image": "units/drakes/enforcer-spear-se-[1"
           }
         ]
       },
@@ -3626,13 +3750,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "war talon",
         "frames": [
           {
-            "image": "units/drakes/enforcer-blade.png:25"
+            "image": "units/drakes/enforcer-blade.png"
           },
           {
-            "image": "units/drakes/enforcer-blade-[1~6].png:100"
+            "image": "units/drakes/enforcer-blade-[1"
           },
           {
-            "image": "units/drakes/enforcer-blade.png:100"
+            "image": "units/drakes/enforcer-blade.png"
           }
         ]
       },
@@ -3641,13 +3765,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "ram",
         "frames": [
           {
-            "image": "units/drakes/enforcer-blade.png:25"
+            "image": "units/drakes/enforcer-blade.png"
           },
           {
-            "image": "units/drakes/enforcer-impact-[1~5].png:100"
+            "image": "units/drakes/enforcer-impact-[1"
           },
           {
-            "image": "units/drakes/enforcer-blade.png:100"
+            "image": "units/drakes/enforcer-blade.png"
           }
         ]
       }
@@ -3716,7 +3840,7 @@ export const unitTypes: WesnothUnitType[] = [
             "image": "units/drakes/fighter.png"
           },
           {
-            "image": "units/drakes/fighter-melee-[1~6].png:100"
+            "image": "units/drakes/fighter-melee-[1"
           },
           {
             "image": "units/drakes/fighter.png"
@@ -3793,7 +3917,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "war blade",
         "frames": [
           {
-            "image": "units/drakes/flameheart-melee-[1~6].png:100"
+            "image": "units/drakes/flameheart-melee-[1"
           }
         ]
       }
@@ -3870,7 +3994,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "war blade",
         "frames": [
           {
-            "image": "units/drakes/flare-melee-[1~6].png:100"
+            "image": "units/drakes/flare-melee-[1"
           }
         ]
       }
@@ -3946,7 +4070,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "slam",
         "frames": [
           {
-            "image": "units/drakes/glider-kick-[1~6,2].png:100"
+            "image": "units/drakes/glider-kick-[1"
           }
         ]
       }
@@ -4028,7 +4152,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/drakes/thrasher-spear-se-1.png,units/drakes/thrasher-spear-s-[2~6].png:100"
+            "image": "units/drakes/thrasher-spear-se-1.png,units/drakes/thrasher-spear-s-[2"
           }
         ]
       },
@@ -4038,7 +4162,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/drakes/thrasher-spear-se-[1~6].png:100"
+            "image": "units/drakes/thrasher-spear-se-[1"
           }
         ]
       },
@@ -4047,13 +4171,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "war talon",
         "frames": [
           {
-            "image": "units/drakes/thrasher-blade.png:25"
+            "image": "units/drakes/thrasher-blade.png"
           },
           {
-            "image": "units/drakes/thrasher-blade-[1~6].png:100"
+            "image": "units/drakes/thrasher-blade-[1"
           },
           {
-            "image": "units/drakes/thrasher-blade.png:100"
+            "image": "units/drakes/thrasher-blade.png"
           }
         ]
       },
@@ -4062,13 +4186,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "ram",
         "frames": [
           {
-            "image": "units/drakes/thrasher-blade.png:25"
+            "image": "units/drakes/thrasher-blade.png"
           },
           {
-            "image": "units/drakes/thrasher-impact-[1~5].png:100"
+            "image": "units/drakes/thrasher-impact-[1"
           },
           {
-            "image": "units/drakes/thrasher-blade.png:100"
+            "image": "units/drakes/thrasher-blade.png"
           }
         ]
       }
@@ -4137,13 +4261,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/warden.png:50"
+            "image": "units/drakes/warden.png"
           },
           {
-            "image": "units/drakes/warden-pierce-se-[1~2].png:100,units/drakes/warden-pierce-s-[3~7].png:100"
+            "image": "units/drakes/warden-pierce-se-[1"
           },
           {
-            "image": "units/drakes/warden.png:100"
+            "image": "units/drakes/warden.png"
           }
         ]
       },
@@ -4153,13 +4277,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/warden.png:50"
+            "image": "units/drakes/warden.png"
           },
           {
-            "image": "units/drakes/warden-pierce-se-[1~7].png:100"
+            "image": "units/drakes/warden-pierce-se-[1"
           },
           {
-            "image": "units/drakes/warden.png:100"
+            "image": "units/drakes/warden.png"
           }
         ]
       },
@@ -4169,7 +4293,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/warden.png:100"
+            "image": "units/drakes/warden.png"
           }
         ]
       },
@@ -4179,13 +4303,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/warden.png:50"
+            "image": "units/drakes/warden.png"
           },
           {
-            "image": "units/drakes/warden-blade-se-[1~3].png:100,units/drakes/warden-blade-s-[4~6].png:100"
+            "image": "units/drakes/warden-blade-se-[1"
           },
           {
-            "image": "units/drakes/warden.png:100"
+            "image": "units/drakes/warden.png"
           }
         ]
       },
@@ -4195,13 +4319,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/warden.png:50"
+            "image": "units/drakes/warden.png"
           },
           {
-            "image": "units/drakes/warden-blade-se-[1~6].png:100"
+            "image": "units/drakes/warden-blade-se-[1"
           },
           {
-            "image": "units/drakes/warden.png:100"
+            "image": "units/drakes/warden.png"
           }
         ]
       },
@@ -4211,7 +4335,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/drakes/warden.png:100"
+            "image": "units/drakes/warden.png"
           }
         ]
       }
@@ -4277,7 +4401,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "war blade",
         "frames": [
           {
-            "image": "units/drakes/warrior-melee-[1~6].png:100"
+            "image": "units/drakes/warrior-melee-[1"
           }
         ]
       }
@@ -4339,7 +4463,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-skeletal/draug-bob[1~8].png:200"
+            "image": "units/undead-skeletal/draug-bob[1"
           }
         ]
       },
@@ -4348,13 +4472,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/undead-skeletal/draug.png:50"
+            "image": "units/undead-skeletal/draug.png"
           },
           {
-            "image": "units/undead-skeletal/draug-attack[1~2].png:[100,150]"
+            "image": "units/undead-skeletal/draug-attack[1"
           },
           {
-            "image": "units/undead-skeletal/draug-defend-1.png:100"
+            "image": "units/undead-skeletal/draug-defend-1.png"
           }
         ]
       }
@@ -4373,7 +4497,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/bats/dreadbat-se-3.png",
     "profile": "portraits/monsters/bat-dread.webp",
-    "smallProfile": "portraits/monsters/bat-dread.webp~CROP(175,0,325,300)",
+    "smallProfile": "portraits/monsters/bat-dread.webp",
     "hitpoints": 33,
     "movementType": "smallfly",
     "movement": 9,
@@ -4406,7 +4530,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,se,sw",
         "frames": [
           {
-            "image": "units/bats/dreadbat-se-[3~1,2~5,4].png:[50,60,80,60,50,60,80,60]"
+            "image": "units/bats/dreadbat-se-[3"
           }
         ]
       },
@@ -4415,7 +4539,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,ne,nw",
         "frames": [
           {
-            "image": "units/bats/dreadbat-ne-[3~1,2~5,4].png:[50,60,80,60,50,60,80,60]"
+            "image": "units/bats/dreadbat-ne-[3"
           }
         ]
       },
@@ -4425,14 +4549,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/bats/dreadbat-se-[3,2].png:30"
+            "image": "units/bats/dreadbat-se-[3,2].png"
           },
           {
-            "image": "units/bats/dreadbat-se-1.png:30",
+            "image": "units/bats/dreadbat-se-1.png",
             "sound": "bat-flapping.wav"
           },
           {
-            "image": "units/bats/dreadbat-se-[2~4,3,2,3].png:[30*2,70,50*2,40]"
+            "image": "units/bats/dreadbat-se-[2"
           }
         ]
       },
@@ -4442,14 +4566,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/bats/dreadbat-ne-[3,2].png:30"
+            "image": "units/bats/dreadbat-ne-[3,2].png"
           },
           {
-            "image": "units/bats/dreadbat-ne-1.png:30",
+            "image": "units/bats/dreadbat-ne-1.png",
             "sound": "bat-flapping.wav"
           },
           {
-            "image": "units/bats/dreadbat-ne-[2~4,3,2,3].png:[30*2,70,50*2,40]"
+            "image": "units/bats/dreadbat-ne-[2"
           }
         ]
       }
@@ -4511,7 +4635,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/human-loyalists/duelist-die[1~8].png:100"
+            "image": "units/human-loyalists/duelist-die[1"
           }
         ]
       },
@@ -4520,7 +4644,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/human-loyalists/duelist-ranged.png:400"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/human-loyalists/duelist-ranged.png"
           }
         ]
       },
@@ -4529,13 +4657,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "saber",
         "frames": [
           {
-            "image": "units/human-loyalists/duelist.png:100"
+            "image": "units/human-loyalists/duelist.png"
           },
           {
-            "image": "units/human-loyalists/duelist-attack.png:200"
+            "image": "units/human-loyalists/duelist-attack.png"
           },
           {
-            "image": "units/human-loyalists/duelist.png:100"
+            "image": "units/human-loyalists/duelist.png"
           }
         ]
       }
@@ -4551,7 +4679,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Alchemist",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}alchemist.png",
+    "image": "units/dunefolk/herbalist/alchemist.png",
     "profile": "portraits/dunefolk/herbalist.webp",
     "hitpoints": 41,
     "movementType": "dunefoot",
@@ -4597,7 +4725,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}alchemist.png:300"
+            "image": "units/dunefolk/herbalist/alchemist.png"
           }
         ]
       },
@@ -4606,7 +4734,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "blowgun",
         "frames": [
           {
-            "image": "{PATH_TEMP}alchemist.png:300"
+            "image": "projectiles/bullet.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/herbalist/alchemist.png"
           }
         ]
       }
@@ -4623,7 +4755,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Apothecary",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}apothecary.png",
+    "image": "units/dunefolk/herbalist/apothecary.png",
     "profile": "portraits/dunefolk/herbalist.webp",
     "hitpoints": 45,
     "movementType": "dunefoot",
@@ -4658,7 +4790,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}apothecary.png:300"
+            "image": "units/dunefolk/herbalist/apothecary.png"
           }
         ]
       }
@@ -4674,7 +4806,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Blademaster",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}blademaster.png",
+    "image": "units/dunefolk/soldier/blademaster.png",
     "hitpoints": 76,
     "movementType": "dunearmoredfoot",
     "movement": 5,
@@ -4716,7 +4848,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "{PATH_TEMP}blademaster.png:300"
+            "image": "units/dunefolk/soldier/blademaster.png"
           }
         ]
       }
@@ -4736,7 +4868,7 @@ export const unitTypes: WesnothUnitType[] = [
       "male",
       "female"
     ],
-    "image": "{PATH_TEMP}burner.png",
+    "image": "units/dunefolk/burner/burner.png",
     "hitpoints": 35,
     "movementType": "dunefoot",
     "movement": 6,
@@ -4775,7 +4907,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "{PATH_TEMP}burner.png:300"
+            "image": "units/dunefolk/burner/burner.png"
           }
         ]
       }
@@ -4786,7 +4918,7 @@ export const unitTypes: WesnothUnitType[] = [
       "gender": [
         "female"
       ],
-      "image": "{PATH_TEMP}burner+female.png",
+      "image": "units/dunefolk/burner/burner+female.png",
       "dieSound": "human-female-die-[1~3].ogg",
       "animations": [
         {
@@ -4794,7 +4926,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "dagger",
           "frames": [
             {
-              "image": "{PATH_TEMP}burner+female.png:300"
+              "image": "units/dunefolk/burner/burner+female.png"
             }
           ]
         }
@@ -4810,7 +4942,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Captain",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}captain.png",
+    "image": "units/dunefolk/soldier/captain.png",
     "hitpoints": 48,
     "movementType": "dunearmoredfoot",
     "movement": 5,
@@ -4843,7 +4975,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "scimitar",
         "frames": [
           {
-            "image": "{PATH_TEMP}captain.png:300"
+            "image": "units/dunefolk/soldier/captain.png"
           }
         ]
       }
@@ -4860,7 +4992,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Cataphract",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}cataphract.png",
+    "image": "units/dunefolk/rider/cataphract.png",
     "hitpoints": 71,
     "movementType": "dunearmoredhorse",
     "movement": 7,
@@ -4911,7 +5043,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}cataphract-mace.png:300"
+            "image": "units/dunefolk/rider/cataphract-mace.png"
           }
         ]
       },
@@ -4920,7 +5052,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lance",
         "frames": [
           {
-            "image": "{PATH_TEMP}cataphract-lance.png:300"
+            "image": "units/dunefolk/rider/cataphract-lance.png"
           }
         ]
       },
@@ -4929,7 +5061,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "composite bow",
         "frames": [
           {
-            "image": "{PATH_TEMP}cataphract-bow.png:300"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rider/cataphract-bow.png"
           }
         ]
       }
@@ -4946,7 +5082,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Explorer",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}explorer.png",
+    "image": "units/dunefolk/rover/explorer.png",
     "profile": "portraits/dunefolk/rover.webp",
     "hitpoints": 46,
     "movementType": "dunefoot",
@@ -4986,7 +5122,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "{PATH_TEMP}explorer.png:300"
+            "image": "units/dunefolk/rover/explorer.png"
           }
         ]
       },
@@ -4995,7 +5131,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "composite bow",
         "frames": [
           {
-            "image": "{PATH_TEMP}explorer.png:300"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rover/explorer.png"
           }
         ]
       }
@@ -5017,7 +5157,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [
       "female"
     ],
-    "image": "{PATH_TEMP}falconer.png",
+    "image": "units/dunefolk/skirmisher/falconer.png",
     "profile": "portraits/dunefolk/falconer.webp",
     "hitpoints": 38,
     "movementType": "duneelusivefoot",
@@ -5047,7 +5187,7 @@ export const unitTypes: WesnothUnitType[] = [
       "male",
       "female"
     ],
-    "image": "{PATH_TEMP}firetrooper.png",
+    "image": "units/dunefolk/burner/firetrooper.png",
     "hitpoints": 57,
     "movementType": "dunefoot",
     "movement": 6,
@@ -5086,7 +5226,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "{PATH_TEMP}firetrooper.png:300"
+            "image": "units/dunefolk/burner/firetrooper.png"
           }
         ]
       }
@@ -5097,7 +5237,7 @@ export const unitTypes: WesnothUnitType[] = [
       "gender": [
         "female"
       ],
-      "image": "{PATH_TEMP}firetrooper+female.png",
+      "image": "units/dunefolk/burner/firetrooper+female.png",
       "dieSound": "human-female-die-[1~3].ogg",
       "animations": [
         {
@@ -5105,7 +5245,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "dagger",
           "frames": [
             {
-              "image": "{PATH_TEMP}firetrooper+female.png:300"
+              "image": "units/dunefolk/burner/firetrooper+female.png"
             }
           ]
         }
@@ -5124,7 +5264,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [
       "female"
     ],
-    "image": "{PATH_TEMP}harrier.png",
+    "image": "units/dunefolk/skirmisher/harrier.png",
     "hitpoints": 53,
     "movementType": "duneelusivefoot",
     "movement": 7,
@@ -5172,7 +5312,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "{PATH_TEMP}harrier.png:300"
+            "image": "units/dunefolk/skirmisher/harrier.png"
           }
         ]
       }
@@ -5189,7 +5329,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Herbalist",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}herbalist.png",
+    "image": "units/dunefolk/herbalist/herbalist.png",
     "profile": "portraits/dunefolk/herbalist.webp",
     "hitpoints": 32,
     "movementType": "dunefoot",
@@ -5225,7 +5365,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}herbalist.png:300"
+            "image": "units/dunefolk/herbalist/herbalist.png"
           }
         ]
       }
@@ -5241,7 +5381,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Horse Archer",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}horse-archer.png",
+    "image": "units/dunefolk/rider/horse-archer.png",
     "hitpoints": 44,
     "movementType": "dunehorse",
     "movement": 8,
@@ -5280,7 +5420,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}horse-archer.png:400"
+            "image": "units/dunefolk/rider/horse-archer.png"
           }
         ]
       },
@@ -5289,7 +5429,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "composite bow",
         "frames": [
           {
-            "image": "{PATH_TEMP}horse-archer.png:300"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rider/horse-archer.png"
           }
         ]
       }
@@ -5305,7 +5449,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Luminary",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}luminary.png",
+    "image": "units/dunefolk/herbalist/luminary.png",
     "profile": "portraits/dunefolk/herbalist.webp",
     "hitpoints": 52,
     "movementType": "dunefoot",
@@ -5339,7 +5483,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}luminary.png:300"
+            "image": "units/dunefolk/herbalist/luminary.png"
           }
         ]
       }
@@ -5356,7 +5500,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Marauder",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}marauder.png",
+    "image": "units/dunefolk/rider/marauder.png",
     "hitpoints": 58,
     "movementType": "dunehorse",
     "movement": 9,
@@ -5395,7 +5539,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "torch",
         "frames": [
           {
-            "image": "{TORCH_STATIC_IMAGE}:400"
+            "image": "units/dunefolk/rider/marauder.png"
           }
         ]
       },
@@ -5404,7 +5548,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dart",
         "frames": [
           {
-            "image": "{PATH_TEMP}marauder-rope[1~3,2,3,2~4].png~BLIT({PATH_TEMP}marauder-torch-overlay.png,51,0):[120,80*6,200]"
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rider/marauder-rope[1"
           }
         ]
       }
@@ -5425,7 +5573,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Paragon",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}paragon.png",
+    "image": "units/dunefolk/soldier/paragon.png",
     "hitpoints": 82,
     "movementType": "dunearmoredfoot",
     "movement": 5,
@@ -5476,7 +5624,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "{PATH_TEMP}paragon.png:300"
+            "image": "units/dunefolk/soldier/paragon.png"
           }
         ]
       },
@@ -5485,7 +5633,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pommel strike",
         "frames": [
           {
-            "image": "{PATH_TEMP}paragon.png:300"
+            "image": "units/dunefolk/soldier/paragon.png"
           }
         ]
       }
@@ -5503,7 +5651,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Raider",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}raider.png",
+    "image": "units/dunefolk/rider/raider.png",
     "hitpoints": 45,
     "movementType": "dunehorse",
     "movement": 9,
@@ -5542,7 +5690,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "torch",
         "frames": [
           {
-            "image": "{TORCH_STATIC_IMAGE}:400"
+            "image": "units/dunefolk/rider/raider.png"
           }
         ]
       },
@@ -5551,7 +5699,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dart",
         "frames": [
           {
-            "image": "{TORCH_STATIC_IMAGE}:400"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rider/raider.png"
           }
         ]
       }
@@ -5570,7 +5722,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Rider",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}rider.png",
+    "image": "units/dunefolk/rider/rider.png",
     "hitpoints": 33,
     "movementType": "dunehorse",
     "movement": 8,
@@ -5611,7 +5763,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}rider.png:400"
+            "image": "units/dunefolk/rider/rider.png"
           }
         ]
       },
@@ -5620,7 +5772,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "composite bow",
         "frames": [
           {
-            "image": "{PATH_TEMP}rider.png:300"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rider/rider.png"
           }
         ]
       }
@@ -5636,7 +5792,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Rover",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}rover.png",
+    "image": "units/dunefolk/rover/rover.png",
     "profile": "portraits/dunefolk/rover.webp",
     "hitpoints": 32,
     "movementType": "dunefoot",
@@ -5675,10 +5831,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{PATH_TEMP}rover.png:240"
+            "image": "units/dunefolk/rover/rover.png"
           },
           {
-            "image": "{PATH_TEMP}rover-breeze[3~1].png:[240*3]"
+            "image": "units/dunefolk/rover/rover-breeze[3"
           }
         ]
       },
@@ -5686,7 +5842,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{PATH_TEMP}rover-bob[1~4,3,2].png:[300*2,380,525,225,300]"
+            "image": "units/dunefolk/rover/rover-bob[1"
           }
         ]
       },
@@ -5695,10 +5851,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "{PATH_TEMP}rover-attack[1~7].png:[100*2,80*4,130]"
+            "image": "units/dunefolk/rover/rover-attack[1"
           },
           {
-            "image": "{PATH_TEMP}rover.png:50"
+            "image": "units/dunefolk/rover/rover.png"
           }
         ]
       },
@@ -5707,10 +5863,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "composite bow",
         "frames": [
           {
-            "image": "{PATH_TEMP}rover-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "{PATH_TEMP}rover-bow-attack[1~4,1].png:[75*2,100,130,65]"
+            "image": "units/dunefolk/rover/rover-bow.png"
+          },
+          {
+            "image": "units/dunefolk/rover/rover-bow-attack[1"
           }
         ]
       }
@@ -5733,7 +5893,7 @@ export const unitTypes: WesnothUnitType[] = [
       "male",
       "female"
     ],
-    "image": "{PATH_TEMP}scorcher.png",
+    "image": "units/dunefolk/burner/scorcher.png",
     "hitpoints": 51,
     "movementType": "dunefoot",
     "movement": 6,
@@ -5772,7 +5932,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "{PATH_TEMP}scorcher.png:300"
+            "image": "units/dunefolk/burner/scorcher.png"
           }
         ]
       }
@@ -5783,7 +5943,7 @@ export const unitTypes: WesnothUnitType[] = [
       "gender": [
         "female"
       ],
-      "image": "{PATH_TEMP}scorcher+female.png",
+      "image": "units/dunefolk/burner/scorcher+female.png",
       "dieSound": "human-female-die-[1~3].ogg",
       "animations": [
         {
@@ -5791,7 +5951,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "dagger",
           "frames": [
             {
-              "image": "{PATH_TEMP}scorcher+female.png:300"
+              "image": "units/dunefolk/burner/scorcher+female.png"
             }
           ]
         }
@@ -5809,7 +5969,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [
       "female"
     ],
-    "image": "{PATH_TEMP}skirmisher.png",
+    "image": "units/dunefolk/skirmisher/skirmisher.png",
     "hitpoints": 29,
     "movementType": "duneelusivefoot",
     "movement": 6,
@@ -5863,7 +6023,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [
       "female"
     ],
-    "image": "{PATH_TEMP}sky_hunter.png",
+    "image": "units/dunefolk/skirmisher/sky_hunter.png",
     "profile": "portraits/dunefolk/falconer.webp",
     "hitpoints": 48,
     "movementType": "duneelusivefoot",
@@ -5893,7 +6053,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Soldier",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}soldier.png",
+    "image": "units/dunefolk/soldier/soldier.png",
     "hitpoints": 41,
     "movementType": "dunearmoredfoot",
     "movement": 5,
@@ -5925,7 +6085,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "scimitar",
         "frames": [
           {
-            "image": "{PATH_TEMP}soldier.png:300"
+            "image": "units/dunefolk/soldier/soldier.png"
           }
         ]
       }
@@ -5941,7 +6101,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Spearguard",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}spearguard.png",
+    "image": "units/dunefolk/soldier/spearguard.png",
     "hitpoints": 53,
     "movementType": "dunearmoredfoot",
     "movement": 5,
@@ -5983,7 +6143,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "{PATH_TEMP}spearguard.png:300"
+            "image": "units/dunefolk/soldier/spearguard.png"
           }
         ]
       },
@@ -5992,7 +6152,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shield bash",
         "frames": [
           {
-            "image": "{PATH_TEMP}spearguard.png:300"
+            "image": "units/dunefolk/soldier/spearguard.png"
           }
         ]
       }
@@ -6008,7 +6168,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Spearmaster",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}spearmaster.png",
+    "image": "units/dunefolk/soldier/spearmaster.png",
     "hitpoints": 68,
     "movementType": "dunearmoredfoot",
     "movement": 5,
@@ -6050,7 +6210,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "{PATH_TEMP}spearmaster.png:300"
+            "image": "units/dunefolk/soldier/spearmaster.png"
           }
         ]
       },
@@ -6059,7 +6219,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shield bash",
         "frames": [
           {
-            "image": "{PATH_TEMP}spearmaster.png:300"
+            "image": "units/dunefolk/soldier/spearmaster.png"
           }
         ]
       }
@@ -6078,7 +6238,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [
       "female"
     ],
-    "image": "{PATH_TEMP}strider.png",
+    "image": "units/dunefolk/skirmisher/strider.png",
     "hitpoints": 42,
     "movementType": "duneelusivefoot",
     "movement": 6,
@@ -6126,7 +6286,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "{PATH_TEMP}strider.png:300"
+            "image": "units/dunefolk/skirmisher/strider.png"
           }
         ]
       }
@@ -6142,7 +6302,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Sunderer",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}sunderer.png",
+    "image": "units/dunefolk/rider/sunderer.png",
     "hitpoints": 55,
     "movementType": "dunearmoredhorse",
     "movement": 7,
@@ -6181,7 +6341,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}sunderer.png:400"
+            "image": "units/dunefolk/rider/sunderer.png"
           }
         ]
       },
@@ -6190,7 +6350,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "composite bow",
         "frames": [
           {
-            "image": "{PATH_TEMP}sunderer.png:300"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rider/sunderer.png"
           }
         ]
       }
@@ -6206,7 +6370,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Swordsman",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}swordsman.png",
+    "image": "units/dunefolk/soldier/swordsman.png",
     "hitpoints": 56,
     "movementType": "dunearmoredfoot",
     "movement": 5,
@@ -6248,7 +6412,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "scimitar_balance",
         "frames": [
           {
-            "image": "{PATH_TEMP}swordsman.png:500"
+            "image": "units/dunefolk/soldier/swordsman.png"
           }
         ]
       },
@@ -6257,7 +6421,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "scimitar_force",
         "frames": [
           {
-            "image": "{PATH_TEMP}swordsman.png:500"
+            "image": "units/dunefolk/soldier/swordsman.png"
           }
         ]
       }
@@ -6273,7 +6437,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Warmaster",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}warmaster.png",
+    "image": "units/dunefolk/soldier/warmaster.png",
     "hitpoints": 61,
     "movementType": "dunearmoredfoot",
     "movement": 5,
@@ -6306,7 +6470,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "scimitar",
         "frames": [
           {
-            "image": "{PATH_TEMP}warmaster.png:300"
+            "image": "units/dunefolk/soldier/warmaster.png"
           }
         ]
       }
@@ -6324,7 +6488,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Wayfarer",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}wayfarer.png",
+    "image": "units/dunefolk/rover/wayfarer.png",
     "hitpoints": 62,
     "movementType": "dunefoot",
     "movement": 6,
@@ -6363,7 +6527,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "{PATH_TEMP}wayfarer.png:300"
+            "image": "units/dunefolk/rover/wayfarer.png"
           }
         ]
       },
@@ -6372,7 +6536,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "composite bow",
         "frames": [
           {
-            "image": "{PATH_TEMP}wayfarer.png:300"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rover/wayfarer.png"
           }
         ]
       }
@@ -6393,7 +6561,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Dune Windbolt",
     "race": "dunefolk",
     "gender": [],
-    "image": "{PATH_TEMP}windbolt.png",
+    "image": "units/dunefolk/rider/windbolt.png",
     "hitpoints": 52,
     "movementType": "dunehorse",
     "movement": 8,
@@ -6432,7 +6600,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "{PATH_TEMP}windbolt.png:400"
+            "image": "units/dunefolk/rider/windbolt.png"
           }
         ]
       },
@@ -6441,7 +6609,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "composite bow",
         "frames": [
           {
-            "image": "{PATH_TEMP}windbolt.png:300"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/rider/windbolt.png"
           }
         ]
       }
@@ -6492,10 +6664,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hammer",
         "frames": [
           {
-            "image": "units/dwarves/arcanister.png:250"
+            "image": "units/dwarves/arcanister.png"
           },
           {
-            "image": "units/dwarves/arcanister.png:400"
+            "image": "units/dwarves/arcanister.png"
           }
         ]
       }
@@ -6545,7 +6717,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/berserker/berserker-bob[1~6].png:200"
+            "image": "units/dwarves/berserker/berserker-bob[1"
           }
         ]
       },
@@ -6553,7 +6725,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/berserker/berserker.png:200"
+            "image": "units/dwarves/berserker/berserker.png"
           }
         ]
       },
@@ -6561,7 +6733,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/dwarves/berserker/berserker-idle-[1~10,9~12,11,13,15,14,16,2,1].png:[100*8,200,100,300,100*2,400,100*2,500,100*4]"
+            "image": "units/dwarves/berserker/berserker-idle-[1"
           }
         ]
       },
@@ -6570,10 +6742,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "berserker frenzy",
         "frames": [
           {
-            "image": "units/dwarves/berserker/berserker-attack-[1~8,1].png:[40,50*4,60,40,30*2]"
+            "image": "units/dwarves/berserker/berserker-attack-[1"
           },
           {
-            "image": "units/dwarves/berserker/berserker.png:30"
+            "image": "units/dwarves/berserker/berserker.png"
           }
         ]
       }
@@ -6684,7 +6856,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/dwarves/explorer-ranged-[1~3].png:[200*2,100]"
+            "image": "units/dwarves/explorer-ranged-[1"
           }
         ]
       },
@@ -6693,7 +6865,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "battle axe",
         "frames": [
           {
-            "image": "units/dwarves/explorer-melee-[1~6].png:[80*2,50*2,100*2]"
+            "image": "units/dwarves/explorer-melee-[1"
           }
         ]
       }
@@ -6748,7 +6920,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/dwarves/fighter-taunt-[1,2,3,4,5,6,7,6,5,6,7,6,5,4,3,2,1].png:[110,200,100,90,70,50,110,110,150,50,110,110,110,110,110,110,110]"
+            "image": "units/dwarves/fighter-taunt-[1,2,3,4,5,6,7,6,5,6,7,6,5,4,3,2,1].png"
           }
         ]
       }
@@ -6807,13 +6979,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/guard.png:400,units/dwarves/guard-bob-[1~3,2,1].png:[150*2,300,100*2]"
+            "image": "units/dwarves/guard.png:400,units/dwarves/guard-bob-[1"
           },
           {
-            "image": "units/dwarves/guard.png:400,units/dwarves/guard-bob-[1~3,2,1].png:[150*2,300,100*2]"
+            "image": "units/dwarves/guard.png:400,units/dwarves/guard-bob-[1"
           },
           {
-            "image": "units/dwarves/guard.png:400,units/dwarves/guard-bob-[1~5].png:[150*2,300,100*2]"
+            "image": "units/dwarves/guard.png:400,units/dwarves/guard-bob-[1"
           }
         ]
       },
@@ -6821,7 +6993,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/guard.png:200"
+            "image": "units/dwarves/guard.png"
           }
         ]
       },
@@ -6829,7 +7001,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/dwarves/guard-idle-[1~6,1].png:[100,500,100*2,400,500,100]"
+            "image": "units/dwarves/guard-idle-[1"
           }
         ]
       },
@@ -6838,14 +7010,18 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "javelin",
         "frames": [
           {
-            "image": "units/dwarves/guard-defend-1.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dwarves/guard-defend-1.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/dwarves/guard-attack.png:100"
+            "image": "units/dwarves/guard-attack.png"
           },
           {
-            "image": "units/dwarves/guard.png:50"
+            "image": "units/dwarves/guard.png"
           }
         ]
       },
@@ -6854,7 +7030,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/dwarves/guard-attack-[1~7,1].png:[100*2,50*3,100*3]"
+            "image": "units/dwarves/guard-attack-[1"
           }
         ]
       }
@@ -6962,7 +7138,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pick",
         "frames": [
           {
-            "image": "units/dwarves/miner-attack-[1~6].png:100"
+            "image": "units/dwarves/miner-attack-[1"
           }
         ]
       }
@@ -7015,7 +7191,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/dwarves/pathfinder-idle-[1~14,13,14~1].png:[100*3,1,100*2,200,100,200,100*2,1,100,300,100,300,100*13]"
+            "image": "units/dwarves/pathfinder-idle-[1"
           }
         ]
       },
@@ -7024,7 +7200,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/dwarves/pathfinder-ranged-[1~3].png:[200*2,100]"
+            "image": "units/dwarves/pathfinder-ranged-[1"
           }
         ]
       },
@@ -7033,10 +7209,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/dwarves/pathfinder-melee.png:80"
+            "image": "units/dwarves/pathfinder-melee.png"
           },
           {
-            "image": "units/dwarves/pathfinder-melee-[1~6].png:[80*2,50*2,100*2]"
+            "image": "units/dwarves/pathfinder-melee-[1"
           }
         ]
       }
@@ -7087,10 +7263,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hammer",
         "frames": [
           {
-            "image": "units/dwarves/runemaster.png:250"
+            "image": "units/dwarves/runemaster.png"
           },
           {
-            "image": "units/dwarves/runemaster.png:400"
+            "image": "units/dwarves/runemaster.png"
           }
         ]
       }
@@ -7140,7 +7316,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/runesmith-bob-[1~6].png:[150*3,200,150*2]"
+            "image": "units/dwarves/runesmith-bob-[1"
           }
         ]
       },
@@ -7148,7 +7324,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/runesmith.png:150"
+            "image": "units/dwarves/runesmith.png"
           }
         ]
       },
@@ -7157,7 +7333,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hammer",
         "frames": [
           {
-            "image": "units/dwarves/runesmith-attack-se-[1~10].png:70"
+            "image": "units/dwarves/runesmith-attack-se-[1"
           }
         ]
       }
@@ -7210,7 +7386,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/dwarves/scout-idle-[1~16].png:[150*16]"
+            "image": "units/dwarves/scout-idle-[1"
           }
         ]
       },
@@ -7219,7 +7395,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/dwarves/scout-ranged-[1~3].png:[200*2,100]"
+            "image": "units/dwarves/scout-ranged-[1"
           }
         ]
       },
@@ -7228,7 +7404,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/dwarves/scout-melee-[1~8].png:[80*2,50*4,100*2]"
+            "image": "units/dwarves/scout-melee-[1"
           }
         ]
       }
@@ -7246,7 +7422,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/dwarves/sentinel.png",
     "profile": "portraits/dwarves/sentinel.webp",
-    "smallProfile": "portraits/dwarves/sentinel.webp~CROP(0,100,400,400)",
+    "smallProfile": "portraits/dwarves/sentinel.webp",
     "hitpoints": 68,
     "movementType": "dwarvishfoot",
     "movement": 4,
@@ -7287,13 +7463,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/sentinel.png:400,units/dwarves/sentinel-bob-[1~3,2,1].png:[150*2,300,100*2]"
+            "image": "units/dwarves/sentinel.png:400,units/dwarves/sentinel-bob-[1"
           },
           {
-            "image": "units/dwarves/sentinel.png:400,units/dwarves/sentinel-bob-[1~3,2,1].png:[150*2,300,100*2]"
+            "image": "units/dwarves/sentinel.png:400,units/dwarves/sentinel-bob-[1"
           },
           {
-            "image": "units/dwarves/sentinel.png:400,units/dwarves/sentinel-bob-[1~5].png:[150*2,300,100*2]"
+            "image": "units/dwarves/sentinel.png:400,units/dwarves/sentinel-bob-[1"
           }
         ]
       },
@@ -7301,7 +7477,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/sentinel.png:200"
+            "image": "units/dwarves/sentinel.png"
           }
         ]
       },
@@ -7310,14 +7486,18 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "javelin",
         "frames": [
           {
-            "image": "units/dwarves/sentinel-defend-1.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dwarves/sentinel-defend-1.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/dwarves/sentinel-attack.png:100"
+            "image": "units/dwarves/sentinel-attack.png"
           },
           {
-            "image": "units/dwarves/sentinel.png:50"
+            "image": "units/dwarves/sentinel.png"
           }
         ]
       },
@@ -7326,19 +7506,19 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/dwarves/sentinel.png:50"
+            "image": "units/dwarves/sentinel.png"
           },
           {
-            "image": "units/dwarves/sentinel-defend-1.png:50"
+            "image": "units/dwarves/sentinel-defend-1.png"
           },
           {
-            "image": "units/dwarves/sentinel-attack.png:150"
+            "image": "units/dwarves/sentinel-attack.png"
           },
           {
-            "image": "units/dwarves/sentinel-defend-1.png:25"
+            "image": "units/dwarves/sentinel-defend-1.png"
           },
           {
-            "image": "units/dwarves/sentinel.png:75"
+            "image": "units/dwarves/sentinel.png"
           }
         ]
       }
@@ -7364,7 +7544,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/dwarves/stalwart.png",
     "profile": "portraits/dwarves/sentinel.webp",
-    "smallProfile": "portraits/dwarves/sentinel.webp~CROP(0,100,400,400)",
+    "smallProfile": "portraits/dwarves/sentinel.webp",
     "hitpoints": 59,
     "movementType": "dwarvishfoot",
     "movement": 4,
@@ -7405,13 +7585,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/stalwart.png:400,units/dwarves/stalwart-bob-[1~3,2,1].png:[150*2,300,100*2]"
+            "image": "units/dwarves/stalwart.png:400,units/dwarves/stalwart-bob-[1"
           },
           {
-            "image": "units/dwarves/stalwart.png:400,units/dwarves/stalwart-bob-[1~3,2,1].png:[150*2,300,100*2]"
+            "image": "units/dwarves/stalwart.png:400,units/dwarves/stalwart-bob-[1"
           },
           {
-            "image": "units/dwarves/stalwart.png:400,units/dwarves/stalwart-bob-[1~5].png:[150*2,300,100*2]"
+            "image": "units/dwarves/stalwart.png:400,units/dwarves/stalwart-bob-[1"
           }
         ]
       },
@@ -7419,7 +7599,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/stalwart.png:200"
+            "image": "units/dwarves/stalwart.png"
           }
         ]
       },
@@ -7428,14 +7608,18 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "javelin",
         "frames": [
           {
-            "image": "units/dwarves/stalwart-defend-1.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dwarves/stalwart-defend-1.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/dwarves/stalwart-attack.png:100"
+            "image": "units/dwarves/stalwart-attack.png"
           },
           {
-            "image": "units/dwarves/stalwart.png:50"
+            "image": "units/dwarves/stalwart.png"
           }
         ]
       },
@@ -7444,19 +7628,19 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/dwarves/stalwart.png:50"
+            "image": "units/dwarves/stalwart.png"
           },
           {
-            "image": "units/dwarves/stalwart-defend-1.png:50"
+            "image": "units/dwarves/stalwart-defend-1.png"
           },
           {
-            "image": "units/dwarves/stalwart-attack.png:150"
+            "image": "units/dwarves/stalwart-attack.png"
           },
           {
-            "image": "units/dwarves/stalwart-defend-1.png:25"
+            "image": "units/dwarves/stalwart-defend-1.png"
           },
           {
-            "image": "units/dwarves/stalwart.png:75"
+            "image": "units/dwarves/stalwart.png"
           }
         ]
       }
@@ -7518,7 +7702,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/dwarves/steelclad-idle-[1~11,1~3,2,1].png:100"
+            "image": "units/dwarves/steelclad-idle-[1"
           }
         ]
       }
@@ -7574,7 +7758,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/dwarves/thunderer/thunderer-idle-[1~6,5,6,5,6,4,2,1].png:[100*3,800,200,300,200,300,200*2,500,100*2]"
+            "image": "units/dwarves/thunderer/thunderer-idle-[1"
           }
         ]
       },
@@ -7582,7 +7766,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/dwarves/thunderer/thunderer-die[1~3].png:200"
+            "image": "units/dwarves/thunderer/thunderer-die[1"
           }
         ]
       }
@@ -7679,7 +7863,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/ulfserker-bob-[1~6].png:200"
+            "image": "units/dwarves/ulfserker-bob-[1"
           }
         ]
       },
@@ -7687,7 +7871,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/ulfserker.png:200"
+            "image": "units/dwarves/ulfserker.png"
           }
         ]
       },
@@ -7695,7 +7879,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/dwarves/ulfserker-idle-[1~6,3,5,6,3~1].png:[100*2,200,100*2,300,200*2,300,200,100*2]"
+            "image": "units/dwarves/ulfserker-idle-[1"
           }
         ]
       },
@@ -7704,7 +7888,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "berserker frenzy",
         "frames": [
           {
-            "image": "units/dwarves/ulfserker-attack-[1~8,1].png:[40,50*4,60,40,30*2]"
+            "image": "units/dwarves/ulfserker-attack-[1"
           }
         ]
       }
@@ -7768,7 +7952,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/falcon/elder-falcon-shadow.png:4800"
+            "image": "units/monsters/falcon/elder-falcon-shadow.png"
+          },
+          {
+            "image": "units/monsters/falcon/elder-falcon-soar[1"
           }
         ]
       },
@@ -7777,7 +7964,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/falcon/falcon-shadow.png:700"
+            "image": "units/monsters/falcon/falcon-shadow.png"
+          },
+          {
+            "image": "units/monsters/falcon/elder-falcon-attack-[1,2,claws,end].png"
           }
         ]
       },
@@ -7786,7 +7976,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "beak",
         "frames": [
           {
-            "image": "units/monsters/falcon/falcon-shadow.png:800"
+            "image": "units/monsters/falcon/falcon-shadow.png"
+          },
+          {
+            "image": "units/monsters/falcon/elder-falcon-attack-[1,2,beak,end].png"
           }
         ]
       }
@@ -7849,16 +8042,43 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/human-magi/elder-mage-ranged1.png:25"
+            "image": "units/human-magi/elder-mage-ranged1.png"
           },
           {
-            "image": "units/human-magi/elder-mage-melee[1~2].png:[100,200]"
+            "image": "units/human-magi/elder-mage-melee[1"
           },
           {
-            "image": "units/human-magi/elder-mage-ranged1.png:50"
+            "image": "units/human-magi/elder-mage-ranged1.png"
           },
           {
-            "image": "units/human-magi/elder-mage.png:50"
+            "image": "units/human-magi/elder-mage.png"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "lightning",
+        "frames": [
+          {
+            "image": "units/human-magi/elder-mage-ranged[1"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "lightning",
+        "frames": [
+          {
+            "image": "units/human-magi/elder-mage-ranged[1"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "lightning",
+        "frames": [
+          {
+            "image": "units/human-magi/elder-mage-ranged[1"
           }
         ]
       }
@@ -7866,10 +8086,7 @@ export const unitTypes: WesnothUnitType[] = [
     "dieSound": "human-old-die-[1~3].ogg",
     "macros": [
       "DEFENSE_ANIM \"units/human-magi/elder-mage-defend.png\" \"units/human-magi/elder-mage.png\" {SOUND_LIST:HUMAN_OLD_HIT}",
-      "AMLA_DEFAULT",
-      "ELDER_MAGE_LIGHTNING 1",
-      "ELDER_MAGE_LIGHTNING 2",
-      "ELDER_MAGE_LIGHTNING 3"
+      "AMLA_DEFAULT"
     ],
     "sourceFile": "data/core/units/humans/Mage_Elder.cfg"
   },
@@ -7880,7 +8097,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/woses/wose-elder.png",
     "profile": "portraits/woses/wose.webp",
-    "smallProfile": "portraits/woses/wose.webp~CROP(0,35,435,435)",
+    "smallProfile": "portraits/woses/wose.webp",
     "hitpoints": 64,
     "movementType": "treefolk",
     "movement": 4,
@@ -7913,7 +8130,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/woses/wose-elder-die-fall-[1~15].png:100"
+            "image": "units/woses/wose-elder-die-fall-[1"
           }
         ]
       },
@@ -7921,10 +8138,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/woses/elder-wose-die-decay-[1,2].png:150"
+            "image": "units/woses/elder-wose-die-decay-[1,2].png"
           },
           {
-            "image": "units/woses/wose-die-decay-[4~9].png:150"
+            "image": "units/woses/wose-die-decay-[4"
           }
         ]
       },
@@ -7933,7 +8150,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crush",
         "frames": [
           {
-            "image": "units/woses/wose-elder-attack-[1,2,1].png:[400,200,100]"
+            "image": "units/woses/wose-elder-attack-[1,2,1].png"
           }
         ]
       }
@@ -7954,7 +8171,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/archer.png",
     "profile": "portraits/elves/archer.webp",
-    "smallProfile": "portraits/elves/archer.webp~CROP(0,40,360,360)",
+    "smallProfile": "portraits/elves/archer.webp",
     "hitpoints": 29,
     "movementType": "woodland",
     "movement": 6,
@@ -7993,7 +8210,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/elves-wood/archer-idle-[1~6,3~6,3~6,2,1].png:100"
+            "image": "units/elves-wood/archer-idle-[1"
           }
         ]
       },
@@ -8002,13 +8219,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/archer-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/archer-bow-attack[1~4].png:[75*2,100,130]"
+            "image": "units/elves-wood/archer-bow.png"
           },
           {
-            "image": "units/elves-wood/archer-bow.png:65"
+            "image": "units/elves-wood/archer-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/archer-bow.png"
           }
         ]
       },
@@ -8017,13 +8238,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/archer-sword.png:25"
+            "image": "units/elves-wood/archer-sword.png"
           },
           {
-            "image": "units/elves-wood/archer-sword-[1~4].png:[100,150,50*2]"
+            "image": "units/elves-wood/archer-sword-[1"
           },
           {
-            "image": "units/elves-wood/archer-sword.png:25"
+            "image": "units/elves-wood/archer-sword.png"
           }
         ]
       }
@@ -8044,13 +8265,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "bow",
           "frames": [
             {
-              "image": "units/elves-wood/archer+female-bow.png:65"
+              "image": "units/elves-wood/archer+female-bow.png"
             },
             {
-              "image": "units/elves-wood/archer+female-bow-attack[1~4].png:[75*2,100,130]"
+              "image": "units/elves-wood/archer+female-bow-attack[1"
             },
             {
-              "image": "units/elves-wood/archer+female-bow.png:65"
+              "image": "units/elves-wood/archer+female-bow.png"
             }
           ]
         },
@@ -8059,13 +8280,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "sword",
           "frames": [
             {
-              "image": "units/elves-wood/archer+female-sword.png:25"
+              "image": "units/elves-wood/archer+female-sword.png"
             },
             {
-              "image": "units/elves-wood/archer+female-sword-[1~4].png:[100,150,50*2]"
+              "image": "units/elves-wood/archer+female-sword-[1"
             },
             {
-              "image": "units/elves-wood/archer+female-sword.png:25"
+              "image": "units/elves-wood/archer+female-sword.png"
             }
           ]
         }
@@ -8087,7 +8308,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/avenger.png",
     "profile": "portraits/elves/ranger.webp",
-    "smallProfile": "portraits/elves/ranger.webp~CROP(20,20,400,400)",
+    "smallProfile": "portraits/elves/ranger.webp",
     "hitpoints": 55,
     "movementType": "woodland",
     "movement": 6,
@@ -8129,13 +8350,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/avenger-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/avenger-bow-attack[1~4].png:[75*2,100,130]"
+            "image": "units/elves-wood/avenger-bow.png"
           },
           {
-            "image": "units/elves-wood/avenger-bow.png:65"
+            "image": "units/elves-wood/avenger-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/avenger-bow.png"
           }
         ]
       },
@@ -8144,13 +8369,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/avenger-sword.png:25"
+            "image": "units/elves-wood/avenger-sword.png"
           },
           {
-            "image": "units/elves-wood/avenger-sword-[1~3].png:[100,150,100]"
+            "image": "units/elves-wood/avenger-sword-[1"
           },
           {
-            "image": "units/elves-wood/avenger-sword.png:25"
+            "image": "units/elves-wood/avenger-sword.png"
           }
         ]
       }
@@ -8163,7 +8388,7 @@ export const unitTypes: WesnothUnitType[] = [
       ],
       "image": "units/elves-wood/avenger+female.png",
       "profile": "portraits/elves/ranger+female.webp",
-      "smallProfile": "portraits/elves/ranger+female.webp~CROP(10,11,389,389)",
+      "smallProfile": "portraits/elves/ranger+female.webp",
       "dieSound": "human-female-hit-[1~3].ogg",
       "animations": [
         {
@@ -8171,13 +8396,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "bow",
           "frames": [
             {
-              "image": "units/elves-wood/avenger+female-bow.png:65"
+              "image": "units/elves-wood/avenger+female-bow.png"
             },
             {
-              "image": "units/elves-wood/avenger+female-bow-attack[1~4].png:[75*2,100,130]"
+              "image": "units/elves-wood/avenger+female-bow-attack[1"
             },
             {
-              "image": "units/elves-wood/avenger+female-bow.png:75"
+              "image": "units/elves-wood/avenger+female-bow.png"
             }
           ]
         },
@@ -8186,13 +8411,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "sword",
           "frames": [
             {
-              "image": "units/elves-wood/avenger+female-sword.png:25"
+              "image": "units/elves-wood/avenger+female-sword.png"
             },
             {
-              "image": "units/elves-wood/avenger+female-sword-[1~3].png:[100,150,100]"
+              "image": "units/elves-wood/avenger+female-sword-[1"
             },
             {
-              "image": "units/elves-wood/avenger+female-sword.png:25"
+              "image": "units/elves-wood/avenger+female-sword.png"
             }
           ]
         }
@@ -8221,7 +8446,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/elves-wood/captain.png",
     "profile": "portraits/elves/captain.webp",
-    "smallProfile": "portraits/elves/captain.webp~CROP(8,60,370,380)",
+    "smallProfile": "portraits/elves/captain.webp",
     "hitpoints": 47,
     "movementType": "woodland",
     "movement": 5,
@@ -8263,13 +8488,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/captain-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/captain-bow-attack[1~4].png:[75*2,100,130]"
+            "image": "units/elves-wood/captain-bow.png"
           },
           {
-            "image": "units/elves-wood/captain-bow.png:65"
+            "image": "units/elves-wood/captain-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/captain-bow.png"
           }
         ]
       },
@@ -8278,13 +8507,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/captain.png:25"
+            "image": "units/elves-wood/captain.png"
           },
           {
-            "image": "units/elves-wood/captain-melee-[2,1,2].png:[75,200,75]"
+            "image": "units/elves-wood/captain-melee-[2,1,2].png"
           },
           {
-            "image": "units/elves-wood/captain.png:50"
+            "image": "units/elves-wood/captain.png"
           }
         ]
       }
@@ -8345,13 +8574,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/champion-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/champion-bow-attack[1~4].png:[75*2,100,130]"
+            "image": "units/elves-wood/champion-bow.png"
           },
           {
-            "image": "units/elves-wood/champion-bow.png:65"
+            "image": "units/elves-wood/champion-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/champion-bow.png"
           }
         ]
       },
@@ -8360,10 +8593,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/champion.png:25"
+            "image": "units/elves-wood/champion.png"
           },
           {
-            "image": "units/elves-wood/champion-attack-[1~6].png:[50*2,150,50*2,25]"
+            "image": "units/elves-wood/champion-attack-[1"
           }
         ]
       }
@@ -8439,7 +8672,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1700"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/elven/cutter-bob[1"
+          },
+          {
+            "image": "units/transport/elven/cutter-flag[1"
           }
         ]
       },
@@ -8447,7 +8686,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/elven/cutter-bob[1"
+          },
+          {
+            "image": "units/transport/elven/cutter-flag[1"
           }
         ]
       },
@@ -8455,7 +8700,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/elven/cutter-bob[1,2].png"
+          },
+          {
+            "image": "units/transport/elven/cutter-flag[1"
           }
         ]
       },
@@ -8463,7 +8714,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/elven/cutter-bob1.png"
+          },
+          {
+            "image": "units/transport/elven/cutter-flag[1"
           }
         ]
       }
@@ -8486,7 +8743,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/druid.png",
     "profile": "portraits/elves/druid.webp",
-    "smallProfile": "portraits/elves/druid.webp~CROP(18,48,362,362)",
+    "smallProfile": "portraits/elves/druid.webp",
     "hitpoints": 36,
     "movementType": "woodland",
     "movement": 5,
@@ -8543,7 +8800,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "thorns",
         "frames": [
           {
-            "image": "units/elves-wood/druid-magic-[1~4,4~1].png:75"
+            "image": "projectiles/thorns.png",
+            "duration": 200
+          },
+          {
+            "image": "units/elves-wood/druid-magic-[1"
           }
         ]
       },
@@ -8552,7 +8813,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "ensnare",
         "frames": [
           {
-            "image": "units/elves-wood/druid-magic-[1~4,4~1].png:75"
+            "image": "projectiles/entangle.png",
+            "duration": 200
+          },
+          {
+            "image": "units/elves-wood/druid-magic-[1"
           }
         ]
       },
@@ -8561,13 +8826,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/elves-wood/druid.png:75"
+            "image": "units/elves-wood/druid.png"
           },
           {
-            "image": "units/elves-wood/druid-attack.png:200"
+            "image": "units/elves-wood/druid-attack.png"
           },
           {
-            "image": "units/elves-wood/druid.png:75"
+            "image": "units/elves-wood/druid.png"
           }
         ]
       }
@@ -8587,7 +8852,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/enchantress.png",
     "profile": "portraits/elves/sorceress.webp",
-    "smallProfile": "portraits/elves/sorceress.webp~CROP(3,7,400,400)",
+    "smallProfile": "portraits/elves/sorceress.webp",
     "hitpoints": 50,
     "movementType": "woodland",
     "movement": 5,
@@ -8641,7 +8906,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "faerie fire",
         "frames": [
           {
-            "image": "units/elves-wood/enchantress-magic-[1,2*5,1].png:75"
+            "image": "units/elves-wood/enchantress-magic-[1,2*5,1].png"
           }
         ]
       },
@@ -8650,7 +8915,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "entangle",
         "frames": [
           {
-            "image": "units/elves-wood/enchantress-magic-[1,2*6,1].png:75"
+            "image": "projectiles/entangle.png",
+            "duration": 250
+          },
+          {
+            "image": "units/elves-wood/enchantress-magic-[1,2*6,1].png"
           }
         ]
       },
@@ -8659,7 +8928,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/elves-wood/enchantress-melee-[1~6].png:[90*2,100*4]"
+            "image": "units/elves-wood/enchantress-melee-[1"
           }
         ]
       }
@@ -8717,13 +8986,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/fighter/fighter-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/fighter/fighter-bow-attack[1~4].png:[75*2,100,130]"
+            "image": "units/elves-wood/fighter/fighter-bow.png"
           },
           {
-            "image": "units/elves-wood/fighter/fighter-bow.png:65"
+            "image": "units/elves-wood/fighter/fighter-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/fighter/fighter-bow.png"
           }
         ]
       },
@@ -8732,13 +9005,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/fighter/fighter-melee-1.png:155"
+            "image": "units/elves-wood/fighter/fighter-melee-1.png"
           },
           {
-            "image": "units/elves-wood/fighter/fighter-melee-[2,3,4].png:[80,80,125]"
+            "image": "units/elves-wood/fighter/fighter-melee-[2,3,4].png"
           },
           {
-            "image": "units/elves-wood/fighter/fighter.png:15"
+            "image": "units/elves-wood/fighter/fighter.png"
           }
         ]
       },
@@ -8747,10 +9020,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/fighter/fighter-melee-[1~4].png:[155,80,80,125]"
+            "image": "units/elves-wood/fighter/fighter-melee-[1"
           },
           {
-            "image": "units/elves-wood/fighter/fighter.png:15"
+            "image": "units/elves-wood/fighter/fighter.png"
           }
         ]
       },
@@ -8759,10 +9032,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/fighter/fighter-melee-[1~5]b.png:[90,90,125,80,125]"
+            "image": "units/elves-wood/fighter/fighter-melee-[1"
           },
           {
-            "image": "units/elves-wood/fighter/fighter.png:15"
+            "image": "units/elves-wood/fighter/fighter.png"
           }
         ]
       }
@@ -8820,13 +9093,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/hero-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/hero-bow-attack[1~4].png:[75*2,100,130]"
+            "image": "units/elves-wood/hero-bow.png"
           },
           {
-            "image": "units/elves-wood/hero-bow.png:65"
+            "image": "units/elves-wood/hero-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/hero-bow.png"
           }
         ]
       },
@@ -8835,16 +9112,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/hero.png:25"
+            "image": "units/elves-wood/hero.png"
           },
           {
-            "image": "units/elves-wood/hero-melee-[1~4].png:[65,35,150,45]"
+            "image": "units/elves-wood/hero-melee-[1"
           },
           {
-            "image": "units/elves-wood/hero-defend.png:60"
+            "image": "units/elves-wood/hero-defend.png"
           },
           {
-            "image": "units/elves-wood/hero.png:20"
+            "image": "units/elves-wood/hero.png"
           }
         ]
       }
@@ -8914,13 +9191,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/high-lord.png:25"
+            "image": "units/elves-wood/high-lord.png"
           },
           {
-            "image": "units/elves-wood/high-lord-attack-sword-[1~2].png:[100,175]"
+            "image": "units/elves-wood/high-lord-attack-sword-[1"
           },
           {
-            "image": "units/elves-wood/high-lord.png:100"
+            "image": "units/elves-wood/high-lord.png"
           }
         ]
       }
@@ -8941,7 +9218,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/lady.png",
     "profile": "portraits/elves/lady.webp",
-    "smallProfile": "portraits/elves/lady.webp~CROP(0,20,380,380)",
+    "smallProfile": "portraits/elves/lady.webp",
     "hitpoints": 47,
     "movementType": "woodland",
     "movement": 6,
@@ -8978,6 +9255,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "ensnare",
         "frames": [
           {
+            "image": "projectiles/entangle.png",
+            "duration": 150
+          },
+          {
             "image": "units/elves-wood/lady.png"
           }
         ]
@@ -8997,7 +9278,7 @@ export const unitTypes: WesnothUnitType[] = [
     "race": "elf",
     "gender": [],
     "image": "units/elves-wood/lord.png",
-    "profile": "portraits/elves/lord.webp~RIGHT()",
+    "profile": "portraits/elves/lord.webp",
     "hitpoints": 51,
     "movementType": "woodland",
     "movement": 6,
@@ -9048,13 +9329,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/lord.png:100"
+            "image": "units/elves-wood/lord.png"
           },
           {
-            "image": "units/elves-wood/lord-melee.png:225"
+            "image": "units/elves-wood/lord-melee.png"
           },
           {
-            "image": "units/elves-wood/lord.png:75"
+            "image": "units/elves-wood/lord.png"
           }
         ]
       }
@@ -9076,7 +9357,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/marksman.png",
     "profile": "portraits/elves/marksman.webp",
-    "smallProfile": "portraits/elves/marksman.webp~CROP(30,30,370,370)~FL()",
+    "smallProfile": "portraits/elves/marksman.webp",
     "hitpoints": 37,
     "movementType": "woodland",
     "movement": 6,
@@ -9117,7 +9398,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/elves-wood/marksman-die-[1~5].png:[160,220,180,200,220]"
+            "image": "units/elves-wood/marksman-die-[1"
           }
         ]
       },
@@ -9126,13 +9407,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "longbow",
         "frames": [
           {
-            "image": "units/elves-wood/marksman-bow.png:75"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/marksman-bow-attack[1~4].png:[75*2,100,150]"
+            "image": "units/elves-wood/marksman-bow.png"
           },
           {
-            "image": "units/elves-wood/marksman-bow.png:75"
+            "image": "units/elves-wood/marksman-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/marksman-bow.png"
           }
         ]
       },
@@ -9141,13 +9426,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/marksman-sword.png:25"
+            "image": "units/elves-wood/marksman-sword.png"
           },
           {
-            "image": "units/elves-wood/marksman-sword-[1~3].png:[100,175,75]"
+            "image": "units/elves-wood/marksman-sword-[1"
           },
           {
-            "image": "units/elves-wood/marksman-sword.png:25"
+            "image": "units/elves-wood/marksman-sword.png"
           }
         ]
       }
@@ -9160,17 +9445,17 @@ export const unitTypes: WesnothUnitType[] = [
       ],
       "image": "units/elves-wood/marksman+female.png",
       "profile": "portraits/elves/marksman+female.webp",
-      "smallProfile": "portraits/elves/marksman+female.webp~CROP(0,30,370,370)",
+      "smallProfile": "portraits/elves/marksman+female.webp",
       "dieSound": "human-female-hit-[1~3].ogg",
       "animations": [
         {
           "type": "death",
           "frames": [
             {
-              "image": "units/elves-wood/marksman+female-die-[1~3].png:[160,220,180]"
+              "image": "units/elves-wood/marksman+female-die-[1"
             },
             {
-              "image": "units/elves-wood/marksman-die-[4,5].png:[200,220]"
+              "image": "units/elves-wood/marksman-die-[4,5].png"
             }
           ]
         },
@@ -9179,13 +9464,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "longbow",
           "frames": [
             {
-              "image": "units/elves-wood/marksman+female-bow.png:75"
+              "image": "units/elves-wood/marksman+female-bow.png"
             },
             {
-              "image": "units/elves-wood/marksman+female-bow-attack[1~4].png:[75*2,100,150]"
+              "image": "units/elves-wood/marksman+female-bow-attack[1"
             },
             {
-              "image": "units/elves-wood/marksman+female-bow.png:75"
+              "image": "units/elves-wood/marksman+female-bow.png"
             }
           ]
         },
@@ -9194,13 +9479,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "sword",
           "frames": [
             {
-              "image": "units/elves-wood/marksman+female-sword.png:25"
+              "image": "units/elves-wood/marksman+female-sword.png"
             },
             {
-              "image": "units/elves-wood/marksman+female-sword-[1~3].png:[100,175,75]"
+              "image": "units/elves-wood/marksman+female-sword-[1"
             },
             {
-              "image": "units/elves-wood/marksman+female-sword.png:25"
+              "image": "units/elves-wood/marksman+female-sword.png"
             }
           ]
         }
@@ -9219,7 +9504,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/elves-wood/marshal.png",
     "profile": "portraits/elves/captain.webp",
-    "smallProfile": "portraits/elves/captain.webp~CROP(8,60,370,380)",
+    "smallProfile": "portraits/elves/captain.webp",
     "hitpoints": 60,
     "movementType": "woodland",
     "movement": 6,
@@ -9260,7 +9545,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/elves-wood/marshal-stand-[1~14].png:[150*14]"
+            "image": "units/elves-wood/marshal-stand-[1"
           }
         ]
       },
@@ -9269,13 +9554,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/marshal-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/marshal-bow-attack[1~4].png:[75*2,100,130]"
+            "image": "units/elves-wood/marshal-bow.png"
           },
           {
-            "image": "units/elves-wood/marshal-bow.png:65"
+            "image": "units/elves-wood/marshal-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/marshal-bow.png"
           }
         ]
       },
@@ -9284,13 +9573,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/marshal-melee-2.png:75"
+            "image": "units/elves-wood/marshal-melee-2.png"
           },
           {
-            "image": "units/elves-wood/marshal-melee-[1~2].png:[175,75]"
+            "image": "units/elves-wood/marshal-melee-[1"
           },
           {
-            "image": "units/elves-wood/marshal.png:50"
+            "image": "units/elves-wood/marshal.png"
           }
         ]
       }
@@ -9349,10 +9638,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/outrider/outrider.png:[100,250,100]"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/outrider/outrider.png:100"
+            "image": "units/elves-wood/outrider/outrider.png"
+          },
+          {
+            "image": "units/elves-wood/outrider/outrider.png"
           }
         ]
       },
@@ -9361,20 +9654,20 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/outrider/outrider-melee-0.png:80"
+            "image": "units/elves-wood/outrider/outrider-melee-0.png"
           },
           {
-            "image": "units/elves-wood/outrider/outrider-melee-1.png:70",
+            "image": "units/elves-wood/outrider/outrider-melee-1.png",
             "sound": "horse-elf-canter.wav"
           },
           {
-            "image": "units/elves-wood/outrider/outrider-melee-[2,3].png:[75,90]"
+            "image": "units/elves-wood/outrider/outrider-melee-[2,3].png"
           },
           {
-            "image": "units/elves-wood/outrider/outrider-melee-[4,5,6].png:[90,80,75]"
+            "image": "units/elves-wood/outrider/outrider-melee-[4,5,6].png"
           },
           {
-            "image": "units/elves-wood/outrider/outrider.png:1"
+            "image": "units/elves-wood/outrider/outrider.png"
           }
         ]
       }
@@ -9399,7 +9692,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/ranger.png",
     "profile": "portraits/elves/ranger.webp",
-    "smallProfile": "portraits/elves/ranger.webp~CROP(20,20,400,400)",
+    "smallProfile": "portraits/elves/ranger.webp",
     "hitpoints": 42,
     "movementType": "woodland",
     "movement": 6,
@@ -9441,13 +9734,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/ranger-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/ranger-bow-attack[1~4].png:[75*2,100,130]"
+            "image": "units/elves-wood/ranger-bow.png"
           },
           {
-            "image": "units/elves-wood/ranger-bow.png:65"
+            "image": "units/elves-wood/ranger-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/ranger-bow.png"
           }
         ]
       },
@@ -9456,13 +9753,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/ranger-sword.png:25"
+            "image": "units/elves-wood/ranger-sword.png"
           },
           {
-            "image": "units/elves-wood/ranger-sword-[1~3].png:[100,150,100]"
+            "image": "units/elves-wood/ranger-sword-[1"
           },
           {
-            "image": "units/elves-wood/ranger-sword.png:25"
+            "image": "units/elves-wood/ranger-sword.png"
           }
         ]
       }
@@ -9475,7 +9772,7 @@ export const unitTypes: WesnothUnitType[] = [
       ],
       "image": "units/elves-wood/ranger+female.png",
       "profile": "portraits/elves/ranger+female.webp",
-      "smallProfile": "portraits/elves/ranger+female.webp~CROP(10,10,389,389)",
+      "smallProfile": "portraits/elves/ranger+female.webp",
       "dieSound": "human-female-hit-[1~3].ogg",
       "animations": [
         {
@@ -9483,13 +9780,17 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "bow",
           "frames": [
             {
-              "image": "units/elves-wood/ranger+female-bow.png:65"
+              "image": "projectiles/missile-n.png",
+              "duration": 150
             },
             {
-              "image": "units/elves-wood/ranger+female-bow-attack[1~4].png:[75*2,100,130]"
+              "image": "units/elves-wood/ranger+female-bow.png"
             },
             {
-              "image": "units/elves-wood/ranger+female-bow.png:65"
+              "image": "units/elves-wood/ranger+female-bow-attack[1"
+            },
+            {
+              "image": "units/elves-wood/ranger+female-bow.png"
             }
           ]
         },
@@ -9498,13 +9799,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "sword",
           "frames": [
             {
-              "image": "units/elves-wood/ranger+female-sword.png:25"
+              "image": "units/elves-wood/ranger+female-sword.png"
             },
             {
-              "image": "units/elves-wood/ranger+female-sword-[1~3].png:[100,150,100]"
+              "image": "units/elves-wood/ranger+female-sword-[1"
             },
             {
-              "image": "units/elves-wood/ranger+female-sword.png:25"
+              "image": "units/elves-wood/ranger+female-sword.png"
             }
           ]
         }
@@ -9570,10 +9871,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/rider/rider.png:[250,100]"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/rider/rider.png:150"
+            "image": "units/elves-wood/rider/rider.png"
+          },
+          {
+            "image": "units/elves-wood/rider/rider.png"
           }
         ]
       },
@@ -9582,17 +9887,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/rider/rider.png:25",
+            "image": "units/elves-wood/rider/rider.png",
             "sound": "horse-elf-canter.wav"
           },
           {
-            "image": "units/elves-wood/rider/rider.png:75"
+            "image": "units/elves-wood/rider/rider.png"
           },
           {
-            "image": "units/elves-wood/rider/rider.png:75"
+            "image": "units/elves-wood/rider/rider.png"
           },
           {
-            "image": "units/elves-wood/rider/rider.png:25"
+            "image": "units/elves-wood/rider/rider.png"
           }
         ]
       }
@@ -9651,7 +9956,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/elves-wood/scout/scout.png:[125*9,150,175,150,175*8]"
+            "image": "units/elves-wood/scout/scout.png"
           }
         ]
       },
@@ -9660,13 +9965,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/elves-wood/scout/scout-bow.png:60"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/scout/scout-bow-attack[1~4].png:[60,60,70,180]"
+            "image": "units/elves-wood/scout/scout-bow.png"
           },
           {
-            "image": "units/elves-wood/scout/scout-bow.png:80"
+            "image": "units/elves-wood/scout/scout-bow-attack[1"
+          },
+          {
+            "image": "units/elves-wood/scout/scout-bow.png"
           }
         ]
       },
@@ -9675,7 +9984,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/scout/scout-melee-[1~5].png:[100,80,70,100,150]",
+            "image": "units/elves-wood/scout/scout-melee-[1",
             "sound": "horse-elf-canter.wav"
           }
         ]
@@ -9700,8 +10009,8 @@ export const unitTypes: WesnothUnitType[] = [
       "female"
     ],
     "image": "units/elves-wood/shaman.png",
-    "profile": "portraits/elves/shaman.webp~RIGHT()",
-    "smallProfile": "portraits/elves/shaman.webp~CROP(10,10,390,390)",
+    "profile": "portraits/elves/shaman.webp",
+    "smallProfile": "portraits/elves/shaman.webp",
     "hitpoints": 26,
     "movementType": "woodland",
     "movement": 5,
@@ -9745,7 +10054,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/elves-wood/shaman-idle-[1~6,6,5,4,3].png:200"
+            "image": "units/elves-wood/shaman-idle-[1"
           }
         ]
       },
@@ -9754,10 +10063,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "entangle",
         "frames": [
           {
-            "image": "units/elves-wood/shaman.png:225,units/elves-wood/shaman-attack2.png:225,units/elves-wood/shaman.png:100"
+            "image": "projectiles/entangle.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/shaman.png:50"
+            "image": "units/elves-wood/shaman.png:225,units/elves-wood/shaman-attack2.png:225,units/elves-wood/shaman.png"
+          },
+          {
+            "image": "units/elves-wood/shaman.png"
           }
         ]
       },
@@ -9766,13 +10079,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/elves-wood/shaman.png:75"
+            "image": "units/elves-wood/shaman.png"
           },
           {
-            "image": "units/elves-wood/shaman-attack.png:200"
+            "image": "units/elves-wood/shaman-attack.png"
           },
           {
-            "image": "units/elves-wood/shaman.png:75"
+            "image": "units/elves-wood/shaman.png"
           }
         ]
       }
@@ -9793,7 +10106,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/sharpshooter.png",
     "profile": "portraits/elves/marksman.webp",
-    "smallProfile": "portraits/elves/marksman.webp~CROP(30,30,370,370)~FL()",
+    "smallProfile": "portraits/elves/marksman.webp",
     "hitpoints": 47,
     "movementType": "woodland",
     "movement": 6,
@@ -9835,10 +10148,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "longbow",
         "frames": [
           {
-            "image": "units/elves-wood/sharpshooter-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/elves-wood/sharpshooter-bow-attack[1~5].png:[75*2,100,130,150]"
+            "image": "units/elves-wood/sharpshooter-bow.png"
+          },
+          {
+            "image": "units/elves-wood/sharpshooter-bow-attack[1"
           }
         ]
       },
@@ -9847,13 +10164,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/elves-wood/sharpshooter-sword.png:25"
+            "image": "units/elves-wood/sharpshooter-sword.png"
           },
           {
-            "image": "units/elves-wood/sharpshooter-sword-[1~3].png:[100,175,75]"
+            "image": "units/elves-wood/sharpshooter-sword-[1"
           },
           {
-            "image": "units/elves-wood/sharpshooter-sword.png:25"
+            "image": "units/elves-wood/sharpshooter-sword.png"
           }
         ]
       }
@@ -9866,7 +10183,7 @@ export const unitTypes: WesnothUnitType[] = [
       ],
       "image": "units/elves-wood/sharpshooter+female.png",
       "profile": "portraits/elves/marksman+female.webp",
-      "smallProfile": "portraits/elves/marksman+female.webp~CROP(0,30,370,370)",
+      "smallProfile": "portraits/elves/marksman+female.webp",
       "dieSound": "human-female-hit-[1~3].ogg",
       "animations": [
         {
@@ -9874,10 +10191,10 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "longbow",
           "frames": [
             {
-              "image": "units/elves-wood/sharpshooter+female-bow.png:65"
+              "image": "units/elves-wood/sharpshooter+female-bow.png"
             },
             {
-              "image": "units/elves-wood/sharpshooter+female-bow-attack[1~5].png:[75*2,100,130,150]"
+              "image": "units/elves-wood/sharpshooter+female-bow-attack[1"
             }
           ]
         },
@@ -9886,13 +10203,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "sword",
           "frames": [
             {
-              "image": "units/elves-wood/sharpshooter+female-sword.png:25"
+              "image": "units/elves-wood/sharpshooter+female-sword.png"
             },
             {
-              "image": "units/elves-wood/sharpshooter+female-sword-[1~3].png:[100,175,75]"
+              "image": "units/elves-wood/sharpshooter+female-sword-[1"
             },
             {
-              "image": "units/elves-wood/sharpshooter+female-sword.png:25"
+              "image": "units/elves-wood/sharpshooter+female-sword.png"
             }
           ]
         }
@@ -9914,7 +10231,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/shyde.png",
     "profile": "portraits/elves/shyde.webp",
-    "smallProfile": "portraits/elves/shyde.webp~CROP(110,60,390,390)",
+    "smallProfile": "portraits/elves/shyde.webp",
     "hitpoints": 46,
     "movementType": "woodlandfloat",
     "movement": 6,
@@ -9974,6 +10291,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "thorns",
         "frames": [
           {
+            "image": "projectiles/thorns.png",
+            "duration": 200
+          },
+          {
             "image": "units/elves-wood/shyde-ftouch-attack3.png"
           }
         ]
@@ -9982,6 +10303,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "attack",
         "filterAttack": "ensnare",
         "frames": [
+          {
+            "image": "projectiles/entangle.png",
+            "duration": 150
+          },
           {
             "image": "units/elves-wood/shyde-ftouch-attack3.png"
           }
@@ -9992,7 +10317,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "faerie touch",
         "frames": [
           {
-            "image": "units/elves-wood/shyde-ftouch-attack[1~3].png:[100,200,100]"
+            "image": "units/elves-wood/shyde-ftouch-attack[1"
           }
         ]
       }
@@ -10067,7 +10392,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1700"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/elven/sloop-bob[1"
+          },
+          {
+            "image": "units/transport/elven/sloop-flag[1"
           }
         ]
       },
@@ -10075,7 +10406,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/elven/sloop-bob[1"
+          },
+          {
+            "image": "units/transport/elven/sloop-flag[1"
           }
         ]
       },
@@ -10083,7 +10420,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/elven/sloop-bob[2,3,2,3].png"
+          },
+          {
+            "image": "units/transport/skiff/skiff-flag[1"
           }
         ]
       },
@@ -10091,7 +10434,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/elven/sloop-bob2.png"
+          },
+          {
+            "image": "units/transport/skiff/skiff-flag[1"
           }
         ]
       }
@@ -10115,7 +10464,7 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "image": "units/elves-wood/sorceress.png",
     "profile": "portraits/elves/sorceress.webp",
-    "smallProfile": "portraits/elves/sorceress.webp~CROP(3,7,400,400)",
+    "smallProfile": "portraits/elves/sorceress.webp",
     "hitpoints": 41,
     "movementType": "woodland",
     "movement": 5,
@@ -10168,7 +10517,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "faerie fire",
         "frames": [
           {
-            "image": "units/elves-wood/sorceress-magic-[1~3,3,3~1].png:75"
+            "image": "units/elves-wood/sorceress-magic-[1"
           }
         ]
       },
@@ -10177,7 +10526,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "entangle",
         "frames": [
           {
-            "image": "units/elves-wood/sorceress-magic-[1~3,2,1].png:[75*2,300,75*2]"
+            "image": "projectiles/entangle.png",
+            "duration": 150
+          },
+          {
+            "image": "units/elves-wood/sorceress-magic-[1"
           }
         ]
       },
@@ -10186,7 +10539,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/elves-wood/sorceress-melee-attack-[1~10,1,2].png:[80*5,100*2,80*5]"
+            "image": "units/elves-wood/sorceress-melee-attack-[1"
           }
         ]
       }
@@ -10206,8 +10559,8 @@ export const unitTypes: WesnothUnitType[] = [
       "female"
     ],
     "image": "units/elves-wood/sylph.png",
-    "profile": "portraits/elves/sylph.webp~RIGHT()",
-    "smallProfile": "portraits/elves/sylph.webp~CROP(26,30,420,420)",
+    "profile": "portraits/elves/sylph.webp",
+    "smallProfile": "portraits/elves/sylph.webp",
     "hitpoints": 60,
     "movementType": "woodlandfloat",
     "movement": 6,
@@ -10273,6 +10626,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "gossamer",
         "frames": [
           {
+            "image": "projectiles/web.png",
+            "duration": 150
+          },
+          {
             "image": "units/elves-wood/sylph.png"
           }
         ]
@@ -10282,7 +10639,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "faerie touch",
         "frames": [
           {
-            "image": "units/elves-wood/sylph.png:[400]"
+            "image": "units/elves-wood/sylph.png"
           }
         ]
       }
@@ -10341,7 +10698,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/falcon/falcon-shadow.png:4800"
+            "image": "units/monsters/falcon/falcon-shadow.png"
+          },
+          {
+            "image": "units/monsters/falcon/falcon-soar[1"
           }
         ]
       },
@@ -10350,7 +10710,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "beak",
         "frames": [
           {
-            "image": "units/monsters/falcon/falcon-shadow.png:800"
+            "image": "units/monsters/falcon/falcon-shadow.png"
+          },
+          {
+            "image": "units/monsters/falcon/falcon-attack-[1,2,beak,end].png"
           }
         ]
       },
@@ -10359,7 +10722,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/falcon/falcon-shadow.png:700"
+            "image": "units/monsters/falcon/falcon-shadow.png"
+          },
+          {
+            "image": "units/monsters/falcon/falcon-attack-[1,2,claws,end].png"
           }
         ]
       }
@@ -10411,7 +10777,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/fencer-stand-[1~8].png:[200,80*6,200]"
+            "image": "units/human-loyalists/fencer-stand-[1"
           }
         ]
       },
@@ -10419,7 +10785,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/fencer.png:80"
+            "image": "units/human-loyalists/fencer.png"
           }
         ]
       },
@@ -10427,7 +10793,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-loyalists/fencer-idle-[1~7,6~1].png:100"
+            "image": "units/human-loyalists/fencer-idle-[1"
           }
         ]
       },
@@ -10435,7 +10801,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/human-loyalists/fencer-die[1~5].png:100"
+            "image": "units/human-loyalists/fencer-die[1"
           }
         ]
       },
@@ -10444,7 +10810,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "saber",
         "frames": [
           {
-            "image": "units/human-loyalists/fencer-attack-[1~9,1].png:50"
+            "image": "units/human-loyalists/fencer-attack-[1"
           }
         ]
       }
@@ -10460,7 +10826,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Fire Ant",
     "race": "monster",
     "gender": [],
-    "image": "{PATH_TEMP}fire-ant.png",
+    "image": "units/monsters/ant/fire-ant.png",
     "profile": "portraits/monsters/ant-fire.webp",
     "hitpoints": 34,
     "movementType": "orcishfoot",
@@ -10500,7 +10866,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{PATH_TEMP}fire-ant.png:960"
+            "image": "units/monsters/ant/fire-ant-flame[1"
+          },
+          {
+            "image": "units/monsters/ant/fire-ant.png"
           }
         ]
       },
@@ -10509,7 +10878,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{PATH_TEMP}fire-ant.png:200"
+            "image": "units/monsters/ant/fire-ant.png"
           }
         ]
       },
@@ -10518,7 +10887,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire",
         "frames": [
           {
-            "image": "{PATH_TEMP}fire-ant.png:200"
+            "image": "units/monsters/ant/fire-ant.png"
           }
         ]
       }
@@ -10541,27 +10910,32 @@ export const unitTypes: WesnothUnitType[] = [
   {
     "id": "Fire Ant Egg",
     "name": "Fire Ant Egg",
-    "race": "",
+    "race": "monster",
     "gender": [],
-    "image": "",
-    "hitpoints": 0,
-    "movementType": "",
+    "image": "units/monsters/ant/ant_red-egg.png",
+    "profile": "portraits/monsters/ant-egg.webp",
+    "hitpoints": 32,
+    "movementType": "none",
     "movement": 0,
-    "experience": 0,
+    "experience": 4,
     "level": 0,
     "alignment": "neutral",
     "advancesTo": [
       "Fire Ant"
     ],
-    "cost": 0,
-    "description": "In large numbers, Fire Ants can be a real menace, and those threatening numbers start with their eggs. Most Fire Ant Eggs come from one of the colony queens, but the workers transport them to any suitable location.\n\n{ANT_EGG_TEXT}",
+    "cost": 4,
+    "usage": "fighter",
+    "description": "In large numbers, Fire Ants can be a real menace, and those threatening numbers start with their eggs. Most Fire Ant Eggs come from one of the colony queens, but the workers transport them to any suitable location.\n\nThe Giant Ant Eggs have a tough, leathery shell that takes a dedicated effort to break through. While this shell makes it difficult to know the status of the inhabitant from the outside, it does not obscure the outside world from the rapidly developing ant larva within. Any predator or foe who approaches an ant egg or breaches the shell of an adjacent brood member will spur that ant to hatch as a fully formed adult.",
     "attacks": [],
     "animations": [
       {
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:50"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/monsters/ant/ant_red-egg.png"
           }
         ]
       },
@@ -10569,11 +10943,15 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "misc/blank-hex.png:600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/monsters/ant/ant_red-egg.png"
           }
         ]
       }
     ],
+    "baseUnitId": "Giant Ant Egg",
     "sourceFile": "data/core/units/monsters/Ant_Egg.cfg"
   },
   {
@@ -10583,7 +10961,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [
       "female"
     ],
-    "image": "{PATH_TEMP}fire-queen.png",
+    "image": "units/monsters/ant/fire-queen.png",
     "profile": "portraits/monsters/ant-fire-queen.webp",
     "hitpoints": 62,
     "movementType": "orcishfoot",
@@ -10625,7 +11003,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{PATH_TEMP}fire-queen.png:960"
+            "image": "units/monsters/ant/fire-ant-flame[1"
+          },
+          {
+            "image": "units/monsters/ant/fire-queen.png"
           }
         ]
       },
@@ -10634,7 +11015,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{PATH_TEMP}fire-queen.png:200"
+            "image": "units/monsters/ant/fire-queen.png"
           }
         ]
       },
@@ -10643,7 +11024,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire",
         "frames": [
           {
-            "image": "{PATH_TEMP}fire-queen.png:200"
+            "image": "units/monsters/ant/fire-queen.png"
           }
         ]
       }
@@ -10723,7 +11104,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/fire-dragon-resting[1,2,3,4,3,4,2,5,6].png:[350,300,400,400,300,400,300,400,350]"
+            "image": "units/monsters/fire-dragon-resting[1,2,3,4,3,4,2,5,6].png"
           }
         ]
       },
@@ -10732,7 +11113,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/fire-dragon.png:400"
+            "image": "units/monsters/fire-dragon.png"
           }
         ]
       },
@@ -10741,7 +11122,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tail",
         "frames": [
           {
-            "image": "units/monsters/fire-dragon.png:400"
+            "image": "units/monsters/fire-dragon.png"
           }
         ]
       },
@@ -10750,7 +11131,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire breath",
         "frames": [
           {
-            "image": "units/monsters/fire-dragon.png:400"
+            "image": "units/monsters/fire-dragon.png"
           }
         ]
       }
@@ -10809,7 +11190,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "battle claws",
         "frames": [
           {
-            "image": "units/drakes/fire-melee-[1~6].png:100"
+            "image": "units/drakes/fire-melee-[1"
           }
         ]
       }
@@ -10877,7 +11258,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:2400"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/monsters/fireghost/fireghost-s[1"
+          },
+          {
+            "image": "units/monsters/firewraith/firewraith-halo.png"
           }
         ]
       },
@@ -10885,10 +11272,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/monsters/fireghost/fireghost.png:50"
+            "image": "units/monsters/fireghost/fireghost.png"
           },
           {
-            "image": "units/monsters/fireghost/fireghost-death[1~6].png:100"
+            "image": "units/monsters/fireghost/fireghost-death[1"
           }
         ]
       },
@@ -10897,10 +11284,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire claws",
         "frames": [
           {
-            "image": "units/monsters/fireghost/fireghost-attack[1~2].png:250"
+            "image": "units/monsters/fireghost/fireghost-attack[1"
           },
           {
-            "image": "units/monsters/fireghost/fireghost.png:100"
+            "image": "units/monsters/fireghost/fireghost.png"
           }
         ]
       },
@@ -10909,13 +11296,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire breath",
         "frames": [
           {
-            "image": "units/monsters/fireghost/fireghost.png:100"
+            "image": "units/monsters/fireghost/fireghost.png"
           },
           {
-            "image": "units/monsters/fireghost/fireghost-ranged2.png:50,units/monsters/fireghost/fireghost-attack1.png:200"
+            "image": "units/monsters/fireghost/fireghost-ranged2.png:50,units/monsters/fireghost/fireghost-attack1.png"
           },
           {
-            "image": "units/monsters/fireghost/fireghost.png:150"
+            "image": "units/monsters/fireghost/fireghost.png"
           }
         ]
       }
@@ -10971,10 +11358,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/firewisp.png:150"
+            "image": "units/monsters/firewisp.png"
           },
           {
-            "image": "units/monsters/firewisp-[2,3,2].png:150"
+            "image": "units/monsters/firewisp-[2,3,2].png"
           }
         ]
       },
@@ -10982,10 +11369,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/monsters/firewisp.png:50"
+            "image": "units/monsters/firewisp.png"
           },
           {
-            "image": "units/monsters/firewisp-death[1~5].png:100"
+            "image": "units/monsters/firewisp-death[1"
           }
         ]
       },
@@ -10994,7 +11381,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire bash",
         "frames": [
           {
-            "image": "units/monsters/firewisp-attack.png:200",
+            "image": "units/monsters/firewisp-attack.png",
             "sound": "fire.wav"
           }
         ]
@@ -11005,7 +11392,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire breath",
         "frames": [
           {
-            "image": "units/monsters/firewisp-ranged-n[1~2].png:[100,50]"
+            "image": "units/monsters/firewisp-ranged-n[1"
           }
         ]
       },
@@ -11015,7 +11402,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire breath",
         "frames": [
           {
-            "image": "units/monsters/firewisp-ranged[1~2].png:[100,50]"
+            "image": "units/monsters/firewisp-ranged[1"
           }
         ]
       },
@@ -11025,7 +11412,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire breath",
         "frames": [
           {
-            "image": "units/monsters/firewisp-ranged[1~2].png:[100,50]"
+            "image": "units/monsters/firewisp-ranged[1"
           }
         ]
       },
@@ -11035,7 +11422,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire breath",
         "frames": [
           {
-            "image": "units/monsters/firewisp-ranged[1~2].png:[100,50]"
+            "image": "units/monsters/firewisp-ranged[1"
           }
         ]
       }
@@ -11053,7 +11440,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Fire Wraith",
     "race": "monster",
     "gender": [],
-    "image": "{IMG_PATH_TEMP}/firewraith.png",
+    "image": "units/monsters/firewraith/firewraith.png",
     "profile": "portraits/monsters/fire_wraith_A.webp",
     "hitpoints": 41,
     "movementType": "flamefly",
@@ -11092,7 +11479,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/firewraith-s[1~8].png:100"
+            "image": "units/monsters/firewraith/firewraith-s[1"
+          },
+          {
+            "image": "units/monsters/firewraith/firewraith-halo.png"
           }
         ]
       },
@@ -11100,10 +11490,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/firewraith.png:100"
+            "image": "units/monsters/firewraith/firewraith.png"
           },
           {
-            "image": "units/monsters/fireghost/fireghost-death[3~6].png:100"
+            "image": "units/monsters/fireghost/fireghost-death[3"
           }
         ]
       },
@@ -11112,7 +11502,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire claws",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/firewraith.png:350"
+            "image": "units/monsters/firewraith/firewraith.png"
+          },
+          {
+            "image": "units/monsters/firewraith/firewraith-halo.png"
           }
         ]
       },
@@ -11121,7 +11514,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire breath",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/firewraith.png:450"
+            "image": "units/monsters/firewraith/firewraith.png"
+          },
+          {
+            "image": "units/monsters/firewraith/firewraith-halo.png"
           }
         ]
       }
@@ -11139,7 +11535,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Firebane Ant",
     "race": "monster",
     "gender": [],
-    "image": "{PATH_TEMP}firebane-ant.png",
+    "image": "units/monsters/ant/firebane-ant.png",
     "profile": "portraits/monsters/ant-firebane.webp",
     "hitpoints": 46,
     "movementType": "orcishfoot",
@@ -11178,7 +11574,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{PATH_TEMP}firebane-ant.png:960"
+            "image": "units/monsters/ant/fire-ant-flame[1"
+          },
+          {
+            "image": "units/monsters/ant/firebane-ant.png"
           }
         ]
       },
@@ -11187,7 +11586,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{PATH_TEMP}firebane-ant.png:200"
+            "image": "units/monsters/ant/firebane-ant.png"
           }
         ]
       },
@@ -11196,7 +11595,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire",
         "frames": [
           {
-            "image": "{PATH_TEMP}firebane-ant.png:200"
+            "image": "units/monsters/ant/firebane-ant.png"
           }
         ]
       }
@@ -11222,7 +11621,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Firebomb Ant",
     "race": "monster",
     "gender": [],
-    "image": "{PATH_TEMP}firebomb-ant.png",
+    "image": "units/monsters/ant/firebomb-ant.png",
     "profile": "portraits/monsters/ant-firebomb.webp",
     "hitpoints": 45,
     "movementType": "orcishfoot",
@@ -11264,7 +11663,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{PATH_TEMP}firebomb-ant.png:960"
+            "image": "units/monsters/ant/fire-ant-flame[1"
+          },
+          {
+            "image": "units/monsters/ant/firebomb-ant.png"
           }
         ]
       },
@@ -11273,7 +11675,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{PATH_TEMP}firebomb-ant.png:200"
+            "image": "units/monsters/ant/firebomb-ant.png"
           }
         ]
       },
@@ -11282,7 +11684,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fire",
         "frames": [
           {
-            "image": "{PATH_TEMP}firebomb-ant.png:200"
+            "image": "units/monsters/ant/firebomb-ant.png"
           }
         ]
       }
@@ -11308,7 +11710,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Fireship",
     "race": "ship",
     "gender": [],
-    "image": "halo/transport/fireship-back-glow.png~BLIT(units/transport/fireship.png)~BLIT(units/transport/flames/fireship-2.png)",
+    "image": "units/transport/fireship.png",
     "profile": "portraits/transport/fireship.webp",
     "hitpoints": 110,
     "movementType": "ship",
@@ -11341,7 +11743,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "halo/transport/fireship-back-glow.png:1480"
+            "image": "halo/transport/fireship-back-glow.png"
+          },
+          {
+            "image": "units/transport/fireship-[port,mid,starboard,mid].png"
+          },
+          {
+            "image": "units/transport/fireship-back-fire[1,2,1,2,1,2,1,2].png"
+          },
+          {
+            "image": "units/transport/flames/fireship-[1"
           }
         ]
       },
@@ -11349,7 +11760,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "halo/transport/fireship-back-glow.png:1480"
+            "image": "halo/transport/fireship-back-glow.png"
+          },
+          {
+            "image": "units/transport/fireship-[port,mid,starboard,mid].png"
+          },
+          {
+            "image": "units/transport/fireship-back-fire[1,2,1,2,1,2,1,2].png"
+          },
+          {
+            "image": "units/transport/flames/fireship-[1"
           }
         ]
       },
@@ -11357,7 +11777,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "halo/transport/fireship-back-glow.png:1480"
+            "image": "halo/transport/fireship-back-glow.png"
+          },
+          {
+            "image": "units/transport/fireship-mid.png"
+          },
+          {
+            "image": "units/transport/fireship-back-fire[1,2,1,2,1,2,1,2].png"
+          },
+          {
+            "image": "units/transport/flames/fireship-[1"
           }
         ]
       },
@@ -11365,7 +11794,19 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1000"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/fireship-mid.png"
+          },
+          {
+            "image": "units/transport/fireship-sink.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "halo/transport/smoke-[1,2,3].png"
           }
         ]
       },
@@ -11374,7 +11815,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "ram",
         "frames": [
           {
-            "image": "halo/transport/fireship-back-glow.png:1100"
+            "image": "units/transport/fireship-mid.png"
+          },
+          {
+            "image": "halo/transport/fireship-back-glow.png"
           }
         ]
       }
@@ -11409,6 +11853,8 @@ export const unitTypes: WesnothUnitType[] = [
       "TRAIT_AGED",
       "DEPRECATED_UNIT \"Fog Clearer\" \"\" 1.15"
     ],
+    "hideHelp": true,
+    "doNotList": true,
     "sourceFile": "data/core/units/fake/Fog_Clearer.cfg"
   },
   {
@@ -11458,10 +11904,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sling",
         "frames": [
           {
-            "image": "units/human-outlaws/footpad-attack2.png:100"
+            "image": "units/human-outlaws/footpad-attack2.png"
           },
           {
-            "image": "units/human-outlaws/footpad.png:100"
+            "image": "units/human-outlaws/footpad.png"
           }
         ]
       },
@@ -11470,7 +11916,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "club",
         "frames": [
           {
-            "image": "units/human-outlaws/footpad-melee-[1~4].png:[80,90,130,200]"
+            "image": "units/human-outlaws/footpad-melee-[1"
           }
         ]
       }
@@ -11490,10 +11936,10 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "sling",
           "frames": [
             {
-              "image": "units/human-outlaws/footpad+female-attack2.png:100"
+              "image": "units/human-outlaws/footpad+female-attack2.png"
             },
             {
-              "image": "units/human-outlaws/footpad+female.png:100"
+              "image": "units/human-outlaws/footpad+female.png"
             }
           ]
         },
@@ -11502,7 +11948,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "club",
           "frames": [
             {
-              "image": "units/human-outlaws/footpad+female-melee-[1~4].png:[80,90,130,200]"
+              "image": "units/human-outlaws/footpad+female-melee-[1"
             }
           ]
         }
@@ -11563,7 +12009,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/cat/tritail.png:150"
+            "image": "units/monsters/cat/tritail.png"
           }
         ]
       },
@@ -11571,7 +12017,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/cat/tritail-sitting.png:150"
+            "image": "units/monsters/cat/tritail-sitting.png"
           }
         ]
       },
@@ -11580,7 +12026,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/cat/tritail-claws[1~4,1].png:[70,70,80,80,250]"
+            "image": "units/monsters/cat/tritail-claws[1"
           }
         ]
       },
@@ -11589,10 +12035,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/cat/tritail-clawsb[1~4].png:[70,70,80,80]"
+            "image": "units/monsters/cat/tritail-clawsb[1"
           },
           {
-            "image": "units/monsters/cat/tritail-defend1.png:250"
+            "image": "units/monsters/cat/tritail-defend1.png"
           }
         ]
       },
@@ -11601,7 +12047,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/cat/tritail-fangs-shadow.png:[900]"
+            "image": "units/monsters/cat/tritail-fangs[1"
+          },
+          {
+            "image": "units/monsters/cat/tritail-fangs-shadow.png"
           }
         ]
       }
@@ -11656,7 +12105,7 @@ export const unitTypes: WesnothUnitType[] = [
         "range": "melee",
         "damage": 3,
         "number": 3,
-        "icon": "attacks/blank-attack.png~BLIT(attacks/claws-animal.png~CS(-40,-30,40)~CROP(4,4,50,50),4,4)"
+        "icon": "attacks/blank-attack.png"
       }
     ],
     "abilities": [
@@ -11667,7 +12116,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/stoat/stoat.png:2000"
+            "image": "units/monsters/stoat/stoat.png"
+          },
+          {
+            "image": "{FS_STANDING_FOG_TEMP 18 18},{FS_STANDING_FOG_TEMP 17 17},{FS_STANDING_FOG_TEMP 16 16},{FS_STANDING_FOG_TEMP 15 15},{FS_STANDING_FOG_TEMP 14 14},{FS_STANDING_FOG_TEMP 13 13},{FS_STANDING_FOG_TEMP 12 12},{FS_STANDING_FOG_TEMP 11 11},{FS_STANDING_FOG_TEMP 10 10},{FS_STANDING_FOG_TEMP 9 9}"
           }
         ]
       },
@@ -11675,7 +12127,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/stoat/stoat.png:2000"
+            "image": "units/monsters/stoat/stoat.png"
+          },
+          {
+            "image": "{FS_STANDING_FOG_TEMP 18 18},{FS_STANDING_FOG_TEMP 17 17},{FS_STANDING_FOG_TEMP 16 16},{FS_STANDING_FOG_TEMP 15 15},{FS_STANDING_FOG_TEMP 14 14},{FS_STANDING_FOG_TEMP 13 13},{FS_STANDING_FOG_TEMP 12 12},{FS_STANDING_FOG_TEMP 11 11},{FS_STANDING_FOG_TEMP 10 10},{FS_STANDING_FOG_TEMP 9 9}"
           }
         ]
       },
@@ -11683,7 +12138,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/stoat/stoat-low.png:50"
+            "image": "units/monsters/stoat/stoat-low.png"
+          },
+          {
+            "image": "{FS_STANDING_FOG_TEMP 18 18},{FS_STANDING_FOG_TEMP 17 17},{FS_STANDING_FOG_TEMP 16 16},{FS_STANDING_FOG_TEMP 15 15},{FS_STANDING_FOG_TEMP 14 14},{FS_STANDING_FOG_TEMP 13 13},{FS_STANDING_FOG_TEMP 12 12},{FS_STANDING_FOG_TEMP 11 11},{FS_STANDING_FOG_TEMP 10 10},{FS_STANDING_FOG_TEMP 9 9}"
           }
         ]
       },
@@ -11692,7 +12150,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/stoat/stoat-bite[1~6].png:[100,100,180,170,150,100]"
+            "image": "units/monsters/stoat/stoat-bite[1"
           }
         ]
       },
@@ -11701,16 +12159,25 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claw",
         "frames": [
           {
-            "image": "units/monsters/stoat/stoat-claws[1~3].png:[140,140,120]"
+            "image": "units/monsters/stoat/stoat-claws[1"
           },
           {
-            "image": "units/monsters/stoat/stoat-claws[4,5,6].png~CS(-20,-10,50):[100*2,70]"
+            "image": "units/monsters/stoat/stoat-claws[4,5,6].png"
           },
           {
-            "image": "units/monsters/stoat/stoat-claws6.png:80"
+            "image": "units/monsters/stoat/stoat-claws6.png"
           },
           {
-            "image": "units/monsters/stoat/stoat-low.png:100"
+            "image": "units/monsters/stoat/stoat-low.png"
+          },
+          {
+            "image": "halo/monster/stoat-frost-base.png,18,18"
+          },
+          {
+            "image": "halo/monster/stoat-frost-base.png,18,18"
+          },
+          {
+            "image": "halo/monster/stoat-frost-base.png,18,18"
           }
         ]
       }
@@ -11775,7 +12242,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sling",
         "frames": [
           {
-            "image": "units/human-outlaws/fugitive-ranged-2.png:200"
+            "image": "units/human-outlaws/fugitive-ranged-2.png"
           }
         ]
       },
@@ -11784,7 +12251,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace-spiked",
         "frames": [
           {
-            "image": "units/human-outlaws/fugitive-melee-[1~3].png:[100,150,100]"
+            "image": "units/human-outlaws/fugitive-melee-[1"
           }
         ]
       }
@@ -11804,7 +12271,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "sling",
           "frames": [
             {
-              "image": "units/human-outlaws/fugitive+female-ranged-2.png:200"
+              "image": "units/human-outlaws/fugitive+female-ranged-2.png"
             }
           ]
         },
@@ -11813,7 +12280,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "mace-spiked",
           "frames": [
             {
-              "image": "units/human-outlaws/fugitive+female-melee-[1~3].png:[100,150,100]"
+              "image": "units/human-outlaws/fugitive+female-melee-[1"
             }
           ]
         }
@@ -11848,6 +12315,7 @@ export const unitTypes: WesnothUnitType[] = [
     "macros": [
       "AMLA_DEFAULT"
     ],
+    "doNotList": true,
     "sourceFile": "data/core/units/boats/Legacy_Galleon.cfg"
   },
   {
@@ -11897,10 +12365,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/general.png:600"
+            "image": "units/human-loyalists/general.png"
           },
           {
-            "image": "units/human-loyalists/general-breeze[1~4,1].png:[400*3,200,600]"
+            "image": "units/human-loyalists/general-breeze[1"
           }
         ]
       },
@@ -11909,13 +12377,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/human-loyalists/general-crossbow.png:100"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-loyalists/general-crossbow-attack[1~2].png:150"
+            "image": "units/human-loyalists/general-crossbow.png"
           },
           {
-            "image": "units/human-loyalists/general-crossbow.png:300"
+            "image": "units/human-loyalists/general-crossbow-attack[1"
+          },
+          {
+            "image": "units/human-loyalists/general-crossbow.png"
           }
         ]
       },
@@ -11924,10 +12396,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/general-melee[1~6].png:[130,110,110,75,100,125]"
+            "image": "units/human-loyalists/general-melee[1"
           },
           {
-            "image": "units/human-loyalists/general.png:125"
+            "image": "units/human-loyalists/general.png"
           }
         ]
       }
@@ -11982,7 +12454,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/undead/ghast-attack-[1~6].png:[100,150,100*4]"
+            "image": "units/undead/ghast-attack-[1"
           }
         ]
       }
@@ -12043,7 +12515,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,se,sw",
         "frames": [
           {
-            "image": "units/undead-spirit/ghost-s-[2,1~3,2,1~3,2,1~3,2,1~3].png:250"
+            "image": "units/undead-spirit/ghost-s-[2,1"
+          },
+          {
+            "image": "units/undead-spirit/ghost-shadow.png"
           }
         ]
       },
@@ -12052,7 +12527,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,ne,nw",
         "frames": [
           {
-            "image": "units/undead-spirit/ghost-n-[2,1~3,2,1~3,2,1~3,2,1~3].png:250"
+            "image": "units/undead-spirit/ghost-n-[2,1"
+          },
+          {
+            "image": "units/undead-spirit/ghost-n-shadow.png"
           }
         ]
       }
@@ -12122,7 +12600,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:2000"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-fog[1"
+          },
+          {
+            "image": "units/transport/ghost-ship-rock-[port2,port,center,starboard,starboard2,starboard,center,port].png"
+          },
+          {
+            "image": "units/transport/ghost-ship-flag[1"
           }
         ]
       },
@@ -12130,7 +12617,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-fog[1"
+          },
+          {
+            "image": "units/transport/ghost-ship-rock-[port,center,starboard,center].png"
+          },
+          {
+            "image": "units/transport/ghost-ship-flag[1"
           }
         ]
       },
@@ -12138,7 +12634,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-fog[1"
+          },
+          {
+            "image": "units/transport/ghost-ship-rock-center.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-flag[1"
           }
         ]
       },
@@ -12146,7 +12651,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-fog[1"
+          },
+          {
+            "image": "units/transport/ghost-ship-rock-center.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-flag[1"
           }
         ]
       },
@@ -12154,7 +12668,25 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1000"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-hit[1,2,1,2].png"
+          },
+          {
+            "image": "misc/blank-hex.png"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "lost souls",
+        "frames": [
+          {
+            "image": "units/transport/ghost-ship.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-fog[1,2].png"
           }
         ]
       },
@@ -12163,7 +12695,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lightning",
         "frames": [
           {
-            "image": "misc/blank-hex.png:550"
+            "image": "units/transport/ghost-ship.png"
+          },
+          {
+            "image": "units/transport/ghost-ship-fog[1,2].png"
+          },
+          {
+            "image": "misc/blank-hex.png"
           }
         ]
       }
@@ -12213,7 +12751,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/undead/ghoul-idle-[1~3,3*2,3~5].png:200"
+            "image": "units/undead/ghoul-idle-[1"
           }
         ]
       },
@@ -12222,13 +12760,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/undead/ghoul.png:50"
+            "image": "units/undead/ghoul.png"
           },
           {
-            "image": "units/undead/ghoul-attack-[1~4].png:[75*2,100,75]"
+            "image": "units/undead/ghoul-attack-[1"
           },
           {
-            "image": "units/undead/ghoul.png:75"
+            "image": "units/undead/ghoul.png"
           }
         ]
       }
@@ -12276,7 +12814,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/ant/ant-attack.png:200"
+            "image": "units/monsters/ant/ant-attack.png"
           }
         ]
       }
@@ -12314,14 +12852,17 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "cost": 4,
     "usage": "fighter",
-    "description": "Giant Ants are common in almost any environment, and the eggs from which they emerge can often be found in caves or any sheltered environment. Most eggs come from one of the colony queens, but the workers transport them to any suitable location.\n\n{ANT_EGG_TEXT}",
+    "description": "Giant Ants are common in almost any environment, and the eggs from which they emerge can often be found in caves or any sheltered environment. Most eggs come from one of the colony queens, but the workers transport them to any suitable location.\n\nThe Giant Ant Eggs have a tough, leathery shell that takes a dedicated effort to break through. While this shell makes it difficult to know the status of the inhabitant from the outside, it does not obscure the outside world from the rapidly developing ant larva within. Any predator or foe who approaches an ant egg or breaches the shell of an adjacent brood member will spur that ant to hatch as a fully formed adult.",
     "attacks": [],
     "animations": [
       {
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:50"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/monsters/ant/ant_egg.png"
           }
         ]
       },
@@ -12329,7 +12870,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "misc/blank-hex.png:600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/monsters/ant/ant_egg.png"
           }
         ]
       }
@@ -12378,10 +12922,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/ant/queen-attack[1,2].png:[220,160]"
+            "image": "units/monsters/ant/queen-attack[1,2].png"
           },
           {
-            "image": "units/monsters/ant/queen.png:170"
+            "image": "units/monsters/ant/queen.png"
           }
         ]
       }
@@ -12409,7 +12953,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/monsters/giant-mudcrawler.png",
     "profile": "portraits/monsters/giant-mudcrawler.webp",
-    "smallProfile": "portraits/monsters/giant-mudcrawler.webp~CROP(0,63,400,337)",
+    "smallProfile": "portraits/monsters/giant-mudcrawler.webp",
     "hitpoints": 36,
     "movementType": "scuttlefoot",
     "movement": 4,
@@ -12447,7 +12991,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/monsters/giant-mudcrawler-death[1~7].png:100"
+            "image": "units/monsters/giant-mudcrawler-death[1"
           }
         ]
       },
@@ -12456,7 +13000,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mud glob",
         "frames": [
           {
-            "image": "units/monsters/giant-mudcrawler-ranged[1~5].png:[125,200*2,100*2]"
+            "image": "projectiles/mud-glob.png",
+            "duration": 200
+          },
+          {
+            "image": "units/monsters/giant-mudcrawler-ranged[1"
           }
         ]
       },
@@ -12465,7 +13013,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fist",
         "frames": [
           {
-            "image": "units/monsters/giant-mudcrawler-attack[1~11].png:[75*3,150,75*4,100*3]"
+            "image": "units/monsters/giant-mudcrawler-attack[1"
           }
         ]
       }
@@ -12521,7 +13069,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/monsters/giant-rat-die-[1~3].png:100"
+            "image": "units/monsters/giant-rat-die-[1"
           }
         ]
       },
@@ -12530,7 +13078,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/giant-rat-attack-[1~7].png:100"
+            "image": "units/monsters/giant-rat-attack-[1"
           }
         ]
       }
@@ -12548,8 +13096,8 @@ export const unitTypes: WesnothUnitType[] = [
     "race": "monster",
     "gender": [],
     "image": "units/monsters/scorpion/scorpion.png",
-    "profile": "portraits/monsters/scorpion-elder.webp~RIGHT()",
-    "smallProfile": "portraits/monsters/scorpion-elder.webp~FL()",
+    "profile": "portraits/monsters/scorpion-elder.webp",
+    "smallProfile": "portraits/monsters/scorpion-elder.webp",
     "hitpoints": 35,
     "movementType": "scuttlefoot",
     "movement": 8,
@@ -12589,7 +13137,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,sw,se",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpion.png:150"
+            "image": "units/monsters/scorpion/scorpion.png"
           }
         ]
       },
@@ -12598,7 +13146,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,nw,ne",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpion-ne.png:150"
+            "image": "units/monsters/scorpion/scorpion-ne.png"
           }
         ]
       },
@@ -12608,10 +13156,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pincers",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpion-pincer-[1~6].png:[100,100,80*2,120,120]"
+            "image": "units/monsters/scorpion/scorpion-pincer-[1"
           },
           {
-            "image": "units/monsters/scorpion/scorpion.png:1"
+            "image": "units/monsters/scorpion/scorpion.png"
           }
         ]
       },
@@ -12621,10 +13169,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pincers",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpion-ne-pincer[1~6].png:[100,120,100,80,100,100]"
+            "image": "units/monsters/scorpion/scorpion-ne-pincer[1"
           },
           {
-            "image": "units/monsters/scorpion/scorpion-ne.png:1"
+            "image": "units/monsters/scorpion/scorpion-ne.png"
           }
         ]
       },
@@ -12633,10 +13181,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sting",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpion-stinger-[1~7,6,5,4,1].png:[80,100,120,80*8]"
+            "image": "units/monsters/scorpion/scorpion-stinger-[1"
           },
           {
-            "image": "units/monsters/scorpion/scorpion.png:1"
+            "image": "units/monsters/scorpion/scorpion.png"
           }
         ]
       }
@@ -12654,8 +13202,8 @@ export const unitTypes: WesnothUnitType[] = [
     "race": "monster",
     "gender": [],
     "image": "units/monsters/scorpion/scorpling.png",
-    "profile": "portraits/monsters/scorpion.webp~RIGHT()",
-    "smallProfile": "portraits/monsters/scorpion.webp~FL()~CROP(0,82,400,318)",
+    "profile": "portraits/monsters/scorpion.webp",
+    "smallProfile": "portraits/monsters/scorpion.webp",
     "hitpoints": 24,
     "movementType": "scuttlefoot",
     "movement": 6,
@@ -12695,10 +13243,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pincers",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpling-pincer[1~7].png:[50,75,75,50,50,75,100]"
+            "image": "units/monsters/scorpion/scorpling-pincer[1"
           },
           {
-            "image": "units/monsters/scorpion/scorpling.png:25"
+            "image": "units/monsters/scorpion/scorpling.png"
           }
         ]
       },
@@ -12707,10 +13255,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sting",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpling-sting[1~5].png:[75,75,150,100,150]"
+            "image": "units/monsters/scorpion/scorpling-sting[1"
           },
           {
-            "image": "units/monsters/scorpion/scorpling.png:1"
+            "image": "units/monsters/scorpion/scorpling.png"
           }
         ]
       }
@@ -12728,7 +13276,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/monsters/spider.png",
     "profile": "portraits/monsters/giant-spider.webp",
-    "smallProfile": "portraits/monsters/giant-spider.webp~CROP(0,58,400,342)",
+    "smallProfile": "portraits/monsters/giant-spider.webp",
     "hitpoints": 54,
     "movementType": "mountainfoot",
     "movement": 6,
@@ -12772,7 +13320,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "web",
         "frames": [
           {
-            "image": "units/monsters/spider-ranged-[1~7,3~1].png:75"
+            "image": "projectiles/web.png",
+            "duration": 200
+          },
+          {
+            "image": "units/monsters/spider-ranged-[1"
           }
         ]
       },
@@ -12781,7 +13333,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/spider-melee-[1~13].png:50"
+            "image": "units/monsters/spider-melee-[1"
           }
         ]
       }
@@ -12803,7 +13355,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/goblins/impaler.png",
     "profile": "portraits/goblins/impaler.webp",
-    "smallProfile": "portraits/goblins/impaler.webp~CROP(0,100,400,400)",
+    "smallProfile": "portraits/goblins/impaler.webp",
     "hitpoints": 26,
     "movementType": "orcishfoot",
     "movement": 5,
@@ -12844,7 +13396,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/goblins/impaler-death-[1~9].png:[80,75,70,65,60,55,50,45,150]"
+            "image": "units/goblins/impaler-death-[1"
           }
         ]
       },
@@ -12853,14 +13405,18 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/impaler-attack-se-1.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/goblins/impaler-attack-se-1.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/goblins/impaler-attack-ranged-s.png:100"
+            "image": "units/goblins/impaler-attack-ranged-s.png"
           },
           {
-            "image": "units/goblins/impaler-death-1.png:50"
+            "image": "units/goblins/impaler-death-1.png"
           }
         ]
       },
@@ -12870,13 +13426,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/impaler.png:75"
+            "image": "units/goblins/impaler.png"
           },
           {
-            "image": "units/goblins/impaler-attack-ne.png:250"
+            "image": "units/goblins/impaler-attack-ne.png"
           },
           {
-            "image": "units/goblins/impaler.png:75"
+            "image": "units/goblins/impaler.png"
           }
         ]
       },
@@ -12886,13 +13442,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/impaler.png:75"
+            "image": "units/goblins/impaler.png"
           },
           {
-            "image": "units/goblins/impaler-attack-n.png:250"
+            "image": "units/goblins/impaler-attack-n.png"
           },
           {
-            "image": "units/goblins/impaler.png:75"
+            "image": "units/goblins/impaler.png"
           }
         ]
       },
@@ -12902,13 +13458,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/impaler.png:75"
+            "image": "units/goblins/impaler.png"
           },
           {
-            "image": "units/goblins/impaler-attack-[se-1,s,se-1].png:[50,150,50]"
+            "image": "units/goblins/impaler-attack-[se-1,s,se-1].png"
           },
           {
-            "image": "units/goblins/impaler.png:75"
+            "image": "units/goblins/impaler.png"
           }
         ]
       },
@@ -12918,13 +13474,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/impaler.png:75"
+            "image": "units/goblins/impaler.png"
           },
           {
-            "image": "units/goblins/impaler-attack-se-[1,2,1].png:[50,150,50]"
+            "image": "units/goblins/impaler-attack-se-[1,2,1].png"
           },
           {
-            "image": "units/goblins/impaler.png:75"
+            "image": "units/goblins/impaler.png"
           }
         ]
       }
@@ -12944,7 +13500,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/goblins/knight.png",
     "profile": "portraits/goblins/direwolver.webp",
-    "smallProfile": "portraits/goblins/direwolver.webp~CROP(60,0,390,390)",
+    "smallProfile": "portraits/goblins/direwolver.webp",
     "hitpoints": 49,
     "movementType": "orcishfoot",
     "movement": 9,
@@ -12974,17 +13530,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/goblins/knight.png:100",
+            "image": "units/goblins/knight.png",
             "sound": "wolf-growl-[1~4].ogg"
           },
           {
-            "image": "units/goblins/knight-attack.png:200"
+            "image": "units/goblins/knight-attack.png"
           },
           {
-            "image": "units/goblins/knight-moving.png:250"
+            "image": "units/goblins/knight-moving.png"
           },
           {
-            "image": "units/goblins/knight.png:50"
+            "image": "units/goblins/knight.png"
           }
         ]
       }
@@ -13003,7 +13559,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Goblin Pillager",
     "race": "wolf",
     "gender": [],
-    "image": "units/goblins/pillager-base1.png~BLIT(units/goblins/pillager-flame/a1.png)~BLIT(units/goblins/pillager-flame/glow.png)",
+    "image": "units/goblins/pillager-base1.png",
     "profile": "portraits/goblins/pillager.webp",
     "hitpoints": 44,
     "movementType": "orcishfoot",
@@ -13054,7 +13610,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/goblins/pillager-base[1~4].png:[210*4]"
+            "image": "units/goblins/pillager-base[1"
+          },
+          {
+            "image": "units/goblins/pillager-flame/a[1"
+          },
+          {
+            "image": "units/goblins/pillager-flame/glow.png"
           }
         ]
       },
@@ -13063,13 +13625,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "net",
         "frames": [
           {
-            "image": "units/goblins/pillager-net1.png:150"
+            "image": "projectiles/web.png",
+            "duration": 200
           },
           {
-            "image": "units/goblins/pillager-net2.png:275"
+            "image": "units/goblins/pillager-net1.png"
           },
           {
-            "image": "units/goblins/pillager-net3.png:100"
+            "image": "units/goblins/pillager-net2.png"
+          },
+          {
+            "image": "units/goblins/pillager-net3.png"
           }
         ]
       },
@@ -13078,13 +13644,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "torch",
         "frames": [
           {
-            "image": "units/goblins/pillager-moving.png:100"
+            "image": "units/goblins/pillager-moving.png"
           },
           {
-            "image": "units/goblins/pillager-attack.png:150"
+            "image": "units/goblins/pillager-attack.png"
           },
           {
-            "image": "units/goblins/pillager-moving.png:100"
+            "image": "units/goblins/pillager-moving.png"
           }
         ]
       },
@@ -13093,17 +13659,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/goblins/pillager.png:100",
+            "image": "units/goblins/pillager.png",
             "sound": "wolf-growl-[1~4].ogg"
           },
           {
-            "image": "units/goblins/pillager-attack.png:200"
+            "image": "units/goblins/pillager-attack.png"
           },
           {
-            "image": "units/goblins/pillager-moving.png:250"
+            "image": "units/goblins/pillager-moving.png"
           },
           {
-            "image": "units/goblins/pillager.png:50"
+            "image": "units/goblins/pillager.png"
           }
         ]
       }
@@ -13158,16 +13724,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/rouser.png:25"
+            "image": "units/goblins/rouser.png"
           },
           {
-            "image": "units/goblins/rouser-defend.png:50"
+            "image": "units/goblins/rouser-defend.png"
           },
           {
-            "image": "units/goblins/rouser-attack[1,-se,3~4].png:[50,150,50*2]"
+            "image": "units/goblins/rouser-attack[1,-se,3"
           },
           {
-            "image": "units/goblins/rouser.png:25"
+            "image": "units/goblins/rouser.png"
           }
         ]
       },
@@ -13177,16 +13743,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/rouser.png:25"
+            "image": "units/goblins/rouser.png"
           },
           {
-            "image": "units/goblins/rouser-defend.png:50"
+            "image": "units/goblins/rouser-defend.png"
           },
           {
-            "image": "units/goblins/rouser-attack[1,-ne,3~4].png:[50,150,50*2]"
+            "image": "units/goblins/rouser-attack[1,-ne,3"
           },
           {
-            "image": "units/goblins/rouser.png:25"
+            "image": "units/goblins/rouser.png"
           }
         ]
       },
@@ -13196,7 +13762,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/rouser-attack[4,-s,4].png:[100,200,100]"
+            "image": "units/goblins/rouser-attack[4,-s,4].png"
           }
         ]
       },
@@ -13206,7 +13772,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/rouser-attack[4,-n,4].png:[100,200,100]"
+            "image": "units/goblins/rouser-attack[4,-n,4].png"
           }
         ]
       }
@@ -13265,7 +13831,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/goblins/spearman-idle-[1~12].png:[150*3,300,150*8]"
+            "image": "units/goblins/spearman-idle-[1"
           }
         ]
       },
@@ -13273,7 +13839,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/goblins/spearman-die-[1~4].png:240"
+            "image": "units/goblins/spearman-die-[1"
           }
         ]
       },
@@ -13283,11 +13849,15 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/spearman.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/goblins/spearman.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/goblins/spearman-attack-se1.png:150"
+            "image": "units/goblins/spearman-attack-se1.png"
           }
         ]
       },
@@ -13297,11 +13867,15 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/spearman.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/goblins/spearman.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/goblins/spearman-attack-s1.png:150"
+            "image": "units/goblins/spearman-attack-s1.png"
           }
         ]
       },
@@ -13311,11 +13885,15 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/spearman.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/goblins/spearman.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/goblins/spearman-attack-ne1.png:150"
+            "image": "units/goblins/spearman-attack-ne1.png"
           }
         ]
       },
@@ -13325,11 +13903,15 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/spearman.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/goblins/spearman.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/goblins/spearman-attack-n1.png:150"
+            "image": "units/goblins/spearman-attack-n1.png"
           }
         ]
       },
@@ -13339,7 +13921,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/spearman-attack-se[1,2,1].png:[100,200,100]"
+            "image": "units/goblins/spearman-attack-se[1,2,1].png"
           }
         ]
       },
@@ -13349,7 +13931,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/spearman-attack-ne[1,2,1].png:[100,200,100]"
+            "image": "units/goblins/spearman-attack-ne[1,2,1].png"
           }
         ]
       },
@@ -13359,7 +13941,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/spearman-attack-s[1,2,1].png:[100,200,100]"
+            "image": "units/goblins/spearman-attack-s[1,2,1].png"
           }
         ]
       },
@@ -13369,7 +13951,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/goblins/spearman-attack-n[1,2,1].png:[100,200,100]"
+            "image": "units/goblins/spearman-attack-n[1,2,1].png"
           }
         ]
       }
@@ -13433,7 +14015,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "se,s,sw",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/grand/dragonfly-shadow.png:200"
+            "image": "units/monsters/dragonfly/grand/dragonfly-shadow.png"
+          },
+          {
+            "image": "units/monsters/dragonfly/grand/dragonfly-flying[1,2,1,2,1,2,1,2,1,2,1,2].png"
           }
         ]
       },
@@ -13442,7 +14027,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "ne,n,nw",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/grand/dragonfly-n-shadow.png:200"
+            "image": "units/monsters/dragonfly/grand/dragonfly-n-shadow.png"
+          },
+          {
+            "image": "units/monsters/dragonfly/grand/dragonfly-n-flying[1,2,1,2,1,2,1,2,1,2,1,2].png"
           }
         ]
       },
@@ -13452,7 +14040,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sting",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/grand/dragonfly-n.png:[400]"
+            "image": "units/monsters/dragonfly/grand/dragonfly-n.png"
           }
         ]
       },
@@ -13462,7 +14050,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/grand/dragonfly-n.png:[350]"
+            "image": "units/monsters/dragonfly/grand/dragonfly-n.png"
           }
         ]
       },
@@ -13472,7 +14060,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sting",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/grand/dragonfly.png:[400]"
+            "image": "units/monsters/dragonfly/grand/dragonfly.png"
           }
         ]
       },
@@ -13482,7 +14070,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/dragonfly/grand/dragonfly.png:[350]"
+            "image": "units/monsters/dragonfly/grand/dragonfly.png"
           }
         ]
       }
@@ -13538,10 +14126,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight.png:250"
+            "image": "units/human-loyalists/grand-knight/grand-knight.png"
           },
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight-se-breeze[1~3,2,1].png:[400,600,900,300,250]"
+            "image": "units/human-loyalists/grand-knight/grand-knight-se-breeze[1"
           }
         ]
       },
@@ -13549,10 +14137,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight.png:850"
+            "image": "units/human-loyalists/grand-knight/grand-knight.png"
           },
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight-se-bob[1~3,2,1].png:[450,300,200,550,650]"
+            "image": "units/human-loyalists/grand-knight/grand-knight-se-bob[1"
           }
         ]
       },
@@ -13561,14 +14149,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lance",
         "frames": [
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight-se-attack[1~3].png:80"
+            "image": "units/human-loyalists/grand-knight/grand-knight-se-attack[1"
           },
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight-se-attack[4~6].png:[90,110,140]",
+            "image": "units/human-loyalists/grand-knight/grand-knight-se-attack[4",
             "sound": "horse-canter.wav"
           },
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight.png:1"
+            "image": "units/human-loyalists/grand-knight/grand-knight.png"
           }
         ]
       },
@@ -13577,14 +14165,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight.png:50",
+            "image": "units/human-loyalists/grand-knight/grand-knight.png",
             "sound": "horse-canter.wav"
           },
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight.png:250"
+            "image": "units/human-loyalists/grand-knight/grand-knight.png"
           },
           {
-            "image": "units/human-loyalists/grand-knight/grand-knight.png:100"
+            "image": "units/human-loyalists/grand-knight/grand-knight.png"
           }
         ]
       }
@@ -13643,7 +14231,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/human-loyalists/marshal-die-[1~10].png:[75*8,175,125]"
+            "image": "units/human-loyalists/marshal-die-[1"
           }
         ]
       },
@@ -13652,13 +14240,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/human-loyalists/marshal-crossbow.png:100"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-loyalists/marshal-crossbow-attack[1~2].png:150"
+            "image": "units/human-loyalists/marshal-crossbow.png"
           },
           {
-            "image": "units/human-loyalists/marshal-crossbow.png:300"
+            "image": "units/human-loyalists/marshal-crossbow-attack[1"
+          },
+          {
+            "image": "units/human-loyalists/marshal-crossbow.png"
           }
         ]
       },
@@ -13667,16 +14259,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/marshal.png:50"
+            "image": "units/human-loyalists/marshal.png"
           },
           {
-            "image": "units/human-loyalists/marshal-defend-1.png:50"
+            "image": "units/human-loyalists/marshal-defend-1.png"
           },
           {
-            "image": "units/human-loyalists/marshal-attack-sword[1~5].png:[100,75,100,50,75]"
+            "image": "units/human-loyalists/marshal-attack-sword[1"
           },
           {
-            "image": "units/human-loyalists/marshal.png:75"
+            "image": "units/human-loyalists/marshal.png"
           }
         ]
       }
@@ -13725,11 +14317,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hooves",
         "frames": [
           {
-            "image": "units/monsters/horse/horse-larger-attack[1~7].png:[100*4,80,70,260]",
+            "image": "units/monsters/horse/horse-larger-attack[1",
             "sound": "horse-elf-canter.wav"
           },
           {
-            "image": "units/monsters/horse/horse-larger.png:60"
+            "image": "units/monsters/horse/horse-larger.png"
           }
         ]
       }
@@ -13781,7 +14373,7 @@ export const unitTypes: WesnothUnitType[] = [
         "range": "melee",
         "damage": 13,
         "number": 2,
-        "icon": "attacks/fangs-rodent.png~CS(-20,-20,50)~BLIT(attacks/blank-border.png)"
+        "icon": "attacks/fangs-rodent.png"
       },
       {
         "name": "tail",
@@ -13817,7 +14409,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/icemonax/great-icemonax-claws[1~9].png:[80*8,240]"
+            "image": "units/monsters/icemonax/great-icemonax-claws[1"
           }
         ]
       },
@@ -13826,7 +14418,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tail",
         "frames": [
           {
-            "image": "units/monsters/icemonax/great-icemonax-tail[1~9].png:[100,150,150,100,80,70,80,100,120]"
+            "image": "units/monsters/icemonax/great-icemonax-tail[1"
           }
         ]
       }
@@ -13894,13 +14486,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fireball",
         "frames": [
           {
-            "image": "units/human-magi/great-mage.png:50"
+            "image": "units/human-magi/great-mage.png"
           },
           {
-            "image": "units/human-magi/great-mage-attack-magic-[1,2,1].png:[100,800,100]"
+            "image": "units/human-magi/great-mage-attack-magic-[1,2,1].png"
           },
           {
-            "image": "units/human-magi/great-mage.png:50"
+            "image": "units/human-magi/great-mage.png"
           }
         ]
       },
@@ -13909,16 +14501,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/human-magi/great-mage.png:50"
+            "image": "units/human-magi/great-mage.png"
           },
           {
-            "image": "units/human-magi/great-mage-attack-staff-[1~2].png:[100,200]"
+            "image": "units/human-magi/great-mage-attack-staff-[1"
           },
           {
-            "image": "units/human-magi/great-mage-attack-magic-1.png:75"
+            "image": "units/human-magi/great-mage-attack-magic-1.png"
           },
           {
-            "image": "units/human-magi/great-mage.png:75"
+            "image": "units/human-magi/great-mage.png"
           }
         ]
       }
@@ -13938,16 +14530,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "fireball",
           "frames": [
             {
-              "image": "units/human-magi/great-mage+female.png:50"
+              "image": "units/human-magi/great-mage+female.png"
             },
             {
-              "image": "units/human-magi/great-mage+female-attack-magic-1.png:100"
+              "image": "units/human-magi/great-mage+female-attack-magic-1.png"
             },
             {
-              "image": "units/human-magi/great-mage+female-attack-magic-[1,2,1].png:[100,800,100]"
+              "image": "units/human-magi/great-mage+female-attack-magic-[1,2,1].png"
             },
             {
-              "image": "units/human-magi/great-mage+female.png:100"
+              "image": "units/human-magi/great-mage+female.png"
             }
           ]
         },
@@ -13956,16 +14548,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "staff",
           "frames": [
             {
-              "image": "units/human-magi/great-mage+female.png:50"
+              "image": "units/human-magi/great-mage+female.png"
             },
             {
-              "image": "units/human-magi/great-mage+female-attack-staff-[1~2].png:[100,200]"
+              "image": "units/human-magi/great-mage+female-attack-staff-[1"
             },
             {
-              "image": "units/human-magi/great-mage+female-attack-magic-1.png:75"
+              "image": "units/human-magi/great-mage+female-attack-magic-1.png"
             },
             {
-              "image": "units/human-magi/great-mage+female.png:75"
+              "image": "units/human-magi/great-mage+female.png"
             }
           ]
         }
@@ -13982,7 +14574,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Great Seahorse",
     "race": "monster",
     "gender": [],
-    "image": "units/monsters/seahorse.png~O(0)~BLIT(units/monsters/seahorse.png)~MASK(units/monsters/seahorse-mask.png)",
+    "image": "units/monsters/seahorse.png",
     "profile": "portraits/monsters/seahorse.webp",
     "hitpoints": 35,
     "movementType": "float",
@@ -14021,7 +14613,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/seahorse-shadow.png~O(0.3):1200"
+            "image": "units/monsters/seahorse-shadow.png"
+          },
+          {
+            "image": "units/monsters/seahorse.png"
           }
         ]
       },
@@ -14029,10 +14624,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/monsters/seahorse.png:720"
+            "image": "halo/ripples/ripple[13"
           },
           {
-            "image": "misc/blank-hex.png:1"
+            "image": "units/monsters/seahorse.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
           }
         ]
       },
@@ -14041,10 +14639,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "water spray",
         "frames": [
           {
-            "image": "units/monsters/seahorse-spit[1,2].png~MASK(units/monsters/seahorse-mask.png):[150,120]"
+            "image": "projectiles/water-spray.png",
+            "duration": 165
           },
           {
-            "image": "units/monsters/seahorse.png~MASK(units/monsters/seahorse-mask.png):200",
+            "image": "units/monsters/seahorse-spit[1,2].png"
+          },
+          {
+            "image": "units/monsters/seahorse.png",
             "sound": "water-blast.wav"
           }
         ]
@@ -14054,7 +14656,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/seahorse-attack[1~6].png~MASK(units/monsters/seahorse-mask.png):[80*5,300]"
+            "image": "units/monsters/seahorse-attack[1"
           }
         ]
       }
@@ -14105,10 +14707,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hammer",
         "frames": [
           {
-            "image": "units/trolls/great-troll.png:25"
+            "image": "units/trolls/great-troll.png"
           },
           {
-            "image": "units/trolls/great-troll-attack-[1~5,1].png:[80,75,70,80,210,60]"
+            "image": "units/trolls/great-troll-attack-[1"
           }
         ]
       }
@@ -14156,17 +14758,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/wolf-great.png:100",
+            "image": "units/monsters/wolf-great.png",
             "sound": "wolf-growl-[1~4].ogg"
           },
           {
-            "image": "units/monsters/wolf-great-attack.png:200"
+            "image": "units/monsters/wolf-great-attack.png"
           },
           {
-            "image": "units/monsters/wolf-great-moving.png:250"
+            "image": "units/monsters/wolf-great-moving.png"
           },
           {
-            "image": "units/monsters/wolf-great.png:50"
+            "image": "units/monsters/wolf-great.png"
           }
         ]
       }
@@ -14216,7 +14818,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/gryphon-flying-[1~8].png:150"
+            "image": "units/monsters/gryphon-flying-[1"
           }
         ]
       },
@@ -14225,7 +14827,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/gryphon-flying-[5,4,5].png:[100,200,100]"
+            "image": "units/monsters/gryphon-flying-[5,4,5].png"
           }
         ]
       }
@@ -14275,7 +14877,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/gryphon-master-flying-[1~8].png:150"
+            "image": "units/dwarves/gryphon-master-flying-[1"
           }
         ]
       },
@@ -14284,7 +14886,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/dwarves/gryphon-master-flying-[4,5,4].png:[100,200,100]"
+            "image": "units/dwarves/gryphon-master-flying-[4,5,4].png"
           }
         ]
       }
@@ -14334,7 +14936,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/dwarves/gryphon-rider-flying-[1~8].png:150"
+            "image": "units/dwarves/gryphon-rider-flying-[1"
           }
         ]
       },
@@ -14343,7 +14945,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/dwarves/gryphon-rider-flying-[5,4,5].png:[100,200,100]"
+            "image": "units/dwarves/gryphon-rider-flying-[5,4,5].png"
           }
         ]
       }
@@ -14405,10 +15007,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/human-loyalists/halberdier-slash-se-[1~4,1].png:[130,100,100,125,100]"
+            "image": "units/human-loyalists/halberdier-slash-se-[1"
           },
           {
-            "image": "units/human-loyalists/halberdier.png:75"
+            "image": "units/human-loyalists/halberdier.png"
           }
         ]
       },
@@ -14418,13 +15020,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/human-loyalists/halberdier.png:50"
+            "image": "units/human-loyalists/halberdier.png"
           },
           {
-            "image": "units/human-loyalists/halberdier-pierce-ne.png:200"
+            "image": "units/human-loyalists/halberdier-pierce-ne.png"
           },
           {
-            "image": "units/human-loyalists/halberdier.png:100"
+            "image": "units/human-loyalists/halberdier.png"
           }
         ]
       },
@@ -14434,10 +15036,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/human-loyalists/halberdier-pierce-se-[1,2,1].png:[100*3]"
+            "image": "units/human-loyalists/halberdier-pierce-se-[1,2,1].png"
           },
           {
-            "image": "units/human-loyalists/halberdier.png:100"
+            "image": "units/human-loyalists/halberdier.png"
           }
         ]
       },
@@ -14447,13 +15049,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/human-loyalists/halberdier.png:50"
+            "image": "units/human-loyalists/halberdier.png"
           },
           {
-            "image": "units/human-loyalists/halberdier-pierce-[ne,n,ne].png:[100,200,50]"
+            "image": "units/human-loyalists/halberdier-pierce-[ne,n,ne].png"
           },
           {
-            "image": "units/human-loyalists/halberdier.png:25"
+            "image": "units/human-loyalists/halberdier.png"
           }
         ]
       },
@@ -14463,13 +15065,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "halberd",
         "frames": [
           {
-            "image": "units/human-loyalists/halberdier.png:50"
+            "image": "units/human-loyalists/halberdier.png"
           },
           {
-            "image": "units/human-loyalists/halberdier-pierce-[se-1,s,se-1].png:[50,250,50]"
+            "image": "units/human-loyalists/halberdier-pierce-[se-1,s,se-1].png"
           },
           {
-            "image": "units/human-loyalists/halberdier.png:25"
+            "image": "units/human-loyalists/halberdier.png"
           }
         ]
       }
@@ -14517,10 +15119,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "units/human-loyalists/heavyinfantry-attack-[1~15].png:[70*5,50*4,100,75,50*4]"
+            "image": "units/human-loyalists/heavyinfantry-attack-[1"
           },
           {
-            "image": "units/human-loyalists/heavyinfantry.png:100"
+            "image": "units/human-loyalists/heavyinfantry.png"
           }
         ]
       }
@@ -14567,7 +15169,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace-spiked",
         "frames": [
           {
-            "image": "units/human-outlaws/highwayman-melee-[1~8].png:100"
+            "image": "units/human-outlaws/highwayman-melee-[1"
           }
         ]
       }
@@ -14627,7 +15229,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/scarab/scarab.png:450"
+            "image": "units/monsters/scarab/scarab.png"
           }
         ]
       },
@@ -14636,10 +15238,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "horn",
         "frames": [
           {
-            "image": "units/monsters/scarab/scarab-horn-[1,2].png:[130,170]"
+            "image": "units/monsters/scarab/scarab-horn-[1,2].png"
           },
           {
-            "image": "units/monsters/scarab/scarab.png:220"
+            "image": "units/monsters/scarab/scarab.png"
           }
         ]
       }
@@ -14707,7 +15309,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Hunter Caribe",
     "race": "monster",
     "gender": [],
-    "image": "{CARIBE_IMAGE_PATH}/caribe-shadow.png~BLIT(\"{CARIBE_IMAGE_PATH}/caribe-default.png\")",
+    "image": "units/monsters/caribe/caribe-default.png",
     "profile": "portraits/monsters/caribe-hunter.webp",
     "hitpoints": 46,
     "movementType": "deepsea",
@@ -14752,7 +15354,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-shadow.png:1600"
+            "image": "units/monsters/caribe/caribe-[hi,default,lo,default].png"
+          },
+          {
+            "image": "units/monsters/caribe/caribe-shadow.png"
           }
         ]
       },
@@ -14760,7 +15365,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-land.png"
+            "image": "units/monsters/caribe/caribe-land.png"
           }
         ]
       },
@@ -14769,7 +15374,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-[attack-2,attack-1,attack-2,attack-3,default].png~MASK({CARIBE_IMAGE_PATH}/caribe-mask.png):[70,80,125,150,175]"
+            "image": "units/monsters/caribe/caribe-[attack-2,attack-1,attack-2,attack-3,default].png"
           }
         ]
       },
@@ -14778,7 +15383,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-[attack-2,attack-1,attack-2,attack-3,land].png:[60,65,125,150,175]"
+            "image": "units/monsters/caribe/caribe-[attack-2,attack-1,attack-2,attack-3,land].png"
           }
         ]
       },
@@ -14787,7 +15392,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "kelp",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/caribe-sling[1~5].png:[100*3,200,120]"
+            "image": "projectiles/kelp.png",
+            "duration": 200
+          },
+          {
+            "image": "units/monsters/caribe/caribe-sling[1"
           }
         ]
       }
@@ -14849,13 +15458,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/human-outlaws/huntsman-bow.png:75"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-outlaws/huntsman-attack[1~3].png:[75,150,100]"
+            "image": "units/human-outlaws/huntsman-bow.png"
           },
           {
-            "image": "units/human-outlaws/huntsman-bow.png:100"
+            "image": "units/human-outlaws/huntsman-attack[1"
+          },
+          {
+            "image": "units/human-outlaws/huntsman-bow.png"
           }
         ]
       },
@@ -14864,13 +15477,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-outlaws/huntsman.png:50"
+            "image": "units/human-outlaws/huntsman.png"
           },
           {
-            "image": "units/human-outlaws/huntsman-attack-melee.png:250"
+            "image": "units/human-outlaws/huntsman-attack-melee.png"
           },
           {
-            "image": "units/human-outlaws/huntsman.png:50"
+            "image": "units/human-outlaws/huntsman.png"
           }
         ]
       }
@@ -14940,7 +15553,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/drakes/hurricane-fly-[1~5,4].png:100,units/drakes/hurricane-fly-[3,2]-upstroke.png:100"
+            "image": "units/drakes/hurricane-fly-[1"
           }
         ]
       },
@@ -14949,7 +15562,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "slam",
         "frames": [
           {
-            "image": "units/drakes/hurricane-kick-[1~6,2].png:100"
+            "image": "units/drakes/hurricane-kick-[1"
           }
         ]
       }
@@ -15007,7 +15620,7 @@ export const unitTypes: WesnothUnitType[] = [
         "range": "melee",
         "damage": 8,
         "number": 1,
-        "icon": "attacks/fangs-rodent.png~CS(-20,-20,40)"
+        "icon": "attacks/fangs-rodent.png"
       }
     ],
     "animations": [
@@ -15034,7 +15647,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/icemonax/young-icemonax-attack[1~4].png:[150*2,100,200]"
+            "image": "units/monsters/icemonax/young-icemonax-attack[1"
           }
         ]
       }
@@ -15100,7 +15713,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "battle claws",
         "frames": [
           {
-            "image": "units/drakes/inferno-melee-[1~6].png:100"
+            "image": "units/drakes/inferno-melee-[1"
           }
         ]
       }
@@ -15131,7 +15744,7 @@ export const unitTypes: WesnothUnitType[] = [
     "race": "human",
     "gender": [],
     "image": "units/human-loyalists/siegetrooper.png",
-    "profile": "portraits/humans/iron-mauler.webp~RIGHT()",
+    "profile": "portraits/humans/iron-mauler.webp",
     "hitpoints": 64,
     "movementType": "armoredfoot",
     "movement": 4,
@@ -15161,7 +15774,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "flail",
         "frames": [
           {
-            "image": "units/human-loyalists/siegetrooper-attack-[1~6].png:[85,100,125,50*3]"
+            "image": "units/human-loyalists/siegetrooper-attack-[1"
           }
         ]
       }
@@ -15219,7 +15832,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1380"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raider/iron-bob[1"
+          },
+          {
+            "image": "units/transport/raider/iron-flag[1"
           }
         ]
       },
@@ -15227,7 +15846,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1380"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raider/iron-bob[1"
+          },
+          {
+            "image": "units/transport/raider/iron-flag[1"
           }
         ]
       },
@@ -15235,7 +15860,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1680"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raider/iron-bob[1"
+          },
+          {
+            "image": "units/transport/raider/iron-flag[1"
           }
         ]
       },
@@ -15243,7 +15874,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1680"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raider/iron-bob2.png"
+          },
+          {
+            "image": "units/transport/raider/iron-flag[1"
           }
         ]
       },
@@ -15251,7 +15888,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/transport/raider/iron-die[1~12].png:[90*12]"
+            "image": "units/transport/raider/iron-die[1"
           }
         ]
       }
@@ -15314,7 +15951,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "javelin",
         "frames": [
           {
-            "image": "units/human-loyalists/javelineer-attack-ranged-[1~4].png:[100*3,50]"
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/human-loyalists/javelineer-attack-ranged-[1"
           }
         ]
       },
@@ -15323,16 +15964,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/human-loyalists/javelineer-attack-melee-[1~3].png:[100*2,200]"
+            "image": "units/human-loyalists/javelineer-attack-melee-[1"
           },
           {
-            "image": "units/human-loyalists/javelineer-attack-ranged-1.png:75"
+            "image": "units/human-loyalists/javelineer-attack-ranged-1.png"
           },
           {
-            "image": "units/human-loyalists/javelineer-attack-melee-1.png:75"
+            "image": "units/human-loyalists/javelineer-attack-melee-1.png"
           },
           {
-            "image": "units/human-loyalists/javelineer.png:50"
+            "image": "units/human-loyalists/javelineer.png"
           }
         ]
       }
@@ -15350,7 +15991,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Jinn",
     "race": "monster",
     "gender": [],
-    "image": "{IMG_PATH_TEMP}/jinn.png",
+    "image": "units/monsters/jinn/jinn.png",
     "profile": "portraits/monsters/jinn.webp",
     "hitpoints": 58,
     "movementType": "spirit",
@@ -15381,7 +16022,7 @@ export const unitTypes: WesnothUnitType[] = [
         "range": "ranged",
         "damage": 7,
         "number": 4,
-        "icon": "attacks/dark-missile.png~GS()~CS(20,-10,-110)"
+        "icon": "attacks/dark-missile.png"
       },
       {
         "name": "desert lightning",
@@ -15401,7 +16042,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/jinn-bottom[1~3,2,1~6,1,4,3].png:[150*12,200]"
+            "image": "units/monsters/jinn/jinn-bottom[1"
+          },
+          {
+            "image": "units/monsters/jinn/jinn-top.png:400,units/monsters/jinn/jinn-top-hi.png:400,units/monsters/jinn/jinn-top.png:600,units/monsters/jinn/jinn-top-lo.png"
           }
         ]
       },
@@ -15409,7 +16053,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/jinn-defend1.png:670,misc/blank-hex.png:1"
+            "image": "units/monsters/jinn/jinn-defend1.png:670,misc/blank-hex.png"
           }
         ]
       },
@@ -15418,10 +16062,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "desert windblast",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/jinn-wind-[1~9].png:[80*6,90*3]"
+            "image": "units/monsters/jinn/jinn-wind-[1"
           },
           {
-            "image": "{IMG_PATH_TEMP}/jinn.png:1"
+            "image": "units/monsters/jinn/jinn.png"
           }
         ]
       },
@@ -15430,10 +16074,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "desert lightning",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/jinn-lightning-[1~5,1].png:[100,120,110,110,180,80]"
+            "image": "units/monsters/jinn/jinn-lightning-[1"
           },
           {
-            "image": "{IMG_PATH_TEMP}/jinn.png:50"
+            "image": "units/monsters/jinn/jinn.png"
           }
         ]
       },
@@ -15442,10 +16086,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "{IMG_PATH_TEMP}/jinn-attack-[1~4].png:[150*4]"
+            "image": "units/monsters/jinn/jinn-attack-[1"
           },
           {
-            "image": "{IMG_PATH_TEMP}/jinn.png:150"
+            "image": "units/monsters/jinn/jinn.png"
           }
         ]
       }
@@ -15507,7 +16151,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/cat/jumpcat.png:150"
+            "image": "units/monsters/cat/jumpcat.png"
           }
         ]
       },
@@ -15515,7 +16159,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/cat/jumpcat.png:150"
+            "image": "units/monsters/cat/jumpcat.png"
           }
         ]
       },
@@ -15524,10 +16168,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/cat/jumpcat-claws[1~5].png:[90,90,100,100,240]"
+            "image": "units/monsters/cat/jumpcat-claws[1"
           },
           {
-            "image": "units/monsters/cat/jumpcat.png:1"
+            "image": "units/monsters/cat/jumpcat.png"
           }
         ]
       },
@@ -15536,10 +16180,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tail",
         "frames": [
           {
-            "image": "units/monsters/cat/jumpcat-tail[1~7,3].png:[90*4,120,90*2,70]"
+            "image": "units/monsters/cat/jumpcat-tail[1"
           },
           {
-            "image": "units/monsters/cat/jumpcat.png:1"
+            "image": "units/monsters/cat/jumpcat.png"
           }
         ]
       }
@@ -15656,13 +16300,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "ink",
         "frames": [
           {
-            "image": "units/monsters/kraken/kraken-defend1.png:100"
+            "image": "projectiles/inkstream-n.png:180,projectiles/inkstream-cloud.png"
           },
           {
-            "image": "units/monsters/kraken/kraken-ink.png:300"
+            "image": "units/monsters/kraken/kraken-defend1.png"
           },
           {
-            "image": "units/monsters/kraken/kraken-defend1.png:100"
+            "image": "units/monsters/kraken/kraken-ink.png"
+          },
+          {
+            "image": "units/monsters/kraken/kraken-defend1.png"
           }
         ]
       },
@@ -15672,10 +16319,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tentacle",
         "frames": [
           {
-            "image": "units/monsters/kraken/kraken-slap[1~4].png:[100,140,120,140]"
+            "image": "units/monsters/kraken/kraken-slap[1"
           },
           {
-            "image": "units/monsters/kraken/kraken.png:1",
+            "image": "units/monsters/kraken/kraken.png",
             "sound": ""
           }
         ]
@@ -15686,10 +16333,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tentacle",
         "frames": [
           {
-            "image": "units/monsters/kraken/kraken-slap[1~4]b.png:[100,140,120,140]"
+            "image": "units/monsters/kraken/kraken-slap[1"
           },
           {
-            "image": "units/monsters/kraken/kraken.png:1",
+            "image": "units/monsters/kraken/kraken.png",
             "sound": ""
           }
         ]
@@ -15700,10 +16347,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tentacle",
         "frames": [
           {
-            "image": "units/monsters/kraken/kraken-slap[1~4].png:[100,140,120,140]"
+            "image": "units/monsters/kraken/kraken-slap[1"
           },
           {
-            "image": "units/monsters/kraken/kraken.png:1",
+            "image": "units/monsters/kraken/kraken.png",
             "sound": ""
           }
         ]
@@ -15753,7 +16400,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/lancer/lancer-breeze-[1~4,2,5].png::[200,300*3,200*2]"
+            "image": "units/human-loyalists/lancer/lancer-breeze-[1"
           }
         ]
       },
@@ -15762,11 +16409,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lance",
         "frames": [
           {
-            "image": "units/human-loyalists/lancer/lancer-se-attack1.png:25",
+            "image": "units/human-loyalists/lancer/lancer-se-attack1.png",
             "sound": "horse-canter.wav"
           },
           {
-            "image": "units/human-loyalists/lancer/lancer-se-attack[1,1,1,1].png:[75,300,50,25]"
+            "image": "units/human-loyalists/lancer/lancer-se-attack[1,1,1,1].png"
           }
         ]
       }
@@ -15854,13 +16501,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "chill tempest",
         "frames": [
           {
-            "image": "units/undead-necromancers/lich-magic-[1,2].png:75"
+            "image": "units/undead-necromancers/lich-magic-[1,2].png"
           },
           {
             "image": "units/undead-necromancers/lich-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/lich-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/lich-magic-[2,1].png"
           }
         ]
       },
@@ -15869,19 +16516,19 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shadow wave",
         "frames": [
           {
-            "image": "units/undead-necromancers/lich-magic-[1,2].png:75"
+            "image": "units/undead-necromancers/lich-magic-[1,2].png"
           },
           {
             "image": "units/undead-necromancers/lich-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/lich-magic-3.png:200"
+            "image": "units/undead-necromancers/lich-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/lich-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/lich-magic-[2,1].png"
           },
           {
-            "image": "units/undead-necromancers/lich.png:50"
+            "image": "units/undead-necromancers/lich.png"
           }
         ]
       },
@@ -15890,16 +16537,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "touch",
         "frames": [
           {
-            "image": "units/undead-necromancers/lich.png:50"
+            "image": "units/undead-necromancers/lich.png"
           },
           {
-            "image": "units/undead-necromancers/lich-melee-[1~2].png:[100,200]"
+            "image": "units/undead-necromancers/lich-melee-[1"
           },
           {
-            "image": "units/undead-necromancers/lich-magic-1.png:75"
+            "image": "units/undead-necromancers/lich-magic-1.png"
           },
           {
-            "image": "units/undead-necromancers/lich.png:75"
+            "image": "units/undead-necromancers/lich.png"
           }
         ]
       }
@@ -15961,7 +16608,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/human-loyalists/lieutenant-die-[1~9].png:75"
+            "image": "units/human-loyalists/lieutenant-die-[1"
           }
         ]
       },
@@ -15970,13 +16617,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/human-loyalists/lieutenant-crossbow.png:100"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-loyalists/lieutenant-crossbow-attack[1~2].png:150"
+            "image": "units/human-loyalists/lieutenant-crossbow.png"
           },
           {
-            "image": "units/human-loyalists/lieutenant-crossbow.png:300"
+            "image": "units/human-loyalists/lieutenant-crossbow-attack[1"
+          },
+          {
+            "image": "units/human-loyalists/lieutenant-crossbow.png"
           }
         ]
       },
@@ -15985,10 +16636,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/lieutenant.png:50"
+            "image": "units/human-loyalists/lieutenant.png"
           },
           {
-            "image": "units/human-loyalists/lieutenant-attack-sword-[1~3].png:[75,150,100]"
+            "image": "units/human-loyalists/lieutenant-attack-sword-[1"
           }
         ]
       }
@@ -16046,7 +16697,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-loyalists/longbowman-idle-[1~4,3,4,3,4,3,4,1].png:[1000,400,100,200,100,200,100,200,100,400,100]"
+            "image": "units/human-loyalists/longbowman-idle-[1"
           }
         ]
       },
@@ -16055,10 +16706,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/human-loyalists/longbowman-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-loyalists/longbowman-bow-attack-[1~4,1].png:[75*2,100,130,65]"
+            "image": "units/human-loyalists/longbowman-bow.png"
+          },
+          {
+            "image": "units/human-loyalists/longbowman-bow-attack-[1"
           }
         ]
       },
@@ -16067,13 +16722,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/longbowman-melee-defend-1.png:50"
+            "image": "units/human-loyalists/longbowman-melee-defend-1.png"
           },
           {
-            "image": "units/human-loyalists/longbowman-melee-attack-[1~4].png:100"
+            "image": "units/human-loyalists/longbowman-melee-attack-[1"
           },
           {
-            "image": "units/human-loyalists/longbowman-melee-defend-1.png:50"
+            "image": "units/human-loyalists/longbowman-melee-defend-1.png"
           }
         ]
       }
@@ -16136,7 +16791,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-magi/mage-idle-[1~4,4*2,4~1].png:[150*10]"
+            "image": "units/human-magi/mage-idle-[1"
           }
         ]
       },
@@ -16214,7 +16869,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "missile",
         "frames": [
           {
-            "image": "units/human-magi/mage-attack-magic[1,2,1].png:[100,700,200]"
+            "image": "units/human-magi/mage-attack-magic[1,2,1].png"
           }
         ]
       },
@@ -16223,16 +16878,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/human-magi/mage.png:50"
+            "image": "units/human-magi/mage.png"
           },
           {
-            "image": "units/human-magi/mage-attack-staff[1~2].png:[100,200]"
+            "image": "units/human-magi/mage-attack-staff[1"
           },
           {
-            "image": "units/human-magi/mage-attack-magic1.png:50"
+            "image": "units/human-magi/mage-attack-magic1.png"
           },
           {
-            "image": "units/human-magi/mage.png:50"
+            "image": "units/human-magi/mage.png"
           }
         ]
       }
@@ -16251,7 +16906,7 @@ export const unitTypes: WesnothUnitType[] = [
           "type": "idle",
           "frames": [
             {
-              "image": "units/human-magi/mage+female.png:150"
+              "image": "units/human-magi/mage+female.png"
             }
           ]
         },
@@ -16329,7 +16984,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "missile",
           "frames": [
             {
-              "image": "units/human-magi/mage+female-attack-magic[1,2,1].png:[100,700,200]"
+              "image": "units/human-magi/mage+female-attack-magic[1,2,1].png"
             }
           ]
         },
@@ -16338,16 +16993,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "staff",
           "frames": [
             {
-              "image": "units/human-magi/mage+female.png:50"
+              "image": "units/human-magi/mage+female.png"
             },
             {
-              "image": "units/human-magi/mage+female-attack-staff[1~2].png:[100,200]"
+              "image": "units/human-magi/mage+female-attack-staff[1"
             },
             {
-              "image": "units/human-magi/mage+female-attack-magic1.png:50"
+              "image": "units/human-magi/mage+female-attack-magic1.png"
             },
             {
-              "image": "units/human-magi/mage+female.png:50"
+              "image": "units/human-magi/mage+female.png"
             }
           ]
         }
@@ -16413,13 +17068,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lightbeam",
         "frames": [
           {
-            "image": "units/human-magi/white-cleric-magic-[1,2].png:75"
+            "image": "units/human-magi/white-cleric-magic-[1,2].png"
           },
           {
             "image": "units/human-magi/white-cleric-magic-3.png"
           },
           {
-            "image": "units/human-magi/white-cleric-magic-[2,1].png:50"
+            "image": "units/human-magi/white-cleric-magic-[2,1].png"
           }
         ]
       },
@@ -16428,10 +17083,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "flail",
         "frames": [
           {
-            "image": "units/human-magi/white-cleric-magic-3.png:100"
+            "image": "units/human-magi/white-cleric-magic-3.png"
           },
           {
-            "image": "units/human-magi/white-cleric-mace-[1~4].png:[100*4]"
+            "image": "units/human-magi/white-cleric-mace-[1"
           }
         ]
       }
@@ -16451,13 +17106,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "lightbeam",
           "frames": [
             {
-              "image": "units/human-magi/white-cleric+female-magic-[1,2].png:75"
+              "image": "units/human-magi/white-cleric+female-magic-[1,2].png"
             },
             {
               "image": "units/human-magi/white-cleric+female-magic-3.png"
             },
             {
-              "image": "units/human-magi/white-cleric+female-magic-[2,1].png:50"
+              "image": "units/human-magi/white-cleric+female-magic-[2,1].png"
             }
           ]
         },
@@ -16466,10 +17121,10 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "flail",
           "frames": [
             {
-              "image": "units/human-magi/white-cleric+female-magic-3.png:100"
+              "image": "units/human-magi/white-cleric+female-magic-3.png"
             },
             {
-              "image": "units/human-magi/white-cleric+female-mace-[1~4].png:[100*4]"
+              "image": "units/human-magi/white-cleric+female-mace-[1"
             }
           ]
         }
@@ -16528,7 +17183,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-loyalists/master-at-arms-victory-[1~6,5~1].png:[100*5,1000,100*5]"
+            "image": "units/human-loyalists/master-at-arms-victory-[1"
           }
         ]
       },
@@ -16537,10 +17192,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/human-loyalists/master-at-arms-crossbow-[1,2].png:100"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-loyalists/master-at-arms-crossbow-[3~6,3~1].png:[100,200*2,100*4]"
+            "image": "units/human-loyalists/master-at-arms-crossbow-[1,2].png"
+          },
+          {
+            "image": "units/human-loyalists/master-at-arms-crossbow-[3"
           }
         ]
       },
@@ -16549,16 +17208,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "saber",
         "frames": [
           {
-            "image": "units/human-loyalists/master-at-arms.png:25"
+            "image": "units/human-loyalists/master-at-arms.png"
           },
           {
-            "image": "units/human-loyalists/master-at-arms-melee-2-[1,2].png:50"
+            "image": "units/human-loyalists/master-at-arms-melee-2-[1,2].png"
           },
           {
-            "image": "units/human-loyalists/master-at-arms-recover-[1,2].png:50"
+            "image": "units/human-loyalists/master-at-arms-recover-[1,2].png"
           },
           {
-            "image": "units/human-loyalists/master-at-arms.png:25"
+            "image": "units/human-loyalists/master-at-arms.png"
           }
         ]
       },
@@ -16567,16 +17226,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "saber",
         "frames": [
           {
-            "image": "units/human-loyalists/master-at-arms.png:25"
+            "image": "units/human-loyalists/master-at-arms.png"
           },
           {
-            "image": "units/human-loyalists/master-at-arms-melee-2-[1,2].png:50"
+            "image": "units/human-loyalists/master-at-arms-melee-2-[1,2].png"
           },
           {
-            "image": "units/human-loyalists/master-at-arms-recover-[1,2].png:50"
+            "image": "units/human-loyalists/master-at-arms-recover-[1,2].png"
           },
           {
-            "image": "units/human-loyalists/master-at-arms.png:25"
+            "image": "units/human-loyalists/master-at-arms.png"
           }
         ]
       },
@@ -16585,16 +17244,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "saber",
         "frames": [
           {
-            "image": "units/human-loyalists/master-at-arms.png:25"
+            "image": "units/human-loyalists/master-at-arms.png"
           },
           {
-            "image": "units/human-loyalists/master-at-arms-melee-1-[1~3].png:[50*2,150]"
+            "image": "units/human-loyalists/master-at-arms-melee-1-[1"
           },
           {
-            "image": "units/human-loyalists/master-at-arms-recover-[1,2].png:50"
+            "image": "units/human-loyalists/master-at-arms-recover-[1,2].png"
           },
           {
-            "image": "units/human-loyalists/master-at-arms.png:25"
+            "image": "units/human-loyalists/master-at-arms.png"
           }
         ]
       }
@@ -16651,7 +17310,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-loyalists/masterbowman-idle-[1~4,3,4,3,4,3,4,1].png:[1000,400,100,200,100,200,100,200,100,400,100]"
+            "image": "units/human-loyalists/masterbowman-idle-[1"
           }
         ]
       },
@@ -16660,10 +17319,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/human-loyalists/masterbowman-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-loyalists/masterbowman-bow-attack-[1~4,1].png:[75*2,100,130,65]"
+            "image": "units/human-loyalists/masterbowman-bow.png"
+          },
+          {
+            "image": "units/human-loyalists/masterbowman-bow-attack-[1"
           }
         ]
       },
@@ -16672,13 +17335,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/masterbowman-melee-defend-1.png:50"
+            "image": "units/human-loyalists/masterbowman-melee-defend-1.png"
           },
           {
-            "image": "units/human-loyalists/masterbowman-melee-attack-[1~4].png:100"
+            "image": "units/human-loyalists/masterbowman-melee-attack-[1"
           },
           {
-            "image": "units/human-loyalists/masterbowman-melee-defend-1.png:50"
+            "image": "units/human-loyalists/masterbowman-melee-defend-1.png"
           }
         ]
       }
@@ -16742,7 +17405,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1380"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/transport-galleon-bob-[1,2,3,2].png"
+          },
+          {
+            "image": "units/transport/transport-galleon-flag[1"
           }
         ]
       },
@@ -16750,7 +17419,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/transport-galleon-[rock-port,bob-1,rock-starboard,bob-1].png"
+          },
+          {
+            "image": "units/transport/transport-galleon-flag[1"
           }
         ]
       },
@@ -16758,7 +17433,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/transport-galleon-bob-1.png"
+          },
+          {
+            "image": "units/transport/transport-galleon-flag[1"
           }
         ]
       },
@@ -16766,7 +17447,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/transport-galleon-bob-1.png"
+          },
+          {
+            "image": "units/transport/transport-galleon-flag[1"
           }
         ]
       },
@@ -16774,7 +17461,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "misc/blank-hex.png:801"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/transport-galleon-roll-[1"
+          },
+          {
+            "image": "units/transport/transport-galleon-die-[1"
+          },
+          {
+            "image": "misc/blank-hex.png"
           }
         ]
       }
@@ -16843,10 +17539,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lightbeam",
         "frames": [
           {
-            "image": "units/merfolk/diviner.png:75"
+            "image": "units/merfolk/diviner.png"
           },
           {
-            "image": "units/merfolk/diviner.png:175"
+            "image": "units/merfolk/diviner.png"
           }
         ]
       },
@@ -16855,10 +17551,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/merfolk/diviner.png:50"
+            "image": "units/merfolk/diviner.png"
           },
           {
-            "image": "units/merfolk/diviner.png:325"
+            "image": "units/merfolk/diviner.png"
           }
         ]
       }
@@ -16920,14 +17616,18 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "water spray",
         "frames": [
           {
-            "image": "units/merfolk/enchantress.png:300"
+            "image": "projectiles/water-spray.png",
+            "duration": 165
           },
           {
-            "image": "units/merfolk/enchantress.png:50",
+            "image": "units/merfolk/enchantress.png"
+          },
+          {
+            "image": "units/merfolk/enchantress.png",
             "sound": "water-blast.wav"
           },
           {
-            "image": "units/merfolk/enchantress.png:80"
+            "image": "units/merfolk/enchantress.png"
           }
         ]
       },
@@ -16936,16 +17636,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/merfolk/enchantress.png:50"
+            "image": "units/merfolk/enchantress.png"
           },
           {
-            "image": "units/merfolk/enchantress.png:[100,200]"
+            "image": "units/merfolk/enchantress.png"
           },
           {
-            "image": "units/merfolk/enchantress.png:50"
+            "image": "units/merfolk/enchantress.png"
           },
           {
-            "image": "units/merfolk/enchantress.png:50"
+            "image": "units/merfolk/enchantress.png"
           }
         ]
       }
@@ -17007,14 +17707,18 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "water spray",
         "frames": [
           {
-            "image": "units/merfolk/initiate-magic-[1,2].png:[70,230]"
+            "image": "projectiles/water-spray.png",
+            "duration": 165
           },
           {
-            "image": "units/merfolk/initiate-magic-2.png:50",
+            "image": "units/merfolk/initiate-magic-[1,2].png"
+          },
+          {
+            "image": "units/merfolk/initiate-magic-2.png",
             "sound": "water-blast.wav"
           },
           {
-            "image": "units/merfolk/initiate-magic-1.png:80"
+            "image": "units/merfolk/initiate-magic-1.png"
           }
         ]
       },
@@ -17023,16 +17727,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/merfolk/initiate.png:50"
+            "image": "units/merfolk/initiate.png"
           },
           {
-            "image": "units/merfolk/initiate-staff-attack-[1~2].png:[100,200]"
+            "image": "units/merfolk/initiate-staff-attack-[1"
           },
           {
-            "image": "units/merfolk/initiate-magic-1.png:50"
+            "image": "units/merfolk/initiate-magic-1.png"
           },
           {
-            "image": "units/merfolk/initiate.png:50"
+            "image": "units/merfolk/initiate.png"
           }
         ]
       }
@@ -17096,10 +17800,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lightbeam",
         "frames": [
           {
-            "image": "units/merfolk/priestess.png:75"
+            "image": "units/merfolk/priestess.png"
           },
           {
-            "image": "units/merfolk/priestess.png:175"
+            "image": "units/merfolk/priestess.png"
           }
         ]
       },
@@ -17108,13 +17812,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/merfolk/priestess.png:50"
+            "image": "units/merfolk/priestess.png"
           },
           {
-            "image": "units/merfolk/priestess.png:250"
+            "image": "units/merfolk/priestess.png"
           },
           {
-            "image": "units/merfolk/priestess.png:75"
+            "image": "units/merfolk/priestess.png"
           }
         ]
       }
@@ -17178,14 +17882,18 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "water spray",
         "frames": [
           {
-            "image": "units/merfolk/siren-magic-1.png:200"
+            "image": "projectiles/water-spray.png",
+            "duration": 165
           },
           {
-            "image": "units/merfolk/siren-magic-2.png:200",
+            "image": "units/merfolk/siren-magic-1.png"
+          },
+          {
+            "image": "units/merfolk/siren-magic-2.png",
             "sound": "water-blast.wav"
           },
           {
-            "image": "units/merfolk/siren-magic-1.png:120"
+            "image": "units/merfolk/siren-magic-1.png"
           }
         ]
       },
@@ -17194,16 +17902,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "naia touch",
         "frames": [
           {
-            "image": "units/merfolk/siren.png:50"
+            "image": "units/merfolk/siren.png"
           },
           {
-            "image": "units/merfolk/siren.png:[100,200]"
+            "image": "units/merfolk/siren.png"
           },
           {
-            "image": "units/merfolk/siren.png:50"
+            "image": "units/merfolk/siren.png"
           },
           {
-            "image": "units/merfolk/siren.png:50"
+            "image": "units/merfolk/siren.png"
           }
         ]
       }
@@ -17259,13 +17967,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fist-merman",
         "frames": [
           {
-            "image": "units/merfolk/brawler.png:50"
+            "image": "units/merfolk/brawler.png"
           },
           {
-            "image": "units/merfolk/brawler-fist-[1~3].png:[200,100*2]"
+            "image": "units/merfolk/brawler-fist-[1"
           },
           {
-            "image": "units/merfolk/brawler.png:50"
+            "image": "units/merfolk/brawler.png"
           }
         ]
       },
@@ -17274,10 +17982,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tail-merman",
         "frames": [
           {
-            "image": "units/merfolk/brawler-tail-land-[1,3,5~1].png:[30*2,80,30,80*3]"
+            "image": "units/merfolk/brawler-tail-land-[1,3,5"
           },
           {
-            "image": "units/merfolk/brawler.png:80"
+            "image": "units/merfolk/brawler.png"
           }
         ]
       }
@@ -17326,10 +18034,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fist-merman",
         "frames": [
           {
-            "image": "units/merfolk/citizen-fist-[1~3].png:[250,150*2]"
+            "image": "units/merfolk/citizen-fist-[1"
           },
           {
-            "image": "units/merfolk/citizen.png:150"
+            "image": "units/merfolk/citizen.png"
           }
         ]
       }
@@ -17347,7 +18055,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/merfolk/entangler.png",
     "profile": "portraits/merfolk/netcaster.webp",
-    "smallProfile": "portraits/merfolk/netcaster.webp~CROP(20,0,400,400)~FL()",
+    "smallProfile": "portraits/merfolk/netcaster.webp",
     "hitpoints": 55,
     "movementType": "swimmer",
     "movement": 7,
@@ -17388,10 +18096,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "net",
         "frames": [
           {
-            "image": "units/merfolk/entangler.png:75"
+            "image": "projectiles/web.png",
+            "duration": 200
           },
           {
-            "image": "units/merfolk/entangler.png:175"
+            "image": "units/merfolk/entangler.png"
+          },
+          {
+            "image": "units/merfolk/entangler.png"
           }
         ]
       },
@@ -17400,10 +18112,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "club",
         "frames": [
           {
-            "image": "units/merfolk/entangler.png:100"
+            "image": "units/merfolk/entangler.png"
           },
           {
-            "image": "units/merfolk/entangler.png:250"
+            "image": "units/merfolk/entangler.png"
           }
         ]
       }
@@ -17451,7 +18163,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trident",
         "frames": [
           {
-            "image": "units/merfolk/fighter-attack-[1~6,2,1].png:75"
+            "image": "units/merfolk/fighter-attack-[1"
           }
         ]
       },
@@ -17461,13 +18173,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trident",
         "frames": [
           {
-            "image": "units/merfolk/fighter.png:50"
+            "image": "units/merfolk/fighter.png"
           },
           {
-            "image": "units/merfolk/fighter.png:250"
+            "image": "units/merfolk/fighter.png"
           },
           {
-            "image": "units/merfolk/fighter.png:50"
+            "image": "units/merfolk/fighter.png"
           }
         ]
       }
@@ -17485,7 +18197,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/merfolk/hoplite.png",
     "profile": "portraits/merfolk/hoplite.webp",
-    "smallProfile": "portraits/merfolk/hoplite.webp~FL()",
+    "smallProfile": "portraits/merfolk/hoplite.webp",
     "hitpoints": 58,
     "movementType": "swimmer",
     "movement": 5,
@@ -17517,13 +18229,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/merfolk/hoplite.png:50"
+            "image": "units/merfolk/hoplite.png"
           },
           {
-            "image": "units/merfolk/hoplite.png:200"
+            "image": "units/merfolk/hoplite.png"
           },
           {
-            "image": "units/merfolk/hoplite.png:100"
+            "image": "units/merfolk/hoplite.png"
           }
         ]
       }
@@ -17542,7 +18254,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/merfolk/hunter.png",
     "profile": "portraits/merfolk/hunter.webp",
-    "smallProfile": "portraits/merfolk/hunter.webp~CROP(30,0,380,380)",
+    "smallProfile": "portraits/merfolk/hunter.webp",
     "hitpoints": 33,
     "movementType": "swimmer",
     "movement": 6,
@@ -17580,13 +18292,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/merfolk/hunter-javelin-base.png:1"
+            "image": "projectiles/spear-n.png",
+            "duration": 150
           },
           {
-            "image": "units/merfolk/hunter-throw-[1~8].png:[100*2,120,220,120,100*3]"
+            "image": "units/merfolk/hunter-javelin-base.png"
           },
           {
-            "image": "units/merfolk/hunter-javelin-base.png:1"
+            "image": "units/merfolk/hunter-throw-[1"
+          },
+          {
+            "image": "units/merfolk/hunter-javelin-base.png"
           }
         ]
       },
@@ -17595,13 +18311,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/merfolk/hunter.png:50"
+            "image": "units/merfolk/hunter.png"
           },
           {
-            "image": "units/merfolk/hunter.png:250"
+            "image": "units/merfolk/hunter.png"
           },
           {
-            "image": "units/merfolk/hunter.png:50"
+            "image": "units/merfolk/hunter.png"
           }
         ]
       }
@@ -17656,11 +18372,15 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/merfolk/javelineer.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/merfolk/javelineer.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/merfolk/javelineer.png:150"
+            "image": "units/merfolk/javelineer.png"
           }
         ]
       },
@@ -17669,10 +18389,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/merfolk/javelineer.png:[100,200]"
+            "image": "units/merfolk/javelineer.png"
           },
           {
-            "image": "units/merfolk/javelineer.png:50"
+            "image": "units/merfolk/javelineer.png"
           }
         ]
       }
@@ -17691,7 +18411,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/merfolk/netcaster.png",
     "profile": "portraits/merfolk/netcaster.webp",
-    "smallProfile": "portraits/merfolk/netcaster.webp~CROP(20,0,400,400)~FL()",
+    "smallProfile": "portraits/merfolk/netcaster.webp",
     "hitpoints": 40,
     "movementType": "swimmer",
     "movement": 7,
@@ -17732,7 +18452,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "net",
         "frames": [
           {
-            "image": "units/merfolk/netcaster.png:175"
+            "image": "projectiles/web.png",
+            "duration": 200
+          },
+          {
+            "image": "units/merfolk/netcaster.png"
           }
         ]
       },
@@ -17741,7 +18465,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "club",
         "frames": [
           {
-            "image": "units/merfolk/netcaster.png:100"
+            "image": "units/merfolk/netcaster.png"
           }
         ]
       }
@@ -17795,11 +18519,15 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/merfolk/spearman.png:100",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/merfolk/spearman.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/merfolk/spearman.png:150"
+            "image": "units/merfolk/spearman.png"
           }
         ]
       },
@@ -17808,13 +18536,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/merfolk/spearman.png:50"
+            "image": "units/merfolk/spearman.png"
           },
           {
-            "image": "units/merfolk/spearman.png:250"
+            "image": "units/merfolk/spearman.png"
           },
           {
-            "image": "units/merfolk/spearman.png:50"
+            "image": "units/merfolk/spearman.png"
           }
         ]
       }
@@ -17870,13 +18598,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trident",
         "frames": [
           {
-            "image": "units/merfolk/triton.png:75"
+            "image": "units/merfolk/triton.png"
           },
           {
-            "image": "units/merfolk/triton.png:175"
+            "image": "units/merfolk/triton.png"
           },
           {
-            "image": "units/merfolk/triton.png:100"
+            "image": "units/merfolk/triton.png"
           }
         ]
       },
@@ -17885,13 +18613,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trident",
         "frames": [
           {
-            "image": "units/merfolk/triton.png:75"
+            "image": "units/merfolk/triton.png"
           },
           {
-            "image": "units/merfolk/triton.png:175"
+            "image": "units/merfolk/triton.png"
           },
           {
-            "image": "units/merfolk/triton.png:100"
+            "image": "units/merfolk/triton.png"
           }
         ]
       }
@@ -17940,7 +18668,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trident",
         "frames": [
           {
-            "image": "units/merfolk/warrior-attack-[1~9].png:100"
+            "image": "units/merfolk/warrior-attack-[1"
           }
         ]
       },
@@ -17950,13 +18678,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trident",
         "frames": [
           {
-            "image": "units/merfolk/warrior.png:50"
+            "image": "units/merfolk/warrior.png"
           },
           {
-            "image": "units/merfolk/warrior.png:250"
+            "image": "units/merfolk/warrior.png"
           },
           {
-            "image": "units/merfolk/warrior.png:50"
+            "image": "units/merfolk/warrior.png"
           }
         ]
       }
@@ -17974,7 +18702,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/monsters/mudcrawler.png",
     "profile": "portraits/monsters/mudcrawler.webp",
-    "smallProfile": "portraits/monsters/mudcrawler.webp~CROP(0,63,400,337)",
+    "smallProfile": "portraits/monsters/mudcrawler.webp",
     "hitpoints": 20,
     "movementType": "scuttlefoot",
     "movement": 3,
@@ -18003,10 +18731,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/monsters/mudcrawler-defend-1.png:70"
+            "image": "units/monsters/mudcrawler-defend-1.png"
           },
           {
-            "image": "units/monsters/mudcrawler-die-[1~3].png:70"
+            "image": "units/monsters/mudcrawler-die-[1"
           }
         ]
       },
@@ -18015,7 +18743,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mud glob",
         "frames": [
           {
-            "image": "units/monsters/mudcrawler-attack-[1~5].png:100"
+            "image": "projectiles/mud-glob.png",
+            "duration": 200
+          },
+          {
+            "image": "units/monsters/mudcrawler-attack-[1"
           }
         ]
       }
@@ -18084,10 +18816,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/nagas/mixed/dirkfang-melee[1~6].png:[120,160,80*2,100,200]"
+            "image": "units/nagas/mixed/dirkfang-melee[1"
           },
           {
-            "image": "units/nagas/mixed/dirkfang.png:200"
+            "image": "units/nagas/mixed/dirkfang.png"
           }
         ]
       }
@@ -18142,7 +18874,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/nagas/fighter/fighter-idle-[1~8,7,8,7,8,6,5,1].png:[100*2,350,450,250*2,60*6,350*2,200]"
+            "image": "units/nagas/fighter/fighter-idle-[1"
           }
         ]
       },
@@ -18151,7 +18883,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/nagas/fighter/fighter-melee-[1~6].png:[130,100*2,90,80,70]"
+            "image": "units/nagas/fighter/fighter-melee-[1"
           }
         ]
       }
@@ -18203,10 +18935,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "units/nagas/guardian/guardian-attack-[1~5].png:[120,180,120,130,150]"
+            "image": "units/nagas/guardian/guardian-attack-[1"
           },
           {
-            "image": "units/nagas/guardian/guardian.png:150"
+            "image": "units/nagas/guardian/guardian.png"
           }
         ]
       }
@@ -18271,7 +19003,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "units/nagas/guardian/sentinel.png:700"
+            "image": "units/nagas/guardian/sentinel.png"
           },
           {
             "image": "units/nagas/guardian/sentinel.png",
@@ -18284,16 +19016,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shield",
         "frames": [
           {
-            "image": "units/nagas/guardian/sentinel-defend-1.png:100"
+            "image": "units/nagas/guardian/sentinel-defend-1.png"
           },
           {
-            "image": "units/nagas/guardian/sentinel-defend-1abs.png:150"
+            "image": "units/nagas/guardian/sentinel-defend-1abs.png"
           },
           {
-            "image": "units/nagas/guardian/sentinel-defend-2abs.png:300"
+            "image": "units/nagas/guardian/sentinel-defend-2abs.png"
           },
           {
-            "image": "units/nagas/guardian/sentinel.png:100"
+            "image": "units/nagas/guardian/sentinel.png"
           }
         ]
       }
@@ -18348,7 +19080,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/nagas/fighter/myrmidon-melee-[1~6].png:[130,100*2,90,80,70]"
+            "image": "units/nagas/fighter/myrmidon-melee-[1"
           }
         ]
       }
@@ -18418,10 +19150,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "curved blade",
         "frames": [
           {
-            "image": "units/nagas/mixed/ophidian-melee[1~7].png:[70*4,80*2,180]"
+            "image": "units/nagas/mixed/ophidian-melee[1"
           },
           {
-            "image": "units/nagas/mixed/ophidian.png:50"
+            "image": "units/nagas/mixed/ophidian.png"
           }
         ]
       }
@@ -18490,10 +19222,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "chakram_melee",
         "frames": [
           {
-            "image": "units/nagas/mixed/ringcaster-attack-[1~7].png:[80*7]"
+            "image": "units/nagas/mixed/ringcaster-attack-[1"
           },
           {
-            "image": "units/nagas/mixed/ringcaster.png:140"
+            "image": "units/nagas/mixed/ringcaster.png"
           }
         ]
       }
@@ -18569,7 +19301,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "units/nagas/guardian/warden-attack-[1~6].png:[100,200,100*4]"
+            "image": "units/nagas/guardian/warden-attack-[1"
           },
           {
             "image": "units/nagas/guardian/warden.png",
@@ -18582,10 +19314,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shield",
         "frames": [
           {
-            "image": "units/nagas/guardian/warden-shield-attack-[1~3].png:[100*2,150]"
+            "image": "units/nagas/guardian/warden-shield-attack-[1"
           },
           {
-            "image": "units/nagas/guardian/warden-shield-attack-2.png:100"
+            "image": "units/nagas/guardian/warden-shield-attack-2.png"
           }
         ]
       }
@@ -18651,10 +19383,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "curved blade",
         "frames": [
           {
-            "image": "units/nagas/mixed/sicarius-attack[1~8].png:[150,100*2,80*5]"
+            "image": "units/nagas/mixed/sicarius-attack[1"
           },
           {
-            "image": "units/nagas/mixed/sicarius.png:50"
+            "image": "units/nagas/mixed/sicarius.png"
           }
         ]
       },
@@ -18663,10 +19395,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "trishula",
         "frames": [
           {
-            "image": "units/nagas/mixed/sicarius-throw[1~6].png:[120,100,80*2,100,120]"
+            "image": "units/nagas/mixed/sicarius-throw[1"
           },
           {
-            "image": "units/nagas/mixed/sicarius.png:50"
+            "image": "units/nagas/mixed/sicarius.png"
           }
         ]
       }
@@ -18727,7 +19459,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/nagas/fighter/warrior-melee-[1~6].png:[130,100*2,90,80,70]"
+            "image": "units/nagas/fighter/warrior-melee-[1"
           }
         ]
       }
@@ -18796,7 +19528,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "chakram_melee",
         "frames": [
           {
-            "image": "units/nagas/mixed/zephyr.png:300"
+            "image": "units/nagas/mixed/zephyr.png"
           }
         ]
       }
@@ -18891,13 +19623,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "chill wave",
         "frames": [
           {
-            "image": "units/undead-necromancers/necromancer-magic-[1,2].png:75"
+            "image": "units/undead-necromancers/necromancer-magic-[1,2].png"
           },
           {
             "image": "units/undead-necromancers/necromancer-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/necromancer-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/necromancer-magic-[2,1].png"
           }
         ]
       },
@@ -18906,19 +19638,19 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "shadow wave",
         "frames": [
           {
-            "image": "units/undead-necromancers/necromancer-magic-[1,2].png:75"
+            "image": "units/undead-necromancers/necromancer-magic-[1,2].png"
           },
           {
             "image": "units/undead-necromancers/necromancer-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/necromancer-magic-3.png:250"
+            "image": "units/undead-necromancers/necromancer-magic-3.png"
           },
           {
-            "image": "units/undead-necromancers/necromancer-magic-[2,1].png:50"
+            "image": "units/undead-necromancers/necromancer-magic-[2,1].png"
           },
           {
-            "image": "units/undead-necromancers/necromancer.png:50"
+            "image": "units/undead-necromancers/necromancer.png"
           }
         ]
       },
@@ -18927,16 +19659,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "plague staff",
         "frames": [
           {
-            "image": "units/undead-necromancers/necromancer.png:50"
+            "image": "units/undead-necromancers/necromancer.png"
           },
           {
-            "image": "units/undead-necromancers/necromancer-attack-staff-[1~2].png:[100,200]"
+            "image": "units/undead-necromancers/necromancer-attack-staff-[1"
           },
           {
-            "image": "units/undead-necromancers/necromancer-magic-1.png:75"
+            "image": "units/undead-necromancers/necromancer-magic-1.png"
           },
           {
-            "image": "units/undead-necromancers/necromancer.png:75"
+            "image": "units/undead-necromancers/necromancer.png"
           }
         ]
       }
@@ -18956,13 +19688,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "chill wave",
           "frames": [
             {
-              "image": "units/undead-necromancers/necromancer+female-magic-[1,2].png:75"
+              "image": "units/undead-necromancers/necromancer+female-magic-[1,2].png"
             },
             {
               "image": "units/undead-necromancers/necromancer+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/necromancer+female-magic-[2,1].png:50"
+              "image": "units/undead-necromancers/necromancer+female-magic-[2,1].png"
             }
           ]
         },
@@ -18971,19 +19703,19 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "shadow wave",
           "frames": [
             {
-              "image": "units/undead-necromancers/necromancer+female-magic-[1,2].png:75"
+              "image": "units/undead-necromancers/necromancer+female-magic-[1,2].png"
             },
             {
               "image": "units/undead-necromancers/necromancer+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/necromancer+female-magic-3.png:250"
+              "image": "units/undead-necromancers/necromancer+female-magic-3.png"
             },
             {
-              "image": "units/undead-necromancers/necromancer+female-magic-[2,1].png:50"
+              "image": "units/undead-necromancers/necromancer+female-magic-[2,1].png"
             },
             {
-              "image": "units/undead-necromancers/necromancer+female.png:50"
+              "image": "units/undead-necromancers/necromancer+female.png"
             }
           ]
         },
@@ -18992,16 +19724,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "plague staff",
           "frames": [
             {
-              "image": "units/undead-necromancers/necromancer+female.png:50"
+              "image": "units/undead-necromancers/necromancer+female.png"
             },
             {
-              "image": "units/undead-necromancers/necromancer+female-attack-staff-[1~2].png:[100,200]"
+              "image": "units/undead-necromancers/necromancer+female-attack-staff-[1"
             },
             {
-              "image": "units/undead-necromancers/necromancer+female-magic-1.png:75"
+              "image": "units/undead-necromancers/necromancer+female-magic-1.png"
             },
             {
-              "image": "units/undead-necromancers/necromancer+female.png:75"
+              "image": "units/undead-necromancers/necromancer+female.png"
             }
           ]
         }
@@ -19055,13 +19787,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/undead/necrophage.png:50"
+            "image": "units/undead/necrophage.png"
           },
           {
-            "image": "units/undead/necrophage-attack-[1~4].png:[75*2,100,75]"
+            "image": "units/undead/necrophage-attack-[1"
           },
           {
-            "image": "units/undead/necrophage.png:75"
+            "image": "units/undead/necrophage.png"
           }
         ]
       }
@@ -19078,7 +19810,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Nibbler",
     "race": "monster",
     "gender": [],
-    "image": "{CARIBE_IMAGE_PATH}/nibbler.png",
+    "image": "units/monsters/caribe/nibbler.png",
     "profile": "portraits/monsters/nibbler.webp",
     "hitpoints": 28,
     "movementType": "deepsea",
@@ -19111,7 +19843,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/nibbler-shadow.png:1600"
+            "image": "units/monsters/caribe/nibbler-[hi,default,lo,default].png"
+          },
+          {
+            "image": "units/monsters/caribe/nibbler-shadow.png"
           }
         ]
       },
@@ -19119,7 +19854,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/nibbler-land.png"
+            "image": "units/monsters/caribe/nibbler-land.png"
           }
         ]
       },
@@ -19128,7 +19863,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/nibbler-[default,attack-1,default].png~MASK({CARIBE_IMAGE_PATH}/caribe-mask.png):[50,200,200]"
+            "image": "units/monsters/caribe/nibbler-[default,attack-1,default].png"
           }
         ]
       },
@@ -19137,7 +19872,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "{CARIBE_IMAGE_PATH}/nibbler-[land,attack-1,land].png:[50,200,200]"
+            "image": "units/monsters/caribe/nibbler-[land,attack-1,land].png"
           }
         ]
       }
@@ -19202,7 +19937,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-spirit/nightgaunt-shadow.png:800"
+            "image": "units/undead-spirit/nightgaunt-standing-s-[3"
+          },
+          {
+            "image": "units/undead-spirit/nightgaunt-shadow.png"
           }
         ]
       },
@@ -19210,7 +19948,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/undead-spirit/nightgaunt-die-[1~5].png:200"
+            "image": "units/undead-spirit/nightgaunt-die-[1"
           }
         ]
       },
@@ -19219,7 +19957,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/undead-spirit/nightgaunt.png:25"
+            "image": "units/undead-spirit/nightgaunt.png"
           }
         ]
       }
@@ -19264,7 +20002,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/ogres/ogre-idle-[1,2,1].png:[100,1000,100]"
+            "image": "units/ogres/ogre-idle-[1,2,1].png"
           }
         ]
       },
@@ -19273,7 +20011,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "cleaver",
         "frames": [
           {
-            "image": "units/ogres/ogre-attack[1~5].png:[75,100,75,175,100]"
+            "image": "units/ogres/ogre-attack[1"
           }
         ]
       }
@@ -19339,16 +20077,36 @@ export const unitTypes: WesnothUnitType[] = [
     "animations": [
       {
         "type": "attack",
+        "filterAttack": "bow",
+        "frames": [
+          {
+            "image": "projectiles/missile-fire-n.png",
+            "duration": 150
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "bow",
+        "frames": [
+          {
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          }
+        ]
+      },
+      {
+        "type": "attack",
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/orcs/archer-melee.png:50"
+            "image": "units/orcs/archer-melee.png"
           },
           {
-            "image": "units/orcs/archer-melee-[1~6].png:[100*2,75,100*2,75]"
+            "image": "units/orcs/archer-melee-[1"
           },
           {
-            "image": "units/orcs/archer-melee.png:50"
+            "image": "units/orcs/archer-melee.png"
           }
         ]
       }
@@ -19409,7 +20167,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/orcs/assassin-idle-[1~8,7,8,3,2,9].png:100"
+            "image": "units/orcs/assassin-idle-[1"
           }
         ]
       },
@@ -19417,7 +20175,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/orcs/assassin-die-[1~10].png:[120,100*4,80*2,100*3]"
+            "image": "units/orcs/assassin-die-[1"
           }
         ]
       },
@@ -19426,7 +20184,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "throwing knives",
         "frames": [
           {
-            "image": "units/orcs/assassin-ranged[1,2].png:100"
+            "image": "projectiles/dagger-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/orcs/assassin-ranged[1,2].png"
           }
         ]
       },
@@ -19435,7 +20197,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/orcs/assassin-attack-[1~6].png:[80*4,100*2]"
+            "image": "units/orcs/assassin-attack-[1"
           }
         ]
       }
@@ -19486,7 +20248,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/barge-bob[1"
           }
         ]
       },
@@ -19494,7 +20259,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/barge-bob[1,2,1,2].png"
           }
         ]
       },
@@ -19502,7 +20270,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/barge.png"
           }
         ]
       },
@@ -19510,10 +20281,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/transport/orc/barge-hit1.png:1000"
+            "image": "units/transport/orc/barge-hit1.png"
           },
           {
-            "image": "misc/blank-hex.png:81"
+            "image": "misc/blank-hex.png"
           }
         ]
       }
@@ -19576,7 +20347,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-bob[1"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-flag[1"
           }
         ]
       },
@@ -19584,7 +20361,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-bob[1"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-flag[1"
           }
         ]
       },
@@ -19592,7 +20375,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-bob1.png"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-flag[1"
           }
         ]
       },
@@ -19600,10 +20389,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/transport/orc/battle-barge.png:1000"
+            "image": "units/transport/orc/battle-barge.png"
           },
           {
-            "image": "misc/blank-hex.png:81"
+            "image": "misc/blank-hex.png"
           }
         ]
       },
@@ -19612,7 +20401,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "catapult",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1300"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-attack[1"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-bob[1"
+          },
+          {
+            "image": "units/transport/orc/battle-barge-flag[1"
           }
         ]
       }
@@ -19680,10 +20478,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/orcs/xbowman.png:50"
+            "image": "units/orcs/xbowman.png"
           },
           {
-            "image": "units/orcs/xbowman-breeze-[1~5].png:[240*5]"
+            "image": "units/orcs/xbowman-breeze-[1"
           }
         ]
       },
@@ -19692,7 +20490,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/orcs/xbowman-ranged-2.png:100"
+            "image": "units/orcs/xbowman-ranged-2.png"
           }
         ]
       },
@@ -19701,10 +20499,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/orcs/xbowman-ranged-[1,2].png:[200,100]"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/orcs/xbowman.png:50"
+            "image": "units/orcs/xbowman-ranged-[1,2].png"
+          },
+          {
+            "image": "units/orcs/xbowman.png"
           }
         ]
       },
@@ -19713,13 +20515,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "short sword",
         "frames": [
           {
-            "image": "units/orcs/xbowman-melee.png:100"
+            "image": "units/orcs/xbowman-melee.png"
           },
           {
-            "image": "units/orcs/xbowman-melee-attack-[1~4].png:[100*3,150]"
+            "image": "units/orcs/xbowman-melee-attack-[1"
           },
           {
-            "image": "units/orcs/xbowman-melee.png:100"
+            "image": "units/orcs/xbowman-melee.png"
           }
         ]
       }
@@ -19767,16 +20569,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/orcs/grunt.png:50"
+            "image": "units/orcs/grunt.png"
           },
           {
-            "image": "units/orcs/grunt-defend-1.png:50"
+            "image": "units/orcs/grunt-defend-1.png"
           },
           {
-            "image": "units/orcs/grunt-attack-[1~5].png:[100,75,100,50,75]"
+            "image": "units/orcs/grunt-attack-[1"
           },
           {
-            "image": "units/orcs/grunt.png:75"
+            "image": "units/orcs/grunt.png"
           }
         ]
       }
@@ -19835,7 +20637,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/orcs/leader-ranged-attack-[1~2].png:150"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/orcs/leader-ranged-attack-[1"
           }
         ]
       },
@@ -19844,16 +20650,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/orcs/leader.png:50"
+            "image": "units/orcs/leader.png"
           },
           {
-            "image": "units/orcs/leader-defend-1.png:50"
+            "image": "units/orcs/leader-defend-1.png"
           },
           {
-            "image": "units/orcs/leader-attack-[1~5].png:[100,75,100,50,75]"
+            "image": "units/orcs/leader-attack-[1"
           },
           {
-            "image": "units/orcs/leader.png:75"
+            "image": "units/orcs/leader.png"
           }
         ]
       }
@@ -19924,7 +20730,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "throwing knives",
         "frames": [
           {
-            "image": "units/orcs/nightblade-throw-se-[1~9].png:100"
+            "image": "projectiles/dagger-n.png",
+            "duration": 100
+          },
+          {
+            "image": "units/orcs/nightblade-throw-se-[1"
           }
         ]
       },
@@ -19933,7 +20743,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "blade",
         "frames": [
           {
-            "image": "units/orcs/nightblade-attack-se-[1~9].png:100"
+            "image": "units/orcs/nightblade-attack-se-[1"
           }
         ]
       },
@@ -19942,7 +20752,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "kick",
         "frames": [
           {
-            "image": "units/orcs/nightblade-kick-se-[1~12].png:[100,150*2,50*4,100*5]"
+            "image": "units/orcs/nightblade-kick-se-[1"
           }
         ]
       }
@@ -20010,7 +20820,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1800"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/rig-flag[1"
+          },
+          {
+            "image": "units/transport/orc/rig-bob[1"
           }
         ]
       },
@@ -20018,7 +20834,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/rig-flag[1"
+          },
+          {
+            "image": "units/transport/orc/rig-bob[1"
           }
         ]
       },
@@ -20026,7 +20848,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/rig-bob2.png"
+          },
+          {
+            "image": "units/transport/orc/rig-flag[1"
           }
         ]
       }
@@ -20091,7 +20919,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/orcs/ruler-ranged-attack-[1~2].png:150"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/orcs/ruler-ranged-attack-[1"
           }
         ]
       },
@@ -20100,13 +20932,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "greatsword",
         "frames": [
           {
-            "image": "units/orcs/ruler.png:50"
+            "image": "units/orcs/ruler.png"
           },
           {
-            "image": "units/orcs/ruler-attack-sword-[1~6].png:[100*2,75,100*3]"
+            "image": "units/orcs/ruler-attack-sword-[1"
           },
           {
-            "image": "units/orcs/ruler.png:50"
+            "image": "units/orcs/ruler.png"
           }
         ]
       }
@@ -20167,10 +20999,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/orcs/slayer.png:200"
+            "image": "units/orcs/slayer.png"
           },
           {
-            "image": "units/orcs/slayer-breeze-[1~3,2,1].png:[200*5]"
+            "image": "units/orcs/slayer-breeze-[1"
           }
         ]
       },
@@ -20179,7 +21011,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "throwing knives",
         "frames": [
           {
-            "image": "units/orcs/slayer-ranged[1~2].png:[50,100]"
+            "image": "projectiles/dagger-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/orcs/slayer-ranged[1"
           }
         ]
       },
@@ -20188,7 +21024,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/orcs/slayer-attack-[1~14].png:[75*4,50*2,75*5,65,55,50]"
+            "image": "units/orcs/slayer-attack-[1"
           }
         ]
       }
@@ -20252,7 +21088,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/orcs/slurbow-breeze-[1~4,3,2].png:[200*6]"
+            "image": "units/orcs/slurbow-breeze-[1"
           }
         ]
       },
@@ -20261,7 +21097,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/orcs/slurbow-ranged-[1~2].png:[150,250]"
+            "image": "projectiles/bullet.png",
+            "duration": 150
+          },
+          {
+            "image": "units/orcs/slurbow-ranged-[1"
           }
         ]
       },
@@ -20270,10 +21110,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "short sword",
         "frames": [
           {
-            "image": "units/orcs/slurbow-melee.png:75"
+            "image": "units/orcs/slurbow-melee.png"
           },
           {
-            "image": "units/orcs/slurbow-melee-attack-[1~4,2].png:75"
+            "image": "units/orcs/slurbow-melee-attack-[1"
           }
         ]
       }
@@ -20334,7 +21174,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/orcs/sovereign-ranged-attack-[1~2].png:150"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/orcs/sovereign-ranged-attack-[1"
           }
         ]
       },
@@ -20343,16 +21187,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "greatsword",
         "frames": [
           {
-            "image": "units/orcs/sovereign.png:50"
+            "image": "units/orcs/sovereign.png"
           },
           {
-            "image": "units/orcs/sovereign-defend-1.png:50"
+            "image": "units/orcs/sovereign-defend-1.png"
           },
           {
-            "image": "units/orcs/sovereign-attack-[1~5].png:[100,75,100,50,75]"
+            "image": "units/orcs/sovereign-attack-[1"
           },
           {
-            "image": "units/orcs/sovereign.png:75"
+            "image": "units/orcs/sovereign.png"
           }
         ]
       }
@@ -20411,10 +21255,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/orcs/warlord-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/orcs/warlord-bow-attack-[1~4,1].png:[75*2,100,130,65]"
+            "image": "units/orcs/warlord-bow.png"
+          },
+          {
+            "image": "units/orcs/warlord-bow-attack-[1"
           }
         ]
       },
@@ -20423,7 +21271,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "greatsword",
         "frames": [
           {
-            "image": "units/orcs/warlord.png:1"
+            "image": "units/orcs/warlord.png"
           }
         ]
       }
@@ -20471,7 +21319,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/orcs/warrior-bob-[1~3,2].png:[400,280,450,280]"
+            "image": "units/orcs/warrior-bob-[1"
           }
         ]
       },
@@ -20479,10 +21327,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/orcs/warrior.png:200"
+            "image": "units/orcs/warrior.png"
           },
           {
-            "image": "units/orcs/warrior-breeze-[1~5].png:[200*5]"
+            "image": "units/orcs/warrior-breeze-[1"
           }
         ]
       },
@@ -20491,7 +21339,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "greatsword",
         "frames": [
           {
-            "image": "units/orcs/warrior.png:1"
+            "image": "units/orcs/warrior.png"
           }
         ]
       }
@@ -20558,7 +21406,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1800"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/warship-flag[1"
+          },
+          {
+            "image": "units/transport/orc/warship-bob[1"
           }
         ]
       },
@@ -20566,7 +21420,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/warship-flag[1"
+          },
+          {
+            "image": "units/transport/orc/warship-bob[1"
           }
         ]
       },
@@ -20574,7 +21434,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/orc/warship.png"
+          },
+          {
+            "image": "units/transport/orc/warship-flag[1"
           }
         ]
       }
@@ -20637,7 +21503,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-outlaws/outlaw-idle-[1,7,5~1,6~1].png:[100*9,500,100*3]"
+            "image": "units/human-outlaws/outlaw-idle-[1,7,5"
           }
         ]
       },
@@ -20646,7 +21512,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sling",
         "frames": [
           {
-            "image": "units/human-outlaws/outlaw-attack2.png:200"
+            "image": "units/human-outlaws/outlaw-attack2.png"
           }
         ]
       },
@@ -20655,7 +21521,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace-spiked",
         "frames": [
           {
-            "image": "units/human-outlaws/outlaw-melee-[1~3].png:[100,150,100]"
+            "image": "units/human-outlaws/outlaw-melee-[1"
           }
         ]
       }
@@ -20675,7 +21541,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "sling",
           "frames": [
             {
-              "image": "units/human-outlaws/outlaw+female-attack2.png:200"
+              "image": "units/human-outlaws/outlaw+female-attack2.png"
             }
           ]
         },
@@ -20684,7 +21550,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "mace-spiked",
           "frames": [
             {
-              "image": "units/human-outlaws/outlaw+female-melee-[1~3].png:[100,150,100]"
+              "image": "units/human-outlaws/outlaw+female-melee-[1"
             }
           ]
         }
@@ -20744,10 +21610,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/paladin/paladin.png:250"
+            "image": "units/human-loyalists/paladin/paladin.png"
           },
           {
-            "image": "units/human-loyalists/paladin/paladin-breeze-s-[1~6,1~3,2,1~3].png:[100*6,200*7]"
+            "image": "units/human-loyalists/paladin/paladin-breeze-s-[1"
           }
         ]
       },
@@ -20756,14 +21622,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lance",
         "frames": [
           {
-            "image": "units/human-loyalists/paladin/paladin.png:50",
+            "image": "units/human-loyalists/paladin/paladin.png",
             "sound": "horse-canter.wav"
           },
           {
-            "image": "units/human-loyalists/paladin/paladin.png:350"
+            "image": "units/human-loyalists/paladin/paladin.png"
           },
           {
-            "image": "units/human-loyalists/paladin/paladin.png:50"
+            "image": "units/human-loyalists/paladin/paladin.png"
           }
         ]
       },
@@ -20772,15 +21638,15 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/paladin/paladin.png:50",
+            "image": "units/human-loyalists/paladin/paladin.png",
             "sound": "horse-canter.wav"
           },
           {
-            "image": "units/human-loyalists/paladin/paladin.png:250",
+            "image": "units/human-loyalists/paladin/paladin.png",
             "sound": "miss-[1~3].ogg"
           },
           {
-            "image": "units/human-loyalists/paladin/paladin.png:100"
+            "image": "units/human-loyalists/paladin/paladin.png"
           }
         ]
       }
@@ -20839,7 +21705,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-peasants/peasant-idle-[1~7,4,2,1].png:[100*4,200*3,100*3]"
+            "image": "units/human-peasants/peasant-idle-[1"
           }
         ]
       },
@@ -20847,7 +21713,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/human-peasants/peasant-die[1~9].png:[100*3,150*3,200*3]"
+            "image": "units/human-peasants/peasant-die[1"
           }
         ]
       },
@@ -20856,7 +21722,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pitchfork",
         "frames": [
           {
-            "image": "units/human-peasants/peasant-ranged[1,2].png:[150,350]",
+            "image": "projectiles/pitchfork-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/human-peasants/peasant-ranged[1,2].png",
             "sound": "throw-[1~4].wav"
           }
         ]
@@ -20867,10 +21737,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pitchfork",
         "frames": [
           {
-            "image": "units/human-peasants/peasant-attack[1,2,3,4,5].png:[100,100,150,100,100]"
+            "image": "units/human-peasants/peasant-attack[1,2,3,4,5].png"
           },
           {
-            "image": "units/human-peasants/peasant.png:1"
+            "image": "units/human-peasants/peasant.png"
           }
         ]
       },
@@ -20880,10 +21750,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pitchfork",
         "frames": [
           {
-            "image": "units/human-peasants/peasant-attack[1,2-s,3-s,4,5].png:[100,100,150,100,100]"
+            "image": "units/human-peasants/peasant-attack[1,2-s,3-s,4,5].png"
           },
           {
-            "image": "units/human-peasants/peasant.png:1"
+            "image": "units/human-peasants/peasant.png"
           }
         ]
       },
@@ -20893,10 +21763,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pitchfork",
         "frames": [
           {
-            "image": "units/human-peasants/peasant-attack[1,2-n,3-n,4,5].png:[100,100,150,100,100]"
+            "image": "units/human-peasants/peasant-attack[1,2-n,3-n,4,5].png"
           },
           {
-            "image": "units/human-peasants/peasant.png:1"
+            "image": "units/human-peasants/peasant.png"
           }
         ]
       }
@@ -20961,13 +21831,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/boar/piglet-attack[1,2].png:[100,150]"
+            "image": "units/monsters/boar/piglet-attack[1,2].png"
           },
           {
-            "image": "units/monsters/boar/piglet-moving2.png:150"
+            "image": "units/monsters/boar/piglet-moving2.png"
           },
           {
-            "image": "units/monsters/boar/piglet.png:1"
+            "image": "units/monsters/boar/piglet.png"
           }
         ]
       }
@@ -21020,13 +21890,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pike",
         "frames": [
           {
-            "image": "units/human-loyalists/pikeman.png:100"
+            "image": "units/human-loyalists/pikeman.png"
           },
           {
-            "image": "units/human-loyalists/pikeman-attack-ne.png:250"
+            "image": "units/human-loyalists/pikeman-attack-ne.png"
           },
           {
-            "image": "units/human-loyalists/pikeman.png:75"
+            "image": "units/human-loyalists/pikeman.png"
           }
         ]
       },
@@ -21036,13 +21906,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pike",
         "frames": [
           {
-            "image": "units/human-loyalists/pikeman.png:100"
+            "image": "units/human-loyalists/pikeman.png"
           },
           {
-            "image": "units/human-loyalists/pikeman-attack-se.png:250"
+            "image": "units/human-loyalists/pikeman-attack-se.png"
           },
           {
-            "image": "units/human-loyalists/pikeman.png:75"
+            "image": "units/human-loyalists/pikeman.png"
           }
         ]
       },
@@ -21052,16 +21922,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pike",
         "frames": [
           {
-            "image": "units/human-loyalists/pikeman.png:50"
+            "image": "units/human-loyalists/pikeman.png"
           },
           {
-            "image": "units/human-loyalists/pikeman-attack-ne.png:100"
+            "image": "units/human-loyalists/pikeman-attack-ne.png"
           },
           {
-            "image": "units/human-loyalists/pikeman-attack-n.png:200"
+            "image": "units/human-loyalists/pikeman-attack-n.png"
           },
           {
-            "image": "units/human-loyalists/pikeman.png:75"
+            "image": "units/human-loyalists/pikeman.png"
           }
         ]
       },
@@ -21071,16 +21941,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pike",
         "frames": [
           {
-            "image": "units/human-loyalists/pikeman.png:50"
+            "image": "units/human-loyalists/pikeman.png"
           },
           {
-            "image": "units/human-loyalists/pikeman-attack-se.png:100"
+            "image": "units/human-loyalists/pikeman-attack-se.png"
           },
           {
-            "image": "units/human-loyalists/pikeman-attack-s.png:200"
+            "image": "units/human-loyalists/pikeman-attack-s.png"
           },
           {
-            "image": "units/human-loyalists/pikeman.png:75"
+            "image": "units/human-loyalists/pikeman.png"
           }
         ]
       }
@@ -21150,7 +22020,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1380"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-bob-[1,2,3,2].png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-flag[1"
           }
         ]
       },
@@ -21158,7 +22034,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-[rock-port,bob-1,rock-starboard,bob-1].png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-flag[1"
           }
         ]
       },
@@ -21166,7 +22048,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-bob-1.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-flag[1"
           }
         ]
       },
@@ -21174,7 +22062,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1480"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-bob-1.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-flag[1"
           }
         ]
       },
@@ -21182,7 +22076,115 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1400"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/pirate-galleon-roll-[1"
+          },
+          {
+            "image": "units/transport/pirate-galleon-die-[1"
+          },
+          {
+            "image": "misc/blank-hex.png"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "ballistae",
+        "frames": [
+          {
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/transport/pirate-galleon.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "ballistae",
+        "frames": [
+          {
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/transport/pirate-galleon.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "ballistae",
+        "frames": [
+          {
+            "image": "projectiles/missile-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/transport/pirate-galleon.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "grapple",
+        "frames": [
+          {
+            "image": "projectiles/bolas-n.png",
+            "duration": 150,
+            "sound": "throw-[1~4].wav"
+          },
+          {
+            "image": "units/transport/pirate-galleon.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "grapple",
+        "frames": [
+          {
+            "image": "projectiles/bolas-n.png",
+            "duration": 150,
+            "sound": "throw-[1~4].wav"
+          },
+          {
+            "image": "units/transport/pirate-galleon.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "grapple",
+        "frames": [
+          {
+            "image": "projectiles/bolas-n.png",
+            "duration": 150,
+            "sound": "throw-[1~4].wav"
+          },
+          {
+            "image": "units/transport/pirate-galleon.png"
+          },
+          {
+            "image": "misc/blank-hex.png"
           }
         ]
       }
@@ -21190,13 +22192,7 @@ export const unitTypes: WesnothUnitType[] = [
     "macros": [
       "TRAIT_OCEANGOING_MUSTHAVE",
       "AMLA_DEFAULT",
-      "SHIP_RAMMING_ANIM units/transport/pirate-galleon.png \"~MASK(units/transport/pirate-galleon-mask.png)\"",
-      "PIRATE_CARRACK_BALLISTAE_ANIM -15",
-      "PIRATE_CARRACK_BALLISTAE_ANIM   0",
-      "PIRATE_CARRACK_BALLISTAE_ANIM  15",
-      "PIRATE_CARRACK_GRAPPLE_ANIM -15",
-      "PIRATE_CARRACK_GRAPPLE_ANIM   0",
-      "PIRATE_CARRACK_GRAPPLE_ANIM  15"
+      "SHIP_RAMMING_ANIM units/transport/pirate-galleon.png \"~MASK(units/transport/pirate-galleon-mask.png)\""
     ],
     "sourceFile": "data/core/units/boats/Carrack_Pirate.cfg"
   },
@@ -21230,9 +22226,23 @@ export const unitTypes: WesnothUnitType[] = [
         "icon": "attacks/ballista.png"
       }
     ],
+    "animations": [
+      {
+        "type": "attack",
+        "filterAttack": "ballista",
+        "frames": [
+          {
+            "image": "projectiles/bullet.png",
+            "duration": 50
+          }
+        ]
+      }
+    ],
     "macros": [
       "AMLA_DEFAULT"
     ],
+    "hideHelp": true,
+    "doNotList": true,
     "sourceFile": "data/core/units/boats/Legacy_Pirate_Galleon.cfg"
   },
   {
@@ -21279,10 +22289,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/human-outlaws/poacher-bow-attack[1~7].png:[50*4,200,50,100]"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-outlaws/poacher-bow-attack1.png:50"
+            "image": "units/human-outlaws/poacher-bow-attack[1"
+          },
+          {
+            "image": "units/human-outlaws/poacher-bow-attack1.png"
           }
         ]
       },
@@ -21291,13 +22305,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-outlaws/poacher-dagger-defend1.png:70"
+            "image": "units/human-outlaws/poacher-dagger-defend1.png"
           },
           {
-            "image": "units/human-outlaws/poacher-attack.png:180"
+            "image": "units/human-outlaws/poacher-attack.png"
           },
           {
-            "image": "units/human-outlaws/poacher-dagger.png:250"
+            "image": "units/human-outlaws/poacher-dagger.png"
           }
         ]
       }
@@ -21341,7 +22355,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raft/raft-bob[1"
+          },
+          {
+            "image": "units/transport/raft/raft-flag[1"
           }
         ]
       },
@@ -21349,7 +22369,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raft/raft-bob[1,2,1,2].png"
+          },
+          {
+            "image": "units/transport/raft/raft-flag[1"
           }
         ]
       },
@@ -21357,7 +22383,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1680"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/raft/raft-bob1.png"
+          },
+          {
+            "image": "units/transport/raft/raft-flag[1"
           }
         ]
       }
@@ -21414,13 +22446,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/human-outlaws/ranger-bow.png:75"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-outlaws/ranger-bow-attack[1~4].png:[75,150,75*2]"
+            "image": "units/human-outlaws/ranger-bow.png"
           },
           {
-            "image": "units/human-outlaws/ranger-bow.png:50"
+            "image": "units/human-outlaws/ranger-bow-attack[1"
+          },
+          {
+            "image": "units/human-outlaws/ranger-bow.png"
           }
         ]
       },
@@ -21429,13 +22465,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-outlaws/ranger-sword-defend-1.png:50"
+            "image": "units/human-outlaws/ranger-sword-defend-1.png"
           },
           {
-            "image": "units/human-outlaws/ranger-sword-attack[1~4].png:100"
+            "image": "units/human-outlaws/ranger-sword-attack[1"
           },
           {
-            "image": "units/human-outlaws/ranger-sword-defend-1.png:50"
+            "image": "units/human-outlaws/ranger-sword-defend-1.png"
           }
         ]
       }
@@ -21500,7 +22536,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/raven/raven-shadow.png:4800"
+            "image": "units/monsters/raven/raven-shadow.png"
+          },
+          {
+            "image": "units/monsters/raven/raven-soar.png"
           }
         ]
       },
@@ -21509,7 +22548,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "beak",
         "frames": [
           {
-            "image": "units/monsters/raven/raven-shadow.png:700"
+            "image": "units/monsters/raven/raven-shadow.png"
+          },
+          {
+            "image": "units/monsters/raven/raven-soar.png"
           }
         ]
       }
@@ -21567,7 +22609,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-magi/red-mage-idle-[1~5,4,5,3~1].png:[150*5,225*2,150*3]"
+            "image": "units/human-magi/red-mage-idle-[1"
           }
         ]
       },
@@ -21576,17 +22618,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fireball",
         "frames": [
           {
-            "image": "units/human-magi/red-mage.png:50"
+            "image": "units/human-magi/red-mage.png"
           },
           {
-            "image": "units/human-magi/red-mage-attack-magic-1.png:100"
+            "image": "units/human-magi/red-mage-attack-magic-1.png"
           },
           {
-            "image": "units/human-magi/red-mage-attack-magic-[2,1].png:[150,75]",
+            "image": "units/human-magi/red-mage-attack-magic-[2,1].png",
             "sound": "fire.wav"
           },
           {
-            "image": "units/human-magi/red-mage.png:75"
+            "image": "units/human-magi/red-mage.png"
           }
         ]
       },
@@ -21595,16 +22637,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/human-magi/red-mage.png:50"
+            "image": "units/human-magi/red-mage.png"
           },
           {
-            "image": "units/human-magi/red-mage-attack-staff-[1~2].png:[100,200]"
+            "image": "units/human-magi/red-mage-attack-staff-[1"
           },
           {
-            "image": "units/human-magi/red-mage-attack-magic-1.png:75"
+            "image": "units/human-magi/red-mage-attack-magic-1.png"
           },
           {
-            "image": "units/human-magi/red-mage.png:75"
+            "image": "units/human-magi/red-mage.png"
           }
         ]
       }
@@ -21617,14 +22659,14 @@ export const unitTypes: WesnothUnitType[] = [
       ],
       "image": "units/human-magi/red-mage+female.png",
       "profile": "portraits/humans/mage-red+female.webp",
-      "smallProfile": "portraits/humans/mage-red+female.webp~FL()",
+      "smallProfile": "portraits/humans/mage-red+female.webp",
       "dieSound": "human-female-die-[1~3].ogg",
       "animations": [
         {
           "type": "idle",
           "frames": [
             {
-              "image": "units/human-magi/red-mage+female.png:150"
+              "image": "units/human-magi/red-mage+female.png"
             }
           ]
         },
@@ -21633,16 +22675,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "fireball",
           "frames": [
             {
-              "image": "units/human-magi/red-mage+female.png:50"
+              "image": "units/human-magi/red-mage+female.png"
             },
             {
-              "image": "units/human-magi/red-mage+female-attack-magic-1.png:100"
+              "image": "units/human-magi/red-mage+female-attack-magic-1.png"
             },
             {
-              "image": "units/human-magi/red-mage+female-attack-magic-[2,1].png:[150,75]"
+              "image": "units/human-magi/red-mage+female-attack-magic-[2,1].png"
             },
             {
-              "image": "units/human-magi/red-mage+female.png:75"
+              "image": "units/human-magi/red-mage+female.png"
             }
           ]
         },
@@ -21651,16 +22693,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "staff",
           "frames": [
             {
-              "image": "units/human-magi/red-mage+female.png:50"
+              "image": "units/human-magi/red-mage+female.png"
             },
             {
-              "image": "units/human-magi/red-mage+female-attack-staff-[1~2].png:[100,200]"
+              "image": "units/human-magi/red-mage+female-attack-staff-[1"
             },
             {
-              "image": "units/human-magi/red-mage+female-attack-magic-1.png:75"
+              "image": "units/human-magi/red-mage+female-attack-magic-1.png"
             },
             {
-              "image": "units/human-magi/red-mage+female.png:75"
+              "image": "units/human-magi/red-mage+female.png"
             }
           ]
         }
@@ -21718,10 +22760,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/cat/redtail-cat.png:800"
+            "image": "units/monsters/cat/redtail-cat.png"
           },
           {
-            "image": "units/monsters/cat/redtail-cat-s[1,2,3,2].png:[400,300*3]"
+            "image": "units/monsters/cat/redtail-cat-s[1,2,3,2].png"
           }
         ]
       },
@@ -21729,7 +22771,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/cat/redtail-cat-sitting.png:150"
+            "image": "units/monsters/cat/redtail-cat-sitting.png"
           }
         ]
       },
@@ -21737,7 +22779,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/monsters/cat/redtail-cat-s[1,2,1,2,1~8].png:[350*2,150*4,100,75*4,125]"
+            "image": "units/monsters/cat/redtail-cat-s[1,2,1,2,1"
           }
         ]
       },
@@ -21746,7 +22788,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/cat/redtail-cat-bite[1~6].png:[125*4,150,200]"
+            "image": "units/monsters/cat/redtail-cat-bite[1"
           }
         ]
       },
@@ -21755,7 +22797,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tail",
         "frames": [
           {
-            "image": "units/monsters/cat/redtail-cat-tail[1~10].png:[150,100*2,75*7]"
+            "image": "units/monsters/cat/redtail-cat-tail[1"
           }
         ]
       }
@@ -21812,7 +22854,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/undead-skeletal/revenant/revenant-dying-[1~7].png:100"
+            "image": "units/undead-skeletal/revenant/revenant-dying-[1"
           }
         ]
       },
@@ -21821,7 +22863,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/undead-skeletal/revenant/revenant-attack-[1~10].png:[50*5,75*4,50]"
+            "image": "units/undead-skeletal/revenant/revenant-attack-[1"
           }
         ]
       }
@@ -21888,7 +22930,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/roc-shadow[2,1,2,3,2].png:[400,400,750,500,350]"
+            "image": "units/monsters/roc-shadow[2,1,2,3,2].png"
+          },
+          {
+            "image": "units/monsters/roc-soar[1"
           }
         ]
       },
@@ -21897,10 +22942,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/roc-attack.png:180"
+            "image": "units/monsters/roc-attack.png"
           },
           {
-            "image": "units/monsters/roc-attack-recover.png:140"
+            "image": "units/monsters/roc-attack-recover.png"
           }
         ]
       },
@@ -21909,10 +22954,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "beak",
         "frames": [
           {
-            "image": "units/monsters/roc-attack.png:180"
+            "image": "units/monsters/roc-attack.png"
           },
           {
-            "image": "units/monsters/roc-attack-recover.png:140"
+            "image": "units/monsters/roc-attack-recover.png"
           }
         ]
       },
@@ -21921,7 +22966,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "rock",
         "frames": [
           {
-            "image": "units/monsters/roc-shadow2.png:1000"
+            "image": "units/monsters/roc-soar[2,3,4,3].png"
+          },
+          {
+            "image": "units/monsters/roc-shadow2.png"
           }
         ]
       }
@@ -21942,8 +22990,8 @@ export const unitTypes: WesnothUnitType[] = [
     "race": "monster",
     "gender": [],
     "image": "units/monsters/scorpion/rock-scorpion.png",
-    "profile": "portraits/monsters/scorpion-rock.webp~RIGHT()",
-    "smallProfile": "portraits/monsters/scorpion-rock.webp~FL()",
+    "profile": "portraits/monsters/scorpion-rock.webp",
+    "smallProfile": "portraits/monsters/scorpion-rock.webp",
     "hitpoints": 35,
     "movementType": "scuttlefoot",
     "movement": 5,
@@ -21972,7 +23020,7 @@ export const unitTypes: WesnothUnitType[] = [
         "range": "ranged",
         "damage": 4,
         "number": 1,
-        "icon": "attacks/waterspray.png~GS()~CS(-190,0,-220)",
+        "icon": "attacks/waterspray.png",
         "specials": [
           "poison"
         ]
@@ -21984,7 +23032,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,sw,se",
         "frames": [
           {
-            "image": "units/monsters/scorpion/rock-scorpion.png:150"
+            "image": "units/monsters/scorpion/rock-scorpion.png"
           }
         ]
       },
@@ -21993,7 +23041,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,nw,ne",
         "frames": [
           {
-            "image": "units/monsters/scorpion/rock-scorpion-ne.png:150"
+            "image": "units/monsters/scorpion/rock-scorpion-ne.png"
           }
         ]
       },
@@ -22002,10 +23050,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pincers",
         "frames": [
           {
-            "image": "units/monsters/scorpion/rock-scorpion-pincer-[1~8].png:[80*7,120]"
+            "image": "units/monsters/scorpion/rock-scorpion-pincer-[1"
           },
           {
-            "image": "units/monsters/scorpion/rock-scorpion.png:120"
+            "image": "units/monsters/scorpion/rock-scorpion.png"
           }
         ]
       },
@@ -22015,10 +23063,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pincers",
         "frames": [
           {
-            "image": "units/monsters/scorpion/rock-scorpion-ne-pincer[1~6].png:[100,120,100,80,100,100]"
+            "image": "units/monsters/scorpion/rock-scorpion-ne-pincer[1"
           },
           {
-            "image": "units/monsters/scorpion/rock-scorpion-ne.png:1"
+            "image": "units/monsters/scorpion/rock-scorpion-ne.png"
           }
         ]
       },
@@ -22027,7 +23075,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spray",
         "frames": [
           {
-            "image": "units/monsters/scorpion/rock-scorpion.png:400"
+            "image": "projectiles/water-spray.png",
+            "duration": 250
+          },
+          {
+            "image": "units/monsters/scorpion/rock-scorpion.png"
           }
         ]
       }
@@ -22093,7 +23145,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "throwing knives",
         "frames": [
           {
-            "image": "units/human-outlaws/rogue.png:250"
+            "image": "projectiles/dagger-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/human-outlaws/rogue.png"
           }
         ]
       },
@@ -22102,13 +23158,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-outlaws/rogue.png:50"
+            "image": "units/human-outlaws/rogue.png"
           },
           {
-            "image": "units/human-outlaws/rogue.png:250"
+            "image": "units/human-outlaws/rogue.png"
           },
           {
-            "image": "units/human-outlaws/rogue.png:100"
+            "image": "units/human-outlaws/rogue.png"
           }
         ]
       }
@@ -22128,7 +23184,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "throwing knives",
           "frames": [
             {
-              "image": "units/human-outlaws/rogue+female.png:250"
+              "image": "units/human-outlaws/rogue+female.png"
             }
           ]
         },
@@ -22137,13 +23193,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "dagger",
           "frames": [
             {
-              "image": "units/human-outlaws/rogue+female.png:50"
+              "image": "units/human-outlaws/rogue+female.png"
             },
             {
-              "image": "units/human-outlaws/rogue+female.png:250"
+              "image": "units/human-outlaws/rogue+female.png"
             },
             {
-              "image": "units/human-outlaws/rogue+female.png:100"
+              "image": "units/human-outlaws/rogue+female.png"
             }
           ]
         }
@@ -22190,10 +23246,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/royalguard-attack-sword[1~5].png:[90,90,100,100,130]"
+            "image": "units/human-loyalists/royalguard-attack-sword[1"
           },
           {
-            "image": "units/human-loyalists/royalguard.png:120"
+            "image": "units/human-loyalists/royalguard.png"
           }
         ]
       }
@@ -22243,13 +23299,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "mace",
         "frames": [
           {
-            "image": "units/human-loyalists/royal-warrior.png:50"
+            "image": "units/human-loyalists/royal-warrior.png"
           },
           {
-            "image": "units/human-loyalists/royal-warrior-attack[1~2].png:[75,175]"
+            "image": "units/human-loyalists/royal-warrior-attack[1"
           },
           {
-            "image": "units/human-loyalists/royal-warrior.png:75"
+            "image": "units/human-loyalists/royal-warrior.png"
           }
         ]
       }
@@ -22298,7 +23354,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-peasants/ruffian-idle-[1~5,4,3,2,1].png:200"
+            "image": "units/human-peasants/ruffian-idle-[1"
           }
         ]
       },
@@ -22307,7 +23363,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "club",
         "frames": [
           {
-            "image": "units/human-peasants/ruffian-attack-[1~9].png:100"
+            "image": "units/human-peasants/ruffian-attack-[1"
           }
         ]
       }
@@ -22323,9 +23379,9 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Sand Scamperer",
     "race": "monster",
     "gender": [],
-    "image": "units/monsters/scorpion/scorpling.png{SAND_SCAMPERER_IPF}",
-    "profile": "portraits/monsters/scamperer.webp~RIGHT()",
-    "smallProfile": "portraits/monsters/scamperer.webp~FL()~CROP(0,82,400,318)",
+    "image": "units/monsters/scorpion/scorpling.png",
+    "profile": "portraits/monsters/scamperer.webp",
+    "smallProfile": "portraits/monsters/scamperer.webp",
     "hitpoints": 27,
     "movementType": "scuttlefoot",
     "movement": 6,
@@ -22365,10 +23421,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pincers",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpling-pincer[1~7].png{SAND_SCAMPERER_IPF}:[50,75,75,50,50,75,100]"
+            "image": "units/monsters/scorpion/scorpling-pincer[1"
           },
           {
-            "image": "units/monsters/scorpion/scorpling.png{SAND_SCAMPERER_IPF}:25"
+            "image": "units/monsters/scorpion/scorpling.png"
           }
         ]
       },
@@ -22377,10 +23433,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sting",
         "frames": [
           {
-            "image": "units/monsters/scorpion/scorpling-sting[1~5].png{SAND_SCAMPERER_IPF}:[75,75,150,100,150]"
+            "image": "units/monsters/scorpion/scorpling-sting[1"
           },
           {
-            "image": "units/monsters/scorpion/scorpling.png{SAND_SCAMPERER_IPF}:1"
+            "image": "units/monsters/scorpion/scorpling.png"
           }
         ]
       }
@@ -22397,8 +23453,8 @@ export const unitTypes: WesnothUnitType[] = [
     "race": "monster",
     "gender": [],
     "image": "units/monsters/scorpion/sand-scuttler.png",
-    "profile": "portraits/monsters/scuttler.webp~RIGHT()",
-    "smallProfile": "portraits/monsters/scuttler.webp~FL()",
+    "profile": "portraits/monsters/scuttler.webp",
+    "smallProfile": "portraits/monsters/scuttler.webp",
     "hitpoints": 40,
     "movementType": "scuttlefoot",
     "movement": 8,
@@ -22438,7 +23494,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,sw,se",
         "frames": [
           {
-            "image": "units/monsters/scorpion/sand-scuttler.png:150"
+            "image": "units/monsters/scorpion/sand-scuttler.png"
           }
         ]
       },
@@ -22447,7 +23503,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,nw,ne",
         "frames": [
           {
-            "image": "units/monsters/scorpion/sand-scuttler-ne.png:150"
+            "image": "units/monsters/scorpion/sand-scuttler-ne.png"
           }
         ]
       },
@@ -22457,10 +23513,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pincers",
         "frames": [
           {
-            "image": "units/monsters/scorpion/sand-scuttler-pincer-[1~6].png:[100,100,80*2,120,120]"
+            "image": "units/monsters/scorpion/sand-scuttler-pincer-[1"
           },
           {
-            "image": "units/monsters/scorpion/sand-scuttler.png:1"
+            "image": "units/monsters/scorpion/sand-scuttler.png"
           }
         ]
       },
@@ -22470,10 +23526,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "pincers",
         "frames": [
           {
-            "image": "units/monsters/scorpion/sand-scuttler-ne-pincer[1~6].png:[100,120,100,80,100,100]"
+            "image": "units/monsters/scorpion/sand-scuttler-ne-pincer[1"
           },
           {
-            "image": "units/monsters/scorpion/sand-scuttler-ne.png:1"
+            "image": "units/monsters/scorpion/sand-scuttler-ne.png"
           }
         ]
       },
@@ -22482,10 +23538,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sting",
         "frames": [
           {
-            "image": "units/monsters/scorpion/sand-scuttler-stinger-[1~7,6,5,4,1].png:[80,100,120,80*8]"
+            "image": "units/monsters/scorpion/sand-scuttler-stinger-[1"
           },
           {
-            "image": "units/monsters/scorpion/sand-scuttler.png:1"
+            "image": "units/monsters/scorpion/sand-scuttler.png"
           }
         ]
       }
@@ -22540,6 +23596,18 @@ export const unitTypes: WesnothUnitType[] = [
     ],
     "abilities": [
       "skirmisher"
+    ],
+    "animations": [
+      {
+        "type": "attack",
+        "filterAttack": "spear",
+        "frames": [
+          {
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          }
+        ]
+      }
     ],
     "dieSound": "hiss-die.wav",
     "macros": [
@@ -22603,10 +23671,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/augur/augur-se-melee[1~5].png:[150,100*2,90,80]"
+            "image": "units/saurians/augur/augur-se-melee[1"
           },
           {
-            "image": "units/saurians/augur/augur-se-defend1.png:50"
+            "image": "units/saurians/augur/augur-se-defend1.png"
           }
         ]
       },
@@ -22616,10 +23684,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/augur/augur-ne-melee[1~5].png:[150,100*2,90,80]"
+            "image": "units/saurians/augur/augur-ne-melee[1"
           },
           {
-            "image": "units/saurians/augur/augur-ne-defend1.png:50"
+            "image": "units/saurians/augur/augur-ne-defend1.png"
           }
         ]
       }
@@ -22677,6 +23745,18 @@ export const unitTypes: WesnothUnitType[] = [
     "abilities": [
       "skirmisher"
     ],
+    "animations": [
+      {
+        "type": "attack",
+        "filterAttack": "spear",
+        "frames": [
+          {
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          }
+        ]
+      }
+    ],
     "dieSound": "hiss-die.wav",
     "macros": [
       "AMLA_DEFAULT",
@@ -22726,6 +23806,18 @@ export const unitTypes: WesnothUnitType[] = [
         "damage": 9,
         "number": 4,
         "icon": "attacks/spear-thrown.png"
+      }
+    ],
+    "animations": [
+      {
+        "type": "attack",
+        "filterAttack": "spear",
+        "frames": [
+          {
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          }
+        ]
       }
     ],
     "dieSound": "hiss-die.wav",
@@ -22790,10 +23882,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/oracle/oracle-se-melee[1~5].png:[150,100*2,90,80]"
+            "image": "units/saurians/oracle/oracle-se-melee[1"
           },
           {
-            "image": "units/saurians/oracle/oracle-se-defend1.png:50"
+            "image": "units/saurians/oracle/oracle-se-defend1.png"
           }
         ]
       },
@@ -22803,7 +23895,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/oracle/oracle-ne-melee[1~6].png:[150,100*2,90,80,50]"
+            "image": "units/saurians/oracle/oracle-ne-melee[1"
           }
         ]
       }
@@ -22871,10 +23963,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/prophet/prophet-se-melee[1~5].png:[150,100*2,90,80]"
+            "image": "units/saurians/prophet/prophet-se-melee[1"
           },
           {
-            "image": "units/saurians/prophet/prophet-se-defend1.png:50"
+            "image": "units/saurians/prophet/prophet-se-defend1.png"
           }
         ]
       },
@@ -22884,7 +23976,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/prophet/prophet-ne-melee[1~6].png:[150,100*2,90,80,50]"
+            "image": "units/saurians/prophet/prophet-ne-melee[1"
           }
         ]
       }
@@ -22952,10 +24044,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/seer/seer-se-melee[1~5].png:[150,100*2,90,80]"
+            "image": "units/saurians/seer/seer-se-melee[1"
           },
           {
-            "image": "units/saurians/seer/seer-se-defend1.png:50"
+            "image": "units/saurians/seer/seer-se-defend1.png"
           }
         ]
       },
@@ -22965,10 +24057,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/seer/seer-ne-melee[1~5].png:[150,100*2,90,80]"
+            "image": "units/saurians/seer/seer-ne-melee[1"
           },
           {
-            "image": "units/saurians/seer/seer-ne-defend1.png:50"
+            "image": "units/saurians/seer/seer-ne-defend1.png"
           }
         ]
       }
@@ -23032,7 +24124,17 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/saurians/skirmisher/skirmisher-idle-[1~7,6,5,6,8~13].png:200,units/saurians/skirmisher/skirmisher-idle-[12,13,12,13].png:[225*2,250*2]"
+            "image": "units/saurians/skirmisher/skirmisher-idle-[1"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "filterAttack": "spear",
+        "frames": [
+          {
+            "image": "projectiles/spear-n.png",
+            "duration": 150
           }
         ]
       }
@@ -23099,10 +24201,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/soothsayer/soothsayer-se-melee[1~5].png:[150,100*2,90,80]"
+            "image": "units/saurians/soothsayer/soothsayer-se-melee[1"
           },
           {
-            "image": "units/saurians/soothsayer/soothsayer-se-defend1.png:50"
+            "image": "units/saurians/soothsayer/soothsayer-se-defend1.png"
           }
         ]
       },
@@ -23112,10 +24214,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/saurians/soothsayer/soothsayer-ne-melee[1~5].png:[150,100*2,90,80]"
+            "image": "units/saurians/soothsayer/soothsayer-ne-melee[1"
           },
           {
-            "image": "units/saurians/soothsayer/soothsayer-ne-defend1.png:50"
+            "image": "units/saurians/soothsayer/soothsayer-ne-defend1.png"
           }
         ]
       }
@@ -23170,6 +24272,18 @@ export const unitTypes: WesnothUnitType[] = [
         "icon": "attacks/spear-thrown.png"
       }
     ],
+    "animations": [
+      {
+        "type": "attack",
+        "filterAttack": "spear",
+        "frames": [
+          {
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          }
+        ]
+      }
+    ],
     "dieSound": "hiss-die.wav",
     "macros": [
       "DEFENSE_ANIM_DIRECTIONAL \"units/saurians/spearthrower/spearthrower-se-defend2.png\" \"units/saurians/spearthrower/spearthrower-se-defend1.png\" \"units/saurians/spearthrower/spearthrower-ne-defend2.png\" \"units/saurians/spearthrower/spearthrower-ne-defend1.png\" hiss-hit.wav",
@@ -23215,7 +24329,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/seaserpent.png:400"
+            "image": "units/monsters/seaserpent.png"
           }
         ]
       }
@@ -23275,13 +24389,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crossbow",
         "frames": [
           {
-            "image": "units/human-loyalists/sergeant-crossbow.png:100"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-loyalists/sergeant-crossbow-attack[1~2].png:150"
+            "image": "units/human-loyalists/sergeant-crossbow.png"
           },
           {
-            "image": "units/human-loyalists/sergeant-crossbow.png:300"
+            "image": "units/human-loyalists/sergeant-crossbow-attack[1"
+          },
+          {
+            "image": "units/human-loyalists/sergeant-crossbow.png"
           }
         ]
       },
@@ -23290,10 +24408,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/sergeant-attack-sword-[1~4].png:[75,150,100,75]"
+            "image": "units/human-loyalists/sergeant-attack-sword-[1"
           },
           {
-            "image": "units/human-loyalists/sergeant.png:25"
+            "image": "units/human-loyalists/sergeant.png"
           }
         ]
       }
@@ -23349,7 +24467,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,se,sw",
         "frames": [
           {
-            "image": "units/undead-spirit/shadow-s-[2,1~3,2,1~3,2,1~3,2,1~3].png:250"
+            "image": "units/undead-spirit/shadow-s-[2,1"
+          },
+          {
+            "image": "units/undead-spirit/ghost-shadow.png"
           }
         ]
       },
@@ -23358,7 +24479,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,ne,nw",
         "frames": [
           {
-            "image": "units/undead-spirit/shadow-n-[2,1~3,2,1~3,2,1~3,2,1~3].png:250"
+            "image": "units/undead-spirit/shadow-n-[2,1"
+          },
+          {
+            "image": "units/undead-spirit/ghost-n-shadow.png"
           }
         ]
       }
@@ -23426,10 +24550,10 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "se,s,sw",
         "frames": [
           {
-            "image": "units/monsters/jumping-spider-idle[1,2,1,2,1].png:[100,200,300,500,100]"
+            "image": "units/monsters/jumping-spider-idle[1,2,1,2,1].png"
           },
           {
-            "image": "units/monsters/jumping-spider.png:1"
+            "image": "units/monsters/jumping-spider.png"
           }
         ]
       },
@@ -23439,7 +24563,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/jumping-spider-ne-attack[1~4,1].png:[125,115,100,110,200]"
+            "image": "units/monsters/jumping-spider-ne-attack[1"
           }
         ]
       },
@@ -23449,7 +24573,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/jumping-spider-attack[1~4,1].png:[125,115,100,110,200]"
+            "image": "units/monsters/jumping-spider-attack[1"
           }
         ]
       }
@@ -23477,7 +24601,7 @@ export const unitTypes: WesnothUnitType[] = [
     "race": "human",
     "gender": [],
     "image": "units/human-loyalists/shocktrooper.png",
-    "profile": "portraits/humans/iron-mauler.webp~RIGHT()",
+    "profile": "portraits/humans/iron-mauler.webp",
     "hitpoints": 52,
     "movementType": "armoredfoot",
     "movement": 4,
@@ -23507,7 +24631,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "flail",
         "frames": [
           {
-            "image": "units/human-loyalists/shocktrooper-attack-[1~6].png:[85,100,125,50*3]"
+            "image": "units/human-loyalists/shocktrooper-attack-[1"
           }
         ]
       }
@@ -23573,7 +24697,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "missile",
         "frames": [
           {
-            "image": "units/human-magi/silver-mage-attack-magic[1,2,1].png:[100,700,200]"
+            "image": "units/human-magi/silver-mage-attack-magic[1,2,1].png"
           }
         ]
       },
@@ -23582,16 +24706,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/human-magi/silver-mage.png:50"
+            "image": "units/human-magi/silver-mage.png"
           },
           {
-            "image": "units/human-magi/silver-mage-attack-staff[1~2].png:[100,200]"
+            "image": "units/human-magi/silver-mage-attack-staff[1"
           },
           {
-            "image": "units/human-magi/silver-mage-attack-magic1.png:75"
+            "image": "units/human-magi/silver-mage-attack-magic1.png"
           },
           {
-            "image": "units/human-magi/silver-mage.png:75"
+            "image": "units/human-magi/silver-mage.png"
           }
         ]
       }
@@ -23611,7 +24735,7 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "missile",
           "frames": [
             {
-              "image": "units/human-magi/silver-mage+female-attack-magic[1,2,1].png:[100,700,200]"
+              "image": "units/human-magi/silver-mage+female-attack-magic[1,2,1].png"
             }
           ]
         },
@@ -23620,16 +24744,16 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "staff",
           "frames": [
             {
-              "image": "units/human-magi/silver-mage+female.png:50"
+              "image": "units/human-magi/silver-mage+female.png"
             },
             {
-              "image": "units/human-magi/silver-mage+female-attack-staff[1~2].png:[100,200]"
+              "image": "units/human-magi/silver-mage+female-attack-staff[1"
             },
             {
-              "image": "units/human-magi/silver-mage+female-attack-magic1.png:75"
+              "image": "units/human-magi/silver-mage+female-attack-magic1.png"
             },
             {
-              "image": "units/human-magi/silver-mage+female.png:75"
+              "image": "units/human-magi/silver-mage+female.png"
             }
           ]
         }
@@ -23686,10 +24810,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/skeletal-dragon/skeletal-dragon-s[1,2,3,1].png:[450,900,400,250]"
+            "image": "units/monsters/skeletal-dragon/skeletal-dragon-s[1,2,3,1].png"
           },
           {
-            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png:700"
+            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png"
           }
         ]
       },
@@ -23697,16 +24821,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png:700"
+            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png"
           },
           {
-            "image": "units/monsters/skeletal-dragon/skeletal-dragon-s[1,2,3,1].png:[400,800,400,250]"
+            "image": "units/monsters/skeletal-dragon/skeletal-dragon-s[1,2,3,1].png"
           },
           {
-            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png:350"
+            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png"
           },
           {
-            "image": "units/monsters/skeletal-dragon/skeletal-dragon-s[0,01,0].png:[600,900,400]"
+            "image": "units/monsters/skeletal-dragon/skeletal-dragon-s[0,01,0].png"
           }
         ]
       },
@@ -23715,7 +24839,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png:400"
+            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png"
           }
         ]
       },
@@ -23724,7 +24848,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "jaw",
         "frames": [
           {
-            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png:400"
+            "image": "units/monsters/skeletal-dragon/skeletal-dragon.png"
           }
         ]
       }
@@ -23775,7 +24899,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/undead-skeletal/skeleton/skeleton-idle-[1~3,2,3,2,3,2,3,2].png:100"
+            "image": "units/undead-skeletal/skeleton/skeleton-idle-[1"
           }
         ]
       },
@@ -23783,7 +24907,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/undead-skeletal/skeleton/skeleton-dying-[1~7].png:100"
+            "image": "units/undead-skeletal/skeleton/skeleton-dying-[1"
           }
         ]
       }
@@ -23843,7 +24967,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-skeletal/archer/archer-bob-[1~8].png:200"
+            "image": "units/undead-skeletal/archer/archer-bob-[1"
           }
         ]
       },
@@ -23851,7 +24975,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/undead-skeletal/archer/archer-idle-[1~14].png:[100*5,200,100*5,200,100*2]"
+            "image": "units/undead-skeletal/archer/archer-idle-[1"
           }
         ]
       },
@@ -23859,7 +24983,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/undead-skeletal/archer/archer-die2-[1~7].png:100"
+            "image": "units/undead-skeletal/archer/archer-die2-[1"
           }
         ]
       },
@@ -23867,7 +24991,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/undead-skeletal/archer/archer-die-[1~13].png:100"
+            "image": "units/undead-skeletal/archer/archer-die-[1"
           }
         ]
       },
@@ -23876,13 +25000,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/undead-skeletal/archer/archer-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/undead-skeletal/archer/archer-bow-attack-[1~4].png:[75*2,100,130]"
+            "image": "units/undead-skeletal/archer/archer-bow.png"
           },
           {
-            "image": "units/undead-skeletal/archer/archer-bow.png:65"
+            "image": "units/undead-skeletal/archer/archer-bow-attack-[1"
+          },
+          {
+            "image": "units/undead-skeletal/archer/archer-bow.png"
           }
         ]
       },
@@ -23891,13 +25019,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fist",
         "frames": [
           {
-            "image": "units/undead-skeletal/archer/archer.png:100"
+            "image": "units/undead-skeletal/archer/archer.png"
           },
           {
-            "image": "units/undead-skeletal/archer/archer-attack.png:200"
+            "image": "units/undead-skeletal/archer/archer-attack.png"
           },
           {
-            "image": "units/undead-skeletal/archer/archer.png:100"
+            "image": "units/undead-skeletal/archer/archer.png"
           }
         ]
       }
@@ -23947,16 +25075,16 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-skeletal/rider-hi.png:900"
+            "image": "units/undead-skeletal/rider-hi.png"
           },
           {
-            "image": "units/undead-skeletal/rider.png:600"
+            "image": "units/undead-skeletal/rider.png"
           },
           {
-            "image": "units/undead-skeletal/rider-[lo,lo2,lo].png:[400,600,300]"
+            "image": "units/undead-skeletal/rider-[lo,lo2,lo].png"
           },
           {
-            "image": "units/undead-skeletal/rider.png:600"
+            "image": "units/undead-skeletal/rider.png"
           }
         ]
       },
@@ -23964,7 +25092,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-skeletal/rider-bob[1~8,7~2].png:[600,400,250*4,350,500,200*4,300,450]"
+            "image": "units/undead-skeletal/rider-bob[1"
           }
         ]
       },
@@ -23972,13 +25100,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-skeletal/rider-breeze[1~4,2,5].png:[200,300*3,200*2]"
+            "image": "units/undead-skeletal/rider-breeze[1"
           },
           {
-            "image": "units/undead-skeletal/rider-breeze[1~4,2,5].png:[200,300*3,200*2]"
+            "image": "units/undead-skeletal/rider-breeze[1"
           },
           {
-            "image": "units/undead-skeletal/rider-breeze[1~4,2,5]b.png:[200,300*3,200*2]"
+            "image": "units/undead-skeletal/rider-breeze[1"
           }
         ]
       },
@@ -23987,10 +25115,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "axe",
         "frames": [
           {
-            "image": "units/undead-skeletal/rider-attack[1~6].png:[200,200,200,150,100,200]"
+            "image": "units/undead-skeletal/rider-attack[1"
           },
           {
-            "image": "units/undead-skeletal/rider.png:50"
+            "image": "units/undead-skeletal/rider.png"
           }
         ]
       }
@@ -24063,7 +25191,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1700"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/skiff/skiff-bob[1"
+          },
+          {
+            "image": "units/transport/skiff/skiff-flag[1"
           }
         ]
       },
@@ -24071,7 +25205,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/skiff/skiff-bob[2"
+          },
+          {
+            "image": "units/transport/skiff/skiff-flag[1"
           }
         ]
       },
@@ -24079,7 +25219,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/skiff/skiff-bob[3,4,3,2].png"
+          },
+          {
+            "image": "units/transport/skiff/skiff-flag[1"
           }
         ]
       },
@@ -24087,7 +25233,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "misc/blank-hex.png:1600"
+            "image": "misc/blank-hex.png"
+          },
+          {
+            "image": "units/transport/skiff/skiff-bob3.png"
+          },
+          {
+            "image": "units/transport/skiff/skiff-flag[1"
           }
         ]
       }
@@ -24152,7 +25304,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/drakes/sky-fly-[1~5,4].png:100,units/drakes/sky-fly-[3,2]-upstroke.png:100"
+            "image": "units/drakes/sky-fly-[1"
           }
         ]
       },
@@ -24161,7 +25313,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "slam",
         "frames": [
           {
-            "image": "units/drakes/sky-kick-[1~6,2].png:100"
+            "image": "units/drakes/sky-kick-[1"
           }
         ]
       }
@@ -24218,7 +25370,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/ant/soldier-attack.png:200"
+            "image": "units/monsters/ant/soldier-attack.png"
           }
         ]
       }
@@ -24244,11 +25396,11 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Soulless",
     "race": "undead",
     "gender": [],
-    "image": "",
+    "image": "units/undead/soulless.png",
     "profile": "portraits/undead/soulless.webp",
-    "hitpoints": 0,
-    "movementType": "",
-    "movement": 0,
+    "hitpoints": 28,
+    "movementType": "smallfoot",
+    "movement": 4,
     "experience": 50,
     "level": 1,
     "alignment": "chaotic",
@@ -24272,12 +25424,69 @@ export const unitTypes: WesnothUnitType[] = [
         ]
       }
     ],
+    "animations": [
+      {
+        "type": "standing",
+        "frames": [
+          {
+            "image": "units/undead/soulless-standing-[1"
+          }
+        ]
+      },
+      {
+        "type": "standing",
+        "frames": [
+          {
+            "image": "units/undead/soulless.png{IPF}"
+          }
+        ]
+      },
+      {
+        "type": "death",
+        "frames": [
+          {
+            "image": "units/undead/soulless-die-[1"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "direction": "s",
+        "filterAttack": "touch",
+        "frames": [
+          {
+            "image": "units/undead/soulless-attack-s.png{IPF}",
+            "sound": "zombie-attack.wav"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "direction": "n",
+        "filterAttack": "touch",
+        "frames": [
+          {
+            "image": "units/undead/soulless-attack-n.png{IPF}",
+            "sound": "zombie-attack.wav"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "direction": "se,sw,ne,nw",
+        "filterAttack": "touch",
+        "frames": [
+          {
+            "image": "units/undead/soulless-attack.png{IPF}",
+            "sound": "zombie-attack.wav"
+          }
+        ]
+      }
+    ],
     "dieSound": "zombie-hit-[1~6].ogg",
     "macros": [
       "TRAIT_FEARLESS_MUSTHAVE",
-      "AMLA_DEFAULT",
-      "UNIT_BODY_SOULLESS_STATS smallfoot 4 28",
-      "UNIT_BODY_SOULLESS_GRAPHICS soulless"
+      "AMLA_DEFAULT"
     ],
     "movementCostOverrides": {
       "deep_water": 4
@@ -24337,7 +25546,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,se,sw",
         "frames": [
           {
-            "image": "units/human-loyalists/spearman-idle[1~4,3,2].png:[100*3,400,100*2]"
+            "image": "units/human-loyalists/spearman-idle[1"
           }
         ]
       },
@@ -24345,7 +25554,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/human-loyalists/spearman-death[1~4].png:125"
+            "image": "units/human-loyalists/spearman-death[1"
           }
         ]
       },
@@ -24354,14 +25563,18 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "javelin",
         "frames": [
           {
-            "image": "units/human-loyalists/spearman-attack-ranged1.png:100"
+            "image": "projectiles/spear-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-loyalists/spearman-attack-ranged2.png:50",
+            "image": "units/human-loyalists/spearman-attack-ranged1.png"
+          },
+          {
+            "image": "units/human-loyalists/spearman-attack-ranged2.png",
             "sound": "throw-[1~4].wav"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-[ranged2,ranged3].png:[50,100]"
+            "image": "units/human-loyalists/spearman-attack-[ranged2,ranged3].png"
           }
         ]
       },
@@ -24371,16 +25584,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/human-loyalists/spearman-attack-se-1.png:100"
+            "image": "units/human-loyalists/spearman-attack-se-1.png"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-s-[2,3].png:[100,75]"
+            "image": "units/human-loyalists/spearman-attack-s-[2,3].png"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-s-3.png~BLIT(units/human-loyalists/spearman-swoosh-s.png):50"
+            "image": "units/human-loyalists/spearman-attack-s-3.png"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-s-[3,2].png:[50,150]"
+            "image": "units/human-loyalists/spearman-attack-s-[3,2].png"
           }
         ]
       },
@@ -24390,7 +25603,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/human-loyalists/spearman-attack-n-[1~12].png:32"
+            "image": "units/human-loyalists/spearman-attack-n-[1"
           }
         ]
       },
@@ -24400,16 +25613,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/human-loyalists/spearman-attack-n-1.png:80"
+            "image": "units/human-loyalists/spearman-attack-n-1.png"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-ne-[1,2].png:[80,75]"
+            "image": "units/human-loyalists/spearman-attack-ne-[1,2].png"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-ne-3.png~BLIT(units/human-loyalists/spearman-swoosh-ne.png):90"
+            "image": "units/human-loyalists/spearman-attack-ne-3.png"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-ne-[2,1].png:[70,130]"
+            "image": "units/human-loyalists/spearman-attack-ne-[2,1].png"
           }
         ]
       },
@@ -24419,16 +25632,16 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "spear",
         "frames": [
           {
-            "image": "units/human-loyalists/spearman-attack-se-[1,2,3].png:[100,100,75]"
+            "image": "units/human-loyalists/spearman-attack-se-[1,2,3].png"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-se-3.png~BLIT(units/human-loyalists/spearman-swoosh-se.png):50"
+            "image": "units/human-loyalists/spearman-attack-se-3.png"
           },
           {
-            "image": "units/human-loyalists/spearman-attack-se-[2,1].png:[120,80]"
+            "image": "units/human-loyalists/spearman-attack-se-[2,1].png"
           },
           {
-            "image": "units/human-loyalists/spearman.png:1"
+            "image": "units/human-loyalists/spearman.png"
           }
         ]
       }
@@ -24443,7 +25656,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/undead-spirit/spectre.png",
     "profile": "portraits/undead/spectre.webp",
-    "smallProfile": "portraits/undead/spectre.webp~CROP(0,0,390,390)",
+    "smallProfile": "portraits/undead/spectre.webp",
     "hitpoints": 33,
     "movementType": "undeadspirit",
     "movement": 7,
@@ -24482,7 +25695,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-spirit/spectre-se-bob-[1~3,2,1~3,2,1~3,2,1~3,2].png:200"
+            "image": "units/undead-spirit/spectre-se-bob-[1"
           }
         ]
       },
@@ -24491,10 +25704,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "wail",
         "frames": [
           {
-            "image": "units/undead-spirit/spectre.png:50"
+            "image": "units/undead-spirit/spectre.png"
           },
           {
-            "image": "units/undead-spirit/spectre-se-attack-1.png:250",
+            "image": "units/undead-spirit/spectre-se-attack-1.png",
             "sound": "wail.wav"
           }
         ]
@@ -24504,7 +25717,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "baneblade",
         "frames": [
           {
-            "image": "units/undead-spirit/spectre-se-attack-[1~12].png:60"
+            "image": "units/undead-spirit/spectre-se-attack-[1"
           }
         ]
       }
@@ -24555,16 +25768,17 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,sw,se",
         "frames": [
           {
-            "image": "units/monsters/croc/crocodile-no-tail.png:50"
+            "image": "units/monsters/croc/crocodile-no-tail.png"
+          },
+          {
+            "image": "units/monsters/croc/crocodile-tail.png"
           }
         ]
       }
     ],
     "dieSound": "drake-die.ogg",
     "macros": [
-      "AMLA_DEFAULT",
-      "CROC_TERRAIN_FILTER_TEMP",
-      "CROC_TERRAIN_FILTER_TEMP"
+      "AMLA_DEFAULT"
     ],
     "sourceFile": "data/core/units/monsters/Crocodile.cfg"
   },
@@ -24603,7 +25817,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/swordsman.png:200"
+            "image": "units/human-loyalists/swordsman.png"
           }
         ]
       },
@@ -24611,10 +25825,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/human-loyalists/swordsman.png:900"
+            "image": "units/human-loyalists/swordsman.png"
           },
           {
-            "image": "units/human-loyalists/swordsman-bob-s-[1~3,2,1].png:[180,120,600,250,350]"
+            "image": "units/human-loyalists/swordsman-bob-s-[1"
           }
         ]
       },
@@ -24623,10 +25837,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sword",
         "frames": [
           {
-            "image": "units/human-loyalists/swordsman-attack-se-[1~8].png:[100*8]"
+            "image": "units/human-loyalists/swordsman-attack-se-[1"
           },
           {
-            "image": "units/human-loyalists/swordsman.png:50"
+            "image": "units/human-loyalists/swordsman.png"
           }
         ]
       }
@@ -24642,7 +25856,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Tentacle of the Deep",
     "race": "monster",
     "gender": [],
-    "image": "units/monsters/deep-tentacle.png~O(0)~BLIT(halo/ripples/ripple10.png~CROP(0,0,72,53),0,19)~BLIT(units/monsters/deep-tentacle.png)",
+    "image": "units/monsters/deep-tentacle.png",
     "profile": "portraits/monsters/deep-tentacle.webp",
     "hitpoints": 25,
     "movementType": "float",
@@ -24675,7 +25889,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/deep-tentacle.png:1300"
+            "image": "halo/ripples/ripple[1"
+          },
+          {
+            "image": "units/monsters/deep-tentacle.png"
           }
         ]
       },
@@ -24683,10 +25900,13 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/monsters/deep-tentacle-die-[1~6].png:120"
+            "image": "halo/ripples/ripple[13"
           },
           {
-            "image": "misc/blank-hex.png:1"
+            "image": "units/monsters/deep-tentacle-die-[1"
+          },
+          {
+            "image": "misc/blank-hex.png"
           }
         ]
       },
@@ -24695,7 +25915,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tentacle",
         "frames": [
           {
-            "image": "units/monsters/deep-tentacle.png:115"
+            "image": "halo/ripples/ripple[1"
+          },
+          {
+            "image": "units/monsters/deep-tentacle.png"
           }
         ]
       }
@@ -24747,17 +25970,17 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-outlaws/thief-idle-[1~7].png:[100*4,200,150,500]"
+            "image": "units/human-outlaws/thief-idle-[1"
           },
           {
-            "image": "units/human-outlaws/thief-idle-[8~12,11~8].png:100"
+            "image": "units/human-outlaws/thief-idle-[8"
           },
           {
-            "image": "units/human-outlaws/thief-idle-[7~12,11~8].png:[300,100*9]",
+            "image": "units/human-outlaws/thief-idle-[7",
             "duration": 300
           },
           {
-            "image": "units/human-outlaws/thief-idle-[7~1].png:[500,150,200,100*4]"
+            "image": "units/human-outlaws/thief-idle-[7"
           }
         ]
       },
@@ -24765,7 +25988,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/human-outlaws/thief-die-[1~7].png:100"
+            "image": "units/human-outlaws/thief-die-[1"
           }
         ]
       },
@@ -24774,13 +25997,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-outlaws/thief.png:50"
+            "image": "units/human-outlaws/thief.png"
           },
           {
-            "image": "units/human-outlaws/thief-attack.png:200"
+            "image": "units/human-outlaws/thief-attack.png"
           },
           {
-            "image": "units/human-outlaws/thief.png:50"
+            "image": "units/human-outlaws/thief.png"
           }
         ]
       }
@@ -24799,16 +26022,16 @@ export const unitTypes: WesnothUnitType[] = [
           "type": "idle",
           "frames": [
             {
-              "image": "units/human-outlaws/thief+female-idle-[1~7].png:[100*4,200,150,500]"
+              "image": "units/human-outlaws/thief+female-idle-[1"
             },
             {
-              "image": "units/human-outlaws/thief+female-idle-[8~12,11~8].png:100"
+              "image": "units/human-outlaws/thief+female-idle-[8"
             },
             {
-              "image": "units/human-outlaws/thief+female-idle-[7~12,11~8].png:[300,100*9]"
+              "image": "units/human-outlaws/thief+female-idle-[7"
             },
             {
-              "image": "units/human-outlaws/thief+female-idle-[7~1].png:[500,150,200,100*4]"
+              "image": "units/human-outlaws/thief+female-idle-[7"
             }
           ]
         },
@@ -24816,7 +26039,7 @@ export const unitTypes: WesnothUnitType[] = [
           "type": "death",
           "frames": [
             {
-              "image": "units/human-outlaws/thief+female-die-[1~7].png:100"
+              "image": "units/human-outlaws/thief+female-die-[1"
             }
           ]
         },
@@ -24825,13 +26048,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "dagger",
           "frames": [
             {
-              "image": "units/human-outlaws/thief+female.png:50"
+              "image": "units/human-outlaws/thief+female.png"
             },
             {
-              "image": "units/human-outlaws/thief+female-attack.png:200"
+              "image": "units/human-outlaws/thief+female-attack.png"
             },
             {
-              "image": "units/human-outlaws/thief+female.png:50"
+              "image": "units/human-outlaws/thief+female.png"
             }
           ]
         }
@@ -24873,7 +26096,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-outlaws/thug-idle-[1~5,4,5,4,5,2,1].png:[100*3,400,300,400,300,600,100*3]"
+            "image": "units/human-outlaws/thug-idle-[1"
           }
         ]
       },
@@ -24882,7 +26105,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "club",
         "frames": [
           {
-            "image": "units/human-outlaws/thug-melee-[1~8].png:100"
+            "image": "units/human-outlaws/thug-melee-[1"
           }
         ]
       }
@@ -24923,9 +26146,23 @@ export const unitTypes: WesnothUnitType[] = [
         "icon": "attacks/ballista.png"
       }
     ],
+    "animations": [
+      {
+        "type": "attack",
+        "filterAttack": "ballista",
+        "frames": [
+          {
+            "image": "projectiles/bullet.png",
+            "duration": 150
+          }
+        ]
+      }
+    ],
     "macros": [
       "AMLA_DEFAULT"
     ],
+    "hideHelp": true,
+    "doNotList": true,
     "sourceFile": "data/core/units/boats/Legacy_Transport_Galleon.cfg"
   },
   {
@@ -24973,13 +26210,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/human-outlaws/trapper-bow-attack[1~7].png:[50*4,200,50,100]"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-outlaws/trapper-bow-attack1.png:50"
+            "image": "units/human-outlaws/trapper-bow-attack[1"
           },
           {
-            "image": "units/human-outlaws/trapper-bow.png:50"
+            "image": "units/human-outlaws/trapper-bow-attack1.png"
+          },
+          {
+            "image": "units/human-outlaws/trapper-bow.png"
           }
         ]
       },
@@ -24988,13 +26229,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-outlaws/trapper.png:50"
+            "image": "units/human-outlaws/trapper.png"
           },
           {
-            "image": "units/human-outlaws/trapper.png:250"
+            "image": "units/human-outlaws/trapper.png"
           },
           {
-            "image": "units/human-outlaws/trapper.png:50"
+            "image": "units/human-outlaws/trapper.png"
           }
         ]
       },
@@ -25003,13 +26244,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-outlaws/trapper.png:50"
+            "image": "units/human-outlaws/trapper.png"
           },
           {
-            "image": "units/human-outlaws/trapper.png:250"
+            "image": "units/human-outlaws/trapper.png"
           },
           {
-            "image": "units/human-outlaws/trapper.png:50"
+            "image": "units/human-outlaws/trapper.png"
           }
         ]
       }
@@ -25066,13 +26307,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "club",
         "frames": [
           {
-            "image": "units/trolls/grunt.png:25"
+            "image": "units/trolls/grunt.png"
           },
           {
-            "image": "units/trolls/grunt-attack-[1~4,3].png:[75*3,95,80]"
+            "image": "units/trolls/grunt-attack-[1"
           },
           {
-            "image": "units/trolls/grunt-defend.png:75"
+            "image": "units/trolls/grunt-defend.png"
           }
         ]
       }
@@ -25123,7 +26364,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hammer",
         "frames": [
           {
-            "image": "units/trolls/troll-hero-attack-se-[1~6].png:100"
+            "image": "units/trolls/troll-hero-attack-se-[1"
           }
         ]
       },
@@ -25133,7 +26374,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hammer",
         "frames": [
           {
-            "image": "units/trolls/troll-hero-attack-se-[1~6].png:100"
+            "image": "units/trolls/troll-hero-attack-se-[1"
           }
         ]
       },
@@ -25143,10 +26384,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hammer",
         "frames": [
           {
-            "image": "units/trolls/troll-hero-attack-se-1.png:100,units/trolls/troll-hero-attack-ne-[2~6].png:[100*2,75*3]"
+            "image": "units/trolls/troll-hero-attack-se-1.png:100,units/trolls/troll-hero-attack-ne-[2"
           },
           {
-            "image": "units/trolls/troll-hero-attack-se-1.png:75"
+            "image": "units/trolls/troll-hero-attack-se-1.png"
           }
         ]
       }
@@ -25204,13 +26445,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "sling",
         "frames": [
           {
-            "image": "units/trolls/lobber-attack-ranged2.png:600"
+            "image": "units/trolls/lobber-attack-ranged2.png"
           },
           {
-            "image": "units/trolls/lobber-defend.png:100"
+            "image": "units/trolls/lobber-defend.png"
           },
           {
-            "image": "units/trolls/lobber.png:100"
+            "image": "units/trolls/lobber.png"
           }
         ]
       },
@@ -25219,13 +26460,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fist",
         "frames": [
           {
-            "image": "units/trolls/lobber.png:50"
+            "image": "units/trolls/lobber.png"
           },
           {
-            "image": "units/trolls/lobber-attack-melee.png:250"
+            "image": "units/trolls/lobber-attack-melee.png"
           },
           {
-            "image": "units/trolls/lobber.png:100"
+            "image": "units/trolls/lobber.png"
           }
         ]
       }
@@ -25288,11 +26529,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "flame blast",
         "frames": [
           {
-            "image": "units/trolls/shaman-ranged-1.png:100",
+            "image": "units/trolls/shaman-ranged-1.png",
             "sound": "fire.wav"
           },
           {
-            "image": "units/trolls/shaman-ranged-[2,3~1].png:[100,200,100*2]"
+            "image": "units/trolls/shaman-ranged-[2,3"
           }
         ]
       },
@@ -25301,10 +26542,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fist",
         "frames": [
           {
-            "image": "units/trolls/shaman-fist-[1~5].png:100"
+            "image": "units/trolls/shaman-fist-[1"
           },
           {
-            "image": "units/trolls/shaman.png:50"
+            "image": "units/trolls/shaman.png"
           }
         ]
       }
@@ -25354,7 +26595,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/trolls/warrior-breeze-s-[1~3,2].png:290"
+            "image": "units/trolls/warrior-breeze-s-[1"
           }
         ]
       },
@@ -25362,7 +26603,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/trolls/warrior-bob-s-[1~4,3,2].png:[620,420,310,620,420,510]"
+            "image": "units/trolls/warrior-bob-s-[1"
           }
         ]
       },
@@ -25371,13 +26612,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hammer",
         "frames": [
           {
-            "image": "units/trolls/warrior.png:25"
+            "image": "units/trolls/warrior.png"
           },
           {
-            "image": "units/trolls/warrior-attack-[1~4,3,1].png:[75,50,75,175,75,25]"
+            "image": "units/trolls/warrior-attack-[1"
           },
           {
-            "image": "units/trolls/warrior.png:50"
+            "image": "units/trolls/warrior.png"
           }
         ]
       }
@@ -25428,10 +26669,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/trolls/whelp-die-[1~8].png:[280,230,150,80*4,120]"
+            "image": "units/trolls/whelp-die-[1"
           },
           {
-            "image": "units/trolls/whelp-die-8.png~O(0.0):1"
+            "image": "units/trolls/whelp-die-8.png"
           }
         ]
       },
@@ -25440,10 +26681,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fist",
         "frames": [
           {
-            "image": "units/trolls/whelp-attack-[1~3,1].png:[100,125,100,75]"
+            "image": "units/trolls/whelp-attack-[1"
           },
           {
-            "image": "units/trolls/whelp.png:50"
+            "image": "units/trolls/whelp.png"
           }
         ]
       }
@@ -25462,7 +26703,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/bats/bat-se-3.png",
     "profile": "portraits/monsters/bat.webp",
-    "smallProfile": "portraits/monsters/bat.webp~CROP(0,0,400,241)",
+    "smallProfile": "portraits/monsters/bat.webp",
     "hitpoints": 16,
     "movementType": "smallfly",
     "movement": 8,
@@ -25495,7 +26736,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,se,sw",
         "frames": [
           {
-            "image": "units/bats/bat-se-[3~1,2~5,4].png:[50,60,80,60,50,60,80,60]"
+            "image": "units/bats/bat-se-[3"
           }
         ]
       },
@@ -25504,7 +26745,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,ne,nw",
         "frames": [
           {
-            "image": "units/bats/bat-ne-[3~1,2~5,4].png:[50,60,80,60,50,60,80,60]"
+            "image": "units/bats/bat-ne-[3"
           }
         ]
       },
@@ -25514,14 +26755,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/bats/bat-se-[3,2].png:30"
+            "image": "units/bats/bat-se-[3,2].png"
           },
           {
-            "image": "units/bats/bat-se-1.png:30",
+            "image": "units/bats/bat-se-1.png",
             "sound": "bat-flapping.wav"
           },
           {
-            "image": "units/bats/bat-se-[2~4,3,2,3].png:[30*2,70,50*2,40]"
+            "image": "units/bats/bat-se-[2"
           }
         ]
       },
@@ -25531,14 +26772,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/bats/bat-ne-[3,2].png:30"
+            "image": "units/bats/bat-ne-[3,2].png"
           },
           {
-            "image": "units/bats/bat-ne-1.png:30",
+            "image": "units/bats/bat-ne-1.png",
             "sound": "bat-flapping.wav"
           },
           {
-            "image": "units/bats/bat-ne-[2~4,3,2,3].png:[30*2,70,50*2,40]"
+            "image": "units/bats/bat-ne-[2"
           }
         ]
       }
@@ -25557,11 +26798,11 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "Walking Corpse",
     "race": "undead",
     "gender": [],
-    "image": "",
+    "image": "units/undead/zombie.png",
     "profile": "portraits/undead/walking-corpse.webp",
-    "hitpoints": 0,
-    "movementType": "",
-    "movement": 0,
+    "hitpoints": 18,
+    "movementType": "smallfoot",
+    "movement": 4,
     "experience": 24,
     "level": 0,
     "alignment": "chaotic",
@@ -25585,11 +26826,68 @@ export const unitTypes: WesnothUnitType[] = [
         ]
       }
     ],
+    "animations": [
+      {
+        "type": "standing",
+        "frames": [
+          {
+            "image": "units/undead/zombie-standing-[1"
+          }
+        ]
+      },
+      {
+        "type": "standing",
+        "frames": [
+          {
+            "image": "units/undead/zombie.png{IPF}"
+          }
+        ]
+      },
+      {
+        "type": "death",
+        "frames": [
+          {
+            "image": "units/undead/zombie-die-[1"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "direction": "s",
+        "filterAttack": "touch",
+        "frames": [
+          {
+            "image": "units/undead/zombie-attack-s.png{IPF}",
+            "sound": "zombie-attack.wav"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "direction": "n",
+        "filterAttack": "touch",
+        "frames": [
+          {
+            "image": "units/undead/zombie-attack-n.png{IPF}",
+            "sound": "zombie-attack.wav"
+          }
+        ]
+      },
+      {
+        "type": "attack",
+        "direction": "se,sw,ne,nw",
+        "filterAttack": "touch",
+        "frames": [
+          {
+            "image": "units/undead/zombie-attack.png{IPF}",
+            "sound": "zombie-attack.wav"
+          }
+        ]
+      }
+    ],
     "dieSound": "zombie-hit-[4~6].ogg",
     "macros": [
-      "TRAIT_FEARLESS_MUSTHAVE",
-      "UNIT_BODY_WALKING_CORPSE_STATS    smallfoot 4 18",
-      "UNIT_BODY_WALKING_CORPSE_GRAPHICS zombie"
+      "TRAIT_FEARLESS_MUSTHAVE"
     ],
     "movementCostOverrides": {
       "deep_water": 4
@@ -25654,7 +26952,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/raven/raven-shadow.png:4800"
+            "image": "units/monsters/raven/raven-shadow.png"
+          },
+          {
+            "image": "units/monsters/raven/harbinger-soar.png"
           }
         ]
       },
@@ -25663,7 +26964,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "claws",
         "frames": [
           {
-            "image": "units/monsters/raven/raven-shadow.png:700"
+            "image": "units/monsters/raven/raven-shadow.png"
+          },
+          {
+            "image": "units/monsters/raven/harbinger-soar.png"
           }
         ]
       },
@@ -25672,7 +26976,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "beak",
         "frames": [
           {
-            "image": "units/monsters/raven/raven-shadow.png:700"
+            "image": "units/monsters/raven/raven-shadow.png"
+          },
+          {
+            "image": "units/monsters/raven/harbinger-soar.png"
           }
         ]
       },
@@ -25681,7 +26988,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lightning",
         "frames": [
           {
-            "image": "units/monsters/raven/harbinger.png:550"
+            "image": "units/monsters/raven/harbinger.png"
           }
         ]
       }
@@ -25731,7 +27038,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "s,sw,se",
         "frames": [
           {
-            "image": "units/monsters/water-serpent.png:150"
+            "image": "units/monsters/water-serpent.png"
           }
         ]
       },
@@ -25740,7 +27047,7 @@ export const unitTypes: WesnothUnitType[] = [
         "direction": "n,nw,ne",
         "frames": [
           {
-            "image": "units/monsters/water-serpent-n.png:150"
+            "image": "units/monsters/water-serpent-n.png"
           }
         ]
       },
@@ -25750,7 +27057,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/water-serpent-attack-se-[1~6].png:[150*3,200,100,150]"
+            "image": "units/monsters/water-serpent-attack-se-[1"
           }
         ]
       },
@@ -25760,10 +27067,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/water-serpent-attack-se-[1~4].png:[150*3,200]"
+            "image": "units/monsters/water-serpent-attack-se-[1"
           },
           {
-            "image": "units/monsters/water-serpent-attack-s-[5~6].png:[100,150]"
+            "image": "units/monsters/water-serpent-attack-s-[5"
           }
         ]
       },
@@ -25773,7 +27080,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/water-serpent-attack-ne-[1~6].png:[150*3,200,100,150]"
+            "image": "units/monsters/water-serpent-attack-ne-[1"
           }
         ]
       },
@@ -25783,10 +27090,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/water-serpent-attack-ne-[1~4].png:[150*3,200]"
+            "image": "units/monsters/water-serpent-attack-ne-[1"
           },
           {
-            "image": "units/monsters/water-serpent-attack-n-[5~6].png:[100,150]"
+            "image": "units/monsters/water-serpent-attack-n-[5"
           }
         ]
       }
@@ -25803,7 +27110,7 @@ export const unitTypes: WesnothUnitType[] = [
     "name": "White Horse",
     "race": "horse",
     "gender": [],
-    "image": "units/monsters/horse/horse.png{HORSE_WHITE_IPF}",
+    "image": "units/monsters/horse/horse.png",
     "profile": "portraits/monsters/white-horse.webp",
     "hitpoints": 31,
     "movementType": "woodland",
@@ -25834,11 +27141,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "hooves",
         "frames": [
           {
-            "image": "units/monsters/horse/horse-attack[1~7].png{HORSE_WHITE_IPF}:[100*4,80,70,260]",
+            "image": "units/monsters/horse/horse-attack[1",
             "sound": "horse-elf-canter.wav"
           },
           {
-            "image": "units/monsters/horse/horse.png{HORSE_WHITE_IPF}:60"
+            "image": "units/monsters/horse/horse.png"
           }
         ]
       }
@@ -25907,7 +27214,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-magi/white-mage-idle-[1~18].png:[120*18]"
+            "image": "units/human-magi/white-mage-idle-[1"
           }
         ]
       },
@@ -25916,13 +27223,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "lightbeam",
         "frames": [
           {
-            "image": "units/human-magi/white-mage-magic-[1,2].png:75"
+            "image": "units/human-magi/white-mage-magic-[1,2].png"
           },
           {
             "image": "units/human-magi/white-mage-magic-3.png"
           },
           {
-            "image": "units/human-magi/white-mage-magic-[2,1].png:50"
+            "image": "units/human-magi/white-mage-magic-[2,1].png"
           }
         ]
       },
@@ -25931,10 +27238,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "staff",
         "frames": [
           {
-            "image": "units/human-magi/white-mage.png:25"
+            "image": "units/human-magi/white-mage.png"
           },
           {
-            "image": "units/human-magi/white-mage-melee-[1~6].png:[100*2,150,100*3]"
+            "image": "units/human-magi/white-mage-melee-[1"
           }
         ]
       }
@@ -25946,15 +27253,15 @@ export const unitTypes: WesnothUnitType[] = [
         "female"
       ],
       "image": "units/human-magi/white-mage+female.png",
-      "profile": "portraits/humans/mage-white+female.webp~RIGHT()",
-      "smallProfile": "portraits/humans/mage-white+female.webp~FL()",
+      "profile": "portraits/humans/mage-white+female.webp",
+      "smallProfile": "portraits/humans/mage-white+female.webp",
       "dieSound": "human-female-die-[1~3].ogg",
       "animations": [
         {
           "type": "idle",
           "frames": [
             {
-              "image": "units/human-magi/white-mage+female.png:120"
+              "image": "units/human-magi/white-mage+female.png"
             }
           ]
         },
@@ -25963,13 +27270,13 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "lightbeam",
           "frames": [
             {
-              "image": "units/human-magi/white-mage+female-magic-[1,2].png:75"
+              "image": "units/human-magi/white-mage+female-magic-[1,2].png"
             },
             {
               "image": "units/human-magi/white-mage+female-magic-3.png"
             },
             {
-              "image": "units/human-magi/white-mage+female-magic-[2,1].png:50"
+              "image": "units/human-magi/white-mage+female-magic-[2,1].png"
             }
           ]
         },
@@ -25978,10 +27285,10 @@ export const unitTypes: WesnothUnitType[] = [
           "filterAttack": "staff",
           "frames": [
             {
-              "image": "units/human-magi/white-mage+female.png:25"
+              "image": "units/human-magi/white-mage+female.png"
             },
             {
-              "image": "units/human-magi/white-mage+female-melee-[1~6].png:[100*2,150,100*3]"
+              "image": "units/human-magi/white-mage+female-melee-[1"
             }
           ]
         }
@@ -26036,7 +27343,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/wyvern/wild-wyvern.png:50"
+            "image": "units/monsters/wyvern/wild-wyvern.png"
           }
         ]
       },
@@ -26044,7 +27351,10 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/monsters/wyvern/wild-wyvern-fly-shadow.png:2100"
+            "image": "units/monsters/wyvern/wild-wyvern-fly[1"
+          },
+          {
+            "image": "units/monsters/wyvern/wild-wyvern-fly-shadow.png"
           }
         ]
       },
@@ -26053,7 +27363,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "slam",
         "frames": [
           {
-            "image": "units/monsters/wyvern/wild-wyvern-fly[5,6,7,6,5].png:[70*2,90*2,80]"
+            "image": "units/monsters/wyvern/wild-wyvern-fly[5,6,7,6,5].png"
           }
         ]
       },
@@ -26062,7 +27372,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/wyvern/wild-wyvern-fly[4,5,6].png:[100*2,200]"
+            "image": "units/monsters/wyvern/wild-wyvern-fly[4,5,6].png"
           }
         ]
       },
@@ -26071,10 +27381,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "slam",
         "frames": [
           {
-            "image": "units/monsters/wyvern/wild-wyvern-slam[1~5,1].png:[95*4,120,90]"
+            "image": "units/monsters/wyvern/wild-wyvern-slam[1"
           },
           {
-            "image": "units/monsters/wyvern/wild-wyvern.png:80"
+            "image": "units/monsters/wyvern/wild-wyvern.png"
           }
         ]
       },
@@ -26083,10 +27393,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/wyvern/wild-wyvern-bite[1~3].png:[110,120,140]"
+            "image": "units/monsters/wyvern/wild-wyvern-bite[1"
           },
           {
-            "image": "units/monsters/wyvern/wild-wyvern.png:110"
+            "image": "units/monsters/wyvern/wild-wyvern.png"
           }
         ]
       }
@@ -26152,17 +27462,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/monsters/wolf.png:100",
+            "image": "units/monsters/wolf.png",
             "sound": "wolf-growl-[1~4].ogg"
           },
           {
-            "image": "units/monsters/wolf-attack.png:200"
+            "image": "units/monsters/wolf-attack.png"
           },
           {
-            "image": "units/monsters/wolf-moving.png:250"
+            "image": "units/monsters/wolf-moving.png"
           },
           {
-            "image": "units/monsters/wolf.png:50"
+            "image": "units/monsters/wolf.png"
           }
         ]
       }
@@ -26213,7 +27523,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/goblins/wolf-rider.png:50"
+            "image": "units/goblins/wolf-rider.png"
           }
         ]
       },
@@ -26221,7 +27531,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/goblins/wolf-rider-water.png:50"
+            "image": "units/goblins/wolf-rider-water.png"
           }
         ]
       },
@@ -26229,7 +27539,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/goblins/wolf-rider-idle-[1~5,4,3~5,4~1].png:100"
+            "image": "units/goblins/wolf-rider-idle-[1"
           }
         ]
       },
@@ -26237,7 +27547,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/goblins/wolf-rider-die-[1~4].png:200"
+            "image": "units/goblins/wolf-rider-die-[1"
           }
         ]
       },
@@ -26246,17 +27556,17 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fangs",
         "frames": [
           {
-            "image": "units/goblins/wolf-rider.png:100",
+            "image": "units/goblins/wolf-rider.png",
             "sound": "wolf-growl-[1~4].ogg"
           },
           {
-            "image": "units/goblins/wolf-rider-attack.png:200"
+            "image": "units/goblins/wolf-rider-attack.png"
           },
           {
-            "image": "units/goblins/wolf-rider-moving.png:250"
+            "image": "units/goblins/wolf-rider-moving.png"
           },
           {
-            "image": "units/goblins/wolf-rider.png:50"
+            "image": "units/goblins/wolf-rider.png"
           }
         ]
       }
@@ -26336,10 +27646,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/monsters/boar/woodland-bite[1~7].png:[60*5,90,120]"
+            "image": "units/monsters/boar/woodland-bite[1"
           },
           {
-            "image": "units/monsters/boar/woodland.png:120"
+            "image": "units/monsters/boar/woodland.png"
           }
         ]
       },
@@ -26348,7 +27658,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "tusk",
         "frames": [
           {
-            "image": "units/monsters/boar/woodland-charge[1~3,2,1~4,5].png:[70*7,110,230]"
+            "image": "units/monsters/boar/woodland-dust[1"
+          },
+          {
+            "image": "units/monsters/boar/woodland-charge[1"
           }
         ]
       }
@@ -26409,7 +27722,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/human-peasants/woodsman-idle-[1~14,3~1].png:[100,150,200,150*2,200,1200,200,1200,150*2,100*2,1300,200*2,150]"
+            "image": "units/human-peasants/woodsman-idle-[1"
           }
         ]
       },
@@ -26418,10 +27731,14 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bow",
         "frames": [
           {
-            "image": "units/human-peasants/woodsman-bow.png:65"
+            "image": "projectiles/missile-n.png",
+            "duration": 150
           },
           {
-            "image": "units/human-peasants/woodsman-bow-attack-[1~4,1].png:[75*2,100,130,65]"
+            "image": "units/human-peasants/woodsman-bow.png"
+          },
+          {
+            "image": "units/human-peasants/woodsman-bow-attack-[1"
           }
         ]
       },
@@ -26430,10 +27747,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "dagger",
         "frames": [
           {
-            "image": "units/human-peasants/woodsman.png:100"
+            "image": "units/human-peasants/woodsman.png"
           },
           {
-            "image": "units/human-peasants/woodsman.png:100"
+            "image": "units/human-peasants/woodsman.png"
           }
         ]
       }
@@ -26456,7 +27773,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/woses/wose.png",
     "profile": "portraits/woses/wose.webp",
-    "smallProfile": "portraits/woses/wose.webp~CROP(0,35,435,435)",
+    "smallProfile": "portraits/woses/wose.webp",
     "hitpoints": 52,
     "movementType": "treefolk",
     "movement": 4,
@@ -26489,7 +27806,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/woses/wose-idle-[1~7].png:[250,400*2,250*4]"
+            "image": "units/woses/wose-idle-[1"
           }
         ]
       },
@@ -26497,7 +27814,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/woses/wose-hand-[1~4,3,2,1].png:300"
+            "image": "units/woses/wose-hand-[1"
           }
         ]
       },
@@ -26505,7 +27822,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/woses/wose-die-fall-[1~15].png:100"
+            "image": "units/woses/wose-die-fall-[1"
           }
         ]
       },
@@ -26513,7 +27830,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "death",
         "frames": [
           {
-            "image": "units/woses/wose-die-decay-[1~9].png:150"
+            "image": "units/woses/wose-die-decay-[1"
           }
         ]
       },
@@ -26522,7 +27839,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crush",
         "frames": [
           {
-            "image": "units/woses/wose-attack-[1,2,1].png:[400,150,75]"
+            "image": "units/woses/wose-attack-[1,2,1].png"
           }
         ]
       }
@@ -26540,7 +27857,7 @@ export const unitTypes: WesnothUnitType[] = [
     "gender": [],
     "image": "units/woses/wose-sapling.png",
     "profile": "portraits/woses/wose.webp",
-    "smallProfile": "portraits/woses/wose.webp~CROP(0,35,435,435)",
+    "smallProfile": "portraits/woses/wose.webp",
     "hitpoints": 26,
     "movementType": "treefolk",
     "movement": 4,
@@ -26573,7 +27890,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/woses/wose-sapling-blink.png:750"
+            "image": "units/woses/wose-sapling-blink.png"
           }
         ]
       },
@@ -26582,13 +27899,13 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crush",
         "frames": [
           {
-            "image": "units/woses/wose-sapling.png:400"
+            "image": "units/woses/wose-sapling.png"
           },
           {
-            "image": "units/woses/wose-sapling-attack.png:150"
+            "image": "units/woses/wose-sapling-attack.png"
           },
           {
-            "image": "units/woses/wose-sapling.png:75"
+            "image": "units/woses/wose-sapling.png"
           }
         ]
       }
@@ -26657,7 +27974,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "crush",
         "frames": [
           {
-            "image": "units/woses/wose-shaman-attack-[1~4].png:150"
+            "image": "units/woses/wose-shaman-attack-[1"
           }
         ]
       },
@@ -26666,7 +27983,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "entangle",
         "frames": [
           {
-            "image": "units/woses/wose-shaman-attack-ranged-[1,2,1].png:[400,225,75]"
+            "image": "projectiles/entangle.png",
+            "duration": 250
+          },
+          {
+            "image": "units/woses/wose-shaman-attack-ranged-[1,2,1].png"
           }
         ]
       }
@@ -26726,7 +28047,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "standing",
         "frames": [
           {
-            "image": "units/undead-spirit/wraith-s-[1~4,1~4,1~4,1~4].png:200"
+            "image": "units/undead-spirit/wraith-s-[1"
           }
         ]
       },
@@ -26735,10 +28056,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "wail",
         "frames": [
           {
-            "image": "units/undead-spirit/wraith-s.png:50"
+            "image": "units/undead-spirit/wraith-s.png"
           },
           {
-            "image": "units/undead-spirit/wraith-s-defend-1.png:250",
+            "image": "units/undead-spirit/wraith-s-defend-1.png",
             "sound": "wail-sml.wav"
           }
         ]
@@ -26748,10 +28069,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "baneblade",
         "frames": [
           {
-            "image": "units/undead-spirit/wraith-s-attack-[1~5].png:[150,100*2,90,80]"
+            "image": "units/undead-spirit/wraith-s-attack-[1"
           },
           {
-            "image": "units/undead-spirit/wraith-s-defend-1.png:50"
+            "image": "units/undead-spirit/wraith-s-defend-1.png"
           }
         ]
       }
@@ -26803,7 +28124,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "bite",
         "frames": [
           {
-            "image": "units/dunefolk/wyvern-rider.png:300"
+            "image": "units/dunefolk/wyvern-rider.png"
           }
         ]
       },
@@ -26812,7 +28133,11 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "javelin",
         "frames": [
           {
-            "image": "units/dunefolk/wyvern-rider.png:300",
+            "image": "projectiles/spear-n.png",
+            "duration": 150
+          },
+          {
+            "image": "units/dunefolk/wyvern-rider.png",
             "sound": "throw-[1~4].wav"
           }
         ]
@@ -26861,10 +28186,10 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "fist",
         "frames": [
           {
-            "image": "units/monsters/yeti-attack[1~3].png:[100*2,250]"
+            "image": "units/monsters/yeti-attack[1"
           },
           {
-            "image": "units/monsters/yeti.png:100"
+            "image": "units/monsters/yeti.png"
           }
         ]
       }
@@ -26916,7 +28241,7 @@ export const unitTypes: WesnothUnitType[] = [
         "type": "idle",
         "frames": [
           {
-            "image": "units/ogres/young-ogre-idle-[3,4~1,2,1,2,1,2,1,2,1,3,4,3].png:[200,175,150*3,125*2,100*2,125*2,150*3,175,200]"
+            "image": "units/ogres/young-ogre-idle-[3,4"
           }
         ]
       },
@@ -26925,7 +28250,7 @@ export const unitTypes: WesnothUnitType[] = [
         "filterAttack": "cleaver",
         "frames": [
           {
-            "image": "units/ogres/young-ogre-attack[1~5].png:[75,100,75,175,100]"
+            "image": "units/ogres/young-ogre-attack[1"
           }
         ]
       }

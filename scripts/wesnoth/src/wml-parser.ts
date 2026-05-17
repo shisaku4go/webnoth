@@ -32,8 +32,9 @@ export type MacroDictionary = Map<string, string>;
  */
 export function parseWml(
   content: string,
-  macroDictionary?: MacroDictionary,
+  baseMacroDictionary?: MacroDictionary,
 ): WmlNode {
+  const macroDictionary: MacroDictionary = new Map(baseMacroDictionary);
   const root: WmlNode = {
     tag: 'root',
     attributes: {},
@@ -43,6 +44,8 @@ export function parseWml(
   const stack: WmlNode[] = [root];
   const lines = content.split('\n');
   let inDefine = false;
+  let defineName = '';
+  let defineBody: string[] = [];
   let multiLineKey = '';
   let multiLineValue = '';
   let multiLineQuoteOpen = false;
@@ -50,20 +53,41 @@ export function parseWml(
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    // Handle #define / #enddef blocks — skip them (loaded by macro-loader)
-    if (/^\s*#define\b/.test(line)) {
-      // Check if #enddef is on the same line (e.g., single-line macros aren't common here but be safe)
-      if (line.includes('#enddef')) {
+    // Handle #define / #enddef blocks
+    const defineMatch = line.match(/^\s*#define\s+(\S+)(.*)$/);
+    if (defineMatch) {
+      const macroName = defineMatch[1];
+      const rest = defineMatch[2].trim();
+      if (rest.includes('#enddef')) {
+        const body = rest.replace(/\s*#enddef.*$/, '').trim();
+        macroDictionary.set(macroName, body);
         continue;
+      } else if (rest.length > 0) {
+        defineBody = [rest];
+      } else {
+        defineBody = [];
       }
       inDefine = true;
+      defineName = macroName;
       continue;
     }
     if (inDefine) {
-      // #enddef can appear anywhere on the line, e.g.: `value#enddef` or `value #enddef`
       if (line.includes('#enddef')) {
+        const before = line.replace(/\s*#enddef.*$/, '').trim();
+        if (before.length > 0) defineBody.push(before);
         inDefine = false;
+        const bodyStr = defineBody.join('\n').trim();
+        macroDictionary.set(defineName, bodyStr);
+      } else {
+        defineBody.push(line);
       }
+      continue;
+    }
+
+    // Handle #undef
+    const undefMatch = line.match(/^\s*#undef\s+(\S+)/);
+    if (undefMatch) {
+      macroDictionary.delete(undefMatch[1]);
       continue;
     }
 
@@ -143,9 +167,23 @@ export function parseWml(
       const macroContent = macroMatch[1].trim();
       const macroName = macroContent.split(/\s+/)[0];
 
-      // Try to expand simple constant macros
-      if (macroDictionary?.has(macroName) && !macroContent.includes(' ')) {
-        const expansion = macroDictionary.get(macroName)!;
+      // Try to expand simple constant macros and parameterized macros
+      if (macroDictionary?.has(macroName)) {
+        const fullBody = macroDictionary.get(macroName)!;
+        let expansion = fullBody;
+        if (macroContent.includes(' ')) {
+          const bodyLines = fullBody.split('\n');
+          const paramNames = bodyLines[0].trim().split(/\s+/);
+          const argValues = macroContent.slice(macroName.length).trim().split(/\s+/);
+          expansion = bodyLines.slice(1).join('\n');
+          for (let p = 0; p < paramNames.length; p++) {
+            if (paramNames[p]) {
+              const pName = paramNames[p];
+              const pVal = argValues[p] ?? '';
+              expansion = expansion.split('{' + pName + '}').join(pVal);
+            }
+          }
+        }
         // Re-parse the expanded content
         const expandedNode = parseWml(expansion, macroDictionary);
         const currentNode = stack[stack.length - 1];
@@ -244,9 +282,15 @@ function cleanValue(raw: string, macros?: MacroDictionary): string {
 
   // Expand inline macro references like {MACRO_NAME}
   if (macros) {
-    value = value.replace(/\{([A-Z_:][A-Z0-9_:]*)\}/g, (_match, name) => {
-      return macros.get(name) ?? `{${name}}`;
-    });
+    let prev = '';
+    let maxLoops = 10;
+    while (value !== prev && maxLoops > 0) {
+      prev = value;
+      value = value.replace(/\{([A-Z_:][A-Z0-9_:]*)\}/g, (match, name) => {
+        return macros.get(name) ?? match;
+      });
+      maxLoops--;
+    }
   }
 
   // Remove surrounding quotes
@@ -288,9 +332,16 @@ function cleanConcatenatedString(
     .map((part) => {
       let p = part.trim();
       // Handle macro reference like {RACIAL_NOTES_ORCS_AND_GOBLINS}
-      const macroRef = p.match(/^\{([A-Z_:][A-Z0-9_:]*)\}$/);
-      if (macroRef && macros?.has(macroRef[1])) {
-        return macros.get(macroRef[1])!;
+      if (macros) {
+        let prev = '';
+        let maxLoops = 10;
+        while (p !== prev && maxLoops > 0) {
+          prev = p;
+          p = p.replace(/\{([A-Z_:][A-Z0-9_:]*)\}/g, (match, name) => {
+            return macros.get(name) ?? match;
+          });
+          maxLoops--;
+        }
       }
       // Remove translation marker
       p = p.replace(/^_\s*"/, '"');

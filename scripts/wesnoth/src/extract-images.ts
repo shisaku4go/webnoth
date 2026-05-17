@@ -9,6 +9,9 @@
  *   - data/core/images/portraits/  → assets/portraits/   (~33MB)
  *   - data/core/images/attacks/    → assets/attacks/      (~1.3MB)
  *   - data/core/images/projectiles/ → assets/projectiles/
+ *   - data/core/images/scenery/    → assets/scenery/
+ *   - data/core/images/halo/       → assets/halo/
+ *   - data/core/images/misc/       → assets/misc/
  *
  * Usage:
  *   pnpm run extract:images -- --wesnoth-root <path-to-wesnoth>
@@ -162,6 +165,9 @@ function main() {
     { src: 'data/core/images/portraits', dest: 'portraits' },
     { src: 'data/core/images/attacks', dest: 'attacks' },
     { src: 'data/core/images/projectiles', dest: 'projectiles' },
+    { src: 'data/core/images/scenery', dest: 'scenery' },
+    { src: 'data/core/images/halo', dest: 'halo' },
+    { src: 'data/core/images/misc', dest: 'misc' },
   ];
 
   const totalStats: CopyStats = { files: 0, bytes: 0 };

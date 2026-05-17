@@ -29,6 +29,9 @@ importers:
       '@webnoth/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@webnoth/wesnoth-data':
+        specifier: workspace:*
+        version: link:../../packages/wesnoth-data
       lucide-react:
         specifier: ^1.14.0
         version: 1.14.0(react@19.2.6)
