@@ -5,14 +5,16 @@
  * Handles:
  *   - [tag] / [/tag] nesting
  *   - key=value pairs (including _ "translated strings")
- *   - {MACRO_NAME args...} invocations (simple constant macros expanded via dictionary)
+ *   - {MACRO_NAME args...} invocations (expanded via dictionary)
  *   - #textdomain, # comments → skipped
- *   - #define / #enddef → skipped (macro definitions are loaded separately by macro-loader)
+ *   - #define / #enddef → captured into macro dictionary
+ *   - #undef → removes macros from the dictionary
  *   - [+tag] merge syntax (appends to most recent same-named tag)
  *   - String concatenation with + operator
+ *   - Parameterized macro expansion with positional arguments
+ *   - Parenthesized arguments: {MACRO (arg with spaces)}
  *
  * Limitations (recorded for future phases):
- *   - Parameterized macros are NOT expanded; stored as macro names
  *   - Preprocessor conditionals (#ifdef, #else, #endif) are not handled
  *   - WML formula syntax $(...) is not evaluated
  */
@@ -25,7 +27,103 @@ export interface WmlNode {
   macros: string[];
 }
 
-export type MacroDictionary = Map<string, string>;
+/** Structured macro definition with separated params and body */
+export interface MacroEntry {
+  params: string[];
+  body: string;
+}
+
+export type MacroDictionary = Map<string, MacroEntry>;
+
+/**
+ * Parse WML macro arguments, respecting parenthesized groups.
+ *
+ * WML allows arguments containing spaces to be wrapped in parentheses:
+ *   {MY_MACRO (value with spaces) simple_arg}
+ *   → ["value with spaces", "simple_arg"]
+ *
+ * Handles nested parentheses: {MACRO (a (b c) d)} → ["a (b c) d"]
+ */
+function parseMacroArgs(argsString: string): string[] {
+  const args: string[] = [];
+  let current = '';
+  let depth = 0;
+
+  for (let i = 0; i < argsString.length; i++) {
+    const ch = argsString[i];
+    if (ch === '(' && depth === 0) {
+      depth++;
+      continue;
+    }
+    if (ch === '(') {
+      depth++;
+      current += ch;
+      continue;
+    }
+    if (ch === ')' && depth === 1) {
+      depth = 0;
+      if (current.length > 0) {
+        args.push(current.trim());
+        current = '';
+      }
+      continue;
+    }
+    if (ch === ')') {
+      depth--;
+      current += ch;
+      continue;
+    }
+    if (/\s/.test(ch) && depth === 0) {
+      if (current.length > 0) {
+        args.push(current);
+        current = '';
+      }
+      continue;
+    }
+    current += ch;
+  }
+  if (current.length > 0) {
+    args.push(current);
+  }
+  return args;
+}
+
+/**
+ * Parse a #define line to extract macro name, parameters, and optional inline body.
+ *
+ * Examples:
+ *   "#define MY_MACRO"             → { name: "MY_MACRO", params: [], rest: "" }
+ *   "#define MY_MACRO PARAM1 PARAM2" → { name: "MY_MACRO", params: ["PARAM1", "PARAM2"], rest: "" }
+ *   "#define MY_MACRO PARAM foo={PARAM}#enddef"
+ *     → { name: "MY_MACRO", params: ["PARAM"], rest: "foo={PARAM}#enddef" }
+ */
+function parseDefineLine(
+  restAfterName: string,
+): { params: string[]; bodyStart: string } {
+  const trimmed = restAfterName.trim();
+  if (trimmed.length === 0) {
+    return { params: [], bodyStart: '' };
+  }
+
+  // Separate param tokens from the body portion.
+  // Param tokens are UPPERCASE_WORDS. The first non-uppercase token starts the body.
+  const tokens = trimmed.split(/\s+/);
+  const params: string[] = [];
+  let bodyStartIdx = tokens.length;
+
+  for (let i = 0; i < tokens.length; i++) {
+    // A param name is all-uppercase letters, digits, and underscores
+    if (/^[A-Z_][A-Z0-9_]*$/.test(tokens[i])) {
+      params.push(tokens[i]);
+    } else {
+      bodyStartIdx = i;
+      break;
+    }
+  }
+
+  const bodyStart = tokens.slice(bodyStartIdx).join(' ');
+  return { params, bodyStart };
+}
 
 /**
  * Parse WML text content into a tree of WmlNode objects.
@@ -45,6 +143,7 @@ export function parseWml(
   const lines = content.split('\n');
   let inDefine = false;
   let defineName = '';
+  let defineParams: string[] = [];
   let defineBody: string[] = [];
   let multiLineKey = '';
   let multiLineValue = '';
@@ -57,18 +156,20 @@ export function parseWml(
     const defineMatch = line.match(/^\s*#define\s+(\S+)(.*)$/);
     if (defineMatch) {
       const macroName = defineMatch[1];
-      const rest = defineMatch[2].trim();
-      if (rest.includes('#enddef')) {
-        const body = rest.replace(/\s*#enddef.*$/, '').trim();
-        macroDictionary.set(macroName, body);
+      const rest = defineMatch[2];
+      const { params, bodyStart } = parseDefineLine(rest);
+
+      if (bodyStart.includes('#enddef')) {
+        // Single-line define with inline body: #define MACRO PARAM foo={PARAM}#enddef
+        const body = bodyStart.replace(/\s*#enddef.*$/, '').trim();
+        macroDictionary.set(macroName, { params, body });
         continue;
-      } else if (rest.length > 0) {
-        defineBody = [rest];
-      } else {
-        defineBody = [];
       }
-      inDefine = true;
+
+      defineParams = params;
       defineName = macroName;
+      defineBody = bodyStart.length > 0 ? [bodyStart] : [];
+      inDefine = true;
       continue;
     }
     if (inDefine) {
@@ -77,7 +178,10 @@ export function parseWml(
         if (before.length > 0) defineBody.push(before);
         inDefine = false;
         const bodyStr = defineBody.join('\n').trim();
-        macroDictionary.set(defineName, bodyStr);
+        macroDictionary.set(defineName, {
+          params: defineParams,
+          body: bodyStr,
+        });
       } else {
         defineBody.push(line);
       }
@@ -96,7 +200,7 @@ export function parseWml(
 
     // Handle multi-line string continuation
     if (multiLineQuoteOpen) {
-      multiLineValue += '\n' + line;
+      multiLineValue += `\n${line}`;
       // Check if quote closes on this line
       if (hasClosingQuote(line)) {
         multiLineQuoteOpen = false;
@@ -167,21 +271,19 @@ export function parseWml(
       const macroContent = macroMatch[1].trim();
       const macroName = macroContent.split(/\s+/)[0];
 
-      // Try to expand simple constant macros and parameterized macros
-      if (macroDictionary?.has(macroName)) {
-        const fullBody = macroDictionary.get(macroName)!;
-        let expansion = fullBody;
-        if (macroContent.includes(' ')) {
-          const bodyLines = fullBody.split('\n');
-          const paramNames = bodyLines[0].trim().split(/\s+/);
-          const argValues = macroContent.slice(macroName.length).trim().split(/\s+/);
-          expansion = bodyLines.slice(1).join('\n');
-          for (let p = 0; p < paramNames.length; p++) {
-            if (paramNames[p]) {
-              const pName = paramNames[p];
-              const pVal = argValues[p] ?? '';
-              expansion = expansion.split('{' + pName + '}').join(pVal);
-            }
+      // Try to expand macros from dictionary
+      const entry = macroDictionary.get(macroName);
+      if (entry) {
+        let expansion = entry.body;
+        const argsStr = macroContent.slice(macroName.length).trim();
+
+        if (entry.params.length > 0 && argsStr.length > 0) {
+          // Parameterized macro: substitute positional arguments
+          const argValues = parseMacroArgs(argsStr);
+          for (let p = 0; p < entry.params.length; p++) {
+            const pName = entry.params[p];
+            const pVal = argValues[p] ?? '';
+            expansion = expansion.split(`{${pName}}`).join(pVal);
           }
         }
         // Re-parse the expanded content
@@ -259,6 +361,31 @@ function hasClosingQuote(s: string): boolean {
 }
 
 /**
+ * Resolve constant macro references in a string.
+ * Only expands macros with no parameters (constants).
+ */
+function expandConstantMacros(
+  value: string,
+  macros: MacroDictionary,
+): string {
+  let result = value;
+  let prev = '';
+  let maxLoops = 10;
+  while (result !== prev && maxLoops > 0) {
+    prev = result;
+    result = result.replace(/\{([A-Z_:][A-Z0-9_:]*)\}/g, (match, name) => {
+      const entry = macros.get(name);
+      if (entry && entry.params.length === 0) {
+        return entry.body;
+      }
+      return match;
+    });
+    maxLoops--;
+  }
+  return result;
+}
+
+/**
  * Clean a WML value string:
  *  - Remove _ "..." translation markers
  *  - Remove surrounding quotes
@@ -282,15 +409,7 @@ function cleanValue(raw: string, macros?: MacroDictionary): string {
 
   // Expand inline macro references like {MACRO_NAME}
   if (macros) {
-    let prev = '';
-    let maxLoops = 10;
-    while (value !== prev && maxLoops > 0) {
-      prev = value;
-      value = value.replace(/\{([A-Z_:][A-Z0-9_:]*)\}/g, (match, name) => {
-        return macros.get(name) ?? match;
-      });
-      maxLoops--;
-    }
+    value = expandConstantMacros(value, macros);
   }
 
   // Remove surrounding quotes
@@ -333,15 +452,7 @@ function cleanConcatenatedString(
       let p = part.trim();
       // Handle macro reference like {RACIAL_NOTES_ORCS_AND_GOBLINS}
       if (macros) {
-        let prev = '';
-        let maxLoops = 10;
-        while (p !== prev && maxLoops > 0) {
-          prev = p;
-          p = p.replace(/\{([A-Z_:][A-Z0-9_:]*)\}/g, (match, name) => {
-            return macros.get(name) ?? match;
-          });
-          maxLoops--;
-        }
+        p = expandConstantMacros(p, macros);
       }
       // Remove translation marker
       p = p.replace(/^_\s*"/, '"');
