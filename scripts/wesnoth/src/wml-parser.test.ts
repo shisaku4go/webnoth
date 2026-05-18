@@ -207,3 +207,47 @@ describe('parseWml - Macros', () => {
     assert.strictEqual(unit.macros[0], 'SOME_INLINE_MACRO');
   });
 });
+
+describe('parseWml - Python Parser Compatibility Features', () => {
+  test('handles multi-assign syntax (a, b = 1, 2)', () => {
+    const wml = `
+[test]
+  a, b, c = 1, "2, 3", 4
+  x, y = 10
+[/test]
+    `;
+    const root = parseWml(wml);
+    const testTag = root.children[0];
+    assert.strictEqual(testTag.attributes.a, '1');
+    assert.strictEqual(testTag.attributes.b, '2, 3');
+    assert.strictEqual(testTag.attributes.c, '4');
+    assert.strictEqual(testTag.attributes.x, '10');
+    assert.strictEqual(testTag.attributes.y, '');
+  });
+
+  test('handles heredoc syntax (<< ... >>)', () => {
+    const wml = `
+[test]
+  code = <<
+    "quotes" here
+    ""blah""
+>>
+[/test]
+    `;
+    const root = parseWml(wml);
+    const testTag = root.children[0];
+    assert.strictEqual(testTag.attributes.code, '"quotes" here\n    ""blah""');
+  });
+
+  test('handles line-ending + continuation', () => {
+    const wml = `
+[test]
+  foo = "bar" +
+    "baz"
+[/test]
+    `;
+    const root = parseWml(wml);
+    const testTag = root.children[0];
+    assert.strictEqual(testTag.attributes.foo, 'barbaz');
+  });
+});
