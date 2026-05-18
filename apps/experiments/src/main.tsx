@@ -6,7 +6,10 @@ import { routeTree } from './routeTree.gen';
 import './index.css';
 
 // TanStack Router のインスタンス作成
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  basepath: import.meta.env.BASE_URL.replace(/\/$/, ''),
+});
 
 // TanStack Router の型安全性を登録
 declare module '@tanstack/react-router' {

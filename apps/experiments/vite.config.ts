@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { resolve } from 'node:path';
 import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
@@ -52,10 +53,17 @@ function wesnothAssetsPlugin(): Plugin {
         });
       });
     },
+    writeBundle() {
+      const outDir = resolve(__dirname, 'dist', 'wesnoth-assets');
+      if (fs.existsSync(wesnothAssetsDir)) {
+        fs.cpSync(wesnothAssetsDir, outDir, { recursive: true });
+      }
+    },
   };
 }
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES ? '/webnoth/' : '/',
   plugins: [
     // TanStack Router — file-based routing code generation
     TanStackRouterVite(),
