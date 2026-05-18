@@ -54,9 +54,15 @@ function wesnothAssetsPlugin(): Plugin {
       });
     },
     writeBundle() {
-      const outDir = resolve(__dirname, 'dist', 'wesnoth-assets');
+      const distDir = resolve(__dirname, 'dist');
+      const outDir = resolve(distDir, 'wesnoth-assets');
       if (fs.existsSync(wesnothAssetsDir)) {
         fs.cpSync(wesnothAssetsDir, outDir, { recursive: true });
+      }
+      const indexHtml = resolve(distDir, 'index.html');
+      const errorHtml = resolve(distDir, '404.html');
+      if (fs.existsSync(indexHtml)) {
+        fs.copyFileSync(indexHtml, errorHtml);
       }
     },
   };
