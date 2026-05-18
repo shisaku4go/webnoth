@@ -37,7 +37,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build experiments app
-        run: pnpm --filter @webnoth/experiments run build
+        run: pnpm --filter "@webnoth/experiments..." run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
