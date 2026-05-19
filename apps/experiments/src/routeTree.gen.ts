@@ -8,80 +8,80 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as EncyclopediaIndexRouteImport } from './routes/encyclopedia/index'
-import { Route as EncyclopediaUnitIdRouteImport } from './routes/encyclopedia/$unitId'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as IndexRouteImport } from './routes/index';
+import { Route as EncyclopediaIndexRouteImport } from './routes/encyclopedia/index';
+import { Route as EncyclopediaUnitIdRouteImport } from './routes/encyclopedia/$unitId';
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const EncyclopediaIndexRoute = EncyclopediaIndexRouteImport.update({
   id: '/encyclopedia/',
   path: '/encyclopedia/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const EncyclopediaUnitIdRoute = EncyclopediaUnitIdRouteImport.update({
   id: '/encyclopedia/$unitId',
   path: '/encyclopedia/$unitId',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
-  '/encyclopedia/': typeof EncyclopediaIndexRoute
+  '/': typeof IndexRoute;
+  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute;
+  '/encyclopedia/': typeof EncyclopediaIndexRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
-  '/encyclopedia': typeof EncyclopediaIndexRoute
+  '/': typeof IndexRoute;
+  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute;
+  '/encyclopedia': typeof EncyclopediaIndexRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
-  '/encyclopedia/': typeof EncyclopediaIndexRoute
+  __root__: typeof rootRouteImport;
+  '/': typeof IndexRoute;
+  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute;
+  '/encyclopedia/': typeof EncyclopediaIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/encyclopedia/$unitId' | '/encyclopedia/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/encyclopedia/$unitId' | '/encyclopedia'
-  id: '__root__' | '/' | '/encyclopedia/$unitId' | '/encyclopedia/'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: '/' | '/encyclopedia/$unitId' | '/encyclopedia/';
+  fileRoutesByTo: FileRoutesByTo;
+  to: '/' | '/encyclopedia/$unitId' | '/encyclopedia';
+  id: '__root__' | '/' | '/encyclopedia/$unitId' | '/encyclopedia/';
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  EncyclopediaUnitIdRoute: typeof EncyclopediaUnitIdRoute
-  EncyclopediaIndexRoute: typeof EncyclopediaIndexRoute
+  IndexRoute: typeof IndexRoute;
+  EncyclopediaUnitIdRoute: typeof EncyclopediaUnitIdRoute;
+  EncyclopediaIndexRoute: typeof EncyclopediaIndexRoute;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/encyclopedia/': {
-      id: '/encyclopedia/'
-      path: '/encyclopedia'
-      fullPath: '/encyclopedia/'
-      preLoaderRoute: typeof EncyclopediaIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/encyclopedia/';
+      path: '/encyclopedia';
+      fullPath: '/encyclopedia/';
+      preLoaderRoute: typeof EncyclopediaIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/encyclopedia/$unitId': {
-      id: '/encyclopedia/$unitId'
-      path: '/encyclopedia/$unitId'
-      fullPath: '/encyclopedia/$unitId'
-      preLoaderRoute: typeof EncyclopediaUnitIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/encyclopedia/$unitId';
+      path: '/encyclopedia/$unitId';
+      fullPath: '/encyclopedia/$unitId';
+      preLoaderRoute: typeof EncyclopediaUnitIdRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
   }
 }
 
@@ -89,7 +89,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EncyclopediaUnitIdRoute: EncyclopediaUnitIdRoute,
   EncyclopediaIndexRoute: EncyclopediaIndexRoute,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
