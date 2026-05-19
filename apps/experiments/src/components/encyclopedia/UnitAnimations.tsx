@@ -194,6 +194,6 @@ function Animator({
   const scale = Math.min(2.0, targetHeight / texture.height);
 
   return (
-    <sprite texture={texture} x={200} y={150} anchor={0.5} scale={scale} />
+    <pixiSprite texture={texture} x={200} y={150} anchor={0.5} scale={scale} />
   );
 }

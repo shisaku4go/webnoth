@@ -156,3 +156,10 @@ vite.config.js.map
 .agents/packages/wesnoth-data/assets/
 !packages/wesnoth-data/assets/.gitkeep
 skills-lock.json
+.antigravitycli/
+.gemini/
+
+# OS/IDE settings
+.DS_Store
+.vscode/
+.idea/
