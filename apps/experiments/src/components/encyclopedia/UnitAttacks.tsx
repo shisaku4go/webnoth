@@ -12,9 +12,9 @@ export function UnitAttacks({ attacks }: UnitAttacksProps) {
     <section className="flex flex-col gap-3" id="unit-attacks">
       <h2 className="text-lg font-semibold">Attacks</h2>
       <div className="flex flex-col gap-2">
-        {attacks.map((attack, i) => (
+        {attacks.map((attack) => (
           <div
-            key={`${attack.name}-${i}`}
+            key={`${attack.name}-${attack.type}-${attack.range}`}
             className="flex flex-col gap-1.5 rounded-lg border border-border bg-card p-3"
           >
             <div className="flex items-center justify-between gap-3">

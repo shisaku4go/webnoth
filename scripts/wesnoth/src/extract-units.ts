@@ -327,15 +327,15 @@ function expandSequence(str: string): string[] {
     const repeatMatch = part.match(/^([0-9]+)\*([0-9]+)$/);
 
     if (rangeMatch) {
-      const start = parseInt(rangeMatch[1]);
-      const end = parseInt(rangeMatch[2]);
+      const start = parseInt(rangeMatch[1], 10);
+      const end = parseInt(rangeMatch[2], 10);
       const step = start <= end ? 1 : -1;
       for (let i = start; start <= end ? i <= end : i >= end; i += step) {
         expandedValues.push(i.toString());
       }
     } else if (repeatMatch) {
       const val = repeatMatch[1];
-      const count = parseInt(repeatMatch[2]);
+      const count = parseInt(repeatMatch[2], 10);
       for (let i = 0; i < count; i++) {
         expandedValues.push(val);
       }
@@ -395,15 +395,15 @@ function parseWmlImageString(
       for (const d of durParts) {
         if (d.includes('*')) {
           const splitVal = d.split('*');
-          const val = parseInt(splitVal[0]);
-          const count = parseInt(splitVal[1]);
+          const val = parseInt(splitVal[0], 10);
+          const count = parseInt(splitVal[1], 10);
           if (!Number.isNaN(val) && !Number.isNaN(count)) {
             for (let i = 0; i < count; i++) {
               expandedDurations.push(val);
             }
           }
         } else {
-          const val = parseInt(d);
+          const val = parseInt(d, 10);
           if (!Number.isNaN(val)) {
             expandedDurations.push(val);
           }

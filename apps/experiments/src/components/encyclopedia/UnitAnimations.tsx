@@ -17,10 +17,6 @@ interface UnitAnimationsProps {
 export function UnitAnimations({ unit }: UnitAnimationsProps) {
   const animations = unit.animations || [];
 
-  if (animations.length === 0) {
-    return null;
-  }
-
   const [selectedAnimIndex, setSelectedAnimIndex] = useState(0);
   const selectedAnim = animations[selectedAnimIndex];
 
@@ -80,6 +76,10 @@ export function UnitAnimations({ unit }: UnitAnimationsProps) {
       // In a real app, we might want a global cache manager or unload after a delay.
     };
   }, [frames]);
+
+  if (animations.length === 0) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -155,7 +155,7 @@ function Animator({
   useEffect(() => {
     setCurrentFrameIdx(0);
     setElapsed(0);
-  }, [frames]);
+  }, [frames]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useTick((ticker) => {
     if (!isPlaying || frames.length === 0) return;
@@ -194,6 +194,6 @@ function Animator({
   const scale = Math.min(2.0, targetHeight / texture.height);
 
   return (
-    <pixiSprite texture={texture} x={200} y={150} anchor={0.5} scale={scale} />
+    <sprite texture={texture} x={200} y={150} anchor={0.5} scale={scale} />
   );
 }
