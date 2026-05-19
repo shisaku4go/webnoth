@@ -257,12 +257,29 @@ interface UnitTypeData {
   sourceFile: string;
 }
 
+function cleanTranslation(s: string | undefined): string | undefined {
+  if (s === undefined) return undefined;
+  // Remove race^, male^, female^ etc. prefixes from translated names
+  let cleaned = s.replace(
+    /^(race|male|female|race\+female|race\+plural)\^/,
+    '',
+  );
+  // Remove any remaining WML markup
+  cleaned = cleaned.replace(/<[^>]+>/g, '');
+  return cleaned;
+}
+
 function cleanImagePath(s: string | undefined): string | undefined {
   if (!s) return s;
   let cleaned = s.trim();
 
   // If there's a ~BLIT onto a shadow/halo/misc image, prefer the blitted image
-  if ((cleaned.includes('shadow') || cleaned.includes('halo') || cleaned.includes('misc')) && cleaned.includes('~BLIT(')) {
+  if (
+    (cleaned.includes('shadow') ||
+      cleaned.includes('halo') ||
+      cleaned.includes('misc')) &&
+    cleaned.includes('~BLIT(')
+  ) {
     const match = cleaned.match(/~BLIT\s*\(\s*"?([^"~)]+)/);
     if (match && match[1]) {
       cleaned = match[1].trim();
@@ -270,16 +287,149 @@ function cleanImagePath(s: string | undefined): string | undefined {
   }
 
   // Remove any remaining Image Path Functions starting with ~
-  const tildeIndex = cleaned.indexOf('~');
+  // Do not match ~ if it is inside brackets [1~5].
+  let depth = 0;
+  let tildeIndex = -1;
+  for (let i = 0; i < cleaned.length; i++) {
+    if (cleaned[i] === '[') depth++;
+    else if (cleaned[i] === ']') depth--;
+    else if (cleaned[i] === '~' && depth === 0) {
+      tildeIndex = i;
+      break;
+    }
+  }
+
   if (tildeIndex !== -1) {
     cleaned = cleaned.slice(0, tildeIndex);
   }
 
-  // Remove trailing garbage like quotes, closing parens, or animation durations
-  cleaned = cleaned.replace(/(:[0-9*~,\[\]]+)?["')]+$/, '').trim();
-  cleaned = cleaned.replace(/:[0-9*~,\[\]]+$/, '').trim();
+  // Remove trailing macro references like {HORSE_BLACK_IPF}
+  cleaned = cleaned.replace(/\{[A-Z0-9_]+\}$/, '').trim();
+
+  // Remove trailing garbage like quotes or closing parens
+  cleaned = cleaned.replace(/["')]+$/, '').trim();
 
   return cleaned;
+}
+
+function expandSequence(str: string): string[] {
+  const bracketMatch = str.match(/\[([^\]]+)\]/);
+  if (!bracketMatch) return [str];
+
+  const fullBracket = bracketMatch[0]; // e.g. [1~4,4*2,4~1]
+  const content = bracketMatch[1]; // e.g. 1~4,4*2,4~1
+
+  const parts = content.split(',');
+  const expandedValues: string[] = [];
+
+  for (const part of parts) {
+    const rangeMatch = part.match(/^([0-9]+)~([0-9]+)$/);
+    const repeatMatch = part.match(/^([0-9]+)\*([0-9]+)$/);
+
+    if (rangeMatch) {
+      const start = parseInt(rangeMatch[1], 10);
+      const end = parseInt(rangeMatch[2], 10);
+      const step = start <= end ? 1 : -1;
+      for (let i = start; start <= end ? i <= end : i >= end; i += step) {
+        expandedValues.push(i.toString());
+      }
+    } else if (repeatMatch) {
+      const val = repeatMatch[1];
+      const count = parseInt(repeatMatch[2], 10);
+      for (let i = 0; i < count; i++) {
+        expandedValues.push(val);
+      }
+    } else {
+      const trimmed = part.trim();
+      if (trimmed) expandedValues.push(trimmed);
+    }
+  }
+
+  const results = expandedValues.map((val) => str.replace(fullBracket, val));
+  return results.flatMap((res) => expandSequence(res));
+}
+
+function parseWmlImageString(
+  rawImage: string | undefined,
+  fallbackDuration?: number,
+): { image: string; duration?: number }[] {
+  if (!rawImage) return [];
+  const results: { image: string; duration?: number }[] = [];
+
+  let current = '';
+  let depth = 0;
+  const parts: string[] = [];
+  for (let i = 0; i < rawImage.length; i++) {
+    if (rawImage[i] === '[') depth++;
+    else if (rawImage[i] === ']') depth--;
+    else if (rawImage[i] === ',' && depth === 0) {
+      parts.push(current);
+      current = '';
+      continue;
+    }
+    current += rawImage[i];
+  }
+  if (current) parts.push(current);
+
+  for (let part of parts) {
+    part = part.trim();
+    if (!part) continue;
+
+    let imagePart = part;
+    let durationPart = '';
+
+    const colonIdx = part.lastIndexOf(':');
+    if (colonIdx !== -1) {
+      imagePart = part.slice(0, colonIdx);
+      durationPart = part.slice(colonIdx + 1);
+    }
+
+    const expandedImages = expandSequence(imagePart);
+    const expandedDurations: number[] = [];
+
+    if (durationPart) {
+      if (durationPart.startsWith('[') && durationPart.endsWith(']')) {
+        durationPart = durationPart.slice(1, -1);
+      }
+      const durParts = durationPart.split(',');
+      for (const d of durParts) {
+        if (d.includes('*')) {
+          const splitVal = d.split('*');
+          const val = parseInt(splitVal[0], 10);
+          const count = parseInt(splitVal[1], 10);
+          if (!Number.isNaN(val) && !Number.isNaN(count)) {
+            for (let i = 0; i < count; i++) {
+              expandedDurations.push(val);
+            }
+          }
+        } else {
+          const val = parseInt(d, 10);
+          if (!Number.isNaN(val)) {
+            expandedDurations.push(val);
+          }
+        }
+      }
+    }
+
+    const numFrames = Math.max(expandedImages.length, expandedDurations.length);
+    for (let i = 0; i < numFrames; i++) {
+      const img = expandedImages[Math.min(i, expandedImages.length - 1)];
+      let dur: number | undefined = undefined;
+
+      if (expandedDurations.length > 0) {
+        dur = expandedDurations[Math.min(i, expandedDurations.length - 1)];
+      } else if (fallbackDuration !== undefined) {
+        dur = fallbackDuration;
+      }
+
+      results.push({
+        image: img,
+        duration: dur,
+      });
+    }
+  }
+
+  return results;
 }
 
 function extractAttack(node: WmlNode): AttackData {
@@ -297,18 +447,67 @@ function extractAttack(node: WmlNode): AttackData {
 }
 
 function extractAnimationFrames(node: WmlNode): AnimationFrameData[] {
-  const frames: AnimationFrameData[] = [];
-  const frameNodes = node.children.filter((c) => c.tag.endsWith('frame'));
-  for (const frameNode of frameNodes) {
-    const image = cleanImagePath(getAttr(frameNode, 'image'));
-    if (!image) continue;
-    frames.push({
-      image,
-      duration: getNumAttr(frameNode, 'duration'),
-      sound: getAttr(frameNode, 'sound'),
-    });
+  // We want to pick exactly ONE sequence of frames.
+  // Many animations have multiple layers (shadow, boat, flag, unit, halo).
+  // We prioritize: primary=yes > boat_frame > frame > anything else ending in _frame.
+
+  const frameSequences = new Map<string, AnimationFrameData[]>();
+  const primaryTags = new Set<string>();
+
+  const collect = (curr: WmlNode) => {
+    for (const child of curr.children) {
+      if (child.tag.endsWith('frame')) {
+        if (child.tag === 'missile_frame') continue;
+        const layer = getNumAttr(child, 'layer');
+        if (layer !== undefined && layer <= 2) continue;
+
+        const rawImage = getAttr(child, 'image');
+        if (!rawImage || rawImage.includes('misc/blank-hex.png')) continue;
+
+        const rawDuration = getNumAttr(child, 'duration');
+        const sound = getAttr(child, 'sound');
+        const isPrimary = getAttr(child, 'primary') === 'yes';
+
+        const cleanedRawImage = cleanImagePath(rawImage);
+        const expandedFrames = parseWmlImageString(
+          cleanedRawImage,
+          rawDuration,
+        );
+
+        if (expandedFrames.length > 0) {
+          if (!frameSequences.has(child.tag)) frameSequences.set(child.tag, []);
+          const seq = frameSequences.get(child.tag)!;
+          for (const f of expandedFrames) {
+            seq.push({ image: f.image, duration: f.duration, sound });
+          }
+          if (isPrimary) primaryTags.add(child.tag);
+        }
+      } else if (
+        child.tag === 'if' ||
+        child.tag === 'else' ||
+        child.tag === 'variation'
+      ) {
+        collect(child);
+      }
+    }
+  };
+
+  collect(node);
+
+  if (frameSequences.size === 0) return [];
+
+  // Priority selection
+  // 1. Tags marked as primary=yes
+  for (const tag of primaryTags) {
+    return frameSequences.get(tag)!;
   }
-  return frames;
+  // 2. boat_frame (for ships)
+  if (frameSequences.has('boat_frame'))
+    return frameSequences.get('boat_frame')!;
+  // 3. standard 'frame'
+  if (frameSequences.has('frame')) return frameSequences.get('frame')!;
+  // 4. Just take the first one found
+  return Array.from(frameSequences.values())[0];
 }
 
 function extractAnimations(node: WmlNode): AnimationData[] {
@@ -364,6 +563,20 @@ function extractAnimations(node: WmlNode): AnimationData[] {
   return animations;
 }
 
+function extractVariant(node: WmlNode): Partial<UnitTypeData> | undefined {
+  const animations = extractAnimations(node);
+  const data: Partial<UnitTypeData> = {
+    name: cleanTranslation(getAttr(node, 'name')),
+    image: cleanImagePath(getAttr(node, 'image')),
+    profile: cleanImagePath(getAttr(node, 'profile')),
+    smallProfile: cleanImagePath(getAttr(node, 'small_profile')),
+    dieSound: getAttr(node, 'die_sound'),
+    animations: animations.length > 0 ? animations : undefined,
+  };
+  const cleaned = removeUndefined(data) as Partial<UnitTypeData>;
+  return Object.keys(cleaned).length > 0 ? cleaned : undefined;
+}
+
 function extractUnitType(
   node: WmlNode,
   sourceFile: string,
@@ -411,24 +624,13 @@ function extractUnitType(
       !m.startsWith('wmlscope:'),
   );
 
-  // Female variant
-  let female: Partial<UnitTypeData> | undefined;
-  const femaleNode = findChild(node, 'female');
-  if (femaleNode) {
-    const femaleAnims = extractAnimations(femaleNode);
-    female = {
-      name: cleanTranslation(getAttr(femaleNode, 'name')),
-      gender: ['female'],
-      image: cleanImagePath(getAttr(femaleNode, 'image')),
-      profile: cleanImagePath(getAttr(femaleNode, 'profile')),
-      smallProfile: cleanImagePath(getAttr(femaleNode, 'small_profile')),
-      dieSound: getAttr(femaleNode, 'die_sound'),
-      animations: femaleAnims.length > 0 ? femaleAnims : undefined,
-    };
-    // Remove undefined fields
-    female = removeUndefined(female) as Partial<UnitTypeData>;
-    if (Object.keys(female).length === 0) female = undefined;
-  }
+  // Variants
+  const male = findChild(node, 'male')
+    ? extractVariant(findChild(node, 'male')!)
+    : undefined;
+  const female = findChild(node, 'female')
+    ? extractVariant(findChild(node, 'female')!)
+    : undefined;
 
   const baseUnitNode = findChild(node, 'base_unit');
   const baseUnitId = baseUnitNode ? getAttr(baseUnitNode, 'id') : undefined;
@@ -437,7 +639,14 @@ function extractUnitType(
 
   let image = cleanImagePath(getAttr(node, 'image')) ?? '';
   if (!image || image.includes('blank-hex') || image.includes('halo/')) {
-    const betterFrame = animations.flatMap((a) => a.frames).find((f) => f.image && !f.image.includes('blank-hex') && !f.image.includes('halo/'));
+    const betterFrame = animations
+      .flatMap((a) => a.frames)
+      .find(
+        (f) =>
+          f.image &&
+          !f.image.includes('blank-hex') &&
+          !f.image.includes('halo/'),
+      );
     if (betterFrame) {
       image = betterFrame.image;
     }
@@ -465,6 +674,7 @@ function extractUnitType(
     abilities: abilities.length > 0 ? abilities : undefined,
     animations: animations.length > 0 ? animations : undefined,
     dieSound: getAttr(node, 'die_sound'),
+    male,
     female,
     macros: significantMacros.length > 0 ? significantMacros : undefined,
     movementCostOverrides,
@@ -479,15 +689,6 @@ function extractUnitType(
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-function cleanTranslation(s: string | undefined): string | undefined {
-  if (s === undefined) return undefined;
-  // Remove race^ and female^ prefixes from translated names
-  let cleaned = s.replace(/^(race|female|race\+female|race\+plural)\^/, '');
-  // Remove any remaining WML markup
-  cleaned = cleaned.replace(/<[^>]+>/g, '');
-  return cleaned;
-}
 
 function removeUndefined(
   obj: Record<string, unknown>,
@@ -677,12 +878,16 @@ function main() {
         if (!ut.movement) ut.movement = baseUt.movement;
         if (!ut.experience) ut.experience = baseUt.experience;
         if (!ut.level) ut.level = baseUt.level;
-        if (!ut.alignment || ut.alignment === 'neutral') ut.alignment = baseUt.alignment;
+        if (!ut.alignment || ut.alignment === 'neutral')
+          ut.alignment = baseUt.alignment;
         if (!ut.cost) ut.cost = baseUt.cost;
         if (!ut.usage) ut.usage = baseUt.usage;
         if (!ut.description) ut.description = baseUt.description;
         if (ut.attacks.length === 0) ut.attacks = [...baseUt.attacks];
-        if (!ut.animations) ut.animations = baseUt.animations ? [...baseUt.animations] : undefined;
+        if (!ut.animations)
+          ut.animations = baseUt.animations
+            ? [...baseUt.animations]
+            : undefined;
       }
     }
   }

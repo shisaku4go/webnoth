@@ -43,9 +43,7 @@ function EncyclopediaPage() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">
-          Unit Encyclopedia
-        </h1>
+        <h1 className="text-3xl font-bold tracking-tight">Unit Encyclopedia</h1>
         <p className="text-muted-foreground">
           Browse all {totalCount} units from Battle for Wesnoth.
         </p>

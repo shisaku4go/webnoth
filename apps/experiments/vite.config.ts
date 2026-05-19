@@ -10,10 +10,7 @@ import { defineConfig } from 'vitest/config';
 // Resolve @webnoth/wesnoth-data assets via import.meta.resolve.
 // This follows the workspace symlink automatically.
 const wesnothDataEntry = import.meta.resolve('@webnoth/wesnoth-data');
-const wesnothDataRoot = resolve(
-  new URL(wesnothDataEntry).pathname,
-  '../..',
-);
+const wesnothDataRoot = resolve(new URL(wesnothDataEntry).pathname, '../..');
 const wesnothAssetsDir = resolve(wesnothDataRoot, 'assets');
 
 /**

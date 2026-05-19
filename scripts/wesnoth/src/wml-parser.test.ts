@@ -102,7 +102,10 @@ describe('parseWml - String Handling and Comments', () => {
     const root = parseWml(wml);
 
     const unit = root.children[0];
-    assert.strictEqual(unit.attributes.description, 'A fierce warrior of the orcs.');
+    assert.strictEqual(
+      unit.attributes.description,
+      'A fierce warrior of the orcs.',
+    );
   });
 
   test('handles multi-line strings with unclosed quotes', () => {
@@ -116,7 +119,10 @@ string."
     const root = parseWml(wml);
 
     const unit = root.children[0];
-    assert.strictEqual(unit.attributes.description, 'This is a\nmulti-line\nstring.');
+    assert.strictEqual(
+      unit.attributes.description,
+      'This is a\nmulti-line\nstring.',
+    );
   });
 });
 

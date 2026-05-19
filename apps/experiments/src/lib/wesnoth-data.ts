@@ -55,7 +55,9 @@ export function getUnitById(id: string): WesnothUnitType | undefined {
 }
 
 export function getUnitsByRace(raceId: string): WesnothUnitType[] {
-  return unitTypes.filter((u) => u.race === raceId && !u.doNotList && !u.hideHelp);
+  return unitTypes.filter(
+    (u) => u.race === raceId && !u.doNotList && !u.hideHelp,
+  );
 }
 
 export function getAllRaces(): WesnothRace[] {
@@ -84,7 +86,9 @@ export function getUnitCountByRace(raceId: string): number {
 export function searchUnits(query: string): WesnothUnitType[] {
   if (!query.trim()) return getAllUnits();
   const lower = query.toLowerCase();
-  return unitTypes.filter((u) => !u.doNotList && !u.hideHelp && u.name.toLowerCase().includes(lower));
+  return unitTypes.filter(
+    (u) => !u.doNotList && !u.hideHelp && u.name.toLowerCase().includes(lower),
+  );
 }
 
 // === Data computation helpers ===

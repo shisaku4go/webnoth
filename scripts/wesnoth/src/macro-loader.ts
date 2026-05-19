@@ -119,4 +119,3 @@ function extractSimpleMacros(
     dictionary.set(macroName, { params: [], body });
   }
 }
-

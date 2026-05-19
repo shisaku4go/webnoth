@@ -99,9 +99,10 @@ function parseMacroArgs(argsString: string): string[] {
  *   " PARAM1 PARAM2"         → { params: ["PARAM1", "PARAM2"], bodyStart: "" }
  *   " PARAM foo={PARAM}#enddef" → { params: ["PARAM"], bodyStart: "foo={PARAM}#enddef" }
  */
-function parseDefineLine(
-  restAfterName: string,
-): { params: string[]; bodyStart: string } {
+function parseDefineLine(restAfterName: string): {
+  params: string[];
+  bodyStart: string;
+} {
   const trimmed = restAfterName.trim();
   if (trimmed.length === 0) {
     return { params: [], bodyStart: '' };
@@ -521,10 +522,7 @@ function hasClosingQuote(s: string): boolean {
  * Resolve constant macro references in a string.
  * Only expands macros with no parameters (constants).
  */
-function expandConstantMacros(
-  value: string,
-  macros: MacroDictionary,
-): string {
+function expandConstantMacros(value: string, macros: MacroDictionary): string {
   let result = value;
   let prev = '';
   let maxLoops = 10;

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { cn } from '@webnoth/ui/lib/utils';
 import type { WesnothUnitType } from '@webnoth/wesnoth-data';
 import { wesnothAssetUrl } from '@/lib/asset-url';
 
@@ -7,21 +5,9 @@ interface UnitPortraitProps {
   unit: WesnothUnitType;
 }
 
-type Variant = 'male' | 'female';
-
 export function UnitPortrait({ unit }: UnitPortraitProps) {
-  const hasFemale = !!unit.female;
-  const [variant, setVariant] = useState<Variant>('male');
-
-  const portraitSrc =
-    variant === 'female' && unit.female?.profile
-      ? unit.female.profile
-      : unit.profile;
-
-  const spriteSrc =
-    variant === 'female' && unit.female?.image
-      ? unit.female.image
-      : unit.image;
+  const portraitSrc = unit.profile;
+  const spriteSrc = unit.image;
 
   return (
     <div className="flex flex-col items-center gap-3" id="unit-portrait">
@@ -46,36 +32,6 @@ export function UnitPortrait({ unit }: UnitPortraitProps) {
           />
         ) : null}
       </div>
-
-      {/* Variant toggle */}
-      {hasFemale && (
-        <div className="flex gap-1 rounded-md border border-border bg-muted/30 p-0.5">
-          <button
-            type="button"
-            onClick={() => setVariant('male')}
-            className={cn(
-              'rounded px-3 py-1 text-xs font-medium transition-colors',
-              variant === 'male'
-                ? 'bg-primary text-primary-foreground'
-                : 'text-muted-foreground hover:text-foreground',
-            )}
-          >
-            ♂ Male
-          </button>
-          <button
-            type="button"
-            onClick={() => setVariant('female')}
-            className={cn(
-              'rounded px-3 py-1 text-xs font-medium transition-colors',
-              variant === 'female'
-                ? 'bg-primary text-primary-foreground'
-                : 'text-muted-foreground hover:text-foreground',
-            )}
-          >
-            ♀ Female
-          </button>
-        </div>
-      )}
     </div>
   );
 }

@@ -100,6 +100,8 @@ export interface WesnothUnitType {
   abilities?: string[];
   animations?: WesnothAnimation[];
   dieSound?: string;
+  /** Male variant overrides (partial) */
+  male?: Partial<WesnothUnitType>;
   /** Female variant overrides (partial) */
   female?: Partial<WesnothUnitType>;
   /**
