@@ -1,6 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
-import { parseWml, WmlNode, MacroDictionary } from './wml-parser.js';
+import { parseWml, WmlNode, MacroDictionary, getNumAttr } from './wml-parser.js';
 
 describe('parseWml - Structural Tests', () => {
   test('parses basic tags and properties', () => {
@@ -255,5 +255,56 @@ describe('parseWml - Python Parser Compatibility Features', () => {
     const root = parseWml(wml);
     const testTag = root.children[0];
     assert.strictEqual(testTag.attributes.foo, 'barbaz');
+  });
+});
+
+describe('WML Attribute Getters - getNumAttr', () => {
+  test('returns undefined for missing attributes', () => {
+    const node: WmlNode = { tag: 'unit', attributes: {}, children: [], macros: [] };
+    assert.strictEqual(getNumAttr(node, 'damage'), undefined);
+  });
+
+  test('parses valid numeric attributes correctly', () => {
+    const node: WmlNode = {
+      tag: 'unit',
+      attributes: {
+        integer: '42',
+        negative: '-15',
+        float: '3.14',
+      },
+      children: [],
+      macros: [],
+    };
+    assert.strictEqual(getNumAttr(node, 'integer'), 42);
+    assert.strictEqual(getNumAttr(node, 'negative'), -15);
+    assert.strictEqual(getNumAttr(node, 'float'), 3.14);
+  });
+
+  test('returns undefined for invalid numeric attributes (NaN)', () => {
+    const node: WmlNode = {
+      tag: 'unit',
+      attributes: {
+        text: 'not-a-number',
+        mixed: '123foo',
+      },
+      children: [],
+      macros: [],
+    };
+    assert.strictEqual(getNumAttr(node, 'text'), undefined);
+    assert.strictEqual(getNumAttr(node, 'mixed'), undefined);
+  });
+
+  test('handles empty and whitespace strings (Number parses them as 0)', () => {
+    const node: WmlNode = {
+      tag: 'unit',
+      attributes: {
+        empty: '',
+        whitespace: '   ',
+      },
+      children: [],
+      macros: [],
+    };
+    assert.strictEqual(getNumAttr(node, 'empty'), 0);
+    assert.strictEqual(getNumAttr(node, 'whitespace'), 0);
   });
 });
