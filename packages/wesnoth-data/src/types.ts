@@ -186,11 +186,33 @@ export interface ProvenanceSourceFile {
   category: string;
 }
 
+// === Era & Faction ===
+
+export interface WesnothEra {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface WesnothFaction {
+  id: string;
+  name: string;
+  image: string;
+  recruit: string[];
+  leader: string[];
+  randomLeader?: string[];
+  terrainLiked?: string[];
+  description?: string;
+  eraId: string;
+}
+
 // === Aggregate ===
 
 export interface WesnothData {
   unitTypes: WesnothUnitType[];
   races: WesnothRace[];
   movetypes: WesnothMovetype[];
+  eras?: WesnothEra[];
+  factions?: WesnothFaction[];
   provenance: WesnothProvenance;
 }

@@ -16,6 +16,8 @@ export type {
   WesnothAnimationFrame,
   WesnothAttack,
   WesnothData,
+  WesnothEra,
+  WesnothFaction,
   WesnothMovetype,
   WesnothProvenance,
   WesnothRace,

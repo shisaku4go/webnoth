@@ -20,6 +20,14 @@
       "development": "./src/generated/movetypes.ts",
       "default": "./src/generated/movetypes.ts"
     },
+    "./eras": {
+      "development": "./src/generated/eras.ts",
+      "default": "./src/generated/eras.ts"
+    },
+    "./factions": {
+      "development": "./src/generated/factions.ts",
+      "default": "./src/generated/factions.ts"
+    },
     "./provenance": {
       "development": "./src/generated/provenance.ts",
       "default": "./src/generated/provenance.ts"
