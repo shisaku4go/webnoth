@@ -11,7 +11,7 @@
  *   pnpm run extract -- --wesnoth-root <path-to-wesnoth>
  */
 
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import {
   existsSync,
   mkdirSync,
@@ -785,7 +785,7 @@ function main() {
   // Get git revision
   let revision = 'unknown';
   try {
-    revision = execSync('git rev-parse HEAD', { cwd: wesnothRoot })
+    revision = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: wesnothRoot })
       .toString()
       .trim();
   } catch {
