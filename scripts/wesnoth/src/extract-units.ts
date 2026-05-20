@@ -14,6 +14,7 @@
 import { execFileSync } from 'node:child_process';
 import {
   existsSync,
+  promises as fsPromises,
   mkdirSync,
   readdirSync,
   readFileSync,
@@ -414,7 +415,7 @@ function parseWmlImageString(
     const numFrames = Math.max(expandedImages.length, expandedDurations.length);
     for (let i = 0; i < numFrames; i++) {
       const img = expandedImages[Math.min(i, expandedImages.length - 1)];
-      let dur: number | undefined = undefined;
+      let dur: number | undefined;
 
       if (expandedDurations.length > 0) {
         dur = expandedDurations[Math.min(i, expandedDurations.length - 1)];
@@ -766,7 +767,7 @@ export const provenance: WesnothProvenance = ${stringifyData(provenance)};
 // Main
 // ---------------------------------------------------------------------------
 
-function main() {
+async function main() {
   const { wesnothRoot } = parseArgs();
   console.log(`\nWesnoth root: ${wesnothRoot}`);
 
@@ -833,26 +834,38 @@ function main() {
   const unitFiles = collectCfgFiles(unitsDir);
   console.log(`  Found ${unitFiles.length} .cfg files`);
 
-  const unitTypes: UnitTypeData[] = [];
   let parseErrors = 0;
 
-  for (const filePath of unitFiles) {
-    try {
-      const content = readFileSync(filePath, 'utf-8');
-      const tree = parseWml(content, macros);
-      trackFile(wesnothRoot, filePath, 'unit_type');
+  const CONCURRENCY_LIMIT = 50;
+  const unitTypesUnsorted: UnitTypeData[] = [];
 
-      // Find all [unit_type] nodes (usually 1 per file)
-      const unitTypeNodes = findChildren(tree, 'unit_type');
-      for (const utNode of unitTypeNodes) {
-        const ut = extractUnitType(utNode, filePath, wesnothRoot);
-        if (ut) unitTypes.push(ut);
-      }
-    } catch (err) {
-      parseErrors++;
-      console.error(`  Error parsing ${basename(filePath)}: ${err}`);
-    }
+  for (let i = 0; i < unitFiles.length; i += CONCURRENCY_LIMIT) {
+    const chunk = unitFiles.slice(i, i + CONCURRENCY_LIMIT);
+    await Promise.all(
+      chunk.map(async (filePath) => {
+        try {
+          const content = await fsPromises.readFile(filePath, 'utf-8');
+          const tree = parseWml(content, macros);
+          trackFile(wesnothRoot, filePath, 'unit_type');
+
+          // Find all [unit_type] nodes (usually 1 per file)
+          const unitTypeNodes = findChildren(tree, 'unit_type');
+          for (const utNode of unitTypeNodes) {
+            const ut = extractUnitType(utNode, filePath, wesnothRoot);
+            if (ut) unitTypesUnsorted.push(ut);
+          }
+        } catch (err) {
+          parseErrors++;
+          console.error(`  Error parsing ${basename(filePath)}: ${err}`);
+        }
+      }),
+    );
   }
+
+  const unitTypes = unitTypesUnsorted;
+
+  // Sort unit types by id for stable output
+  unitTypes.sort((a, b) => a.id.localeCompare(b.id));
 
   console.log(
     `  Extracted ${unitTypes.length} unit types (${parseErrors} errors)`,
@@ -924,4 +937,4 @@ function main() {
   console.log(`  Source files tracked: ${sourceFiles.length}`);
 }
 
-main();
+main().catch(console.error);
