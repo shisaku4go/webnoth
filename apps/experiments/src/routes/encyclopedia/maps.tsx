@@ -1,25 +1,25 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { useState, useMemo, useEffect } from 'react';
-import {
-  Map as MapIcon,
-  Search,
-  ChevronRight,
-  ChevronDown,
-  Flag,
-  BookOpen,
-  Info,
-  ArrowLeft,
-  Maximize2,
-} from 'lucide-react';
+import { Badge } from '@webnoth/ui/components/badge';
+import { Card, CardContent } from '@webnoth/ui/components/card';
+import { Input } from '@webnoth/ui/components/input';
+import { ScrollArea } from '@webnoth/ui/components/scroll-area';
+import { Separator } from '@webnoth/ui/components/separator';
 import { campaigns } from '@webnoth/wesnoth-data/campaigns';
 import { multiplayerMaps } from '@webnoth/wesnoth-data/multiplayer';
 import { terrains } from '@webnoth/wesnoth-data/terrains';
+import {
+  ArrowLeft,
+  BookOpen,
+  ChevronDown,
+  ChevronRight,
+  Flag,
+  Info,
+  Map as MapIcon,
+  Maximize2,
+  Search,
+} from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import { MapViewer, parseCell } from '@/components/map-viewer/MapViewer';
-import { Input } from '@webnoth/ui/components/input';
-import { ScrollArea } from '@webnoth/ui/components/scroll-area';
-import { Badge } from '@webnoth/ui/components/badge';
-import { Card, CardContent } from '@webnoth/ui/components/card';
-import { Separator } from '@webnoth/ui/components/separator';
 import { wesnothAssetUrl } from '@/lib/asset-url';
 
 export const Route = createFileRoute('/encyclopedia/maps')({
@@ -33,9 +33,13 @@ interface SelectedMapState {
 }
 
 function MapEncyclopediaPage() {
-  const [activeTab, setActiveTab] = useState<'campaigns' | 'multiplayer'>('campaigns');
+  const [activeTab, setActiveTab] = useState<'campaigns' | 'multiplayer'>(
+    'campaigns',
+  );
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedCampaigns, setExpandedCampaigns] = useState<Record<string, boolean>>({});
+  const [expandedCampaigns, setExpandedCampaigns] = useState<
+    Record<string, boolean>
+  >({});
   const [selectedMap, setSelectedMap] = useState<SelectedMapState | null>(null);
   const [hoveredHex, setHoveredHex] = useState<{
     x: number;
@@ -80,9 +84,7 @@ function MapEncyclopediaPage() {
     if (!searchQuery.trim()) return multiplayerMaps;
     const q = searchQuery.toLowerCase();
     return multiplayerMaps.filter(
-      (m) =>
-        m.name.toLowerCase().includes(q) ||
-        m.id.toLowerCase().includes(q),
+      (m) => m.name.toLowerCase().includes(q) || m.id.toLowerCase().includes(q),
     );
   }, [searchQuery]);
 
@@ -102,7 +104,9 @@ function MapEncyclopediaPage() {
     if (!selectedMap) return null;
     if (selectedMap.type === 'campaign') {
       const campaign = campaigns.find((c) => c.id === selectedMap.campaignId);
-      return campaign?.scenarios.find((s) => s.id === selectedMap.mapId) || null;
+      return (
+        campaign?.scenarios.find((s) => s.id === selectedMap.mapId) || null
+      );
     } else {
       return multiplayerMaps.find((m) => m.id === selectedMap.mapId) || null;
     }
@@ -110,7 +114,8 @@ function MapEncyclopediaPage() {
 
   // Get active campaign name
   const currentCampaignName = useMemo(() => {
-    if (!selectedMap || selectedMap.type !== 'campaign') return 'Multiplayer Maps';
+    if (!selectedMap || selectedMap.type !== 'campaign')
+      return 'Multiplayer Maps';
     return (
       campaigns.find((c) => c.id === selectedMap.campaignId)?.name ?? 'Campaign'
     );
@@ -171,7 +176,8 @@ function MapEncyclopediaPage() {
             Map Encyclopedia
           </h1>
           <p className="text-sm text-muted-foreground">
-            Explore and inspect layouts, player starts, and terrain details from campaigns and multiplayer setups.
+            Explore and inspect layouts, player starts, and terrain details from
+            campaigns and multiplayer setups.
           </p>
         </div>
       </div>
@@ -230,7 +236,9 @@ function MapEncyclopediaPage() {
             <div className="space-y-1.5">
               {activeTab === 'campaigns' ? (
                 filteredCampaigns.length === 0 ? (
-                  <p className="text-xs text-muted-foreground text-center py-4">No campaigns found</p>
+                  <p className="text-xs text-muted-foreground text-center py-4">
+                    No campaigns found
+                  </p>
                 ) : (
                   filteredCampaigns.map((camp) => {
                     const isExpanded = expandedCampaigns[camp.id];
@@ -249,7 +257,8 @@ function MapEncyclopediaPage() {
                                 className="size-4 shrink-0 object-contain"
                                 onError={(e) => {
                                   // Fallback if image fails to load
-                                  (e.target as HTMLElement).style.display = 'none';
+                                  (e.target as HTMLElement).style.display =
+                                    'none';
                                 }}
                               />
                             ) : (
@@ -298,7 +307,9 @@ function MapEncyclopediaPage() {
                   })
                 )
               ) : filteredMultiplayer.length === 0 ? (
-                <p className="text-xs text-muted-foreground text-center py-4">No maps found</p>
+                <p className="text-xs text-muted-foreground text-center py-4">
+                  No maps found
+                </p>
               ) : (
                 filteredMultiplayer.map((m) => {
                   const isSelected =
@@ -345,10 +356,16 @@ function MapEncyclopediaPage() {
                     </h2>
                   </div>
                   <div className="flex flex-wrap gap-2 items-center">
-                    <Badge variant="outline" className="text-xs font-medium tabular-nums py-0.5 px-2 bg-background/50 border-border/60">
+                    <Badge
+                      variant="outline"
+                      className="text-xs font-medium tabular-nums py-0.5 px-2 bg-background/50 border-border/60"
+                    >
                       Dimensions: {currentMap.width} × {currentMap.height}
                     </Badge>
-                    <Badge variant="outline" className="text-xs font-medium py-0.5 px-2 bg-background/50 border-border/60">
+                    <Badge
+                      variant="outline"
+                      className="text-xs font-medium py-0.5 px-2 bg-background/50 border-border/60"
+                    >
                       Starts: {startingPositions.length}
                     </Badge>
                   </div>
@@ -369,8 +386,13 @@ function MapEncyclopediaPage() {
             <div className="flex-1 flex items-center justify-center border border-dashed rounded-xl p-8 bg-card/20">
               <div className="text-center space-y-2">
                 <MapIcon className="size-12 text-muted-foreground/40 mx-auto" />
-                <p className="text-sm font-semibold text-muted-foreground">No map selected</p>
-                <p className="text-xs text-muted-foreground/60">Please choose a campaign scenario or multiplayer map from the sidebar.</p>
+                <p className="text-sm font-semibold text-muted-foreground">
+                  No map selected
+                </p>
+                <p className="text-xs text-muted-foreground/60">
+                  Please choose a campaign scenario or multiplayer map from the
+                  sidebar.
+                </p>
               </div>
             </div>
           )}
@@ -422,7 +444,9 @@ function MapEncyclopediaPage() {
             </h3>
             <ScrollArea className="max-h-36 pr-1">
               {startingPositions.length === 0 ? (
-                <p className="text-xs text-muted-foreground italic">No starting positions defined on this map.</p>
+                <p className="text-xs text-muted-foreground italic">
+                  No starting positions defined on this map.
+                </p>
               ) : (
                 <div className="grid grid-cols-2 gap-1.5">
                   {startingPositions.map((pos) => (
@@ -430,7 +454,9 @@ function MapEncyclopediaPage() {
                       key={`start-${pos.id}`}
                       className="flex items-center justify-between gap-1.5 bg-muted/30 border border-border/30 rounded px-2 py-1 text-[11px] font-medium"
                     >
-                      <span className="text-amber-500 font-bold shrink-0">Player {pos.id}</span>
+                      <span className="text-amber-500 font-bold shrink-0">
+                        Player {pos.id}
+                      </span>
                       <span className="text-muted-foreground font-mono tabular-nums text-[10px]">
                         ({pos.x}, {pos.y})
                       </span>
@@ -451,7 +477,9 @@ function MapEncyclopediaPage() {
             </h3>
             <ScrollArea className="flex-1 pr-1 max-h-[300px] lg:max-h-[calc(100vh-28rem)]">
               {usedTerrains.length === 0 ? (
-                <p className="text-xs text-muted-foreground italic">No terrains found.</p>
+                <p className="text-xs text-muted-foreground italic">
+                  No terrains found.
+                </p>
               ) : (
                 <div className="space-y-1.5">
                   {usedTerrains.map((terrain) => (
@@ -462,7 +490,9 @@ function MapEncyclopediaPage() {
                       <div className="size-8 rounded bg-zinc-900 border border-border/30 flex items-center justify-center shrink-0 overflow-hidden relative">
                         {terrain.symbolImage ? (
                           <img
-                            src={wesnothAssetUrl(`terrain/${terrain.symbolImage}.png`)}
+                            src={wesnothAssetUrl(
+                              `terrain/${terrain.symbolImage}.png`,
+                            )}
                             alt=""
                             className="size-7 object-contain"
                             onError={(e) => {
@@ -481,11 +511,12 @@ function MapEncyclopediaPage() {
                           <span className="text-[9px] font-mono text-muted-foreground bg-muted px-1 rounded">
                             {terrain.code}
                           </span>
-                          {terrain.editorGroup && terrain.editorGroup.length > 0 && (
-                            <span className="text-[8px] text-amber-500 font-semibold uppercase tracking-wider">
-                              {terrain.editorGroup[0]}
-                            </span>
-                          )}
+                          {terrain.editorGroup &&
+                            terrain.editorGroup.length > 0 && (
+                              <span className="text-[8px] text-amber-500 font-semibold uppercase tracking-wider">
+                                {terrain.editorGroup[0]}
+                              </span>
+                            )}
                         </div>
                       </div>
                     </div>

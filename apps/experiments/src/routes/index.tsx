@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@webnoth/ui/components/card';
-import { BookOpen, Swords, Map as MapIcon } from 'lucide-react';
+import { BookOpen, Map as MapIcon, Swords } from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -88,7 +88,9 @@ function HomePage() {
               Map Encyclopedia
             </CardTitle>
             <CardDescription className="text-sm mt-1.5 leading-relaxed">
-              Browse campaign scenarios and multiplayer maps. View starting positions, terrain properties, and map dimensions rendered in WebGL.
+              Browse campaign scenarios and multiplayer maps. View starting
+              positions, terrain properties, and map dimensions rendered in
+              WebGL.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-0">
