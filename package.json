@@ -7,6 +7,7 @@
   "license": "GPL-2.0-or-later",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "prepare": "husky",
     "build": "pnpm -r build",
     "typecheck": "pnpm -r exec tsc --noEmit",
     "lint": "biome lint .",
@@ -18,6 +19,8 @@
     "pnpm": ">=11"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15"
+    "@biomejs/biome": "^2.4.15",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5"
   }
 }

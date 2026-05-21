@@ -8,6 +8,7 @@
  *   pnpm --filter @webnoth/scripts-wesnoth run extract-maps -- --wesnoth-root <path-to-wesnoth>
  */
 
+import { execFileSync } from 'node:child_process';
 import {
   existsSync,
   mkdirSync,
@@ -372,6 +373,24 @@ export const ${varName}: ${typeName}[] = ${JSON.stringify(data, null, 2)};
     'WesnothMap',
     multiplayerScenarios,
   );
+
+  console.log('\nStep 5: Formatting generated files with Biome...');
+  try {
+    execFileSync(
+      'npx',
+      [
+        'biome',
+        'check',
+        '--write',
+        '--no-errors-on-unmatched',
+        join(outDir, 'campaigns.ts'),
+        join(outDir, 'multiplayer.ts'),
+      ],
+      { stdio: 'inherit' },
+    );
+  } catch (err) {
+    console.error('Failed to run Biome formatter automatically:', err);
+  }
 
   console.log('\nDone! ✓');
 }

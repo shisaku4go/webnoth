@@ -1083,6 +1083,28 @@ async function main() {
   );
   writeProvenanceFile(outDir, wesnothRoot, revision);
 
+  console.log('\nPhase 5: Formatting generated files with Biome...');
+  try {
+    execFileSync(
+      'npx',
+      [
+        'biome',
+        'check',
+        '--write',
+        '--no-errors-on-unmatched',
+        join(outDir, 'units.ts'),
+        join(outDir, 'races.ts'),
+        join(outDir, 'movetypes.ts'),
+        join(outDir, 'eras.ts'),
+        join(outDir, 'factions.ts'),
+        join(outDir, 'provenance.ts'),
+      ],
+      { stdio: 'inherit' },
+    );
+  } catch (err) {
+    console.error('Failed to run Biome formatter automatically:', err);
+  }
+
   console.log('\nDone! ✓');
   console.log(`  Output directory: ${outDir}`);
   console.log(`  Unit types: ${unitTypes.length}`);
