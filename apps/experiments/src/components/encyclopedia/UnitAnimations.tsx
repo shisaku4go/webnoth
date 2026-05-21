@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
-import { Assets, type Texture, Sprite, Container } from 'pixi.js';
 import { Application, extend, useTick } from '@pixi/react';
 import type {
-  WesnothUnitType,
   WesnothAnimationFrame,
+  WesnothUnitType,
 } from '@webnoth/wesnoth-data';
+import { Assets, Container, Sprite, type Texture } from 'pixi.js';
+import { useEffect, useRef, useState } from 'react';
 import { wesnothAssetUrl } from '@/lib/asset-url';
 
 // Register Pixi elements for React
@@ -91,7 +91,8 @@ export function UnitAnimations({ unit }: UnitAnimationsProps) {
 
           return (
             <button
-              key={idx}
+              // biome-ignore lint/suspicious/noArrayIndexKey: static animation list
+              key={`${anim.type}-${anim.filterAttack || 'default'}-${idx}`}
               type="button"
               onClick={() => setSelectedAnimIndex(idx)}
               className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
@@ -149,13 +150,13 @@ function Animator({
   isPlaying: boolean;
 }) {
   const [currentFrameIdx, setCurrentFrameIdx] = useState(0);
-  const [elapsed, setElapsed] = useState(0);
+  const [_elapsed, setElapsed] = useState(0);
 
   // Reset when frames change
   useEffect(() => {
     setCurrentFrameIdx(0);
     setElapsed(0);
-  }, [frames]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useTick((ticker) => {
     if (!isPlaying || frames.length === 0) return;
@@ -180,14 +181,14 @@ function Animator({
   const safeFrameIdx = currentFrameIdx < frames.length ? currentFrameIdx : 0;
   const frame = frames[safeFrameIdx];
 
-  if (!frame || !frame.image) return null;
+  if (!frame?.image) return null;
 
   const url = wesnothAssetUrl(frame.image);
   const texture = textures[url];
 
   // If the texture isn't ready, don't try to render it.
   // PixiJS v8 errors out if a sprite has a null texture or an invalid source.
-  if (!texture || !texture.source) return null;
+  if (!texture?.source) return null;
 
   // Determine scale to fit height nicely
   const targetHeight = 250;

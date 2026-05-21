@@ -1,26 +1,39 @@
-import type { Alignment, DamageType, WesnothAttack } from '@webnoth/wesnoth-data';
+import type {
+  Alignment,
+  DamageType,
+  WesnothAttack,
+} from '@webnoth/wesnoth-data';
 import type { CombatContext, CombatUnitState } from './types';
 
 /**
  * Mathematically precise Wesnoth combat calculations.
  * Stateless pure functions modeled after C++ source code.
  */
-export class WesnothCombatCore {
+export const WesnothCombatCore = {
   /**
    * Helper to round damage using Wesnoth's integer rounding rules:
    * Round to nearest integer. If the divisor is > 1 and modifier > divisor,
    * we subtract 1 from the rounding constant. Always returns at least 1 unless base is 0.
    */
-  static roundDamage(baseDamage: number, multiplier: number, divisor: number): number {
+  roundDamage(baseDamage: number, multiplier: number, divisor: number): number {
     if (baseDamage === 0) return 0;
-    const rounding = Math.floor(divisor / 2) - (multiplier <= divisor || divisor === 1 ? 0 : 1);
-    return Math.max(1, Math.floor((baseDamage * multiplier + rounding) / divisor));
-  }
+    const rounding =
+      Math.floor(divisor / 2) -
+      (multiplier <= divisor || divisor === 1 ? 0 : 1);
+    return Math.max(
+      1,
+      Math.floor((baseDamage * multiplier + rounding) / divisor),
+    );
+  },
 
   /**
    * Computes the alignment modifier (Time of Day bonus/penalty) as a percentage.
    */
-  static getAlignmentBonus(alignment: Alignment, lawfulBonus: number, hasFearless: boolean): number {
+  getAlignmentBonus(
+    alignment: Alignment,
+    lawfulBonus: number,
+    hasFearless: boolean,
+  ): number {
     let bonus = 0;
     if (alignment === 'lawful') {
       bonus = lawfulBonus;
@@ -37,17 +50,17 @@ export class WesnothCombatCore {
       return 0;
     }
     return bonus;
-  }
+  },
 
   /**
    * Calculates the final damage a single hit from the attacker will deal to the defender.
    * Returns both the final damage and a breakdown of the math.
    */
-  static calculateDamage(
+  calculateDamage(
     attacker: CombatUnitState,
     defender: CombatUnitState,
     weapon: WesnothAttack,
-    defenderWeapon: WesnothAttack | null,
+    _defenderWeapon: WesnothAttack | null,
     context: CombatContext,
     isAttackingSide: boolean, // true if attacker is active unit on their turn
   ): { damage: number; breakdown: string[] } {
@@ -60,11 +73,17 @@ export class WesnothCombatCore {
 
     // 1. Time of Day alignment bonus
     const hasFearless = attacker.traits.includes('fearless');
-    const alignmentBonus = this.getAlignmentBonus(attacker.alignment, context.lawfulBonus, hasFearless);
+    const alignmentBonus = WesnothCombatCore.getAlignmentBonus(
+      attacker.alignment,
+      context.lawfulBonus,
+      hasFearless,
+    );
     if (alignmentBonus !== 0) {
       const alignmentMult = 100 + alignmentBonus;
       multiplier = Math.floor((multiplier * alignmentMult) / 100);
-      breakdown.push(`Time of Day (${attacker.alignment}${hasFearless ? ' + fearless' : ''}): ${alignmentBonus > 0 ? '+' : ''}${alignmentBonus}%`);
+      breakdown.push(
+        `Time of Day (${attacker.alignment}${hasFearless ? ' + fearless' : ''}): ${alignmentBonus > 0 ? '+' : ''}${alignmentBonus}%`,
+      );
     } else {
       breakdown.push(`Time of Day (${attacker.alignment}): no modifier`);
     }
@@ -75,10 +94,12 @@ export class WesnothCombatCore {
     // For now we assume leadership bonus is applied directly if a "leadership_X" trait or ability is present.
     // Since leadership is usually +25% per level difference, let's look for leadership in traits.
     // E.g., leadership_25 = +25%, leadership_50 = +50%, etc.
-    const leadershipTrait = attacker.traits.find((t) => t.startsWith('leadership_'));
+    const leadershipTrait = attacker.traits.find((t) =>
+      t.startsWith('leadership_'),
+    );
     if (leadershipTrait) {
       const bonusPct = parseInt(leadershipTrait.replace('leadership_', ''), 10);
-      if (!isNaN(bonusPct) && bonusPct > 0) {
+      if (!Number.isNaN(bonusPct) && bonusPct > 0) {
         multiplier = Math.floor((multiplier * (100 + bonusPct)) / 100);
         breakdown.push(`Leadership: +${bonusPct}%`);
       }
@@ -99,10 +120,15 @@ export class WesnothCombatCore {
     // Let's assume the state passes defender resistances, or we look it up.
     // In our system, defender's resistance is fetched by type.
     // Let's check defender's resistance modifier:
-    const resistancePct = this.getUnitResistanceTo(defender, weapon.type);
+    const resistancePct = WesnothCombatCore.getUnitResistanceTo(
+      defender,
+      weapon.type,
+    );
     if (resistancePct !== 100) {
       multiplier = Math.floor((multiplier * resistancePct) / 100);
-      breakdown.push(`Resistance (${weapon.type}): ${resistancePct}% damage taken (${100 - resistancePct}% resistant)`);
+      breakdown.push(
+        `Resistance (${weapon.type}): ${resistancePct}% damage taken (${100 - resistancePct}% resistant)`,
+      );
     } else {
       breakdown.push(`Resistance (${weapon.type}): 100% (neutral)`);
     }
@@ -114,37 +140,48 @@ export class WesnothCombatCore {
       breakdown.push('Slowed: damage halved (divisor = 20000)');
     }
 
-    const finalDamage = this.roundDamage(baseDamage, multiplier, divisor);
-    breakdown.push(`Final damage calculation: round(${baseDamage} * ${multiplier} / ${divisor}) = ${finalDamage}`);
+    const finalDamage = WesnothCombatCore.roundDamage(
+      baseDamage,
+      multiplier,
+      divisor,
+    );
+    breakdown.push(
+      `Final damage calculation: round(${baseDamage} * ${multiplier} / ${divisor}) = ${finalDamage}`,
+    );
 
     return { damage: finalDamage, breakdown };
-  }
+  },
 
   /**
    * Helper to look up unit resistance percentage.
    * Currently placeholder logic, but we can compute it using movetypes.ts or lookups.
    */
-  static getUnitResistanceTo(unit: CombatUnitState, damageType: DamageType): number {
+  getUnitResistanceTo(unit: CombatUnitState, damageType: DamageType): number {
     // In our system, this will be handled by WesnothBattleManager which resolves unit and movetype details.
     // For stateless calculation, if a resistance is injected or we resolve it, we apply it.
     // Let's support injecting resistance via unit.traits or standard unit lookup.
     // We will pass the resistance value if available in unit state, or use a default 100.
     // We will check if the unit state has a resistance override map or we can resolve it in the manager.
     // Let's look for a trait like `resistance_pierce_80` or resolve from the global data.
-    const resistanceOverride = unit.traits.find((t) => t.startsWith(`resistance_${damageType}_`));
+    const resistanceOverride = unit.traits.find((t) =>
+      t.startsWith(`resistance_${damageType}_`),
+    );
     if (resistanceOverride) {
-      const val = parseInt(resistanceOverride.replace(`resistance_${damageType}_`, ''), 10);
-      if (!isNaN(val)) return val;
+      const val = parseInt(
+        resistanceOverride.replace(`resistance_${damageType}_`, ''),
+        10,
+      );
+      if (!Number.isNaN(val)) return val;
     }
     return 100;
-  }
+  },
 
   /**
    * Calculates the Chance to Hit (CTH) as a percentage.
    */
-  static calculateCTH(
-    attacker: CombatUnitState,
-    defender: CombatUnitState,
+  calculateCTH(
+    _attacker: CombatUnitState,
+    _defender: CombatUnitState,
     weapon: WesnothAttack,
     defenderDefenseOnTerrain: number, // 0 to 100 (percentage defense)
   ): { cth: number; breakdown: string[] } {
@@ -158,12 +195,14 @@ export class WesnothCombatCore {
 
     // Base chance to hit is defender's hit probability (100% - defense%)
     const baseCth = 100 - defenderDefenseOnTerrain;
-    breakdown.push(`Base CTH (100% - ${defenderDefenseOnTerrain}% defender defense): ${baseCth}%`);
+    breakdown.push(
+      `Base CTH (100% - ${defenderDefenseOnTerrain}% defender defense): ${baseCth}%`,
+    );
 
     // Accuracy and parry modifiers
     // (In Wesnoth, accuracy is attacker weapon accuracy, parry is defender weapon parry)
     let accuracy = 0;
-    let parry = 0;
+    const parry = 0;
 
     // Look for accuracy / parry values from weapon traits/specials
     // E.g., Honed accuracy +10%
@@ -173,7 +212,9 @@ export class WesnothCombatCore {
     }
 
     let cth = Math.min(100, Math.max(0, baseCth + accuracy - parry));
-    breakdown.push(`Adjusted CTH: clamp(${baseCth} + ${accuracy} - ${parry}) = ${cth}%`);
+    breakdown.push(
+      `Adjusted CTH: clamp(${baseCth} + ${accuracy} - ${parry}) = ${cth}%`,
+    );
 
     // Marksman floor
     if (weapon.specials?.includes('marksman')) {
@@ -186,12 +227,16 @@ export class WesnothCombatCore {
     }
 
     return { cth, breakdown };
-  }
+  },
 
   /**
    * Calculates number of strikes scaled by Swarm special if applicable.
    */
-  static calculateSwarmBlows(weapon: WesnothAttack, hp: number, maxHp: number): number {
+  calculateSwarmBlows(
+    weapon: WesnothAttack,
+    hp: number,
+    maxHp: number,
+  ): number {
     const defaultStrikes = weapon.number;
     if (!weapon.specials?.includes('swarm')) {
       return defaultStrikes;
@@ -207,23 +252,27 @@ export class WesnothCombatCore {
     return maxBlows < minBlows
       ? minBlows - Math.floor(((minBlows - maxBlows) * hp) / maxHp)
       : minBlows + Math.floor(((maxBlows - minBlows) * hp) / maxHp);
-  }
+  },
 
   /**
    * Calculates health drained by the striker.
    */
-  static calculateDrain(damageDealt: number, weapon: WesnothAttack, defenderIsUndead: boolean): number {
+  calculateDrain(
+    damageDealt: number,
+    weapon: WesnothAttack,
+    defenderIsUndead: boolean,
+  ): number {
     if (!weapon.specials?.includes('drain') || defenderIsUndead) {
       return 0;
     }
     // Default drain is 50% of damage dealt
     return Math.floor(damageDealt * 0.5);
-  }
+  },
 
   /**
    * Calculates XP earned after combat engagement.
    */
-  static calculateXP(
+  calculateXP(
     attacker: CombatUnitState,
     defender: CombatUnitState,
     isKill: boolean,
@@ -245,5 +294,5 @@ export class WesnothCombatCore {
       const defenderXp = attacker.level === 0 ? 0 : attacker.level;
       return { attackerXp, defenderXp };
     }
-  }
-}
+  },
+} as const;

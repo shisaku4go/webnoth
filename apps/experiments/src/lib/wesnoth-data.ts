@@ -1,25 +1,25 @@
 import type {
   DamageType,
+  WesnothEra,
+  WesnothFaction,
   WesnothMovetype,
   WesnothRace,
   WesnothUnitType,
-  WesnothEra,
-  WesnothFaction,
 } from '@webnoth/wesnoth-data';
+import { eras } from '@webnoth/wesnoth-data/eras';
+import { factions } from '@webnoth/wesnoth-data/factions';
 import { movetypes } from '@webnoth/wesnoth-data/movetypes';
 import { races } from '@webnoth/wesnoth-data/races';
 import { unitTypes } from '@webnoth/wesnoth-data/units';
-import { eras } from '@webnoth/wesnoth-data/eras';
-import { factions } from '@webnoth/wesnoth-data/factions';
 
 // Re-export types for convenience
 export type {
   DamageType,
+  WesnothEra,
+  WesnothFaction,
   WesnothMovetype,
   WesnothRace,
   WesnothUnitType,
-  WesnothEra,
-  WesnothFaction,
 };
 
 // === Lookup indexes (computed once at module load) ===
@@ -70,13 +70,13 @@ for (const faction of factions) {
   const queue = [...faction.recruit, ...faction.leader];
 
   while (queue.length > 0) {
-    const id = queue.shift()!;
-    if (unitIds.has(id)) continue;
+    const id = queue.shift();
+    if (!id || unitIds.has(id)) continue;
 
     unitIds.add(id);
 
     const unit = unitById.get(id);
-    if (unit && unit.advancesTo) {
+    if (unit?.advancesTo) {
       for (const adv of unit.advancesTo) {
         if (adv && adv !== 'null' && !unitIds.has(adv)) {
           queue.push(adv);

@@ -304,7 +304,7 @@ function cleanImagePath(s: string | undefined): string | undefined {
     cleaned.includes('~BLIT(')
   ) {
     const match = cleaned.match(/~BLIT\s*\(\s*"?([^"~)]+)/);
-    if (match && match[1]) {
+    if (match?.[1]) {
       cleaned = match[1].trim();
     }
   }
@@ -761,7 +761,7 @@ export const ${varName}: ${typeName}[] = ${stringifyData(data)};
 
 function writeProvenanceFile(
   outDir: string,
-  wesnothRoot: string,
+  _wesnothRoot: string,
   revision: string,
 ): void {
   const importPath = '../types.ts';

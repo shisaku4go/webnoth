@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { WesnothCombatCore } from '../combat-core';
+import type { WesnothAttack, WesnothUnitType } from '@webnoth/wesnoth-data';
+import { describe, expect, it } from 'vitest';
 import { WesnothBattleManager } from '../battle-manager';
-import type { WesnothUnitType, WesnothAttack } from '@webnoth/wesnoth-data';
-import type { CombatUnitState, CombatContext } from '../types';
+import { WesnothCombatCore } from '../combat-core';
+import type { CombatUnitState } from '../types';
 
 describe('WesnothCombatCore Math Formulas', () => {
   it('roundDamage should correctly round and enforce minimum damage of 1', () => {
@@ -21,27 +21,60 @@ describe('WesnothCombatCore Math Formulas', () => {
   it('calculateCTH should clamp values and respect magical/marksman specials', () => {
     const attacker = { traits: [], statuses: {} } as unknown as CombatUnitState;
     const defender = { traits: [], statuses: {} } as unknown as CombatUnitState;
-    const normalAttack: WesnothAttack = { name: 'Sword', description: '', type: 'blade', range: 'melee', damage: 8, number: 4 };
+    const normalAttack: WesnothAttack = {
+      name: 'Sword',
+      description: '',
+      type: 'blade',
+      range: 'melee',
+      damage: 8,
+      number: 4,
+    };
 
     // Standard defense: defender defense on terrain is 40% (chance to be hit is 60%)
     // base cth = 100 - defender defense percentage
     // Wait! Defender defense on terrain resolves to defense percentage (e.g. 40% defense means 60% chance to be hit).
     // Let's pass 40 as defenderDefenseOnTerrain. base cth = 100 - 40 = 60%.
-    expect(WesnothCombatCore.calculateCTH(attacker, defender, normalAttack, 40).cth).toBe(60);
+    expect(
+      WesnothCombatCore.calculateCTH(attacker, defender, normalAttack, 40).cth,
+    ).toBe(60);
 
     // Magical special overrides CTH to 70%
-    const magicalAttack: WesnothAttack = { ...normalAttack, specials: ['magical'] };
-    expect(WesnothCombatCore.calculateCTH(attacker, defender, magicalAttack, 20).cth).toBe(70);
-    expect(WesnothCombatCore.calculateCTH(attacker, defender, magicalAttack, 80).cth).toBe(70);
+    const magicalAttack: WesnothAttack = {
+      ...normalAttack,
+      specials: ['magical'],
+    };
+    expect(
+      WesnothCombatCore.calculateCTH(attacker, defender, magicalAttack, 20).cth,
+    ).toBe(70);
+    expect(
+      WesnothCombatCore.calculateCTH(attacker, defender, magicalAttack, 80).cth,
+    ).toBe(70);
 
     // Marksman special provides a floor of 60% CTH
-    const marksmanAttack: WesnothAttack = { ...normalAttack, specials: ['marksman'] };
-    expect(WesnothCombatCore.calculateCTH(attacker, defender, marksmanAttack, 30).cth).toBe(70); // 100 - 30 = 70% (>= 60%)
-    expect(WesnothCombatCore.calculateCTH(attacker, defender, marksmanAttack, 60).cth).toBe(60); // 100 - 60 = 40% (< 60%, raised to 60)
+    const marksmanAttack: WesnothAttack = {
+      ...normalAttack,
+      specials: ['marksman'],
+    };
+    expect(
+      WesnothCombatCore.calculateCTH(attacker, defender, marksmanAttack, 30)
+        .cth,
+    ).toBe(70); // 100 - 30 = 70% (>= 60%)
+    expect(
+      WesnothCombatCore.calculateCTH(attacker, defender, marksmanAttack, 60)
+        .cth,
+    ).toBe(60); // 100 - 60 = 40% (< 60%, raised to 60)
   });
 
   it('calculateSwarmBlows should scale strikes linearly with current HP', () => {
-    const swarmAttack: WesnothAttack = { name: 'Swarm', description: '', type: 'pierce', range: 'ranged', damage: 4, number: 4, specials: ['swarm'] };
+    const swarmAttack: WesnothAttack = {
+      name: 'Swarm',
+      description: '',
+      type: 'pierce',
+      range: 'ranged',
+      damage: 4,
+      number: 4,
+      specials: ['swarm'],
+    };
 
     // Full HP => full strikes
     expect(WesnothCombatCore.calculateSwarmBlows(swarmAttack, 40, 40)).toBe(4);
@@ -52,7 +85,15 @@ describe('WesnothCombatCore Math Formulas', () => {
   });
 
   it('calculateDrain should return 50% damage dealt unless target is Undead', () => {
-    const drainAttack: WesnothAttack = { name: 'Drain', description: '', type: 'arcane', range: 'melee', damage: 10, number: 2, specials: ['drain'] };
+    const drainAttack: WesnothAttack = {
+      name: 'Drain',
+      description: '',
+      type: 'arcane',
+      range: 'melee',
+      damage: 10,
+      number: 2,
+      specials: ['drain'],
+    };
 
     // Standard target: drains 50%
     expect(WesnothCombatCore.calculateDrain(10, drainAttack, false)).toBe(5);
@@ -65,10 +106,16 @@ describe('WesnothCombatCore Math Formulas', () => {
 describe('WesnothBattleManager Terrain and Combat Loop', () => {
   it('should resolve detailed terrain codes to base keys correctly', () => {
     // Gg (Grassland) -> flat
-    expect(WesnothBattleManager.resolveTerrainBaseIds('grassland')).toContain('flat');
+    expect(WesnothBattleManager.resolveTerrainBaseIds('grassland')).toContain(
+      'flat',
+    );
     // Wwf (Ford) -> flat, shallow_water
-    expect(WesnothBattleManager.resolveTerrainBaseIds('ford')).toContain('flat');
-    expect(WesnothBattleManager.resolveTerrainBaseIds('ford')).toContain('shallow_water');
+    expect(WesnothBattleManager.resolveTerrainBaseIds('ford')).toContain(
+      'flat',
+    );
+    expect(WesnothBattleManager.resolveTerrainBaseIds('ford')).toContain(
+      'shallow_water',
+    );
   });
 
   it('should run a basic 1v1 battle loop correctly', () => {
@@ -87,10 +134,24 @@ describe('WesnothBattleManager Terrain and Combat Loop', () => {
       cost: 14,
       description: 'Spearman',
       attacks: [
-        { name: 'spear', description: 'spear', type: 'pierce', range: 'melee', damage: 7, number: 3 },
-        { name: 'javelin', description: 'javelin', type: 'pierce', range: 'ranged', damage: 6, number: 2 }
+        {
+          name: 'spear',
+          description: 'spear',
+          type: 'pierce',
+          range: 'melee',
+          damage: 7,
+          number: 3,
+        },
+        {
+          name: 'javelin',
+          description: 'javelin',
+          type: 'pierce',
+          range: 'ranged',
+          damage: 6,
+          number: 2,
+        },
       ],
-      sourceFile: 'units/human-loyalists/Spearman.cfg'
+      sourceFile: 'units/human-loyalists/Spearman.cfg',
     };
 
     const walkingCorpse: WesnothUnitType = {
@@ -108,9 +169,16 @@ describe('WesnothBattleManager Terrain and Combat Loop', () => {
       cost: 8,
       description: 'Walking Corpse',
       attacks: [
-        { name: 'touch', description: 'touch', type: 'impact', range: 'melee', damage: 6, number: 2 }
+        {
+          name: 'touch',
+          description: 'touch',
+          type: 'impact',
+          range: 'melee',
+          damage: 6,
+          number: 2,
+        },
       ],
-      sourceFile: 'units/undead/Walking_Corpse.cfg'
+      sourceFile: 'units/undead/Walking_Corpse.cfg',
     };
 
     // Run battle simulation

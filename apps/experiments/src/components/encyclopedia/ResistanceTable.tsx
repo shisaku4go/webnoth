@@ -1,6 +1,6 @@
 import { cn } from '@webnoth/ui/lib/utils';
-import { getDamageTypes, getEffectiveResistance } from '@/lib/wesnoth-data';
 import type { WesnothUnitType } from '@webnoth/wesnoth-data';
+import { getDamageTypes, getEffectiveResistance } from '@/lib/wesnoth-data';
 
 interface ResistanceTableProps {
   unit: WesnothUnitType;

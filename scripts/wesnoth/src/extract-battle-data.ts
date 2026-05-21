@@ -7,14 +7,13 @@
  *   pnpm --filter @webnoth/scripts-wesnoth run extract-battle -- --wesnoth-root <path-to-wesnoth>
  */
 
-import { execFileSync } from 'node:child_process';
 import {
   existsSync,
   promises as fsPromises,
   mkdirSync,
   writeFileSync,
 } from 'node:fs';
-import { basename, join, relative, resolve } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import {
   findChild,
   findChildren,
@@ -22,7 +21,6 @@ import {
   getListAttr,
   getNumAttr,
   type MacroDictionary,
-  type MacroEntry,
   parseWml,
   type WmlNode,
 } from './wml-parser.ts';
@@ -72,7 +70,10 @@ function trackFile(wesnothRoot: string, absPath: string, category: string) {
 
 function cleanTranslation(s: string | undefined): string | undefined {
   if (s === undefined) return undefined;
-  let cleaned = s.replace(/^(race|male|female|race\+female|race\+plural)\^/, '');
+  let cleaned = s.replace(
+    /^(race|male|female|race\+female|race\+plural)\^/,
+    '',
+  );
   cleaned = cleaned.replace(/<[^>]+>/g, '');
   return cleaned;
 }
@@ -212,11 +213,13 @@ function extractTraitEffects(traitNode: WmlNode): TraitEffectData[] {
     const range = getAttr(effectNode, 'range');
     const replace = getAttr(effectNode, 'replace') === 'yes' ? true : undefined;
 
-    let increaseDamage: number | string | undefined =
-      getNumAttr(effectNode, 'increase_damage') ?? getAttr(effectNode, 'increase_damage');
-    let increaseTotal: number | string | undefined =
-      getNumAttr(effectNode, 'increase_total') ?? getAttr(effectNode, 'increase_total');
-    let increase: number | string | undefined =
+    const increaseDamage: number | string | undefined =
+      getNumAttr(effectNode, 'increase_damage') ??
+      getAttr(effectNode, 'increase_damage');
+    const increaseTotal: number | string | undefined =
+      getNumAttr(effectNode, 'increase_total') ??
+      getAttr(effectNode, 'increase_total');
+    const increase: number | string | undefined =
       getNumAttr(effectNode, 'increase') ?? getAttr(effectNode, 'increase');
 
     // Parse defense block if present
@@ -270,10 +273,7 @@ function extractTraits(
   const processedIds = new Set<string>();
 
   for (const block of blocks) {
-    if (
-      !block.body.includes('[trait]') &&
-      !block.body.includes('[+trait]')
-    ) {
+    if (!block.body.includes('[trait]') && !block.body.includes('[+trait]')) {
       continue;
     }
 
@@ -294,7 +294,9 @@ function extractTraits(
       }
       processedIds.add(id);
 
-      const name = cleanTranslation(getAttr(node, 'male_name') ?? getAttr(node, 'name')) ?? id;
+      const name =
+        cleanTranslation(getAttr(node, 'male_name') ?? getAttr(node, 'name')) ??
+        id;
       const femaleName = cleanTranslation(getAttr(node, 'female_name'));
       const description = cleanTranslation(getAttr(node, 'description'));
       const helpText = cleanTranslation(getAttr(node, 'help_text'));
@@ -392,7 +394,9 @@ function extractSchedulesAndTimes(
 
     schedules.push({
       id: block.name.toLowerCase(),
-      name: cleanTranslation(block.name.replace(/_SCHEDULE$/, '').replace(/_/g, ' ')),
+      name: cleanTranslation(
+        block.name.replace(/_SCHEDULE$/, '').replace(/_/g, ' '),
+      ),
       times: timeIds,
     });
   }
@@ -430,7 +434,9 @@ function extractTerrains(tree: WmlNode): TerrainData[] {
     const code = getAttr(node, 'string');
     if (!id || !code) continue;
 
-    const name = cleanTranslation(getAttr(node, 'name') ?? getAttr(node, 'editor_name')) ?? id;
+    const name =
+      cleanTranslation(getAttr(node, 'name') ?? getAttr(node, 'editor_name')) ??
+      id;
     const editorName = cleanTranslation(getAttr(node, 'editor_name'));
     const aliasOf = getListAttr(node, 'aliasof');
     const submerge = getNumAttr(node, 'submerge');
@@ -498,7 +504,13 @@ async function main() {
 
   // 1. Process schedules.cfg
   console.log('\nPhase 1: Parsing schedules.cfg...');
-  const schedulesPath = join(wesnothRoot, 'data', 'core', 'macros', 'schedules.cfg');
+  const schedulesPath = join(
+    wesnothRoot,
+    'data',
+    'core',
+    'macros',
+    'schedules.cfg',
+  );
   if (existsSync(schedulesPath)) {
     trackFile(wesnothRoot, schedulesPath, 'schedules_cfg');
     const content = await fsPromises.readFile(schedulesPath, 'utf-8');
@@ -507,7 +519,13 @@ async function main() {
     const { times, schedules } = extractSchedulesAndTimes(blocks, macroDict);
 
     writeGeneratedFile(outDir, 'times.ts', 'times', 'WesnothTimeOfDay', times);
-    writeGeneratedFile(outDir, 'schedules.ts', 'schedules', 'WesnothSchedule', schedules);
+    writeGeneratedFile(
+      outDir,
+      'schedules.ts',
+      'schedules',
+      'WesnothSchedule',
+      schedules,
+    );
   } else {
     console.error('Error: schedules.cfg not found.');
   }
@@ -537,7 +555,13 @@ async function main() {
     const tree = parseWml(content);
     const terrains = extractTerrains(tree);
 
-    writeGeneratedFile(outDir, 'terrains.ts', 'terrains', 'WesnothTerrain', terrains);
+    writeGeneratedFile(
+      outDir,
+      'terrains.ts',
+      'terrains',
+      'WesnothTerrain',
+      terrains,
+    );
   } else {
     console.error('Error: terrain.cfg not found.');
   }

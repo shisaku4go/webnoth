@@ -1,4 +1,4 @@
-import type { Alignment, DamageType, WesnothAttack } from '@webnoth/wesnoth-data';
+import type { Alignment, WesnothAttack } from '@webnoth/wesnoth-data';
 
 export interface CombatUnitState {
   unitTypeId: string;

@@ -4,12 +4,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { RaceSidebar } from '@/components/encyclopedia/RaceSidebar';
 import { UnitCard } from '@/components/encyclopedia/UnitCard';
 import {
+  getAllEras,
   getAllRaces,
   getAllUnits,
-  getTotalUnitCount,
-  getAllEras,
   getFactionsByEra,
   getFactionUnits,
+  getTotalUnitCount,
 } from '@/lib/wesnoth-data';
 
 export const Route = createFileRoute('/encyclopedia/')({
@@ -36,7 +36,9 @@ function EncyclopediaPage() {
         uniqueMap.set(f.id, f);
       }
     }
-    return Array.from(uniqueMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+    return Array.from(uniqueMap.values()).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
   }, [selectedEra]);
 
   // Compute active units matching selected Era and Faction

@@ -1,7 +1,13 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button } from '@webnoth/ui/components/button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@webnoth/ui/components/card';
-import { Swords, BookOpen } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@webnoth/ui/components/card';
+import { BookOpen, Swords } from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -15,7 +21,8 @@ function HomePage() {
           Webnoth Experiments
         </h1>
         <p className="text-lg text-muted-foreground">
-          Interactive experimental labs and diagnostic dashboards recreating the Battle for Wesnoth mechanics.
+          Interactive experimental labs and diagnostic dashboards recreating the
+          Battle for Wesnoth mechanics.
         </p>
       </div>
 
@@ -26,9 +33,13 @@ function HomePage() {
             <div className="size-12 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-4 text-red-500 group-hover:scale-110 transition-transform duration-200">
               <Swords className="size-6" />
             </div>
-            <CardTitle className="text-xl font-bold">Battle Simulator</CardTitle>
+            <CardTitle className="text-xl font-bold">
+              Battle Simulator
+            </CardTitle>
             <CardDescription className="text-sm mt-1.5 leading-relaxed">
-              Test and analyze 1v1 combat simulations. Configure traits, custom HP overrides, status effects (Poison/Slow), terrains, and Time of Day phases.
+              Test and analyze 1v1 combat simulations. Configure traits, custom
+              HP overrides, status effects (Poison/Slow), terrains, and Time of
+              Day phases.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-0">
@@ -46,14 +57,21 @@ function HomePage() {
             <div className="size-12 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4 text-blue-500 group-hover:scale-110 transition-transform duration-200">
               <BookOpen className="size-6" />
             </div>
-            <CardTitle className="text-xl font-bold">Unit Encyclopedia</CardTitle>
+            <CardTitle className="text-xl font-bold">
+              Unit Encyclopedia
+            </CardTitle>
             <CardDescription className="text-sm mt-1.5 leading-relaxed">
-              Explore the database of Wesnoth units, races, and properties. Verify character level advancement paths, costs, and standard combat attributes.
+              Explore the database of Wesnoth units, races, and properties.
+              Verify character level advancement paths, costs, and standard
+              combat attributes.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-0">
             <Link to="/encyclopedia">
-              <Button variant="outline" className="w-full cursor-pointer hover:bg-background/80 transition-colors">
+              <Button
+                variant="outline"
+                className="w-full cursor-pointer hover:bg-background/80 transition-colors"
+              >
                 Open Encyclopedia
               </Button>
             </Link>

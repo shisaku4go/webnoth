@@ -3,9 +3,9 @@ import { ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
 import { ResistanceTable } from '@/components/encyclopedia/ResistanceTable';
 import { TerrainTable } from '@/components/encyclopedia/TerrainTable';
+import { UnitAnimations } from '@/components/encyclopedia/UnitAnimations';
 import { UnitAttacks } from '@/components/encyclopedia/UnitAttacks';
 import { UnitPortrait } from '@/components/encyclopedia/UnitPortrait';
-import { UnitAnimations } from '@/components/encyclopedia/UnitAnimations';
 import { UnitStats } from '@/components/encyclopedia/UnitStats';
 import { getUnitById } from '@/lib/wesnoth-data';
 
@@ -74,12 +74,14 @@ function UnitDetailPage() {
           {(hasMaleVariant || hasFemaleVariant) && (
             <div className="flex bg-muted/30 p-1 rounded-md self-center">
               <button
+                type="button"
                 onClick={() => setGender('male')}
                 className={`px-3 py-1 text-xs font-medium rounded ${gender === 'male' ? 'bg-background shadow-sm' : 'text-muted-foreground'}`}
               >
                 ♂ Male
               </button>
               <button
+                type="button"
                 onClick={() => setGender('female')}
                 className={`px-3 py-1 text-xs font-medium rounded ${gender === 'female' ? 'bg-background shadow-sm' : 'text-muted-foreground'}`}
               >

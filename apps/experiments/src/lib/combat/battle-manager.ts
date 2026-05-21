@@ -1,10 +1,19 @@
+import type {
+  WesnothAttack,
+  WesnothTerrain,
+  WesnothUnitType,
+} from '@webnoth/wesnoth-data';
 import { movetypes } from '@webnoth/wesnoth-data/movetypes';
-import { traits as globalTraits } from '@webnoth/wesnoth-data/traits';
 import { terrains as globalTerrains } from '@webnoth/wesnoth-data/terrains';
 import { times as globalTimes } from '@webnoth/wesnoth-data/times';
-import type { WesnothAttack, WesnothUnitType, WesnothTerrain } from '@webnoth/wesnoth-data';
+import { traits as globalTraits } from '@webnoth/wesnoth-data/traits';
 import { WesnothCombatCore } from './combat-core';
-import type { CombatContext, CombatUnitState, BattleResult, StrikeEvent } from './types';
+import type {
+  BattleResult,
+  CombatContext,
+  CombatUnitState,
+  StrikeEvent,
+} from './types';
 
 // Pre-create lookups
 const terrainByCode = new Map<string, WesnothTerrain>(
@@ -18,24 +27,53 @@ const movetypeByName = new Map(movetypes.map((m) => [m.name, m]));
 
 // Default list of fantasy names for fallback
 const RANDOM_NAMES = [
-  'Galdor', 'Dufool', 'Li\'sar', 'Konrad', 'Delfador', 'Kalenz', 'Chantal',
-  'Moremiras', 'Aethyr', 'Gwiti', 'Mal Keshar', 'Kapou\'e', 'Grüu', 'Barak',
-  'Lady Jessica', 'Haldric', 'Lethalia', 'Efraim', 'Argan', 'Krell'
+  'Galdor',
+  'Dufool',
+  "Li'sar",
+  'Konrad',
+  'Delfador',
+  'Kalenz',
+  'Chantal',
+  'Moremiras',
+  'Aethyr',
+  'Gwiti',
+  'Mal Keshar',
+  "Kapou'e",
+  'Grüu',
+  'Barak',
+  'Lady Jessica',
+  'Haldric',
+  'Lethalia',
+  'Efraim',
+  'Argan',
+  'Krell',
 ];
 
-export class WesnothBattleManager {
+export const WesnothBattleManager = {
   /**
    * Resolves detailed terrain to base keys in a unit's movement type.
    * Handles C++ style recursive aliasOf / defaultBase resolution.
    */
-  static resolveTerrainBaseIds(terrainId: string): string[] {
+  resolveTerrainBaseIds(terrainId: string): string[] {
     const terrain = terrainById.get(terrainId);
     if (!terrain) return ['flat'];
 
     const visited = new Set<string>();
     const baseKeys = new Set([
-      'deep_water', 'shallow_water', 'reef', 'swamp_water', 'flat', 'sand',
-      'forest', 'hills', 'mountains', 'village', 'castle', 'cave', 'frozen', 'fungus'
+      'deep_water',
+      'shallow_water',
+      'reef',
+      'swamp_water',
+      'flat',
+      'sand',
+      'forest',
+      'hills',
+      'mountains',
+      'village',
+      'castle',
+      'cave',
+      'frozen',
+      'fungus',
     ]);
 
     const resolve = (t: WesnothTerrain): string[] => {
@@ -46,8 +84,9 @@ export class WesnothBattleManager {
         return [t.id];
       }
 
-      if (terrainByCode.has(t.code) && baseKeys.has(terrainByCode.get(t.code)!.id)) {
-        return [terrainByCode.get(t.code)!.id];
+      const codeTerrain = terrainByCode.get(t.code);
+      if (codeTerrain && baseKeys.has(codeTerrain.id)) {
+        return [codeTerrain.id];
       }
 
       const results: string[] = [];
@@ -65,7 +104,8 @@ export class WesnothBattleManager {
 
       // 2. Resolve defaultBase
       if (t.defaultBase) {
-        const baseTerrain = terrainByCode.get(t.defaultBase) || terrainById.get(t.defaultBase);
+        const baseTerrain =
+          terrainByCode.get(t.defaultBase) || terrainById.get(t.defaultBase);
         if (baseTerrain) {
           results.push(...resolve(baseTerrain));
         }
@@ -77,17 +117,17 @@ export class WesnothBattleManager {
 
     const resolved = resolve(terrain);
     return resolved.length > 0 ? resolved : ['flat'];
-  }
+  },
 
   /**
    * Calculates the best defense rating (chance to be hit, lower = better)
    * and movement cost (lower = better) for a unit on a given terrain.
    */
-  static resolveTerrainValues(
+  resolveTerrainValues(
     unit: WesnothUnitType,
     terrainId: string,
   ): { defenseChanceToHit: number; movementCost: number } {
-    const baseIds = this.resolveTerrainBaseIds(terrainId);
+    const baseIds = WesnothBattleManager.resolveTerrainBaseIds(terrainId);
     const movetype = movetypeByName.get(unit.movementType);
 
     let bestDefenseChanceToHit = 100;
@@ -96,20 +136,32 @@ export class WesnothBattleManager {
     for (const baseId of baseIds) {
       // 1. Defense Resolution
       let defenseRaw = 100;
-      if (unit.defenseOverrides && unit.defenseOverrides[baseId] !== undefined) {
+      if (
+        unit.defenseOverrides &&
+        unit.defenseOverrides[baseId] !== undefined
+      ) {
         defenseRaw = unit.defenseOverrides[baseId];
       } else if (movetype?.defense && movetype.defense[baseId] !== undefined) {
         defenseRaw = movetype.defense[baseId];
       }
       // Note: defense values in WML represent chance to be hit. E.g., 60 means 60% chance to be hit.
       // Unit prefers a lower chance to be hit.
-      bestDefenseChanceToHit = Math.min(bestDefenseChanceToHit, Math.abs(defenseRaw));
+      bestDefenseChanceToHit = Math.min(
+        bestDefenseChanceToHit,
+        Math.abs(defenseRaw),
+      );
 
       // 2. Movement Cost Resolution
       let moveCostRaw = 99;
-      if (unit.movementCostOverrides && unit.movementCostOverrides[baseId] !== undefined) {
+      if (
+        unit.movementCostOverrides &&
+        unit.movementCostOverrides[baseId] !== undefined
+      ) {
         moveCostRaw = unit.movementCostOverrides[baseId];
-      } else if (movetype?.movementCosts && movetype.movementCosts[baseId] !== undefined) {
+      } else if (
+        movetype?.movementCosts &&
+        movetype.movementCosts[baseId] !== undefined
+      ) {
         moveCostRaw = movetype.movementCosts[baseId];
       }
       bestMovementCost = Math.min(bestMovementCost, moveCostRaw);
@@ -119,19 +171,21 @@ export class WesnothBattleManager {
       defenseChanceToHit: bestDefenseChanceToHit,
       movementCost: bestMovementCost === 99 ? 1 : bestMovementCost,
     };
-  }
+  },
 
   /**
    * Initializes a CombatUnitState from a WesnothUnitType with recruit logic.
    */
-  static initializeUnitState(
+  initializeUnitState(
     unit: WesnothUnitType,
     traitOverrides?: string[],
     genderOverride?: string,
   ): CombatUnitState {
-    const gender = genderOverride || (unit.gender && unit.gender.length > 0
-      ? unit.gender[Math.floor(Math.random() * unit.gender.length)]
-      : 'male');
+    const gender =
+      genderOverride ||
+      (unit.gender && unit.gender.length > 0
+        ? unit.gender[Math.floor(Math.random() * unit.gender.length)]
+        : 'male');
 
     const name = RANDOM_NAMES[Math.floor(Math.random() * RANDOM_NAMES.length)];
 
@@ -153,7 +207,7 @@ export class WesnothBattleManager {
 
     // Clone base stats
     let maxHp = unit.hitpoints;
-    let alignment = unit.alignment;
+    const alignment = unit.alignment;
     const traitsList = [...chosenTraits];
     let maxXp = unit.experience;
 
@@ -180,7 +234,10 @@ export class WesnothBattleManager {
             const val = effect.increaseTotal ? Number(effect.increaseTotal) : 0;
             add = val * Math.max(0, unit.level - 1);
           } else {
-            if (typeof effect.increaseTotal === 'string' && effect.increaseTotal.endsWith('%')) {
+            if (
+              typeof effect.increaseTotal === 'string' &&
+              effect.increaseTotal.endsWith('%')
+            ) {
               const pct = parseInt(effect.increaseTotal, 10);
               add = Math.floor((unit.hitpoints * pct) / 100);
             } else if (effect.increaseTotal !== undefined) {
@@ -190,7 +247,10 @@ export class WesnothBattleManager {
           maxHp += add;
         } else if (effect.applyTo === 'max_experience') {
           let add = 0;
-          if (typeof effect.increase === 'string' && effect.increase.endsWith('%')) {
+          if (
+            typeof effect.increase === 'string' &&
+            effect.increase.endsWith('%')
+          ) {
             const pct = parseInt(effect.increase, 10);
             add = Math.floor((unit.experience * pct) / 100);
           } else if (effect.increase !== undefined) {
@@ -219,12 +279,15 @@ export class WesnothBattleManager {
       xp: 0,
       maxXp,
     };
-  }
+  },
 
   /**
    * Applies trait damage/strikes modifications to attacks.
    */
-  static getModifiedAttacks(unit: WesnothUnitType, state: CombatUnitState): WesnothAttack[] {
+  getModifiedAttacks(
+    unit: WesnothUnitType,
+    state: CombatUnitState,
+  ): WesnothAttack[] {
     // Deep clone base attacks
     const modifiedAttacks = unit.attacks.map((a) => ({
       ...a,
@@ -240,7 +303,7 @@ export class WesnothBattleManager {
           for (const attack of modifiedAttacks) {
             // Check filters (e.g. range, type)
             if (effect.range && attack.range !== effect.range) continue;
-            
+
             if (effect.increaseDamage) {
               const add = Number(effect.increaseDamage);
               attack.damage += add;
@@ -255,12 +318,12 @@ export class WesnothBattleManager {
     }
 
     return modifiedAttacks;
-  }
+  },
 
   /**
    * Automatically selects the best weapon for the attacker and matching-range counter for defender.
    */
-  static autoSelectWeapons(
+  autoSelectWeapons(
     attacker: CombatUnitState,
     defender: CombatUnitState,
     attackerAttacks: WesnothAttack[],
@@ -273,7 +336,10 @@ export class WesnothBattleManager {
     let highestExpectedVal = -99999;
 
     const defenderUnitType = { movementType: 'smallfoot' } as WesnothUnitType; // Placeholder fallback
-    const defenderDefense = this.resolveTerrainValues(defenderUnitType, terrainId).defenseChanceToHit;
+    const defenderDefense = WesnothBattleManager.resolveTerrainValues(
+      defenderUnitType,
+      terrainId,
+    ).defenseChanceToHit;
 
     for (let aIdx = 0; aIdx < attackerAttacks.length; aIdx++) {
       const aWep = attackerAttacks[aIdx];
@@ -286,16 +352,48 @@ export class WesnothBattleManager {
       const dWep = dIdx !== -1 ? defenderAttacks[dIdx] : null;
 
       // Pure stateless EV score: CTH * Damage * Strikes
-      const attackerCth = WesnothCombatCore.calculateCTH(attacker, defender, aWep, defenderDefense).cth;
-      const attackerDamage = WesnothCombatCore.calculateDamage(attacker, defender, aWep, dWep, context, true).damage;
-      const attackerStrikes = WesnothCombatCore.calculateSwarmBlows(aWep, attacker.hp, attacker.maxHp);
+      const attackerCth = WesnothCombatCore.calculateCTH(
+        attacker,
+        defender,
+        aWep,
+        defenderDefense,
+      ).cth;
+      const attackerDamage = WesnothCombatCore.calculateDamage(
+        attacker,
+        defender,
+        aWep,
+        dWep,
+        context,
+        true,
+      ).damage;
+      const attackerStrikes = WesnothCombatCore.calculateSwarmBlows(
+        aWep,
+        attacker.hp,
+        attacker.maxHp,
+      );
       const attackerEV = (attackerCth / 100) * attackerDamage * attackerStrikes;
 
       let defenderEV = 0;
       if (dWep) {
-        const defenderCth = WesnothCombatCore.calculateCTH(defender, attacker, dWep, 40).cth; // fallback defense 40
-        const defenderDamage = WesnothCombatCore.calculateDamage(defender, attacker, dWep, aWep, context, false).damage;
-        const defenderStrikes = WesnothCombatCore.calculateSwarmBlows(dWep, defender.hp, defender.maxHp);
+        const defenderCth = WesnothCombatCore.calculateCTH(
+          defender,
+          attacker,
+          dWep,
+          40,
+        ).cth; // fallback defense 40
+        const defenderDamage = WesnothCombatCore.calculateDamage(
+          defender,
+          attacker,
+          dWep,
+          aWep,
+          context,
+          false,
+        ).damage;
+        const defenderStrikes = WesnothCombatCore.calculateSwarmBlows(
+          dWep,
+          defender.hp,
+          defender.maxHp,
+        );
         defenderEV = (defenderCth / 100) * defenderDamage * defenderStrikes;
       }
 
@@ -311,12 +409,12 @@ export class WesnothBattleManager {
       attackerWeaponIndex: bestAttackerIdx,
       defenderWeaponIndex: bestDefenderIdxForAttacker,
     };
-  }
+  },
 
   /**
    * Executes a full combat simulation between the attacker and defender.
    */
-  static runSimulation(
+  runSimulation(
     attackerBase: WesnothUnitType,
     defenderBase: WesnothUnitType,
     options: {
@@ -335,23 +433,42 @@ export class WesnothBattleManager {
     },
   ): BattleResult {
     // 1. Initialize states
-    const attacker = this.initializeUnitState(attackerBase, options.attackerTraits);
-    const defender = this.initializeUnitState(defenderBase, options.defenderTraits);
+    const attacker = WesnothBattleManager.initializeUnitState(
+      attackerBase,
+      options.attackerTraits,
+    );
+    const defender = WesnothBattleManager.initializeUnitState(
+      defenderBase,
+      options.defenderTraits,
+    );
 
     // Apply overrides
-    if (options.attackerHpOverride !== undefined) attacker.hp = Math.min(attacker.maxHp, options.attackerHpOverride);
-    if (options.defenderHpOverride !== undefined) defender.hp = Math.min(defender.maxHp, options.defenderHpOverride);
-    if (options.attackerSlowed !== undefined) attacker.statuses.slowed = options.attackerSlowed;
-    if (options.defenderSlowed !== undefined) defender.statuses.slowed = options.defenderSlowed;
-    if (options.attackerPoisoned !== undefined) attacker.statuses.poisoned = options.attackerPoisoned;
-    if (options.defenderPoisoned !== undefined) defender.statuses.poisoned = options.defenderPoisoned;
+    if (options.attackerHpOverride !== undefined)
+      attacker.hp = Math.min(attacker.maxHp, options.attackerHpOverride);
+    if (options.defenderHpOverride !== undefined)
+      defender.hp = Math.min(defender.maxHp, options.defenderHpOverride);
+    if (options.attackerSlowed !== undefined)
+      attacker.statuses.slowed = options.attackerSlowed;
+    if (options.defenderSlowed !== undefined)
+      defender.statuses.slowed = options.defenderSlowed;
+    if (options.attackerPoisoned !== undefined)
+      attacker.statuses.poisoned = options.attackerPoisoned;
+    if (options.defenderPoisoned !== undefined)
+      defender.statuses.poisoned = options.defenderPoisoned;
 
     // Apply modified attacks from traits
-    const attackerAttacks = this.getModifiedAttacks(attackerBase, attacker);
-    const defenderAttacks = this.getModifiedAttacks(defenderBase, defender);
+    const attackerAttacks = WesnothBattleManager.getModifiedAttacks(
+      attackerBase,
+      attacker,
+    );
+    const defenderAttacks = WesnothBattleManager.getModifiedAttacks(
+      defenderBase,
+      defender,
+    );
 
     // Context resolution
-    const tod = globalTimes.find((t) => t.id === options.timeOfDayId) || globalTimes[0];
+    const tod =
+      globalTimes.find((t) => t.id === options.timeOfDayId) || globalTimes[0];
     const context: CombatContext = {
       terrainId: options.terrainId,
       timeOfDayId: tod.id,
@@ -363,7 +480,14 @@ export class WesnothBattleManager {
     let dWepIdx = options.defenderWeaponIndex ?? -1;
 
     if (aWepIdx === -1) {
-      const selected = this.autoSelectWeapons(attacker, defender, attackerAttacks, defenderAttacks, options.terrainId, context);
+      const selected = WesnothBattleManager.autoSelectWeapons(
+        attacker,
+        defender,
+        attackerAttacks,
+        defenderAttacks,
+        options.terrainId,
+        context,
+      );
       aWepIdx = selected.attackerWeaponIndex;
       dWepIdx = selected.defenderWeaponIndex;
     } else if (dWepIdx === -1) {
@@ -397,8 +521,14 @@ export class WesnothBattleManager {
     }
 
     // Resolve defense & hit chance values
-    const attackerDefenseVal = this.resolveTerrainValues(attackerBase, options.terrainId).defenseChanceToHit;
-    const defenderDefenseVal = this.resolveTerrainValues(defenderBase, options.terrainId).defenseChanceToHit;
+    const attackerDefenseVal = WesnothBattleManager.resolveTerrainValues(
+      attackerBase,
+      options.terrainId,
+    ).defenseChanceToHit;
+    const defenderDefenseVal = WesnothBattleManager.resolveTerrainValues(
+      defenderBase,
+      options.terrainId,
+    ).defenseChanceToHit;
 
     // First Strike ordering
     // Unit with firststrike strikes first. If both or neither, attacker strikes first.
@@ -411,11 +541,14 @@ export class WesnothBattleManager {
     }
 
     // Combat Specials Checking
-    const isBerserk = aWep.specials?.includes('berserk') || dWep?.specials?.includes('berserk');
+    const isBerserk =
+      aWep.specials?.includes('berserk') || dWep?.specials?.includes('berserk');
     const maxRounds = isBerserk ? 30 : 1;
 
-    const defenderIsUndead = defenderBase.race === 'undead' || defender.traits.includes('undead');
-    const attackerIsUndead = attackerBase.race === 'undead' || attacker.traits.includes('undead');
+    const defenderIsUndead =
+      defenderBase.race === 'undead' || defender.traits.includes('undead');
+    const attackerIsUndead =
+      attackerBase.race === 'undead' || attacker.traits.includes('undead');
 
     // Executing the rounds
     for (let r = 1; r <= maxRounds; r++) {
@@ -423,8 +556,18 @@ export class WesnothBattleManager {
       if (attacker.hp <= 0 || defender.hp <= 0) break;
       if (attacker.statuses.petrified || defender.statuses.petrified) break;
 
-      const aStrikesCount = WesnothCombatCore.calculateSwarmBlows(aWep, attacker.hp, attacker.maxHp);
-      const dStrikesCount = dWep ? WesnothCombatCore.calculateSwarmBlows(dWep, defender.hp, defender.maxHp) : 0;
+      const aStrikesCount = WesnothCombatCore.calculateSwarmBlows(
+        aWep,
+        attacker.hp,
+        attacker.maxHp,
+      );
+      const dStrikesCount = dWep
+        ? WesnothCombatCore.calculateSwarmBlows(
+            dWep,
+            defender.hp,
+            defender.maxHp,
+          )
+        : 0;
 
       let aStrikesLeft = aStrikesCount;
       let dStrikesLeft = dStrikesCount;
@@ -443,29 +586,45 @@ export class WesnothBattleManager {
           // Attacker strikes defender
           aStrikesLeft--;
 
-          const cthRes = WesnothCombatCore.calculateCTH(attacker, defender, aWep, defenderDefenseVal);
-          const dmgRes = WesnothCombatCore.calculateDamage(attacker, defender, aWep, dWep, context, true);
+          const cthRes = WesnothCombatCore.calculateCTH(
+            attacker,
+            defender,
+            aWep,
+            defenderDefenseVal,
+          );
+          const dmgRes = WesnothCombatCore.calculateDamage(
+            attacker,
+            defender,
+            aWep,
+            dWep,
+            context,
+            true,
+          );
 
           const roll = Math.random() * 100;
           const isHit = roll < cthRes.cth;
 
           let damage = 0;
           let drained = 0;
-          let defenderHpBefore = defender.hp;
+          const defenderHpBefore = defender.hp;
 
           let msg = '';
           if (isHit) {
             damage = dmgRes.damage;
             defender.hp = Math.max(0, defender.hp - damage);
-            
+
             // Health Draining
-            drained = WesnothCombatCore.calculateDrain(damage, aWep, defenderIsUndead);
+            drained = WesnothCombatCore.calculateDrain(
+              damage,
+              aWep,
+              defenderIsUndead,
+            );
             if (drained > 0) {
               attacker.hp = Math.min(attacker.maxHp, attacker.hp + drained);
             }
 
             // Specials Application
-            let statusEffectsApplied: string[] = [];
+            const statusEffectsApplied: string[] = [];
             if (aWep.specials?.includes('poison') && !defenderIsUndead) {
               defender.statuses.poisoned = true;
               statusEffectsApplied.push('POISONED');
@@ -479,7 +638,10 @@ export class WesnothBattleManager {
               statusEffectsApplied.push('PETRIFIED');
             }
 
-            const statusStr = statusEffectsApplied.length > 0 ? ` [${statusEffectsApplied.join(', ')}]` : '';
+            const statusStr =
+              statusEffectsApplied.length > 0
+                ? ` [${statusEffectsApplied.join(', ')}]`
+                : '';
             msg = `${attacker.name} hit ${defender.name} with ${aWep.name} dealing ${damage} damage (roll: ${Math.floor(roll)} < CTH: ${cthRes.cth}%).${drained > 0 ? ` Drained ${drained} HP.` : ''}${statusStr}`;
           } else {
             msg = `${attacker.name} missed ${defender.name} with ${aWep.name} (roll: ${Math.floor(roll)} >= CTH: ${cthRes.cth}%).`;
@@ -514,15 +676,27 @@ export class WesnothBattleManager {
           // Defender counter-strikes attacker
           dStrikesLeft--;
 
-          const cthRes = WesnothCombatCore.calculateCTH(defender, attacker, dWep, attackerDefenseVal);
-          const dmgRes = WesnothCombatCore.calculateDamage(defender, attacker, dWep, aWep, context, false);
+          const cthRes = WesnothCombatCore.calculateCTH(
+            defender,
+            attacker,
+            dWep,
+            attackerDefenseVal,
+          );
+          const dmgRes = WesnothCombatCore.calculateDamage(
+            defender,
+            attacker,
+            dWep,
+            aWep,
+            context,
+            false,
+          );
 
           const roll = Math.random() * 100;
           const isHit = roll < cthRes.cth;
 
           let damage = 0;
           let drained = 0;
-          let attackerHpBefore = attacker.hp;
+          const attackerHpBefore = attacker.hp;
 
           let msg = '';
           if (isHit) {
@@ -530,13 +704,17 @@ export class WesnothBattleManager {
             attacker.hp = Math.max(0, attacker.hp - damage);
 
             // Draining
-            drained = WesnothCombatCore.calculateDrain(damage, dWep, attackerIsUndead);
+            drained = WesnothCombatCore.calculateDrain(
+              damage,
+              dWep,
+              attackerIsUndead,
+            );
             if (drained > 0) {
               defender.hp = Math.min(defender.maxHp, defender.hp + drained);
             }
 
             // Specials
-            let statusEffectsApplied: string[] = [];
+            const statusEffectsApplied: string[] = [];
             if (dWep.specials?.includes('poison') && !attackerIsUndead) {
               attacker.statuses.poisoned = true;
               statusEffectsApplied.push('POISONED');
@@ -550,7 +728,10 @@ export class WesnothBattleManager {
               statusEffectsApplied.push('PETRIFIED');
             }
 
-            const statusStr = statusEffectsApplied.length > 0 ? ` [${statusEffectsApplied.join(', ')}]` : '';
+            const statusStr =
+              statusEffectsApplied.length > 0
+                ? ` [${statusEffectsApplied.join(', ')}]`
+                : '';
             msg = `${defender.name} counter-hit ${attacker.name} with ${dWep.name} dealing ${damage} damage (roll: ${Math.floor(roll)} < CTH: ${cthRes.cth}%).${drained > 0 ? ` Drained ${drained} HP.` : ''}${statusStr}`;
           } else {
             msg = `${defender.name} missed counter-strike against ${attacker.name} with ${dWep.name} (roll: ${Math.floor(roll)} >= CTH: ${cthRes.cth}%).`;
@@ -588,7 +769,12 @@ export class WesnothBattleManager {
     // Award XP
     const isKill = attacker.hp <= 0 || defender.hp <= 0;
     const wasAttackerKiller = defender.hp <= 0;
-    const xpAwards = WesnothCombatCore.calculateXP(attacker, defender, isKill, wasAttackerKiller);
+    const xpAwards = WesnothCombatCore.calculateXP(
+      attacker,
+      defender,
+      isKill,
+      wasAttackerKiller,
+    );
 
     attacker.xp = Math.min(attacker.maxXp, attacker.xp + xpAwards.attackerXp);
     defender.xp = Math.min(defender.maxXp, defender.xp + xpAwards.defenderXp);
@@ -604,5 +790,5 @@ export class WesnothBattleManager {
       attackerXpGained: xpAwards.attackerXp,
       defenderXpGained: xpAwards.defenderXp,
     };
-  }
-}
+  },
+} as const;
