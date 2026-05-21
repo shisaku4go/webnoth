@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as BattleSimulatorRouteImport } from './routes/battle-simulator'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EncyclopediaIndexRouteImport } from './routes/encyclopedia/index'
 import { Route as EncyclopediaUnitIdRouteImport } from './routes/encyclopedia/$unitId'
 
+const BattleSimulatorRoute = BattleSimulatorRouteImport.update({
+  id: '/battle-simulator',
+  path: '/battle-simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,56 @@ const EncyclopediaUnitIdRoute = EncyclopediaUnitIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/battle-simulator': typeof BattleSimulatorRoute
   '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
   '/encyclopedia/': typeof EncyclopediaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/battle-simulator': typeof BattleSimulatorRoute
   '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
   '/encyclopedia': typeof EncyclopediaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/battle-simulator': typeof BattleSimulatorRoute
   '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
   '/encyclopedia/': typeof EncyclopediaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/encyclopedia/$unitId' | '/encyclopedia/'
+  fullPaths:
+    | '/'
+    | '/battle-simulator'
+    | '/encyclopedia/$unitId'
+    | '/encyclopedia/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/encyclopedia/$unitId' | '/encyclopedia'
-  id: '__root__' | '/' | '/encyclopedia/$unitId' | '/encyclopedia/'
+  to: '/' | '/battle-simulator' | '/encyclopedia/$unitId' | '/encyclopedia'
+  id:
+    | '__root__'
+    | '/'
+    | '/battle-simulator'
+    | '/encyclopedia/$unitId'
+    | '/encyclopedia/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BattleSimulatorRoute: typeof BattleSimulatorRoute
   EncyclopediaUnitIdRoute: typeof EncyclopediaUnitIdRoute
   EncyclopediaIndexRoute: typeof EncyclopediaIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/battle-simulator': {
+      id: '/battle-simulator'
+      path: '/battle-simulator'
+      fullPath: '/battle-simulator'
+      preLoaderRoute: typeof BattleSimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +113,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BattleSimulatorRoute: BattleSimulatorRoute,
   EncyclopediaUnitIdRoute: EncyclopediaUnitIdRoute,
   EncyclopediaIndexRoute: EncyclopediaIndexRoute,
 }

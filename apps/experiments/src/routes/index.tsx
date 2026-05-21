@@ -1,5 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button } from '@webnoth/ui/components/button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@webnoth/ui/components/card';
+import { Swords, BookOpen } from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -7,18 +9,56 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">
-          webnoth experiments
+    <div className="space-y-8 max-w-5xl mx-auto py-6">
+      <div className="space-y-3">
+        <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
+          Webnoth Experiments
         </h1>
-        <p className="text-muted-foreground">
-          Experimental implementations of Wesnoth features on the Web.
+        <p className="text-lg text-muted-foreground">
+          Interactive experimental labs and diagnostic dashboards recreating the Battle for Wesnoth mechanics.
         </p>
       </div>
-      <div className="flex gap-3">
-        <Button>Get Started</Button>
-        <Button variant="outline">Learn More</Button>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Battle Simulator Card */}
+        <Card className="border-border/60 bg-card/40 backdrop-blur-md overflow-hidden hover:shadow-lg transition-all duration-200 group flex flex-col justify-between">
+          <CardHeader className="pb-4">
+            <div className="size-12 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-4 text-red-500 group-hover:scale-110 transition-transform duration-200">
+              <Swords className="size-6" />
+            </div>
+            <CardTitle className="text-xl font-bold">Battle Simulator</CardTitle>
+            <CardDescription className="text-sm mt-1.5 leading-relaxed">
+              Test and analyze 1v1 combat simulations. Configure traits, custom HP overrides, status effects (Poison/Slow), terrains, and Time of Day phases.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Link to="/battle-simulator">
+              <Button className="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold cursor-pointer transition-colors duration-200">
+                Launch Simulator
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        {/* Encyclopedia Card */}
+        <Card className="border-border/60 bg-card/40 backdrop-blur-md overflow-hidden hover:shadow-lg transition-all duration-200 group flex flex-col justify-between">
+          <CardHeader className="pb-4">
+            <div className="size-12 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4 text-blue-500 group-hover:scale-110 transition-transform duration-200">
+              <BookOpen className="size-6" />
+            </div>
+            <CardTitle className="text-xl font-bold">Unit Encyclopedia</CardTitle>
+            <CardDescription className="text-sm mt-1.5 leading-relaxed">
+              Explore the database of Wesnoth units, races, and properties. Verify character level advancement paths, costs, and standard combat attributes.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Link to="/encyclopedia">
+              <Button variant="outline" className="w-full cursor-pointer hover:bg-background/80 transition-colors">
+                Open Encyclopedia
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

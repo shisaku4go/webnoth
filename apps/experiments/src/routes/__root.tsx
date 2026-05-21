@@ -27,6 +27,13 @@ function RootLayout() {
           >
             Encyclopedia
           </Link>
+          <Link
+            to="/battle-simulator"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            activeProps={{ className: 'text-foreground font-medium' }}
+          >
+            Battle Simulator
+          </Link>
         </nav>
       </header>
       <main className="container mx-auto px-4 py-6">
