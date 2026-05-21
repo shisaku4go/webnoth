@@ -1,7 +1,14 @@
-import { useRef, useState, useEffect } from 'react';
 import { Application, extend } from '@pixi/react';
-import { Container, Sprite, Graphics, Text, Assets, type Texture } from 'pixi.js';
 import { terrains } from '@webnoth/wesnoth-data/terrains';
+import {
+  Assets,
+  Container,
+  Graphics,
+  Sprite,
+  Text,
+  type Texture,
+} from 'pixi.js';
+import { useEffect, useRef, useState } from 'react';
 import { wesnothAssetUrl } from '@/lib/asset-url';
 
 // Register Pixi elements for React
@@ -11,7 +18,9 @@ interface MapViewerProps {
   grid: string[][];
   items?: { x: number; y: number; value: { image: string } }[];
   labels?: { x: number; y: number; value: { text: string } }[];
-  onHoverHex?: (hex: { x: number; y: number; code: string; terrainName: string } | null) => void;
+  onHoverHex?: (
+    hex: { x: number; y: number; code: string; terrainName: string } | null,
+  ) => void;
 }
 
 // Flat-topped hex coordinate math (Odd-Q Column-Staggered System)
@@ -22,7 +31,11 @@ export function getHexPosition(col: number, row: number) {
 }
 
 // Parse WML map cell (e.g. "Gs^Fms" or "2 Khr")
-export function parseCell(cell: string): { startPos?: string; baseCode: string; overlayCode?: string } {
+export function parseCell(cell: string): {
+  startPos?: string;
+  baseCode: string;
+  overlayCode?: string;
+} {
   const trimmed = cell.trim();
   const parts = trimmed.split(/\s+/);
   let terrainPart = trimmed;
@@ -43,7 +56,9 @@ export function parseCell(cell: string): { startPos?: string; baseCode: string; 
 // Get human readable name of a terrain code
 export function getTerrainName(baseCode: string, overlayCode?: string): string {
   const base = terrains.find((t) => t.code === baseCode);
-  const overlay = overlayCode ? terrains.find((t) => t.code === `^${overlayCode}`) : undefined;
+  const overlay = overlayCode
+    ? terrains.find((t) => t.code === `^${overlayCode}`)
+    : undefined;
 
   const baseName = base?.name ?? baseCode;
   const overlayName = overlay?.name;
@@ -62,7 +77,11 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
   // Zoom and Offset state for Pan & Zoom
   const [zoom, setZoom] = useState(0.8);
   const [offset, setOffset] = useState({ x: 50, y: 50 });
-  const [hoveredHex, setHoveredHex] = useState<{ x: number; y: number; code: string } | null>(null);
+  const [hoveredHex, setHoveredHex] = useState<{
+    x: number;
+    y: number;
+    code: string;
+  } | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
@@ -94,7 +113,9 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
         if (overlayCode) {
           const overlay = terrains.find((t) => t.code === `^${overlayCode}`);
           if (overlay?.symbolImage) {
-            imageUrls.add(wesnothAssetUrl(`terrain/${overlay.symbolImage}.png`));
+            imageUrls.add(
+              wesnothAssetUrl(`terrain/${overlay.symbolImage}.png`),
+            );
           }
         }
       }
@@ -145,7 +166,13 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
       const rect = containerRef.current.getBoundingClientRect();
       const initialZoom = Math.min(
         1.2,
-        Math.max(0.4, Math.min((rect.width - 60) / mapWidth, (rect.height - 60) / mapHeight)),
+        Math.max(
+          0.4,
+          Math.min(
+            (rect.width - 60) / mapWidth,
+            (rect.height - 60) / mapHeight,
+          ),
+        ),
       );
       setZoom(initialZoom);
       setOffset({
@@ -199,7 +226,13 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
       const rect = containerRef.current.getBoundingClientRect();
       const initialZoom = Math.min(
         1.2,
-        Math.max(0.4, Math.min((rect.width - 60) / mapWidth, (rect.height - 60) / mapHeight)),
+        Math.max(
+          0.4,
+          Math.min(
+            (rect.width - 60) / mapWidth,
+            (rect.height - 60) / mapHeight,
+          ),
+        ),
       );
       setZoom(initialZoom);
       setOffset({
@@ -214,7 +247,9 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
       <div className="w-full h-full flex items-center justify-center bg-background/40 backdrop-blur-sm border rounded-xl">
         <div className="text-center space-y-3">
           <div className="animate-spin size-8 border-4 border-primary border-t-transparent rounded-full mx-auto" />
-          <p className="text-sm text-muted-foreground font-medium animate-pulse">Loading map assets...</p>
+          <p className="text-sm text-muted-foreground font-medium animate-pulse">
+            Loading map assets...
+          </p>
         </div>
       </div>
     );
@@ -268,7 +303,9 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
                   ? textures[wesnothAssetUrl(`terrain/${base.symbolImage}.png`)]
                   : null;
                 const overlayTexture = overlay?.symbolImage
-                  ? textures[wesnothAssetUrl(`terrain/${overlay.symbolImage}.png`)]
+                  ? textures[
+                      wesnothAssetUrl(`terrain/${overlay.symbolImage}.png`)
+                    ]
                   : null;
 
                 return (
@@ -319,7 +356,12 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
                       onPointerOver={() => {
                         const name = getTerrainName(baseCode, overlayCode);
                         setHoveredHex({ x: cIdx, y: rIdx, code: cell });
-                        onHoverHex?.({ x: cIdx, y: rIdx, code: cell, terrainName: name });
+                        onHoverHex?.({
+                          x: cIdx,
+                          y: rIdx,
+                          code: cell,
+                          terrainName: name,
+                        });
                       }}
                       onPointerOut={() => {
                         setHoveredHex(null);
@@ -330,7 +372,9 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
                         g.stroke({ width: 1, color: 0x555555, alpha: 0.18 });
                         g.fill({ color: 0xffffff, alpha: 0.0001 }); // Transparent fill to enable interaction
                         // Flat-topped hex polygon bounds
-                        g.drawPolygon([18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36]);
+                        g.drawPolygon([
+                          18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
+                        ]);
                       }}
                     />
                   </pixiContainer>
@@ -356,20 +400,23 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
             })}
 
             {/* 3. Hover Hex Highlight Overlay */}
-            {hoveredHex && (() => {
-              const pos = getHexPosition(hoveredHex.x, hoveredHex.y);
-              return (
-                <pixiGraphics
-                  x={pos.x}
-                  y={pos.y}
-                  draw={(g) => {
-                    g.clear();
-                    g.stroke({ width: 2, color: 0xeab308, alpha: 0.85 }); // Yellow border
-                    g.drawPolygon([18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36]);
-                  }}
-                />
-              );
-            })()}
+            {hoveredHex &&
+              (() => {
+                const pos = getHexPosition(hoveredHex.x, hoveredHex.y);
+                return (
+                  <pixiGraphics
+                    x={pos.x}
+                    y={pos.y}
+                    draw={(g) => {
+                      g.clear();
+                      g.stroke({ width: 2, color: 0xeab308, alpha: 0.85 }); // Yellow border
+                      g.drawPolygon([
+                        18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
+                      ]);
+                    }}
+                  />
+                );
+              })()}
 
             {/* 4. Text labels */}
             {labels?.map((label, idx) => {
