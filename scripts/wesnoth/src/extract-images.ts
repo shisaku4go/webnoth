@@ -168,6 +168,8 @@ function main() {
     { src: 'data/core/images/scenery', dest: 'scenery' },
     { src: 'data/core/images/halo', dest: 'halo' },
     { src: 'data/core/images/misc', dest: 'misc' },
+    { src: 'data/core/images/terrain', dest: 'terrain' },
+    { src: 'data/core/images/items', dest: 'items' },
   ];
 
   const totalStats: CopyStats = { files: 0, bytes: 0 };

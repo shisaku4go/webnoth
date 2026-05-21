@@ -11,6 +11,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wdt'],
     submerge: 0.5,
     editorGroup: ['water'],
+    symbolImage: 'water/ocean-grey-tile',
   },
   {
     id: 'deep_water_medium',
@@ -20,6 +21,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wdt'],
     submerge: 0.5,
     editorGroup: ['water'],
+    symbolImage: 'water/ocean-tile',
   },
   {
     id: 'deep_water_tropical',
@@ -29,6 +31,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wdt'],
     submerge: 0.5,
     editorGroup: ['water'],
+    symbolImage: 'water/ocean-tropical-tile',
   },
   {
     id: 'gray_tropical_water',
@@ -38,6 +41,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wst'],
     submerge: 0.4,
     editorGroup: ['water'],
+    symbolImage: 'water/coast-grey-tile',
   },
   {
     id: 'medium_shallow_water',
@@ -47,6 +51,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wst'],
     submerge: 0.4,
     editorGroup: ['water'],
+    symbolImage: 'water/coast-tile',
   },
   {
     id: 'tropical_water',
@@ -56,6 +61,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wst'],
     submerge: 0.4,
     editorGroup: ['water'],
+    symbolImage: 'water/coast-tropical-tile',
   },
   {
     id: 'ford',
@@ -67,6 +73,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['water'],
     helpTopicText:
       'When a river happens to be extremely shallow, passing over it is a trivial matter for land based units. Moreover, any creature best adapted to swimming has full mobility even at such places in the river. As far as gameplay is concerned, a river ford is treated as either grassland or shallow water, choosing whichever one offers the best defensive and movement bonuses for the unit on it.',
+    symbolImage: 'water/ford-tile',
   },
   {
     id: 'gray_reef',
@@ -76,6 +83,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wrt'],
     submerge: 0.3,
     editorGroup: ['water'],
+    symbolImage: 'water/reef-gray-tile',
   },
   {
     id: 'medium_reef',
@@ -85,6 +93,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wrt'],
     submerge: 0.3,
     editorGroup: ['water'],
+    symbolImage: 'water/reef-tile',
   },
   {
     id: 'tropical_reef',
@@ -94,6 +103,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Wrt'],
     submerge: 0.3,
     editorGroup: ['water'],
+    symbolImage: 'water/reef-tropical-tile',
   },
   {
     id: 'sea_kelp',
@@ -104,6 +114,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0.45,
     editorGroup: ['water'],
     defaultBase: 'Ww',
+    symbolImage: 'water/seaweed/kelp-tile',
   },
   {
     id: 'swamp_water_reed',
@@ -113,6 +124,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['St'],
     submerge: 0.4,
     editorGroup: ['water'],
+    symbolImage: 'swamp/water-tile',
   },
   {
     id: 'quagmire',
@@ -122,6 +134,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['St'],
     submerge: 0.4,
     editorGroup: ['water'],
+    symbolImage: 'swamp/mud-tile',
   },
   {
     id: 'grassland',
@@ -130,6 +143,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Gg',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'grass/green-symbol',
   },
   {
     id: 'savanna',
@@ -138,6 +152,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Gs',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'grass/semi-dry',
   },
   {
     id: 'grass_dry',
@@ -146,6 +161,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Gd',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'grass/dry-symbol',
   },
   {
     id: 'leaf_litter',
@@ -154,6 +170,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Gll',
     aliasOf: ['Gt'],
     editorGroup: ['flat', 'fall'],
+    symbolImage: 'grass/leaf-litter',
   },
   {
     id: 'dirt_dark',
@@ -162,6 +179,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Rb',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'flat/dirt-dark',
   },
   {
     id: 'dirt',
@@ -170,6 +188,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Re',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'flat/dirt',
   },
   {
     id: 'dirt_dry',
@@ -178,6 +197,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Rd',
     aliasOf: ['Gt'],
     editorGroup: ['desert', 'flat'],
+    symbolImage: 'flat/desert-road',
   },
   {
     id: 'road',
@@ -188,6 +208,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['flat'],
     helpTopicText:
       "text='Roads' are beaten paths of dirt, formed by many travelers passing over them. As far as gameplay is concerned, roads behave as flat terrain.",
+    symbolImage: 'flat/road',
   },
   {
     id: 'road_clean',
@@ -196,6 +217,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Rrc',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'flat/road-clean',
   },
   {
     id: 'road_desert',
@@ -204,6 +226,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Rrd',
     aliasOf: ['Gt'],
     editorGroup: ['flat', 'desert'],
+    symbolImage: 'flat/sandy-path',
   },
   {
     id: 'stone_path',
@@ -212,6 +235,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Rp',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'flat/stone-path',
   },
   {
     id: 'road_icy',
@@ -220,6 +244,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Rra',
     aliasOf: ['Gt'],
     editorGroup: ['flat', 'frozen'],
+    symbolImage: 'flat/road-icy',
   },
   {
     id: 'ice',
@@ -227,6 +252,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ai',
     aliasOf: ['At'],
     editorGroup: ['frozen'],
+    symbolImage: 'frozen/ice',
   },
   {
     id: 'snow',
@@ -234,6 +260,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Aa',
     aliasOf: ['At'],
     editorGroup: ['frozen'],
+    symbolImage: 'frozen/snow',
   },
   {
     id: 'desert',
@@ -244,6 +271,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['desert'],
     helpTopicText:
       "text='Deserts' have a somewhat different composition than small sand pits or beaches, however for gameplay purposes they are identical. See dst='..terrain_sand' text='sand'.",
+    symbolImage: 'sand/desert',
   },
   {
     id: 'sand_beach',
@@ -254,6 +282,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['desert'],
     helpTopicText:
       "The instability of text='sand' makes it harder for most units to cross, and leaves them wide open to attack. In contrast, the wide feet or snakelike bodies of the reptilian races make sand much easier for them to navigate.\n\nMost units receive 20 to 40% defense in sand.",
+    symbolImage: 'sand/beach',
   },
   {
     id: 'oasis',
@@ -266,6 +295,7 @@ export const terrains: WesnothTerrain[] = [
     defaultBase: 'Dd',
     helpTopicText:
       'A welcome sight to any traveler, an oasis allows units to heal as if stationed in a village, but provides no income or defensive advantage.',
+    symbolImage: 'sand/desert-oasis',
   },
   {
     id: 'sand_rubble',
@@ -273,6 +303,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Dr',
     aliasOf: ['_bas', 'Ht'],
     editorGroup: ['desert', 'rough'],
+    symbolImage: 'misc/rubble-tile',
   },
   {
     id: 'crater',
@@ -281,6 +312,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Dt'],
     editorGroup: ['desert'],
     defaultBase: 'Dd',
+    symbolImage: 'sand/crater',
   },
   {
     id: 'flowers_mixed',
@@ -289,6 +321,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Efm',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'embellishments/flowers-mixed',
   },
   {
     id: 'farm',
@@ -296,6 +329,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Gvs',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'embellishments/farm-veg-spring-icon',
   },
   {
     id: 'stones_small',
@@ -304,6 +338,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Es',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'embellishments/stones-small7',
   },
   {
     id: 'snowbits_small',
@@ -312,6 +347,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Esa',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'frozen'],
+    symbolImage: 'embellishments/snowbits-small4',
   },
   {
     id: 'mushrooms_small',
@@ -320,6 +356,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Em',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'embellishments/mushroom',
   },
   {
     id: 'mushrooms_farm',
@@ -328,6 +365,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Emf',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'cave'],
+    symbolImage: 'embellishments/mushroom-farm-small',
   },
   {
     id: 'desert_plants',
@@ -336,6 +374,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Edp',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'desert'],
+    symbolImage: 'embellishments/plants/desert-bones',
   },
   {
     id: 'desert_plants_sans_bones',
@@ -344,6 +383,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Edpp',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'desert'],
+    symbolImage: 'embellishments/plants/desert-plant8',
   },
   {
     id: 'windmill',
@@ -352,6 +392,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Wm',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'misc/windmill-embellishment-tile',
   },
   {
     id: 'campfire',
@@ -361,6 +402,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
     light: 25,
+    symbolImage: 'misc/fire-A01',
   },
   {
     id: 'wallfire',
@@ -370,6 +412,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'cave'],
     light: 25,
+    symbolImage: 'walls/stone/flames/flames-tile',
   },
   {
     id: 'brazier',
@@ -378,6 +421,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Eb',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'misc/brazier-embellishment',
   },
   {
     id: 'brazier-lit',
@@ -387,6 +431,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
     light: 25,
+    symbolImage: 'misc/brazier-A01',
   },
   {
     id: 'fence',
@@ -395,6 +440,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Eff',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'embellishments/fence-se-nw-01',
   },
   {
     id: 'fence_iron',
@@ -403,6 +449,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Eqf',
     aliasOf: ['Qt'],
     editorGroup: ['embellishments', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'fence_palisade',
@@ -411,6 +458,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Eqp',
     aliasOf: ['Qt'],
     editorGroup: ['embellishments', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'sand_drifts',
@@ -419,6 +467,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Esd',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'desert'],
+    symbolImage: 'embellishments/rocks',
   },
   {
     id: 'water-lilies',
@@ -428,6 +477,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['water', 'embellishments'],
     defaultBase: 'Ww',
+    symbolImage: 'embellishments/water-lilies-tile',
   },
   {
     id: 'water-lilies-flower',
@@ -437,6 +487,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['water', 'embellishments'],
     defaultBase: 'Ww',
+    symbolImage: 'embellishments/water-lilies-flower-tile',
   },
   {
     id: 'seashells',
@@ -446,6 +497,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['water', 'embellishments'],
     defaultBase: 'Ds',
+    symbolImage: 'embellishments/seashells-tile',
   },
   {
     id: 'detritus_trash',
@@ -453,6 +505,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Edt',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'misc/detritus/trashC-1',
   },
   {
     id: 'detritus_bones',
@@ -460,6 +513,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Edb',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments'],
+    symbolImage: 'misc/detritus/detritusC-1',
   },
   {
     id: 'wall_windows',
@@ -467,6 +521,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Exw',
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'cave'],
+    symbolImage: 'walls/windows/dark-stone-tile',
   },
   {
     id: 'great_tree',
@@ -476,6 +531,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gg',
+    symbolImage: 'forest/great-tree-tile',
   },
   {
     id: 'great_tree_snowy',
@@ -485,6 +541,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['frozen', 'forest'],
     defaultBase: 'Aa',
+    symbolImage: 'forest/great-tree-snowy-tile',
   },
   {
     id: 'great_tree_dead',
@@ -494,6 +551,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gd',
+    symbolImage: 'forest/great-tree-dead-tile',
   },
   {
     id: 'great_tree_dead_oak',
@@ -503,6 +561,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gll',
+    symbolImage: 'forest/great-oak-tree-dead-tile',
   },
   {
     id: 'tropical_forest',
@@ -512,6 +571,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gs',
+    symbolImage: 'forest/tropical/jungle-tile',
   },
   {
     id: 'rainforest',
@@ -521,6 +581,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gll',
+    symbolImage: 'forest/tropical/rainforest-tile',
   },
   {
     id: 'palm_desert_forest',
@@ -530,6 +591,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest', 'desert'],
     defaultBase: 'Dd',
+    symbolImage: 'forest/tropical/palm-desert-tile',
   },
   {
     id: 'palm_forest',
@@ -539,6 +601,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gs',
+    symbolImage: 'forest/tropical/palms-tile',
   },
   {
     id: 'savanna_forest',
@@ -548,6 +611,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest', 'desert'],
     defaultBase: 'Gd',
+    symbolImage: 'forest/tropical/savanna-tile',
   },
   {
     id: 'pine_forest',
@@ -557,6 +621,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gll',
+    symbolImage: 'forest/pine-tile',
   },
   {
     id: 'snow_forest',
@@ -566,6 +631,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'At', 'Ft'],
     editorGroup: ['frozen', 'forest'],
     defaultBase: 'Aa',
+    symbolImage: 'forest/snow-forest-tile',
   },
   {
     id: 'deciduous_forest_summer',
@@ -575,6 +641,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gs',
+    symbolImage: 'forest/deciduous-summer-tile',
   },
   {
     id: 'deciduous_forest_fall',
@@ -584,6 +651,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest', 'fall'],
     defaultBase: 'Gll',
+    symbolImage: 'forest/deciduous-fall-tile',
   },
   {
     id: 'deciduous_forest_winter',
@@ -593,6 +661,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest', 'fall'],
     defaultBase: 'Gll',
+    symbolImage: 'forest/deciduous-winter-tile',
   },
   {
     id: 'deciduous_forest_winter_snow',
@@ -602,6 +671,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'At', 'Ft'],
     editorGroup: ['frozen', 'forest'],
     defaultBase: 'Aa',
+    symbolImage: 'forest/deciduous-winter-snow-tile',
   },
   {
     id: 'mixed_forest_summer',
@@ -611,6 +681,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest'],
     defaultBase: 'Gs',
+    symbolImage: 'forest/mixed-summer-tile',
   },
   {
     id: 'mixed_forest_fall',
@@ -620,6 +691,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest', 'fall'],
     defaultBase: 'Gll',
+    symbolImage: 'forest/mixed-fall-tile',
   },
   {
     id: 'mixed_forest_winter',
@@ -629,6 +701,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest', 'fall'],
     defaultBase: 'Gll',
+    symbolImage: 'forest/mixed-winter-tile',
   },
   {
     id: 'mixed_forest_winter_snow',
@@ -638,6 +711,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'At', 'Ft'],
     editorGroup: ['frozen', 'forest'],
     defaultBase: 'Aa',
+    symbolImage: 'forest/mixed-winter-snow-tile',
   },
   {
     id: 'hills_regular',
@@ -646,6 +720,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Hh',
     aliasOf: ['Ht'],
     editorGroup: ['rough'],
+    symbolImage: 'hills/regular',
   },
   {
     id: 'hills_dry',
@@ -654,6 +729,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Hhd',
     aliasOf: ['Ht'],
     editorGroup: ['fall', 'rough'],
+    symbolImage: 'hills/dry',
   },
   {
     id: 'desert_hills',
@@ -661,6 +737,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Hd',
     aliasOf: ['Dt', 'Ht'],
     editorGroup: ['desert', 'rough'],
+    symbolImage: 'hills/desert',
   },
   {
     id: 'snow_hills',
@@ -669,6 +746,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ha',
     aliasOf: ['At', 'Ht'],
     editorGroup: ['frozen', 'rough'],
+    symbolImage: 'hills/snow',
   },
   {
     id: 'regular_mountains',
@@ -677,6 +755,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Mm',
     aliasOf: ['Mt'],
     editorGroup: ['rough'],
+    symbolImage: 'mountains/basic-tile',
   },
   {
     id: 'dry_mountains',
@@ -685,6 +764,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Md',
     aliasOf: ['Mt'],
     editorGroup: ['rough', 'desert'],
+    symbolImage: 'mountains/dry-tile',
   },
   {
     id: 'snow_mountains',
@@ -693,6 +773,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ms',
     aliasOf: ['At', 'Mt'],
     editorGroup: ['rough', 'frozen'],
+    symbolImage: 'mountains/snow-tile',
   },
   {
     id: 'desert_mountains',
@@ -701,6 +782,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Mdd',
     aliasOf: ['Mt'],
     editorGroup: ['rough', 'desert'],
+    symbolImage: 'desert_mountains/desert-tile',
   },
   {
     id: 'regular_stone_floor',
@@ -709,6 +791,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Isr',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'interior/stone-regular',
   },
   {
     id: 'ancient_stone_floor',
@@ -717,6 +800,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Isa',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'interior/stone-ancient',
   },
   {
     id: 'rug_floor',
@@ -725,6 +809,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Isc',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'interior/royal-rug/rug-tile',
   },
   {
     id: 'rug2_floor',
@@ -733,6 +818,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Iwc',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'interior/regular-rug/rug-tile',
   },
   {
     id: 'rug3_floor',
@@ -741,6 +827,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Urc',
     aliasOf: ['Gt'],
     editorGroup: ['cave', 'flat'],
+    symbolImage: 'interior/cave-rug/rug-tile',
   },
   {
     id: 'wood_floor',
@@ -749,6 +836,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Iwr',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'interior/wood-regular',
   },
   {
     id: 'old_wood_floor',
@@ -757,6 +845,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Iwo',
     aliasOf: ['Gt'],
     editorGroup: ['flat'],
+    symbolImage: 'interior/wood-ruined',
   },
   {
     id: 'lit',
@@ -766,6 +855,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['cave'],
     light: 25,
+    symbolImage: 'cave/beam-tile',
   },
   {
     id: 'cave_floor',
@@ -774,6 +864,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Uu',
     aliasOf: ['Ut'],
     editorGroup: ['cave'],
+    symbolImage: 'cave/floor6',
   },
   {
     id: 'cave_earthy',
@@ -782,6 +873,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Uue',
     aliasOf: ['Ut'],
     editorGroup: ['cave'],
+    symbolImage: 'cave/earthy-floor3',
   },
   {
     id: 'flagstones_dark',
@@ -790,6 +882,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Urb',
     aliasOf: ['Gt'],
     editorGroup: ['cave', 'flat'],
+    symbolImage: 'cave/flagstones-dark',
   },
   {
     id: 'cave_path',
@@ -798,6 +891,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ur',
     aliasOf: ['Gt'],
     editorGroup: ['cave', 'flat'],
+    symbolImage: 'cave/path',
   },
   {
     id: 'fungus_grove_old',
@@ -809,6 +903,7 @@ export const terrains: WesnothTerrain[] = [
     defaultBase: 'Uu',
     helpTopicText:
       "Dwarven tales describe different types of mushrooms — with some types the difficulty of walking on the spongy floor has no relation to the ground underneath, even when the ground underneath is still visible. This terrain’s defense and movement costs are purely based on the unit’s stats for text='Fungus'.",
+    symbolImage: 'forest/mushrooms-tile',
   },
   {
     id: 'fungus_beam_old',
@@ -821,6 +916,7 @@ export const terrains: WesnothTerrain[] = [
     defaultBase: 'Uu',
     helpTopicText:
       "Dwarven tales describe different types of mushrooms — with some types the difficulty of walking on the spongy floor has no relation to the ground underneath, even when the ground underneath is still visible. This terrain’s defense and movement costs are purely based on the unit’s stats for text='Fungus'.",
+    symbolImage: 'forest/mushrooms-beam-tile',
   },
   {
     id: 'fungus_grove',
@@ -830,6 +926,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Tt'],
     editorGroup: ['cave', 'forest'],
     defaultBase: 'Tb',
+    symbolImage: 'forest/mushrooms-tile',
   },
   {
     id: 'fungus_beam',
@@ -840,6 +937,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['cave'],
     light: 25,
     defaultBase: 'Tb',
+    symbolImage: 'forest/mushrooms-beam-tile',
   },
   {
     id: 'fungus_floor',
@@ -848,6 +946,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Tb',
     aliasOf: ['Tt'],
     editorGroup: ['cave'],
+    symbolImage: 'forest/mushroom-base',
   },
   {
     id: 'rocky_cave',
@@ -858,6 +957,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['cave', 'rough'],
     helpTopicText:
       "text='Rockbound cave' terrain is formed by the action of water and wind, carrying erosive particles that carve the rock. It resembles a scraggy underground cavern which shoulders defense, but is hard for most units to traverse. Only settlers of caves, such as dwarves and trolls, are fully capable of navigating such topography.\n\nMost units have about 50% defense in rocky caves, whereas cavalry are limited to 40%. Dwarves, by dint of their small size, enjoy 60% defense in rockbound caves.\n\nOccasionally caves are text='illuminated'.",
+    symbolImage: 'cave/hills-variation',
   },
   {
     id: 'earthy_rocky_cave',
@@ -868,6 +968,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['cave', 'rough'],
     helpTopicText:
       "text='Rockbound cave' terrain is formed by the action of water and wind, carrying erosive particles that carve the rock. It resembles a scraggy underground cavern which shoulders defense, but is hard for most units to traverse. Only settlers of caves, such as dwarves and trolls, are fully capable of navigating such topography.\n\nMost units have about 50% defense in rocky caves, whereas cavalry are limited to 40%. Dwarves, by dint of their small size, enjoy 60% defense in rockbound caves.\n\nOccasionally caves are text='illuminated'.",
+    symbolImage: 'cave/earthy-hills-variation',
   },
   {
     id: 'mine_rails',
@@ -876,6 +977,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Rt'],
     submerge: 0,
     editorGroup: ['cave'],
+    symbolImage: 'misc/rails-n-s',
   },
   {
     id: 'mine_railsdiag1',
@@ -884,6 +986,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Rt'],
     submerge: 0,
     editorGroup: ['cave'],
+    symbolImage: 'misc/rails-ne-sw',
   },
   {
     id: 'mine_railsdiag2',
@@ -892,6 +995,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Rt'],
     submerge: 0,
     editorGroup: ['cave'],
+    symbolImage: 'misc/rails-se-nw',
   },
   {
     id: 'high_border',
@@ -916,6 +1020,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Qhux',
     aliasOf: ['Qt'],
     editorGroup: ['obstacle', 'elevation'],
+    symbolImage: 'elevation/obstacle-tile',
   },
   {
     id: 'high_border_woods',
@@ -924,6 +1029,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Qhhf',
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest', 'elevation'],
+    symbolImage: 'forest/pine-tile',
   },
   {
     id: 'high_canyon_woods',
@@ -932,6 +1038,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Qhuf',
     aliasOf: ['_bas', 'Ft'],
     editorGroup: ['forest', 'elevation'],
+    symbolImage: 'forest/pine-tile',
   },
   {
     id: 'canyon',
@@ -940,6 +1047,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Qxu',
     aliasOf: ['Qt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'chasm/depths',
   },
   {
     id: 'chasm_earthy',
@@ -948,6 +1056,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Qxe',
     aliasOf: ['Qt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'chasm/depths',
   },
   {
     id: 'abyss',
@@ -956,6 +1065,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Qxua',
     aliasOf: ['Qt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'chasm/abyss',
   },
   {
     id: 'lava_chasm',
@@ -965,6 +1075,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Qt'],
     editorGroup: ['cave', 'obstacle'],
     light: 25,
+    symbolImage: 'unwalkable/lava-tile',
   },
   {
     id: 'lava',
@@ -976,6 +1087,7 @@ export const terrains: WesnothTerrain[] = [
     light: 25,
     helpTopicText:
       "The dangers inherent in trying to walk on text='lava' are fairly obvious. As far as movement is concerned, lava is equivalent to dst='terrain_unwalkable' text='unwalkable' terrain, and can only be crossed by those units capable of flying a considerable distance above it. The molten magma also produces a substantial glow, illuminating the area immediately above it. This provides an attack bonus for lawful units and removes the attack bonus from chaotic units.",
+    symbolImage: 'unwalkable/lava-tile',
   },
   {
     id: 'volcano',
@@ -984,6 +1096,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Qt'],
     editorGroup: ['rough', 'obstacle'],
     light: 25,
+    symbolImage: 'mountains/volcano-tile',
   },
   {
     id: 'cloud',
@@ -992,6 +1105,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Mm^Xm',
     aliasOf: ['-', 'Mt', 'Xt'],
     editorGroup: ['rough', 'obstacle'],
+    symbolImage: 'mountains/cloud-tile',
   },
   {
     id: 'cloud_dry',
@@ -1000,6 +1114,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Md^Xm',
     aliasOf: ['-', 'Mt', 'Xt'],
     editorGroup: ['rough', 'obstacle', 'desert'],
+    symbolImage: 'mountains/cloud-desert-tile',
   },
   {
     id: 'cloud_snow',
@@ -1008,6 +1123,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ms^Xm',
     aliasOf: ['-', 'Mt', 'Xt'],
     editorGroup: ['rough', 'obstacle', 'frozen'],
+    symbolImage: 'mountains/cloud-snow-tile',
   },
   {
     id: 'cloud_desert',
@@ -1016,6 +1132,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Mdd^Xm',
     aliasOf: ['-', 'Mt', 'Xt'],
     editorGroup: ['rough', 'obstacle', 'desert'],
+    symbolImage: 'desert_mountains/cloud-desert-tile',
   },
   {
     id: 'cavewall',
@@ -1024,6 +1141,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xu',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'minewall',
@@ -1032,6 +1150,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xuc',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'cavewall_earthy',
@@ -1040,6 +1159,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xue',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'cavewall_damaged',
@@ -1048,6 +1168,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xur',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_hedge',
@@ -1056,6 +1177,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xuf',
     aliasOf: ['Xt'],
     editorGroup: ['forest', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'cavewall_earthy_hewn',
@@ -1064,6 +1186,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xuce',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone',
@@ -1071,6 +1194,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xos',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_lit',
@@ -1079,6 +1203,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xol',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_mine',
@@ -1087,6 +1212,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xom',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_white',
@@ -1095,6 +1221,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xoi',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_clean',
@@ -1103,6 +1230,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xoc',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_ancient',
@@ -1111,6 +1239,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xoa',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_tomb',
@@ -1119,6 +1248,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xot',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_overgrown',
@@ -1127,6 +1257,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xof',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_damaged',
@@ -1135,6 +1266,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xor',
     aliasOf: ['Xt'],
     editorGroup: ['cave', 'obstacle'],
+    symbolImage: 'void/void',
   },
   {
     id: 'wall_stone_ruins',
@@ -1142,6 +1274,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Exos',
     aliasOf: ['Gt', 'Ut'],
     editorGroup: ['cave', 'flat'],
+    symbolImage: 'walls/stone/ruins/wall-stone-tile',
   },
   {
     id: 'portal_gate_rusty_sw',
@@ -1151,6 +1284,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Xt'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_gate_rusty_se',
@@ -1160,6 +1294,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Xt'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_gate_rusty_n',
@@ -1169,6 +1304,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Xt'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_door_wooden_sw',
@@ -1178,6 +1314,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Xt'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_door_wooden_se',
@@ -1187,6 +1324,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Xt'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_door_wooden_n',
@@ -1196,6 +1334,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Xt'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_gate_rusty_open_sw',
@@ -1205,6 +1344,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_gate_rusty_open_se',
@@ -1214,6 +1354,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_gate_rusty_open_n',
@@ -1223,6 +1364,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_door_wooden_open_sw',
@@ -1232,6 +1374,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_door_wooden_open_se',
@@ -1241,6 +1384,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'portal_door_wooden_open_n',
@@ -1250,6 +1394,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['embellishments', 'obstacle'],
     defaultBase: 'Rr',
+    symbolImage: 'void/void',
   },
   {
     id: 'impassable_overlay',
@@ -1273,6 +1418,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Xv',
     aliasOf: ['Xt'],
     editorGroup: ['obstacle', 'special'],
+    symbolImage: 'void/void',
   },
   {
     id: 'desert_village',
@@ -1283,6 +1429,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'desert'],
     heals: 8,
     defaultBase: 'Dd',
+    symbolImage: 'village/desert-tile',
   },
   {
     id: 'desert_village_ruin',
@@ -1293,6 +1440,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'desert'],
     heals: 8,
     defaultBase: 'Dd',
+    symbolImage: 'village/desert-ruin-tile',
   },
   {
     id: 'desert_village_tent',
@@ -1303,6 +1451,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'desert'],
     heals: 8,
     defaultBase: 'Dd',
+    symbolImage: 'village/desert-camp-tile',
   },
   {
     id: 'camp_village',
@@ -1313,6 +1462,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Re',
+    symbolImage: 'village/camp-tile',
   },
   {
     id: 'orcish_village',
@@ -1323,6 +1473,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Gd',
+    symbolImage: 'village/orc-tile',
   },
   {
     id: 'orcish_snow_village',
@@ -1333,6 +1484,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen'],
     heals: 8,
     defaultBase: 'Aa',
+    symbolImage: 'village/orc-snow-tile',
   },
   {
     id: 'elven_snow_village',
@@ -1343,6 +1495,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen'],
     heals: 8,
     defaultBase: 'Aa',
+    symbolImage: 'village/elven-snow-tile',
   },
   {
     id: 'elven_village',
@@ -1353,6 +1506,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Gg',
+    symbolImage: 'village/elven-tile',
   },
   {
     id: 'human_village',
@@ -1363,6 +1517,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Gs',
+    symbolImage: 'village/human-tile',
   },
   {
     id: 'snow_village',
@@ -1373,6 +1528,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen'],
     heals: 8,
     defaultBase: 'Aa',
+    symbolImage: 'village/snow-tile',
   },
   {
     id: 'human_village_ruin',
@@ -1383,6 +1539,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Gd',
+    symbolImage: 'village/human-cottage-ruin-tile',
   },
   {
     id: 'city_village',
@@ -1393,6 +1550,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Rr',
+    symbolImage: 'village/human-city-tile',
   },
   {
     id: 'windmill_village',
@@ -1403,6 +1561,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Gg',
+    symbolImage: 'misc/windmill-tile',
   },
   {
     id: 'city_village_wno',
@@ -1413,6 +1572,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen'],
     heals: 8,
     defaultBase: 'Rrc',
+    symbolImage: 'village/human-city-snow-tile',
   },
   {
     id: 'city_village_ruin',
@@ -1423,6 +1583,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Rp',
+    symbolImage: 'village/human-city-ruin-tile',
   },
   {
     id: 'hill_village',
@@ -1433,6 +1594,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'rough'],
     heals: 8,
     defaultBase: 'Hh',
+    symbolImage: 'village/human-hills-tile',
   },
   {
     id: 'snow-hill_village',
@@ -1443,6 +1605,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen', 'rough'],
     heals: 8,
     defaultBase: 'Ha',
+    symbolImage: 'village/human-snow-hills-tile',
   },
   {
     id: 'hill_village_ruin',
@@ -1453,6 +1616,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'rough'],
     heals: 8,
     defaultBase: 'Hhd',
+    symbolImage: 'village/human-hills-ruin-tile',
   },
   {
     id: 'tropical_forest_village',
@@ -1463,6 +1627,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Gs',
+    symbolImage: 'village/tropical-tile',
   },
   {
     id: 'drake_village',
@@ -1473,6 +1638,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Rr',
+    symbolImage: 'village/drake-tile',
   },
   {
     id: 'drake_snow_village',
@@ -1483,6 +1649,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen'],
     heals: 8,
     defaultBase: 'Aa',
+    symbolImage: 'village/drake-snow-tile',
   },
   {
     id: 'underground_village',
@@ -1493,6 +1660,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'cave'],
     heals: 8,
     defaultBase: 'Uu',
+    symbolImage: 'village/cave-tile',
   },
   {
     id: 'dwarven_village',
@@ -1503,6 +1671,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'cave'],
     heals: 8,
     defaultBase: 'Uu',
+    symbolImage: 'village/dwarven-tile',
   },
   {
     id: 'hut_village',
@@ -1513,6 +1682,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Gs',
+    symbolImage: 'village/hut-tile',
   },
   {
     id: 'hut_snow_village',
@@ -1523,6 +1693,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen'],
     heals: 8,
     defaultBase: 'Aa',
+    symbolImage: 'village/hut-snow-tile',
   },
   {
     id: 'logcabin_village',
@@ -1533,6 +1704,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village'],
     heals: 8,
     defaultBase: 'Gs',
+    symbolImage: 'village/log-cabin-tile',
   },
   {
     id: 'logcabin_snow_village',
@@ -1543,6 +1715,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen'],
     heals: 8,
     defaultBase: 'Aa',
+    symbolImage: 'village/log-cabin-snow-tile',
   },
   {
     id: 'igloo',
@@ -1553,6 +1726,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['village', 'frozen'],
     heals: 8,
     defaultBase: 'Aa',
+    symbolImage: 'village/igloo-tile',
   },
   {
     id: 'swamp_village',
@@ -1563,6 +1737,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['water', 'village'],
     heals: 8,
     defaultBase: 'Ss',
+    symbolImage: 'village/swampwater-tile',
   },
   {
     id: 'mermen-village',
@@ -1576,6 +1751,7 @@ export const terrains: WesnothTerrain[] = [
     defaultBase: 'Ww',
     helpTopicText:
       "text='Submerged villages' are the homes of merfolk and nagas. While water-dwelling creatures are at home here, land-dwellers have a hard time navigating and defending these villages. However, like any village, the facilities are available to all creatures which allow units to tend to their wounds. Any unit stationed in a village can heal eight hitpoints each turn, or be cured of poison.\n\nMerfolk and nagas have 60% defense in submerged villages, whereas land based units usually have a low defense.",
+    symbolImage: 'village/coast-tile',
   },
   {
     id: 'village_overlay',
@@ -1585,6 +1761,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas'],
     editorGroup: ['village', 'special'],
     heals: 8,
+    symbolImage: 'fog/fog1',
   },
   {
     id: 'encampment',
@@ -1593,6 +1770,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ce',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/encampment/regular-tile',
   },
   {
     id: 'encampment_ruin',
@@ -1601,6 +1779,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cer',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/encampment-ruin/regular-tile',
   },
   {
     id: 'encampment_snow',
@@ -1609,6 +1788,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cea',
     aliasOf: ['Ct', 'At'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/encampment/snow-tile',
   },
   {
     id: 'orcish_fort',
@@ -1617,6 +1797,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Co',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/orcish/tile',
   },
   {
     id: 'snow_orcish_fort',
@@ -1625,6 +1806,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Coa',
     aliasOf: ['Ct', 'At'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/winter-orcish/tile',
   },
   {
     id: 'human_castle',
@@ -1633,6 +1815,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ch',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/castle-tile',
   },
   {
     id: 'snow_castle',
@@ -1641,6 +1824,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cha',
     aliasOf: ['Ct', 'At'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/snowy/castle-tile',
   },
   {
     id: 'elven_castle',
@@ -1649,6 +1833,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cv',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/elven/tile',
   },
   {
     id: 'elven_castle_ruin',
@@ -1657,6 +1842,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cvr',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/elven-ruin/tile',
   },
   {
     id: 'elven_castle_winter',
@@ -1665,6 +1851,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cva',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/winter-elven/tile',
   },
   {
     id: 'dwarven_castle',
@@ -1673,6 +1860,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cud',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'cave'],
+    symbolImage: 'castle/dwarven-castle-tile',
   },
   {
     id: 'dwarven_castle2',
@@ -1681,6 +1869,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cf',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/outside-dwarven/dwarven-castle-tile',
   },
   {
     id: 'dwarven_castle_ruin',
@@ -1689,6 +1878,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cfr',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/ruin-dwarven/dwarven-castle-tile',
   },
   {
     id: 'dwarven_castle_winter',
@@ -1697,6 +1887,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cfa',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/winter-dwarven/dwarven-castle-tile',
   },
   {
     id: 'ruin',
@@ -1705,6 +1896,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Chr',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/ruin-tile',
   },
   {
     id: 'sunkenruin',
@@ -1714,6 +1906,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Ct', 'Wst'],
     submerge: 0.4,
     editorGroup: ['castle', 'water'],
+    symbolImage: 'castle/sunken-ruin-tile',
   },
   {
     id: 'swampruin',
@@ -1723,6 +1916,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Ct', 'St'],
     submerge: 0.4,
     editorGroup: ['castle', 'water'],
+    symbolImage: 'castle/swamp-ruin-tile',
   },
   {
     id: 'sand_castle',
@@ -1731,6 +1925,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cd',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'desert'],
+    symbolImage: 'castle/sand/tile',
   },
   {
     id: 'sand_castle_ruin',
@@ -1739,6 +1934,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cdr',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'desert'],
+    symbolImage: 'castle/sand/ruin-tile',
   },
   {
     id: 'troll_encampment',
@@ -1747,6 +1943,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Cte',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/troll/tile',
   },
   {
     id: 'aquatic_camp',
@@ -1756,6 +1953,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Ct', 'Wrt'],
     submerge: 0.3,
     editorGroup: ['castle', 'water'],
+    symbolImage: 'castle/aquatic-camp/tile',
   },
   {
     id: 'aquatic_castle',
@@ -1765,6 +1963,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Ct', 'Wrt'],
     submerge: 0.4,
     editorGroup: ['castle', 'water'],
+    symbolImage: 'castle/aquatic-castle/castle-tile',
   },
   {
     id: 'encampment_keep',
@@ -1772,6 +1971,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ke',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/encampment/regular-keep-tile',
   },
   {
     id: 'encampment_ruin_keep',
@@ -1779,6 +1979,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ker',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/encampment-ruin/regular-keep-tile',
   },
   {
     id: 'encampment_keep_tall',
@@ -1787,6 +1988,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ket',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/encampment/tall-keep-tile',
   },
   {
     id: 'encampment_snow_keep',
@@ -1795,6 +1997,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kea',
     aliasOf: ['Ct', 'At'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/encampment/snow-keep-tile',
   },
   {
     id: 'orcish_keep',
@@ -1803,6 +2006,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Ko',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/orcish/keep-tile',
   },
   {
     id: 'snow_orcish_keep',
@@ -1811,6 +2015,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Koa',
     aliasOf: ['Ct', 'At'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/winter-orcish/keep-tile',
   },
   {
     id: 'human_keep',
@@ -1819,6 +2024,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kh',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/keep-tile',
   },
   {
     id: 'snow_keep',
@@ -1827,6 +2033,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kha',
     aliasOf: ['Ct', 'At'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/snowy/keep-tile',
   },
   {
     id: 'elven_keep',
@@ -1835,6 +2042,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kv',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/elven/keep-tile',
   },
   {
     id: 'elven_keep_ruin',
@@ -1843,6 +2051,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kvr',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/elven-ruin/keep-tile',
   },
   {
     id: 'elven_keep_winter',
@@ -1851,6 +2060,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kva',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/winter-elven/keep-tile',
   },
   {
     id: 'dwarven_keep',
@@ -1859,6 +2069,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kud',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'cave'],
+    symbolImage: 'castle/dwarven-keep-tile',
   },
   {
     id: 'dwarven_keep2',
@@ -1867,6 +2078,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kf',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/outside-dwarven/dwarven-keep-tile',
   },
   {
     id: 'dwarven_keep_ruin',
@@ -1875,6 +2087,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kfr',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/ruin-dwarven/dwarven-keep-tile',
   },
   {
     id: 'dwarven_keep_winter',
@@ -1883,6 +2096,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kfa',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'frozen'],
+    symbolImage: 'castle/winter-dwarven/dwarven-keep-tile',
   },
   {
     id: 'ruined_keep',
@@ -1891,6 +2105,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Khr',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/ruined-keep-tile',
   },
   {
     id: 'sunken_keep',
@@ -1899,6 +2114,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Khw',
     aliasOf: ['Ct', 'Wst'],
     editorGroup: ['castle', 'water'],
+    symbolImage: 'castle/sunken-keep-tile',
   },
   {
     id: 'swamp_keep',
@@ -1907,6 +2123,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Khs',
     aliasOf: ['Ct', 'St'],
     editorGroup: ['castle', 'water'],
+    symbolImage: 'castle/swamp-keep-tile',
   },
   {
     id: 'desert_keep',
@@ -1915,6 +2132,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kd',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'desert'],
+    symbolImage: 'castle/sand/keep-tile',
   },
   {
     id: 'desert_keep_ruined',
@@ -1923,6 +2141,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kdr',
     aliasOf: ['Ct'],
     editorGroup: ['castle', 'desert'],
+    symbolImage: 'castle/sand/ruin-keep-tile',
   },
   {
     id: 'merman_campkeep',
@@ -1931,6 +2150,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kme',
     aliasOf: ['Ct', 'Wrt'],
     editorGroup: ['castle', 'water'],
+    symbolImage: 'castle/aquatic-camp/keep-tile',
   },
   {
     id: 'troll_campkeep',
@@ -1939,6 +2159,7 @@ export const terrains: WesnothTerrain[] = [
     code: 'Kte',
     aliasOf: ['Ct'],
     editorGroup: ['castle'],
+    symbolImage: 'castle/troll/keep-tile',
   },
   {
     id: 'merman_castlekeep',
@@ -1948,6 +2169,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['Ct', 'Wrt'],
     submerge: 0.4,
     editorGroup: ['castle', 'water'],
+    symbolImage: 'castle/aquatic-castle/keep-tile',
   },
   {
     id: 'castle_overlay',
@@ -1956,6 +2178,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Cov',
     aliasOf: ['_bas'],
     editorGroup: ['castle', 'special'],
+    symbolImage: 'fog/fog1',
   },
   {
     id: 'keep_overlay',
@@ -1964,6 +2187,7 @@ export const terrains: WesnothTerrain[] = [
     code: '^Kov',
     aliasOf: ['_bas'],
     editorGroup: ['castle', 'special'],
+    symbolImage: 'fog/fog1',
   },
   {
     id: 'bridge',
@@ -1975,6 +2199,7 @@ export const terrains: WesnothTerrain[] = [
     editorGroup: ['bridge', 'water'],
     helpTopicText:
       "To those capable of building one, the ability to lay a text='bridge' offers a liberation from the fickle nature of waterways, whose fords come and go with the rise and fall of the waterline. This is to say nothing of the luxury of dry feet, the loss of which is no laughing matter in the cold months of the year.\n\nFor those who go by land or sea, a bridge is the best of both worlds — for gameplay purposes, it is treated either as grassland or the underlying water, whichever offers the best movement and defensive bonuses for the unit occupying the bridge hex. Note that a swimming unit and a land unit are not capable of occupying a bridge hex at the same time.",
+    symbolImage: 'bridge/wood-n-s',
   },
   {
     id: 'bridgediag1',
@@ -1984,6 +2209,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'water'],
+    symbolImage: 'bridge/wood-ne-sw',
   },
   {
     id: 'bridgediag2',
@@ -1993,6 +2219,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'water'],
+    symbolImage: 'bridge/wood-se-nw',
   },
   {
     id: 'rotbridge',
@@ -2002,6 +2229,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'water'],
+    symbolImage: 'bridge/wood-rotting-n-s',
   },
   {
     id: 'rotbridgediag1',
@@ -2011,6 +2239,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'water'],
+    symbolImage: 'bridge/wood-rotting-ne-sw',
   },
   {
     id: 'rotbridgediag2',
@@ -2020,6 +2249,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'water'],
+    symbolImage: 'bridge/wood-rotting-se-nw',
   },
   {
     id: 'stone_bridge',
@@ -2029,6 +2259,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'water'],
+    symbolImage: 'bridge/stonebridge-n-s-tile',
   },
   {
     id: 'stone_bridgediag1',
@@ -2038,6 +2269,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'water'],
+    symbolImage: 'bridge/stonebridge-se-nw-tile',
   },
   {
     id: 'stone_bridgediag2',
@@ -2047,6 +2279,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'water'],
+    symbolImage: 'bridge/stonebridge-ne-sw-tile',
   },
   {
     id: 'snow_stone_bridge',
@@ -2056,6 +2289,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'frozen', 'water'],
+    symbolImage: 'bridge/snow/stonebridge-n-s-tile',
   },
   {
     id: 'snow_stone_bridgediag1',
@@ -2065,6 +2299,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'frozen', 'water'],
+    symbolImage: 'bridge/snow/stonebridge-se-nw-tile',
   },
   {
     id: 'snow_stone_bridgediag2',
@@ -2074,6 +2309,7 @@ export const terrains: WesnothTerrain[] = [
     aliasOf: ['_bas', 'Gt'],
     submerge: 0,
     editorGroup: ['bridge', 'frozen', 'water'],
+    symbolImage: 'bridge/snow/stonebridge-ne-sw-tile',
   },
   {
     id: 'bridgechasm',
@@ -2084,6 +2320,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'cave/chasm-stone-bridge-s-n-tile',
   },
   {
     id: 'bridgechasmdiag1',
@@ -2094,6 +2331,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'cave/chasm-stone-bridge-sw-ne-tile',
   },
   {
     id: 'bridgechasmdiag2',
@@ -2104,6 +2342,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'cave/chasm-stone-bridge-se-nw-tile',
   },
   {
     id: 'hangingbridgediag1',
@@ -2114,6 +2353,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/hanging-se-nw-tile',
   },
   {
     id: 'hangingbridgediag2',
@@ -2124,6 +2364,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/hanging-sw-ne-tile',
   },
   {
     id: 'hangingbridge',
@@ -2134,6 +2375,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/hanging-s-n-tile',
   },
   {
     id: 'stonechasmbridgediag1',
@@ -2144,6 +2386,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/chasm-se-nw-tile',
   },
   {
     id: 'stonechasmbridgediag2',
@@ -2154,6 +2397,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/chasm-sw-ne-tile',
   },
   {
     id: 'stonechasmbridge',
@@ -2164,6 +2408,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/chasm-s-n-tile',
   },
   {
     id: 'plankbridgediag1',
@@ -2174,6 +2419,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/planks-se-nw-tile',
   },
   {
     id: 'plankbridgediag2',
@@ -2184,6 +2430,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/planks-sw-ne-tile',
   },
   {
     id: 'plankbridge',
@@ -2194,6 +2441,7 @@ export const terrains: WesnothTerrain[] = [
     submerge: 0,
     editorGroup: ['bridge', 'cave'],
     defaultBase: 'Qxu',
+    symbolImage: 'bridge/planks-s-n',
   },
   {
     id: 'mark_high',
@@ -2233,6 +2481,7 @@ export const terrains: WesnothTerrain[] = [
     editorName: 'Off Map',
     code: '_off^_usr',
     editorGroup: ['special', 'obstacle'],
+    symbolImage: 'off-map/symbol',
   },
   {
     id: 'off_map2',
@@ -2240,6 +2489,7 @@ export const terrains: WesnothTerrain[] = [
     editorName: 'Fake Map Border',
     code: '^_fme',
     editorGroup: ['special', 'obstacle'],
+    symbolImage: 'off-map/border',
   },
   {
     id: 'overlay_artplaceholder',
@@ -2248,24 +2498,28 @@ export const terrains: WesnothTerrain[] = [
     code: '^Xxxx',
     aliasOf: ['_bas'],
     editorGroup: ['special'],
+    symbolImage: 'off-map/symbol',
   },
   {
     id: 'shroud',
     name: 'Shroud',
     code: '_s',
     editorGroup: ['special'],
+    symbolImage: 'void/void',
   },
   {
     id: 'fake_shroud_overlay',
     name: 'Fake Shroud',
     code: '^_s',
     editorGroup: ['special'],
+    symbolImage: 'void/void',
   },
   {
     id: 'fog',
     name: 'Fog',
     code: '_f',
     editorGroup: ['special'],
+    symbolImage: 'fog/fog1',
   },
   {
     id: 'fungus',
@@ -2416,6 +2670,7 @@ export const terrains: WesnothTerrain[] = [
     editorName: 'Deprecated',
     code: 'Irs',
     aliasOf: ['Gt'],
+    symbolImage: 'interior/stone-regular',
   },
   {
     id: 'ancient_stone_floor_deprecated',
@@ -2423,6 +2678,7 @@ export const terrains: WesnothTerrain[] = [
     editorName: 'Deprecated',
     code: 'Ias',
     aliasOf: ['Gt'],
+    symbolImage: 'interior/stone-ancient',
   },
   {
     id: 'rug_floor_deprecated',
@@ -2430,6 +2686,7 @@ export const terrains: WesnothTerrain[] = [
     editorName: 'Deprecated',
     code: 'Icr',
     aliasOf: ['Gt'],
+    symbolImage: 'interior/royal-rug/rug-tile',
   },
   {
     id: 'rug2_floor_deprecated',
@@ -2437,6 +2694,7 @@ export const terrains: WesnothTerrain[] = [
     editorName: 'Deprecated',
     code: 'Icn',
     aliasOf: ['Gt'],
+    symbolImage: 'interior/regular-rug/rug-tile',
   },
   {
     id: 'old_wood_floor_deprecated',
@@ -2444,5 +2702,6 @@ export const terrains: WesnothTerrain[] = [
     editorName: 'Deprecated',
     code: 'Ior',
     aliasOf: ['Gt'],
+    symbolImage: 'interior/wood-ruined',
   },
 ];

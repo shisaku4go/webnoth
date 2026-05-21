@@ -222,6 +222,33 @@ export interface WesnothTerrain {
   light?: number;
   defaultBase?: string;
   helpTopicText?: string;
+  symbolImage?: string; // e.g. "water/coast-tile"
+}
+
+// === Map & Campaign ===
+
+export interface WesnothMapPlacement<T> {
+  x: number;
+  y: number;
+  value: T;
+}
+
+export interface WesnothMap {
+  id: string;
+  name: string;
+  width: number;
+  height: number;
+  grid: string[][]; // 2D array [row][col] containing terrain code strings (e.g., "Gs^Fms", "2 Khr")
+  items?: WesnothMapPlacement<{ image: string }>[];
+  labels?: WesnothMapPlacement<{ text: string }>[];
+}
+
+export interface WesnothCampaign {
+  id: string;
+  name: string;
+  icon?: string;
+  firstScenario?: string;
+  scenarios: WesnothMap[];
 }
 
 // === Provenance (出所情報) ===
@@ -279,5 +306,7 @@ export interface WesnothData {
   traits?: WesnothTrait[];
   schedules?: WesnothSchedule[];
   terrains?: WesnothTerrain[];
+  campaigns?: WesnothCampaign[];
+  multiplayer?: WesnothMap[];
   provenance: WesnothProvenance;
 }

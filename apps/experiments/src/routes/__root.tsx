@@ -24,8 +24,16 @@ function RootLayout() {
             to="/encyclopedia"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             activeProps={{ className: 'text-foreground font-medium' }}
+            activeOptions={{ exact: true }}
           >
-            Encyclopedia
+            Unit Encyclopedia
+          </Link>
+          <Link
+            to="/encyclopedia/maps"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            activeProps={{ className: 'text-foreground font-medium' }}
+          >
+            Map Encyclopedia
           </Link>
           <Link
             to="/battle-simulator"

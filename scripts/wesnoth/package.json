@@ -7,7 +7,8 @@
     "extract": "tsx src/extract-units.ts",
     "extract:images": "tsx src/extract-images.ts",
     "extract:all": "tsx src/extract-all.ts",
-    "extract:battle": "tsx src/extract-battle-data.ts"
+    "extract:battle": "tsx src/extract-battle-data.ts",
+    "extract:maps": "tsx src/extract-maps.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.18",

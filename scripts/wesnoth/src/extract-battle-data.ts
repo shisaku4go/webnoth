@@ -7,6 +7,7 @@
  *   pnpm --filter @webnoth/scripts-wesnoth run extract-battle -- --wesnoth-root <path-to-wesnoth>
  */
 
+import { execFileSync } from 'node:child_process';
 import {
   existsSync,
   promises as fsPromises,
@@ -423,6 +424,7 @@ interface TerrainData {
   light?: number;
   defaultBase?: string;
   helpTopicText?: string;
+  symbolImage?: string;
 }
 
 function extractTerrains(tree: WmlNode): TerrainData[] {
@@ -445,6 +447,7 @@ function extractTerrains(tree: WmlNode): TerrainData[] {
     const light = getNumAttr(node, 'light');
     const defaultBase = getAttr(node, 'default_base');
     const helpTopicText = cleanTranslation(getAttr(node, 'help_topic_text'));
+    const symbolImage = getAttr(node, 'symbol_image');
 
     terrains.push({
       id,
@@ -458,6 +461,7 @@ function extractTerrains(tree: WmlNode): TerrainData[] {
       light,
       defaultBase,
       helpTopicText,
+      symbolImage,
     });
   }
 
@@ -564,6 +568,26 @@ async function main() {
     );
   } else {
     console.error('Error: terrain.cfg not found.');
+  }
+
+  console.log('\nPhase 4: Formatting generated files with Biome...');
+  try {
+    execFileSync(
+      'npx',
+      [
+        'biome',
+        'check',
+        '--write',
+        '--no-errors-on-unmatched',
+        join(outDir, 'times.ts'),
+        join(outDir, 'schedules.ts'),
+        join(outDir, 'traits.ts'),
+        join(outDir, 'terrains.ts'),
+      ],
+      { stdio: 'inherit' },
+    );
+  } catch (err) {
+    console.error('Failed to run Biome formatter automatically:', err);
   }
 
   console.log('\nDone! ✓');
