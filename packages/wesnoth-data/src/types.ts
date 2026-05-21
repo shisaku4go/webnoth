@@ -162,6 +162,68 @@ export interface WesnothMovetype {
   resistance: Record<string, number>;
 }
 
+// === Trait ===
+
+export interface WesnothTraitEffect {
+  applyTo: string;
+  add?: string;
+  ellipse?: string;
+  increaseDamage?: number | string;
+  increaseTotal?: number | string;
+  increase?: number | string;
+  times?: string;
+  range?: string;
+  replace?: boolean;
+  defense?: Record<string, number>;
+  abilities?: Record<string, unknown>; // Parsed custom abilities block if any
+}
+
+export interface WesnothTrait {
+  id: string;
+  name: string;
+  femaleName?: string;
+  description?: string;
+  helpText?: string;
+  availability?: string; // e.g. "musthave"
+  effects: WesnothTraitEffect[];
+}
+
+// === Time of Day & Schedule ===
+
+export interface WesnothTimeOfDay {
+  id: string;
+  name: string;
+  image: string;
+  lawfulBonus?: number;
+  red?: number;
+  green?: number;
+  blue?: number;
+  sound?: string;
+}
+
+export interface WesnothSchedule {
+  id: string;
+  name?: string;
+  description?: string;
+  times: string[]; // Array of WesnothTimeOfDay IDs
+}
+
+// === Terrain ===
+
+export interface WesnothTerrain {
+  id: string;
+  name: string;
+  editorName?: string;
+  code: string; // WML representation e.g. "Gg", "^Ft"
+  aliasOf?: string[];
+  submerge?: number;
+  editorGroup?: string[];
+  heals?: number;
+  light?: number;
+  defaultBase?: string;
+  helpTopicText?: string;
+}
+
 // === Provenance (出所情報) ===
 
 export interface WesnothProvenance {
@@ -186,11 +248,36 @@ export interface ProvenanceSourceFile {
   category: string;
 }
 
+// === Era & Faction ===
+
+export interface WesnothEra {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface WesnothFaction {
+  id: string;
+  name: string;
+  image: string;
+  recruit: string[];
+  leader: string[];
+  randomLeader?: string[];
+  terrainLiked?: string[];
+  description?: string;
+  eraId: string;
+}
+
 // === Aggregate ===
 
 export interface WesnothData {
   unitTypes: WesnothUnitType[];
   races: WesnothRace[];
   movetypes: WesnothMovetype[];
+  eras?: WesnothEra[];
+  factions?: WesnothFaction[];
+  traits?: WesnothTrait[];
+  schedules?: WesnothSchedule[];
+  terrains?: WesnothTerrain[];
   provenance: WesnothProvenance;
 }

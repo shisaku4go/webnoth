@@ -103,6 +103,28 @@ function collectCfgFiles(dir: string): string[] {
 }
 
 // ---------------------------------------------------------------------------
+// Era & Faction Interfaces
+// ---------------------------------------------------------------------------
+
+interface EraData {
+  id: string;
+  name: string;
+  description: string;
+}
+
+interface FactionData {
+  id: string;
+  name: string;
+  image: string;
+  recruit: string[];
+  leader: string[];
+  randomLeader?: string[];
+  terrainLiked?: string[];
+  description?: string;
+  eraId: string;
+}
+
+// ---------------------------------------------------------------------------
 // Extract races from [race] nodes
 // ---------------------------------------------------------------------------
 
@@ -282,7 +304,7 @@ function cleanImagePath(s: string | undefined): string | undefined {
     cleaned.includes('~BLIT(')
   ) {
     const match = cleaned.match(/~BLIT\s*\(\s*"?([^"~)]+)/);
-    if (match && match[1]) {
+    if (match?.[1]) {
       cleaned = match[1].trim();
     }
   }
@@ -739,7 +761,7 @@ export const ${varName}: ${typeName}[] = ${stringifyData(data)};
 
 function writeProvenanceFile(
   outDir: string,
-  wesnothRoot: string,
+  _wesnothRoot: string,
   revision: string,
 ): void {
   const importPath = '../types.ts';
@@ -761,6 +783,31 @@ export const provenance: WesnothProvenance = ${stringifyData(provenance)};
 `;
   writeFileSync(join(outDir, 'provenance.ts'), content, 'utf-8');
   console.log('  Written: provenance.ts');
+}
+
+function getFactionFilesForMacro(macroName: string, content: string): string[] {
+  const lines = content.split('\n');
+  const files: string[] = [];
+  let inMacro = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (line.startsWith(`#define ${macroName}`)) {
+      inMacro = true;
+      continue;
+    }
+    if (inMacro) {
+      if (line.startsWith('#enddef')) {
+        inMacro = false;
+        break;
+      }
+      const match = line.match(/^\{multiplayer\/factions\/(.+?)\}$/);
+      if (match) {
+        files.push(match[1]);
+      }
+    }
+  }
+  return files;
 }
 
 // ---------------------------------------------------------------------------
@@ -827,6 +874,101 @@ async function main() {
     if (mt) movetypes.push(mt);
   }
   console.log(`  Found ${movetypes.length} movetypes`);
+
+  // Phase 2.5: Parsing eras and factions...
+  console.log('\nPhase 2.5: Parsing eras and factions...');
+  const erasCfgPath = join(wesnothRoot, 'data', 'multiplayer', 'eras.cfg');
+  const multiplayerCfgPath = join(
+    wesnothRoot,
+    'data',
+    'core',
+    'macros',
+    'multiplayer.cfg',
+  );
+
+  const eras: EraData[] = [];
+  const factions: FactionData[] = [];
+
+  if (existsSync(erasCfgPath) && existsSync(multiplayerCfgPath)) {
+    trackFile(wesnothRoot, erasCfgPath, 'eras_cfg');
+    trackFile(wesnothRoot, multiplayerCfgPath, 'multiplayer_cfg');
+
+    const erasCfgContent = readFileSync(erasCfgPath, 'utf-8');
+    const multiplayerCfgContent = readFileSync(multiplayerCfgPath, 'utf-8');
+
+    // Parse eras.cfg using parseWml (with macro dictionary)
+    const erasTree = parseWml(erasCfgContent, macros);
+    const eraNodes = findChildren(erasTree, 'era');
+
+    for (const eraNode of eraNodes) {
+      const eraId = getAttr(eraNode, 'id');
+      const name = cleanTranslation(getAttr(eraNode, 'name'));
+      const description = cleanTranslation(getAttr(eraNode, 'description'));
+
+      if (!eraId || !name) continue;
+
+      eras.push({
+        id: eraId,
+        name,
+        description: description ?? '',
+      });
+
+      // Find which multiplayer macros are invoked inside this era definition
+      for (const macroName of eraNode.macros) {
+        const factionFiles = getFactionFilesForMacro(
+          macroName,
+          multiplayerCfgContent,
+        );
+        for (const fFile of factionFiles) {
+          const fPath = join(
+            wesnothRoot,
+            'data',
+            'multiplayer',
+            'factions',
+            fFile,
+          );
+          if (existsSync(fPath)) {
+            trackFile(wesnothRoot, fPath, 'faction_cfg');
+            const fContent = readFileSync(fPath, 'utf-8');
+            const fTree = parseWml(fContent, macros);
+            const sideNodes = findChildren(fTree, 'multiplayer_side');
+            for (const sideNode of sideNodes) {
+              const factionId = getAttr(sideNode, 'id');
+              const fName = cleanTranslation(getAttr(sideNode, 'name'));
+              const image = cleanImagePath(getAttr(sideNode, 'image'));
+              const leader = getListAttr(sideNode, 'leader');
+              const recruit = getListAttr(sideNode, 'recruit');
+
+              if (!factionId || !fName) continue;
+
+              const randomLeader = getListAttr(sideNode, 'random_leader');
+              const terrainLiked = getListAttr(sideNode, 'terrain_liked');
+              const fDescription = cleanTranslation(
+                getAttr(sideNode, 'description'),
+              );
+
+              factions.push({
+                id: factionId,
+                name: fName,
+                image: image ?? '',
+                leader,
+                recruit,
+                randomLeader:
+                  randomLeader.length > 0 ? randomLeader : undefined,
+                terrainLiked:
+                  terrainLiked.length > 0 ? terrainLiked : undefined,
+                description: fDescription,
+                eraId,
+              });
+            }
+          }
+        }
+      }
+    }
+    console.log(`  Found ${eras.length} eras and ${factions.length} factions`);
+  } else {
+    console.warn('  Warning: eras.cfg or multiplayer.cfg not found.');
+  }
 
   // Parse individual unit files
   console.log('\nPhase 3: Parsing unit files...');
@@ -909,6 +1051,10 @@ async function main() {
   unitTypes.sort((a, b) => a.id.localeCompare(b.id));
   races.sort((a, b) => a.id.localeCompare(b.id));
   movetypes.sort((a, b) => a.name.localeCompare(b.name));
+  eras.sort((a, b) => a.id.localeCompare(b.id));
+  factions.sort((a, b) =>
+    `${a.eraId}:${a.id}`.localeCompare(`${b.eraId}:${b.id}`),
+  );
 
   // Write output files
   console.log('\nPhase 4: Writing output...');
@@ -927,6 +1073,14 @@ async function main() {
     'WesnothMovetype',
     movetypes,
   );
+  writeGeneratedFile(outDir, 'eras.ts', 'eras', 'WesnothEra', eras);
+  writeGeneratedFile(
+    outDir,
+    'factions.ts',
+    'factions',
+    'WesnothFaction',
+    factions,
+  );
   writeProvenanceFile(outDir, wesnothRoot, revision);
 
   console.log('\nDone! ✓');
@@ -934,6 +1088,8 @@ async function main() {
   console.log(`  Unit types: ${unitTypes.length}`);
   console.log(`  Races: ${races.length}`);
   console.log(`  Movetypes: ${movetypes.length}`);
+  console.log(`  Eras: ${eras.length}`);
+  console.log(`  Factions: ${factions.length}`);
   console.log(`  Source files tracked: ${sourceFiles.length}`);
 }
 

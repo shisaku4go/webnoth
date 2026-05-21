@@ -20,9 +20,33 @@
       "development": "./src/generated/movetypes.ts",
       "default": "./src/generated/movetypes.ts"
     },
+    "./eras": {
+      "development": "./src/generated/eras.ts",
+      "default": "./src/generated/eras.ts"
+    },
+    "./factions": {
+      "development": "./src/generated/factions.ts",
+      "default": "./src/generated/factions.ts"
+    },
     "./provenance": {
       "development": "./src/generated/provenance.ts",
       "default": "./src/generated/provenance.ts"
+    },
+    "./traits": {
+      "development": "./src/generated/traits.ts",
+      "default": "./src/generated/traits.ts"
+    },
+    "./schedules": {
+      "development": "./src/generated/schedules.ts",
+      "default": "./src/generated/schedules.ts"
+    },
+    "./times": {
+      "development": "./src/generated/times.ts",
+      "default": "./src/generated/times.ts"
+    },
+    "./terrains": {
+      "development": "./src/generated/terrains.ts",
+      "default": "./src/generated/terrains.ts"
     }
   }
 }

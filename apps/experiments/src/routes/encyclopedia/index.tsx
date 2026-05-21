@@ -1,15 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Search } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { RaceSidebar } from '@/components/encyclopedia/RaceSidebar';
 import { UnitCard } from '@/components/encyclopedia/UnitCard';
 import {
+  getAllEras,
   getAllRaces,
   getAllUnits,
-  getUnitCountByRace,
-  getUnitsByRace,
+  getFactionsByEra,
+  getFactionUnits,
   getTotalUnitCount,
-  searchUnits,
 } from '@/lib/wesnoth-data';
 
 export const Route = createFileRoute('/encyclopedia/')({
@@ -18,25 +18,99 @@ export const Route = createFileRoute('/encyclopedia/')({
 
 function EncyclopediaPage() {
   const [selectedRace, setSelectedRace] = useState<string | null>(null);
+  const [selectedEra, setSelectedEra] = useState<string | null>(null);
+  const [selectedFaction, setSelectedFaction] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const eras = useMemo(() => getAllEras(), []);
+
+  const factions = useMemo(() => {
+    if (selectedEra) {
+      return getFactionsByEra(selectedEra);
+    }
+    // Get unique factions by ID across all eras
+    const allFactions = getAllEras().flatMap((era) => getFactionsByEra(era.id));
+    const uniqueMap = new Map<string, (typeof allFactions)[number]>();
+    for (const f of allFactions) {
+      if (!uniqueMap.has(f.id)) {
+        uniqueMap.set(f.id, f);
+      }
+    }
+    return Array.from(uniqueMap.values()).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
+  }, [selectedEra]);
+
+  // Compute active units matching selected Era and Faction
+  const eraFactionUnits = useMemo(() => {
+    if (selectedEra && selectedFaction) {
+      return getFactionUnits(selectedEra, selectedFaction);
+    }
+    if (selectedEra) {
+      const fts = getFactionsByEra(selectedEra);
+      const ids = new Set<string>();
+      for (const ft of fts) {
+        const units = getFactionUnits(selectedEra, ft.id);
+        for (const u of units) {
+          ids.add(u.id);
+        }
+      }
+      return getAllUnits().filter((u) => ids.has(u.id));
+    }
+    if (selectedFaction) {
+      // Union of units in this faction across all eras
+      const eras = getAllEras();
+      const ids = new Set<string>();
+      for (const era of eras) {
+        const units = getFactionUnits(era.id, selectedFaction);
+        for (const u of units) {
+          ids.add(u.id);
+        }
+      }
+      return getAllUnits().filter((u) => ids.has(u.id));
+    }
+    return getAllUnits();
+  }, [selectedEra, selectedFaction]);
+
+  // Compute races with counts dynamically based on active eraFactionUnits
   const racesWithCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const unit of eraFactionUnits) {
+      counts.set(unit.race, (counts.get(unit.race) ?? 0) + 1);
+    }
+
     return getAllRaces()
       .map((race) => ({
         id: race.id,
         pluralName: race.pluralName,
-        count: getUnitCountByRace(race.id),
+        count: counts.get(race.id) ?? 0,
       }))
       .filter((r) => r.count > 0)
       .sort((a, b) => a.pluralName.localeCompare(b.pluralName));
-  }, []);
+  }, [eraFactionUnits]);
+
+  // Reset selected faction if it's no longer in the active factions list
+  useEffect(() => {
+    if (selectedFaction && !factions.some((f) => f.id === selectedFaction)) {
+      setSelectedFaction(null);
+    }
+  }, [factions, selectedFaction]);
+
+  // Reset selected race if it's no longer present in the filtered races list
+  useEffect(() => {
+    if (selectedRace && !racesWithCounts.some((r) => r.id === selectedRace)) {
+      setSelectedRace(null);
+    }
+  }, [racesWithCounts, selectedRace]);
 
   const filteredUnits = useMemo(() => {
-    const base = selectedRace ? getUnitsByRace(selectedRace) : getAllUnits();
+    const base = selectedRace
+      ? eraFactionUnits.filter((u) => u.race === selectedRace)
+      : eraFactionUnits;
     if (!searchQuery.trim()) return base;
     const lower = searchQuery.toLowerCase();
     return base.filter((u) => u.name.toLowerCase().includes(lower));
-  }, [selectedRace, searchQuery]);
+  }, [eraFactionUnits, selectedRace, searchQuery]);
 
   const totalCount = getTotalUnitCount();
 
@@ -49,18 +123,121 @@ function EncyclopediaPage() {
         </p>
       </div>
 
-      {/* Search bar */}
-      <div className="relative max-w-md">
-        <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-        <input
-          id="unit-search"
-          type="text"
-          placeholder="Search units by name..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full rounded-md border border-border bg-background py-2 pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-        />
+      {/* Era and Faction Filters Card */}
+      <div className="grid grid-cols-1 gap-4 rounded-xl border border-border bg-card/50 p-4 backdrop-blur-md sm:grid-cols-2 lg:grid-cols-3 max-w-4xl">
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="era-select"
+            className="text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+          >
+            Game Era
+          </label>
+          <select
+            id="era-select"
+            value={selectedEra ?? ''}
+            onChange={(e) => {
+              const val = e.target.value === '' ? null : e.target.value;
+              setSelectedEra(val);
+              setSelectedFaction(null); // Reset faction when era changes
+            }}
+            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm transition-all focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary hover:border-muted-foreground/30"
+          >
+            <option value="">All Eras (Global)</option>
+            {eras.map((era) => (
+              <option key={era.id} value={era.id}>
+                {era.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="faction-select"
+            className="text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+          >
+            Faction
+          </label>
+          <select
+            id="faction-select"
+            value={selectedFaction ?? ''}
+            onChange={(e) => {
+              setSelectedFaction(e.target.value === '' ? null : e.target.value);
+            }}
+            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm transition-all focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary hover:border-muted-foreground/30"
+          >
+            <option value="">All Factions</option>
+            {factions.map((faction) => (
+              <option key={faction.id} value={faction.id}>
+                {faction.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-1.5 sm:col-span-2 lg:col-span-1">
+          <label
+            htmlFor="unit-search"
+            className="text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+          >
+            Search
+          </label>
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <input
+              id="unit-search"
+              type="text"
+              placeholder="Search units by name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-md border border-border bg-background py-2 pl-9 pr-3 text-sm placeholder:text-muted-foreground transition-all focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary hover:border-muted-foreground/30"
+            />
+          </div>
+        </div>
       </div>
+
+      {/* Selection Info (Description) */}
+      {(selectedEra || selectedFaction) && (
+        <div className="rounded-xl border border-border/60 bg-muted/20 p-4 max-w-4xl animate-in fade-in slide-in-from-top-2 duration-300">
+          {selectedFaction
+            ? (() => {
+                const faction = factions.find((f) => f.id === selectedFaction);
+                return (
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold text-foreground uppercase tracking-wider">
+                        {faction?.name} Faction
+                      </span>
+                      <span className="text-xs rounded-full bg-primary/10 px-2 py-0.5 text-primary font-medium">
+                        {eras.find((e) => e.id === selectedEra)?.name}
+                      </span>
+                    </div>
+                    {faction?.description && (
+                      <p className="text-xs text-muted-foreground leading-relaxed italic">
+                        {faction.description.trim()}
+                      </p>
+                    )}
+                  </div>
+                );
+              })()
+            : selectedEra &&
+              (() => {
+                const era = eras.find((e) => e.id === selectedEra);
+                return (
+                  <div className="flex flex-col gap-2">
+                    <span className="text-sm font-semibold text-foreground uppercase tracking-wider">
+                      {era?.name} Era
+                    </span>
+                    {era?.description && (
+                      <p className="text-xs text-muted-foreground leading-relaxed italic">
+                        {era.description.trim()}
+                      </p>
+                    )}
+                  </div>
+                );
+              })()}
+        </div>
+      )}
 
       <div className="flex gap-6">
         {/* Sidebar */}
@@ -68,7 +245,7 @@ function EncyclopediaPage() {
           <RaceSidebar
             races={racesWithCounts}
             selectedRace={selectedRace}
-            totalCount={totalCount}
+            totalCount={eraFactionUnits.length}
             onSelectRace={setSelectedRace}
           />
         </aside>
@@ -82,7 +259,7 @@ function EncyclopediaPage() {
             }
             className="rounded-md border border-border bg-background px-3 py-2 text-sm"
           >
-            <option value="">All ({totalCount})</option>
+            <option value="">All ({eraFactionUnits.length})</option>
             {racesWithCounts.map((race) => (
               <option key={race.id} value={race.id}>
                 {race.pluralName} ({race.count})
@@ -104,7 +281,7 @@ function EncyclopediaPage() {
             </div>
           ) : (
             <>
-              <p className="mb-3 text-xs text-muted-foreground">
+              <p className="mb-3 text-xs text-muted-foreground animate-pulse">
                 {filteredUnits.length} unit
                 {filteredUnits.length !== 1 ? 's' : ''}
               </p>

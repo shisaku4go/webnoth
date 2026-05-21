@@ -24,7 +24,7 @@ function main() {
     });
 
     console.log('\n=== All extractions completed successfully! ===');
-  } catch (err) {
+  } catch (_err) {
     console.error('\nExtraction failed.');
     process.exit(1);
   }

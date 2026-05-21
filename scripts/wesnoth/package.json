@@ -6,7 +6,8 @@
   "scripts": {
     "extract": "tsx src/extract-units.ts",
     "extract:images": "tsx src/extract-images.ts",
-    "extract:all": "tsx src/extract-all.ts"
+    "extract:all": "tsx src/extract-all.ts",
+    "extract:battle": "tsx src/extract-battle-data.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.18",

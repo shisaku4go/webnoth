@@ -1,6 +1,11 @@
-import { test, describe } from 'node:test';
 import assert from 'node:assert';
-import { parseWml, WmlNode, MacroDictionary, getNumAttr } from './wml-parser.js';
+import { describe, test } from 'node:test';
+import {
+  getNumAttr,
+  type MacroDictionary,
+  parseWml,
+  type WmlNode,
+} from './wml-parser.js';
 
 describe('parseWml - Structural Tests', () => {
   test('parses basic tags and properties', () => {
@@ -260,7 +265,12 @@ describe('parseWml - Python Parser Compatibility Features', () => {
 
 describe('WML Attribute Getters - getNumAttr', () => {
   test('returns undefined for missing attributes', () => {
-    const node: WmlNode = { tag: 'unit', attributes: {}, children: [], macros: [] };
+    const node: WmlNode = {
+      tag: 'unit',
+      attributes: {},
+      children: [],
+      macros: [],
+    };
     assert.strictEqual(getNumAttr(node, 'damage'), undefined);
   });
 

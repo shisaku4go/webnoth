@@ -1,15 +1,26 @@
 import type {
   DamageType,
+  WesnothEra,
+  WesnothFaction,
   WesnothMovetype,
   WesnothRace,
   WesnothUnitType,
 } from '@webnoth/wesnoth-data';
+import { eras } from '@webnoth/wesnoth-data/eras';
+import { factions } from '@webnoth/wesnoth-data/factions';
 import { movetypes } from '@webnoth/wesnoth-data/movetypes';
 import { races } from '@webnoth/wesnoth-data/races';
 import { unitTypes } from '@webnoth/wesnoth-data/units';
 
 // Re-export types for convenience
-export type { DamageType, WesnothMovetype, WesnothRace, WesnothUnitType };
+export type {
+  DamageType,
+  WesnothEra,
+  WesnothFaction,
+  WesnothMovetype,
+  WesnothRace,
+  WesnothUnitType,
+};
 
 // === Lookup indexes (computed once at module load) ===
 
@@ -44,7 +55,64 @@ for (const unit of unitTypes) {
   unitCountByRace.set(unit.race, (unitCountByRace.get(unit.race) ?? 0) + 1);
 }
 
+const factionsByEra = new Map<string, WesnothFaction[]>();
+for (const faction of factions) {
+  const existing = factionsByEra.get(faction.eraId) ?? [];
+  existing.push(faction);
+  factionsByEra.set(faction.eraId, existing);
+}
+
+/** Pre-compute transitive closure of all unit IDs in a faction (leaders + recruits + advancements) */
+const factionUnitsMap = new Map<string, Set<string>>();
+for (const faction of factions) {
+  const key = `${faction.eraId}:${faction.id}`;
+  const unitIds = new Set<string>();
+  const queue = [...faction.recruit, ...faction.leader];
+
+  while (queue.length > 0) {
+    const id = queue.shift();
+    if (!id || unitIds.has(id)) continue;
+
+    unitIds.add(id);
+
+    const unit = unitById.get(id);
+    if (unit?.advancesTo) {
+      for (const adv of unit.advancesTo) {
+        if (adv && adv !== 'null' && !unitIds.has(adv)) {
+          queue.push(adv);
+        }
+      }
+    }
+  }
+  factionUnitsMap.set(key, unitIds);
+}
+
 // === Public API ===
+
+export function getAllEras(): WesnothEra[] {
+  return eras;
+}
+
+export function getFactionsByEra(eraId: string): WesnothFaction[] {
+  return factionsByEra.get(eraId) ?? [];
+}
+
+export function getFactionUnits(
+  eraId: string,
+  factionId: string,
+): WesnothUnitType[] {
+  const key = `${eraId}:${factionId}`;
+  const ids = factionUnitsMap.get(key);
+  if (!ids) return [];
+  const result: WesnothUnitType[] = [];
+  for (const id of ids) {
+    const u = unitById.get(id);
+    if (u && !u.doNotList && !u.hideHelp) {
+      result.push(u);
+    }
+  }
+  return result.sort((a, b) => a.name.localeCompare(b.name));
+}
 
 export function getAllUnits(): WesnothUnitType[] {
   return unitTypes.filter((u) => !u.doNotList && !u.hideHelp);
