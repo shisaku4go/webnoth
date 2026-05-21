@@ -423,6 +423,7 @@ interface TerrainData {
   light?: number;
   defaultBase?: string;
   helpTopicText?: string;
+  symbolImage?: string;
 }
 
 function extractTerrains(tree: WmlNode): TerrainData[] {
@@ -445,6 +446,7 @@ function extractTerrains(tree: WmlNode): TerrainData[] {
     const light = getNumAttr(node, 'light');
     const defaultBase = getAttr(node, 'default_base');
     const helpTopicText = cleanTranslation(getAttr(node, 'help_topic_text'));
+    const symbolImage = getAttr(node, 'symbol_image');
 
     terrains.push({
       id,
@@ -458,6 +460,7 @@ function extractTerrains(tree: WmlNode): TerrainData[] {
       light,
       defaultBase,
       helpTopicText,
+      symbolImage,
     });
   }
 

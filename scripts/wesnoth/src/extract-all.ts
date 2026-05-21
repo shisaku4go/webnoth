@@ -23,6 +23,11 @@ function main() {
       stdio: 'inherit',
     });
 
+    console.log('\n--- Step 3: Extracting Maps ---');
+    execFileSync('pnpm', ['exec', 'tsx', 'src/extract-maps.ts', ...args], {
+      stdio: 'inherit',
+    });
+
     console.log('\n=== All extractions completed successfully! ===');
   } catch (_err) {
     console.error('\nExtraction failed.');

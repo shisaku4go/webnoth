@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@webnoth/ui/components/card';
-import { BookOpen, Swords } from 'lucide-react';
+import { BookOpen, Swords, Map as MapIcon } from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -26,7 +26,7 @@ function HomePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Battle Simulator Card */}
         <Card className="border-border/60 bg-card/40 backdrop-blur-md overflow-hidden hover:shadow-lg transition-all duration-200 group flex flex-col justify-between">
           <CardHeader className="pb-4">
@@ -73,6 +73,31 @@ function HomePage() {
                 className="w-full cursor-pointer hover:bg-background/80 transition-colors"
               >
                 Open Encyclopedia
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        {/* Map Encyclopedia Card */}
+        <Card className="border-border/60 bg-card/40 backdrop-blur-md overflow-hidden hover:shadow-lg transition-all duration-200 group flex flex-col justify-between">
+          <CardHeader className="pb-4">
+            <div className="size-12 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-4 text-amber-500 group-hover:scale-110 transition-transform duration-200">
+              <MapIcon className="size-6" />
+            </div>
+            <CardTitle className="text-xl font-bold">
+              Map Encyclopedia
+            </CardTitle>
+            <CardDescription className="text-sm mt-1.5 leading-relaxed">
+              Browse campaign scenarios and multiplayer maps. View starting positions, terrain properties, and map dimensions rendered in WebGL.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Link to="/encyclopedia/maps">
+              <Button
+                variant="outline"
+                className="w-full cursor-pointer hover:bg-background/80 transition-colors"
+              >
+                Open Map Encyclopedia
               </Button>
             </Link>
           </CardContent>

@@ -30,4 +30,7 @@ export type {
   WesnothTrait,
   WesnothTraitEffect,
   WesnothUnitType,
+  WesnothMap,
+  WesnothMapPlacement,
+  WesnothCampaign,
 } from './types.ts';

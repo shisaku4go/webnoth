@@ -47,6 +47,14 @@
     "./terrains": {
       "development": "./src/generated/terrains.ts",
       "default": "./src/generated/terrains.ts"
+    },
+    "./campaigns": {
+      "development": "./src/generated/campaigns.ts",
+      "default": "./src/generated/campaigns.ts"
+    },
+    "./multiplayer": {
+      "development": "./src/generated/multiplayer.ts",
+      "default": "./src/generated/multiplayer.ts"
     }
   }
 }
