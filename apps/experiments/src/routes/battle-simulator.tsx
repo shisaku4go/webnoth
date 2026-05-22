@@ -44,15 +44,75 @@ import {
   TooltipTrigger,
 } from '@webnoth/ui/components/tooltip';
 import { cn } from '@webnoth/ui/lib/utils';
+import type { WesnothAttack, WesnothTerrain } from '@webnoth/wesnoth-data';
 import { terrains as globalTerrains } from '@webnoth/wesnoth-data/terrains';
 import { times as globalTimes } from '@webnoth/wesnoth-data/times';
-import { Heart, Play, RefreshCw, Shield, Swords, Zap } from 'lucide-react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  Heart,
+  Pause,
+  Play,
+  RefreshCw,
+  RotateCcw,
+  Shield,
+  Swords,
+  Zap,
+} from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { wesnothAssetUrl } from '@/lib/asset-url';
 import { WesnothBattleManager } from '@/lib/combat/battle-manager';
 import { WesnothCombatCore } from '@/lib/combat/combat-core';
-import type { BattleResult, CombatUnitState } from '@/lib/combat/types';
+import type {
+  BattleResult,
+  CombatUnitState,
+  StrikeEvent,
+} from '@/lib/combat/types';
 import { getAllUnits, getUnitById } from '@/lib/wesnoth-data';
+
+// Helper to get terrain images, including fallbacks for abstract terrains lacking symbolImage
+function getTerrainImageUrl(t: WesnothTerrain): string {
+  if (t.symbolImage) {
+    return wesnothAssetUrl(`terrain/${t.symbolImage}.png`);
+  }
+
+  const fallbackMap: Record<string, string> = {
+    hills: 'hills/regular.png',
+    cave: 'cave/floor6.png',
+    village: 'village/human-tile.png',
+    castle: 'castle/castle-tile.png',
+    mountains: 'mountains/basic-tile.png',
+    deep_water: 'water/ocean-tile.png',
+    shallow_water: 'water/coast-tile.png',
+    swamp_water: 'swamp/water-tile.png',
+    reef: 'water/reef-tile.png',
+    flat: 'flat/dirt.png',
+    forest: 'forest/mixed-summer-tile.png',
+    frozen: 'frozen/snow.png',
+    sand: 'sand/desert.png',
+    fungus: 'symbols/terrain_type_fungus.png',
+    rails: 'symbols/terrain_type_rails.png',
+
+    // Impassable / unwalkable
+    impassable: 'impassable-editor.png',
+    impassable_overlay: 'impassable-editor.png',
+    unwalkable: 'unwalkable-editor.png',
+    unwalkable_overlay: 'unwalkable-editor.png',
+
+    // Void / boundaries
+    high_border: 'void/void.png',
+    high_canyon: 'void/void.png',
+    mark_high: 'void/void.png',
+    mark_high2: 'void/void.png',
+    mark_low: 'void/void.png',
+    mark_low2: 'void/void.png',
+  };
+
+  const fallbackPath = fallbackMap[t.id];
+  if (fallbackPath) {
+    return wesnothAssetUrl(`terrain/${fallbackPath}`);
+  }
+
+  return wesnothAssetUrl('terrain/void/void.png');
+}
 
 export const Route = createFileRoute('/battle-simulator')({
   component: BattleSimulatorPage,
@@ -115,7 +175,45 @@ function BattleSimulatorPage() {
   const [terrainId, setTerrainId] = useState('grassland');
   const [selectedTimeOfDayId, setSelectedTimeOfDayId] = useState('morning');
 
-  const [battleResult, setBattleResult] = useState<BattleResult | null>(null);
+  // Active battle simulation states
+  const [battleState, setBattleState] = useState<
+    'idle' | 'active' | 'finished'
+  >('idle');
+  const [currentRound, setCurrentRound] = useState<number>(0);
+  const [maxRounds, setMaxRounds] = useState<number>(20);
+  const [isAutoRun, setIsAutoRun] = useState<boolean>(true);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  // Active combat state overrides
+  const [battleAttackerHp, setBattleAttackerHp] = useState<number>(0);
+  const [battleDefenderHp, setBattleDefenderHp] = useState<number>(0);
+  const [battleAttackerSlowed, setBattleAttackerSlowed] =
+    useState<boolean>(false);
+  const [battleDefenderSlowed, setBattleDefenderSlowed] =
+    useState<boolean>(false);
+  const [battleAttackerPoisoned, setBattleAttackerPoisoned] =
+    useState<boolean>(false);
+  const [battleDefenderPoisoned, setBattleDefenderPoisoned] =
+    useState<boolean>(false);
+  const [battleAttackerPetrified, setBattleAttackerPetrified] =
+    useState<boolean>(false);
+  const [battleDefenderPetrified, setBattleDefenderPetrified] =
+    useState<boolean>(false);
+
+  const [battleLogs, setBattleLogs] = useState<StrikeEvent[]>([]);
+  const [selectedAttackerWeapon, setSelectedAttackerWeapon] =
+    useState<WesnothAttack | null>(null);
+  const [selectedDefenderWeapon, setSelectedDefenderWeapon] =
+    useState<WesnothAttack | null>(null);
+  const [lockedAttackerWeaponIndex, setLockedAttackerWeaponIndex] =
+    useState<number>(-1);
+  const [lockedDefenderWeaponIndex, setLockedDefenderWeaponIndex] =
+    useState<number>(-1);
+
+  const [attackerXp, setAttackerXp] = useState<number>(0);
+  const [defenderXp, setDefenderXp] = useState<number>(0);
+
+  const logEndRef = useRef<HTMLDivElement | null>(null);
 
   // Fetch unit definitions
   const attackerUnit = useMemo(() => getUnitById(attackerId), [attackerId]);
@@ -175,51 +273,361 @@ function BattleSimulatorPage() {
     return WesnothBattleManager.getModifiedAttacks(defenderUnit, defenderState);
   }, [defenderUnit, defenderState]);
 
-  // Run simulation function
-  const runSim = useCallback(() => {
+  // Execute a single combat round
+  const executeRound = useCallback(() => {
     if (!attackerUnit || !defenderUnit) return;
+    if (battleState === 'finished') return;
+
+    const isFirstRound = currentRound === 0;
+    const startAttackerHp = isFirstRound
+      ? attackerHp === 0
+        ? attackerState?.maxHp || 1
+        : attackerHp
+      : battleAttackerHp;
+    const startDefenderHp = isFirstRound
+      ? defenderHp === 0
+        ? defenderState?.maxHp || 1
+        : defenderHp
+      : battleDefenderHp;
+    const startAttackerSlowed = isFirstRound
+      ? attackerSlowed
+      : battleAttackerSlowed;
+    const startDefenderSlowed = isFirstRound
+      ? defenderSlowed
+      : battleDefenderSlowed;
+    const startAttackerPoisoned = isFirstRound
+      ? attackerPoisoned
+      : battleAttackerPoisoned;
+    const startDefenderPoisoned = isFirstRound
+      ? defenderPoisoned
+      : battleDefenderPoisoned;
+
+    const wAttIdx = isFirstRound
+      ? attackerWeaponIndex === -1
+        ? undefined
+        : attackerWeaponIndex
+      : lockedAttackerWeaponIndex === -1
+        ? undefined
+        : lockedAttackerWeaponIndex;
+    const wDefIdx = isFirstRound
+      ? defenderWeaponIndex === -1
+        ? undefined
+        : defenderWeaponIndex
+      : lockedDefenderWeaponIndex === -1
+        ? undefined
+        : lockedDefenderWeaponIndex;
+
+    // Run a single round engagement
     const result = WesnothBattleManager.runSimulation(
       attackerUnit,
       defenderUnit,
       {
         attackerTraits,
         defenderTraits,
-        attackerWeaponIndex:
-          attackerWeaponIndex === -1 ? undefined : attackerWeaponIndex,
-        defenderWeaponIndex:
-          defenderWeaponIndex === -1 ? undefined : defenderWeaponIndex,
+        attackerWeaponIndex: wAttIdx,
+        defenderWeaponIndex: wDefIdx,
         terrainId,
         timeOfDayId: selectedTimeOfDayId,
-        attackerHpOverride: attackerHp,
-        defenderHpOverride: defenderHp,
-        attackerSlowed,
-        defenderSlowed,
-        attackerPoisoned,
-        defenderPoisoned,
+        attackerHpOverride: startAttackerHp,
+        defenderHpOverride: startDefenderHp,
+        attackerSlowed: startAttackerSlowed,
+        defenderSlowed: startDefenderSlowed,
+        attackerPoisoned: startAttackerPoisoned,
+        defenderPoisoned: startDefenderPoisoned,
       },
     );
-    setBattleResult(result);
+
+    const nextRound = currentRound + 1;
+
+    // Map logs to show correct round number
+    const mappedLogs = result.logs.map((log) => ({
+      ...log,
+      round: nextRound,
+    }));
+
+    // Update states
+    setBattleAttackerHp(result.attacker.hp);
+    setBattleDefenderHp(result.defender.hp);
+    setBattleAttackerSlowed(result.attacker.statuses.slowed);
+    setBattleDefenderSlowed(result.defender.statuses.slowed);
+    setBattleAttackerPoisoned(result.attacker.statuses.poisoned);
+    setBattleDefenderPoisoned(result.defender.statuses.poisoned);
+    setBattleAttackerPetrified(result.attacker.statuses.petrified);
+    setBattleDefenderPetrified(result.defender.statuses.petrified);
+
+    // Save weapons locked in Round 1
+    if (isFirstRound) {
+      setSelectedAttackerWeapon(result.attackerWeapon);
+      setSelectedDefenderWeapon(result.defenderWeapon);
+      setLockedAttackerWeaponIndex(result.attacker.activeWeaponIndex);
+      setLockedDefenderWeaponIndex(result.defender.activeWeaponIndex);
+    }
+
+    // Accumulate logs
+    setBattleLogs((prev) => [...prev, ...mappedLogs]);
+    setCurrentRound(nextRound);
+
+    // Accumulate XP
+    setAttackerXp((prev) =>
+      Math.min(result.attacker.maxXp, prev + result.attackerXpGained),
+    );
+    setDefenderXp((prev) =>
+      Math.min(result.defender.maxXp, prev + result.defenderXpGained),
+    );
+
+    // Check end condition
+    const isFinished =
+      result.attacker.hp <= 0 ||
+      result.defender.hp <= 0 ||
+      result.attacker.statuses.petrified ||
+      result.defender.statuses.petrified ||
+      nextRound >= maxRounds;
+
+    if (isFinished) {
+      setBattleState('finished');
+      setIsPlaying(false);
+    } else {
+      setBattleState('active');
+    }
   }, [
     attackerUnit,
     defenderUnit,
-    attackerTraits,
-    defenderTraits,
-    attackerWeaponIndex,
-    defenderWeaponIndex,
-    terrainId,
-    selectedTimeOfDayId,
+    currentRound,
     attackerHp,
     defenderHp,
     attackerSlowed,
     defenderSlowed,
     attackerPoisoned,
     defenderPoisoned,
+    battleAttackerHp,
+    battleDefenderHp,
+    battleAttackerSlowed,
+    battleDefenderSlowed,
+    battleAttackerPoisoned,
+    battleDefenderPoisoned,
+    lockedAttackerWeaponIndex,
+    lockedDefenderWeaponIndex,
+    attackerWeaponIndex,
+    defenderWeaponIndex,
+    attackerTraits,
+    defenderTraits,
+    terrainId,
+    selectedTimeOfDayId,
+    maxRounds,
+    attackerState,
+    defenderState,
+    battleState,
   ]);
 
-  // Run initial simulation on load and whenever configs change
+  const resetBattle = useCallback(() => {
+    setBattleState('idle');
+    setCurrentRound(0);
+    setIsPlaying(false);
+    setBattleAttackerHp(0);
+    setBattleDefenderHp(0);
+    setBattleAttackerSlowed(false);
+    setBattleDefenderSlowed(false);
+    setBattleAttackerPoisoned(false);
+    setBattleDefenderPoisoned(false);
+    setBattleAttackerPetrified(false);
+    setBattleDefenderPetrified(false);
+    setBattleLogs([]);
+    setSelectedAttackerWeapon(null);
+    setSelectedDefenderWeapon(null);
+    setLockedAttackerWeaponIndex(-1);
+    setLockedDefenderWeaponIndex(-1);
+    setAttackerXp(0);
+    setDefenderXp(0);
+  }, []);
+
+  const startBattle = () => {
+    if (isAutoRun) {
+      setIsPlaying(true);
+    } else {
+      executeRound();
+    }
+  };
+
+  // Construct displayResult
+  const displayResult = useMemo<BattleResult | null>(() => {
+    if (!attackerUnit || !defenderUnit || !attackerState || !defenderState)
+      return null;
+
+    // Resolve weapon selection
+    const tod =
+      globalTimes.find((t) => t.id === selectedTimeOfDayId) || globalTimes[0];
+    const context = {
+      terrainId,
+      timeOfDayId: tod.id,
+      lawfulBonus: tod.lawfulBonus || 0,
+    };
+
+    const attackerAttacks = WesnothBattleManager.getModifiedAttacks(
+      attackerUnit,
+      attackerState,
+    );
+    const defenderAttacks = WesnothBattleManager.getModifiedAttacks(
+      defenderUnit,
+      defenderState,
+    );
+
+    let aWepIdx =
+      battleState === 'idle' ? attackerWeaponIndex : lockedAttackerWeaponIndex;
+    let dWepIdx =
+      battleState === 'idle' ? defenderWeaponIndex : lockedDefenderWeaponIndex;
+
+    if (aWepIdx === -1) {
+      const selected = WesnothBattleManager.autoSelectWeapons(
+        attackerState,
+        defenderState,
+        attackerAttacks,
+        defenderAttacks,
+        terrainId,
+        context,
+      );
+      aWepIdx = selected.attackerWeaponIndex;
+      dWepIdx = selected.defenderWeaponIndex;
+    } else if (dWepIdx === -1) {
+      const aWep = attackerAttacks[aWepIdx];
+      dWepIdx = defenderAttacks.findIndex((w) => w.range === aWep.range);
+    }
+
+    const aWep = attackerAttacks[aWepIdx] || null;
+    const dWep = dWepIdx !== -1 ? defenderAttacks[dWepIdx] : null;
+
+    if (battleState === 'idle') {
+      const initAttackerHp =
+        attackerHp === 0 ? attackerState.maxHp : attackerHp;
+      const initDefenderHp =
+        defenderHp === 0 ? defenderState.maxHp : defenderHp;
+
+      return {
+        attacker: {
+          ...attackerState,
+          hp: initAttackerHp,
+          statuses: {
+            slowed: attackerSlowed,
+            poisoned: attackerPoisoned,
+            petrified: false,
+          },
+          xp: 0,
+        },
+        defender: {
+          ...defenderState,
+          hp: initDefenderHp,
+          statuses: {
+            slowed: defenderSlowed,
+            poisoned: defenderPoisoned,
+            petrified: false,
+          },
+          xp: 0,
+        },
+        attackerWeapon: aWep,
+        defenderWeapon: dWep,
+        logs: [],
+        winner: 'none',
+        roundsRun: 0,
+        attackerXpGained: 0,
+        defenderXpGained: 0,
+      };
+    }
+
+    let winner: 'attacker' | 'defender' | 'none' = 'none';
+    if (battleDefenderHp <= 0 && battleAttackerHp > 0) {
+      winner = 'attacker';
+    } else if (battleAttackerHp <= 0 && battleDefenderHp > 0) {
+      winner = 'defender';
+    } else if (battleAttackerHp <= 0 && battleDefenderHp <= 0) {
+      winner = 'none';
+    }
+
+    return {
+      attacker: {
+        ...attackerState,
+        hp: battleAttackerHp,
+        statuses: {
+          slowed: battleAttackerSlowed,
+          poisoned: battleAttackerPoisoned,
+          petrified: battleAttackerPetrified,
+        },
+        xp: attackerXp,
+      },
+      defender: {
+        ...defenderState,
+        hp: battleDefenderHp,
+        statuses: {
+          slowed: battleDefenderSlowed,
+          poisoned: battleDefenderPoisoned,
+          petrified: battleDefenderPetrified,
+        },
+        xp: defenderXp,
+      },
+      attackerWeapon: selectedAttackerWeapon || aWep,
+      defenderWeapon: selectedDefenderWeapon || dWep,
+      logs: battleLogs,
+      winner,
+      roundsRun: currentRound,
+      attackerXpGained: attackerXp,
+      defenderXpGained: defenderXp,
+    };
+  }, [
+    battleState,
+    attackerUnit,
+    defenderUnit,
+    attackerState,
+    defenderState,
+    attackerHp,
+    defenderHp,
+    attackerSlowed,
+    defenderSlowed,
+    attackerPoisoned,
+    defenderPoisoned,
+    attackerWeaponIndex,
+    defenderWeaponIndex,
+    lockedAttackerWeaponIndex,
+    lockedDefenderWeaponIndex,
+    selectedAttackerWeapon,
+    selectedDefenderWeapon,
+    battleAttackerHp,
+    battleDefenderHp,
+    battleAttackerSlowed,
+    battleDefenderSlowed,
+    battleAttackerPoisoned,
+    battleDefenderPoisoned,
+    battleAttackerPetrified,
+    battleDefenderPetrified,
+    battleLogs,
+    currentRound,
+    attackerXp,
+    defenderXp,
+    terrainId,
+    selectedTimeOfDayId,
+  ]);
+
+  // Set up auto-play visual timer
   useEffect(() => {
-    runSim();
-  }, [runSim]);
+    let timerId: ReturnType<typeof setTimeout> | null = null;
+    if (isPlaying && battleState === 'active') {
+      timerId = setTimeout(() => {
+        executeRound();
+      }, 300);
+    } else if (isPlaying && battleState === 'idle') {
+      executeRound();
+    }
+    return () => {
+      if (timerId) clearTimeout(timerId);
+    };
+  }, [isPlaying, battleState, executeRound]);
+
+  // Auto-scroll logs to bottom
+  useEffect(() => {
+    if (logEndRef.current && battleLogs.length > 0) {
+      logEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [battleLogs]);
+
+  // Map result for backward compatibility with JSX
+  const battleResult = displayResult;
 
   // Math breakdown resolver
   const mathBreakdown = useMemo(() => {
@@ -359,14 +767,117 @@ function BattleSimulatorPage() {
             real-time battle loops.
           </p>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <Button
-            onClick={runSim}
-            className="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold px-5 py-2.5 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2 cursor-pointer"
-          >
-            <Swords className="size-4 animate-bounce" />
-            Re-roll Simulation
-          </Button>
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          {/* Status Badge */}
+          {battleState === 'idle' && (
+            <Badge
+              variant="secondary"
+              className="bg-zinc-800 text-zinc-300 border-zinc-700 font-mono text-[10px] px-2.5 py-1"
+            >
+              READY
+            </Badge>
+          )}
+          {battleState === 'active' && (
+            <Badge className="bg-amber-500/10 text-amber-500 border-amber-500/20 font-mono text-[10px] px-2.5 py-1 animate-pulse">
+              ROUND {currentRound} ACTIVE
+            </Badge>
+          )}
+          {battleState === 'finished' && (
+            <Badge className="bg-red-500/10 text-red-500 border-red-500/20 font-mono text-[10px] px-2.5 py-1">
+              FINISHED (Rounds: {currentRound})
+            </Badge>
+          )}
+
+          {/* Auto-run toggle and Max Rounds input */}
+          <div className="flex items-center gap-2 border border-border/60 bg-muted/20 px-3 py-1.5 rounded-lg text-xs font-medium">
+            <label
+              className={cn(
+                'flex items-center gap-1.5 cursor-pointer select-none',
+                battleState !== 'idle' && 'opacity-50 cursor-not-allowed',
+              )}
+            >
+              <input
+                type="checkbox"
+                checked={isAutoRun}
+                disabled={battleState !== 'idle'}
+                onChange={(e) => setIsAutoRun(e.target.checked)}
+                className="size-3.5 rounded border-border text-primary focus:ring-primary/20 accent-primary"
+              />
+              <span>Auto-run</span>
+            </label>
+            <Separator orientation="vertical" className="h-4 bg-border/60" />
+            <div className="flex items-center gap-1">
+              <span className="text-muted-foreground text-[10px]">Max:</span>
+              <Input
+                type="number"
+                min="1"
+                max="100"
+                value={maxRounds}
+                disabled={battleState !== 'idle'}
+                onChange={(e) =>
+                  setMaxRounds(Math.max(1, Number(e.target.value)))
+                }
+                className="w-11 h-6 text-center text-[10px] font-mono p-0 bg-background border-border"
+              />
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          {battleState === 'idle' && (
+            <Button
+              onClick={startBattle}
+              className="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold px-4 py-1.5 h-9 rounded-lg shadow hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <Swords className="size-3.5 animate-bounce" />
+              Start Battle
+            </Button>
+          )}
+
+          {battleState === 'active' && (
+            <>
+              {isAutoRun ? (
+                isPlaying ? (
+                  <Button
+                    onClick={() => setIsPlaying(false)}
+                    variant="outline"
+                    className="border-amber-500/30 text-amber-500 bg-amber-500/5 hover:bg-amber-500/10 font-bold px-4 py-1.5 h-9 rounded-lg shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Pause className="size-3.5 fill-amber-500/20" />
+                    Pause
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => setIsPlaying(true)}
+                    className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold px-4 py-1.5 h-9 rounded-lg shadow hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Play className="size-3.5 fill-white/20" />
+                    Resume
+                  </Button>
+                )
+              ) : null}
+
+              {!isPlaying && (
+                <Button
+                  onClick={executeRound}
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold px-4 py-1.5 h-9 rounded-lg shadow hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Play className="size-3.5 fill-white/20" />
+                  Continue (R{currentRound + 1})
+                </Button>
+              )}
+            </>
+          )}
+
+          {battleState !== 'idle' && (
+            <Button
+              onClick={resetBattle}
+              variant="ghost"
+              className="hover:bg-muted text-muted-foreground hover:text-foreground px-3 py-1.5 h-9 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <RotateCcw className="size-3.5" />
+              Reset
+            </Button>
+          )}
         </div>
       </div>
 
@@ -385,7 +896,7 @@ function BattleSimulatorPage() {
             </div>
 
             {/* Terrain Combobox */}
-            <div className="flex flex-col gap-1.5 w-full md:w-64">
+            <div className="flex flex-col gap-1.5 w-full md:w-80">
               <Label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 Battle Terrain
               </Label>
@@ -393,13 +904,25 @@ function BattleSimulatorPage() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-full justify-between bg-background/50 hover:bg-background/80 transition-all border-border text-left font-normal cursor-pointer"
+                    disabled={battleState !== 'idle'}
+                    className="w-full justify-between bg-background/50 hover:bg-background/80 transition-all border-border text-left font-normal cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed h-auto py-1.5 px-3"
                   >
-                    <div className="flex items-center gap-2 truncate">
-                      <span className="text-[10px] text-muted-foreground border border-border px-1.5 py-0.5 rounded font-mono bg-muted/30 shrink-0">
-                        {selectedTerrain.code}
-                      </span>
-                      <span className="truncate">{selectedTerrain.name}</span>
+                    <div className="flex items-center gap-3 truncate">
+                      <div className="relative size-10 rounded-lg overflow-hidden bg-muted/40 flex items-center justify-center border border-border shrink-0">
+                        <img
+                          src={getTerrainImageUrl(selectedTerrain)}
+                          alt=""
+                          className="size-10 object-cover"
+                        />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-[10px] text-muted-foreground font-mono bg-muted/30 border border-border px-1.5 py-0.5 rounded w-max">
+                          {selectedTerrain.code}
+                        </span>
+                        <span className="truncate text-sm font-medium mt-0.5">
+                          {selectedTerrain.name}
+                        </span>
+                      </div>
                     </div>
                     <RefreshCw
                       className="size-3 shrink-0 opacity-40 animate-spin"
@@ -408,7 +931,7 @@ function BattleSimulatorPage() {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                  className="w-[280px] p-0 border-border bg-card/95 backdrop-blur-md shadow-xl"
+                  className="w-[320px] p-0 border-border bg-card/95 backdrop-blur-md shadow-xl"
                   align="end"
                 >
                   <Command>
@@ -416,7 +939,7 @@ function BattleSimulatorPage() {
                       placeholder="Search terrain..."
                       className="border-none focus:ring-0 text-sm py-2"
                     />
-                    <CommandList className="max-h-[260px] overflow-y-auto">
+                    <CommandList className="max-h-[300px] overflow-y-auto">
                       <CommandEmpty className="p-3 text-xs text-muted-foreground text-center">
                         No terrains found.
                       </CommandEmpty>
@@ -426,15 +949,24 @@ function BattleSimulatorPage() {
                             key={t.id}
                             value={t.id}
                             onSelect={() => setTerrainId(t.id)}
-                            className="flex items-center justify-between gap-2 p-2 hover:bg-accent cursor-pointer transition-colors"
+                            className="flex items-center justify-between gap-3 p-2 hover:bg-accent cursor-pointer transition-colors"
                           >
-                            <div className="flex items-center gap-2 truncate">
-                              <span className="text-[10px] text-muted-foreground border border-border px-1 py-0.5 rounded font-mono bg-muted/20 shrink-0">
-                                {t.code}
-                              </span>
-                              <span className="truncate text-sm font-medium">
-                                {t.name}
-                              </span>
+                            <div className="flex items-center gap-3 truncate">
+                              <div className="relative size-10 rounded-lg overflow-hidden bg-muted/40 flex items-center justify-center border border-border shrink-0">
+                                <img
+                                  src={getTerrainImageUrl(t)}
+                                  alt=""
+                                  className="size-10 object-cover"
+                                />
+                              </div>
+                              <div className="flex flex-col min-w-0">
+                                <span className="text-[10px] text-muted-foreground font-mono bg-muted/20 border border-border px-1.5 py-0.5 rounded w-max">
+                                  {t.code}
+                                </span>
+                                <span className="truncate text-sm font-medium mt-0.5">
+                                  {t.name}
+                                </span>
+                              </div>
                             </div>
                             {terrainId === t.id && (
                               <Badge
@@ -475,12 +1007,16 @@ function BattleSimulatorPage() {
                 <button
                   key={time.id}
                   type="button"
+                  disabled={battleState !== 'idle'}
                   onClick={() => setSelectedTimeOfDayId(time.id)}
                   className={cn(
-                    'flex flex-col items-center gap-2 p-3 rounded-xl border text-center transition-all duration-200 cursor-pointer bg-background/20',
+                    'flex flex-col items-center gap-2 p-3 rounded-xl border text-center transition-all duration-200 bg-background/20',
                     isSelected
                       ? 'border-primary ring-2 ring-primary/20 bg-primary/5 shadow-md scale-[1.02] font-semibold'
                       : 'border-border hover:border-muted-foreground/30 hover:bg-background/40',
+                    battleState !== 'idle'
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'cursor-pointer',
                   )}
                 >
                   <div className="relative size-10 rounded-full overflow-hidden bg-muted/40 flex items-center justify-center border border-border shrink-0">
@@ -535,6 +1071,7 @@ function BattleSimulatorPage() {
           onWeaponIndexChange={setAttackerWeaponIndex}
           terrainId={terrainId}
           isAttacking={true}
+          disabled={battleState !== 'idle'}
         />
 
         {/* Defender Panel */}
@@ -558,6 +1095,7 @@ function BattleSimulatorPage() {
           onWeaponIndexChange={setDefenderWeaponIndex}
           terrainId={terrainId}
           isAttacking={false}
+          disabled={battleState !== 'idle'}
         />
       </div>
 
@@ -812,8 +1350,9 @@ function BattleSimulatorPage() {
 
                     {battleResult.logs.length === 0 ? (
                       <span className="text-zinc-600 italic">
-                        No combat events occurred. Possible range mismatch or
-                        petrifaction.
+                        {battleState === 'idle'
+                          ? 'Battle has not started. Click "Start Battle" to begin the simulation.'
+                          : 'No combat events occurred. Possible range mismatch or petrifaction.'}
                       </span>
                     ) : (
                       battleResult.logs.map((event) => {
@@ -862,6 +1401,7 @@ function BattleSimulatorPage() {
                         );
                       })
                     )}
+                    <div ref={logEndRef} />
                   </div>
                 </ScrollArea>
               </TabsContent>
@@ -1081,6 +1621,132 @@ function BattleSimulatorPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Bottom Controls */}
+      <Card className="border-border bg-card/45 backdrop-blur-md shadow-md p-4 mt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col gap-0.5">
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Simulation Controls
+            </span>
+            <p className="text-[10px] text-muted-foreground">
+              Manage the active combat loop and step through battle rounds.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 justify-end w-full sm:w-auto">
+            {/* Status Badge */}
+            {battleState === 'idle' && (
+              <Badge
+                variant="secondary"
+                className="bg-zinc-800 text-zinc-300 border-zinc-700 font-mono text-[10px] px-2.5 py-1"
+              >
+                READY
+              </Badge>
+            )}
+            {battleState === 'active' && (
+              <Badge className="bg-amber-500/10 text-amber-500 border-amber-500/20 font-mono text-[10px] px-2.5 py-1 animate-pulse">
+                ROUND {currentRound} ACTIVE
+              </Badge>
+            )}
+            {battleState === 'finished' && (
+              <Badge className="bg-red-500/10 text-red-500 border-red-500/20 font-mono text-[10px] px-2.5 py-1">
+                FINISHED (Rounds: {currentRound})
+              </Badge>
+            )}
+
+            {/* Auto-run toggle and Max Rounds input */}
+            <div className="flex items-center gap-2 border border-border/60 bg-muted/20 px-3 py-1.5 rounded-lg text-xs font-medium">
+              <label
+                className={cn(
+                  'flex items-center gap-1.5 cursor-pointer select-none',
+                  battleState !== 'idle' && 'opacity-50 cursor-not-allowed',
+                )}
+              >
+                <input
+                  type="checkbox"
+                  checked={isAutoRun}
+                  disabled={battleState !== 'idle'}
+                  onChange={(e) => setIsAutoRun(e.target.checked)}
+                  className="size-3.5 rounded border-border text-primary focus:ring-primary/20 accent-primary"
+                />
+                <span>Auto-run</span>
+              </label>
+              <Separator orientation="vertical" className="h-4 bg-border/60" />
+              <div className="flex items-center gap-1">
+                <span className="text-muted-foreground text-[10px]">Max:</span>
+                <Input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={maxRounds}
+                  disabled={battleState !== 'idle'}
+                  onChange={(e) =>
+                    setMaxRounds(Math.max(1, Number(e.target.value)))
+                  }
+                  className="w-11 h-6 text-center text-[10px] font-mono p-0 bg-background border-border"
+                />
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            {battleState === 'idle' && (
+              <Button
+                onClick={startBattle}
+                className="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold px-4 py-1.5 h-9 rounded-lg shadow hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <Swords className="size-3.5 animate-bounce" />
+                Start Battle
+              </Button>
+            )}
+
+            {battleState === 'active' && (
+              <>
+                {isAutoRun ? (
+                  isPlaying ? (
+                    <Button
+                      onClick={() => setIsPlaying(false)}
+                      variant="outline"
+                      className="border-amber-500/30 text-amber-500 bg-amber-500/5 hover:bg-amber-500/10 font-bold px-4 py-1.5 h-9 rounded-lg shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <Pause className="size-3.5 fill-amber-500/20" />
+                      Pause
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => setIsPlaying(true)}
+                      className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold px-4 py-1.5 h-9 rounded-lg shadow hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <Play className="size-3.5 fill-white/20" />
+                      Resume
+                    </Button>
+                  )
+                ) : null}
+
+                {!isPlaying && (
+                  <Button
+                    onClick={executeRound}
+                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold px-4 py-1.5 h-9 rounded-lg shadow hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Play className="size-3.5 fill-white/20" />
+                    Continue (R{currentRound + 1})
+                  </Button>
+                )}
+              </>
+            )}
+
+            {battleState !== 'idle' && (
+              <Button
+                onClick={resetBattle}
+                variant="ghost"
+                className="hover:bg-muted text-muted-foreground hover:text-foreground px-3 py-1.5 h-9 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <RotateCcw className="size-3.5" />
+                Reset
+              </Button>
+            )}
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }
@@ -1105,6 +1771,7 @@ interface UnitConfigPanelProps {
   onWeaponIndexChange: (idx: number) => void;
   terrainId: string;
   isAttacking: boolean;
+  disabled?: boolean;
 }
 
 function UnitConfigPanel({
@@ -1127,6 +1794,7 @@ function UnitConfigPanel({
   onWeaponIndexChange,
   terrainId,
   isAttacking: _isAttacking,
+  disabled = false,
 }: UnitConfigPanelProps) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
@@ -1176,13 +1844,17 @@ function UnitConfigPanel({
             <Label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Unit Type
             </Label>
-            <Popover open={open} onOpenChange={setOpen}>
+            <Popover
+              open={disabled ? false : open}
+              onOpenChange={disabled ? undefined : setOpen}
+            >
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
                   role="combobox"
                   aria-expanded={open}
-                  className="w-full justify-between bg-background/50 hover:bg-background/80 transition-all border-border text-left font-normal cursor-pointer"
+                  disabled={disabled}
+                  className="w-full justify-between bg-background/50 hover:bg-background/80 transition-all border-border text-left font-normal cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {selectedUnit ? (
                     <div className="flex items-center gap-2 truncate">
@@ -1332,14 +2004,16 @@ function UnitConfigPanel({
                       <TooltipTrigger asChild>
                         <button
                           type="button"
-                          disabled={isDisabled}
+                          disabled={disabled || isDisabled}
                           onClick={() => toggleTrait(trait.id)}
                           className={cn(
-                            'px-2.5 py-1 text-xs rounded-full border transition-all duration-200 flex items-center gap-1 font-medium cursor-pointer',
+                            'px-2.5 py-1 text-xs rounded-full border transition-all duration-200 flex items-center gap-1 font-medium',
                             isSelected
                               ? 'bg-primary/20 border-primary text-primary shadow-sm scale-105'
                               : 'bg-muted/40 border-border text-muted-foreground hover:bg-muted/80 hover:text-foreground',
-                            isDisabled && 'opacity-40 cursor-not-allowed',
+                            disabled || isDisabled
+                              ? 'opacity-40 cursor-not-allowed'
+                              : 'cursor-pointer',
                           )}
                         >
                           {trait.name}
@@ -1374,14 +2048,16 @@ function UnitConfigPanel({
                   min="1"
                   max={state.maxHp}
                   value={hp}
+                  disabled={disabled}
                   onChange={(e) => onHpChange(Number(e.target.value))}
-                  className="flex-1 accent-primary h-1 bg-muted rounded-lg appearance-none cursor-pointer"
+                  className="flex-1 accent-primary h-1 bg-muted rounded-lg appearance-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 />
                 <Input
                   type="number"
                   min="1"
                   max={state.maxHp}
                   value={hp}
+                  disabled={disabled}
                   onChange={(e) =>
                     onHpChange(
                       Math.max(
@@ -1404,22 +2080,34 @@ function UnitConfigPanel({
               Status Effects Overrides
             </span>
             <div className="grid grid-cols-2 gap-3">
-              <label className="flex items-center gap-2 text-xs font-semibold text-muted-foreground/80 hover:text-foreground transition-colors cursor-pointer select-none">
+              <label
+                className={cn(
+                  'flex items-center gap-2 text-xs font-semibold text-muted-foreground/80 hover:text-foreground transition-colors select-none',
+                  disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
+                )}
+              >
                 <input
                   type="checkbox"
                   checked={slowed}
+                  disabled={disabled}
                   onChange={(e) => onSlowedChange(e.target.checked)}
-                  className="size-3.5 rounded border-border text-primary focus:ring-primary/20 accent-primary"
+                  className="size-3.5 rounded border-border text-primary focus:ring-primary/20 accent-primary disabled:opacity-50"
                 />
                 <span>Slowed (halves damage)</span>
               </label>
 
-              <label className="flex items-center gap-2 text-xs font-semibold text-muted-foreground/80 hover:text-foreground transition-colors cursor-pointer select-none">
+              <label
+                className={cn(
+                  'flex items-center gap-2 text-xs font-semibold text-muted-foreground/80 hover:text-foreground transition-colors select-none',
+                  disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
+                )}
+              >
                 <input
                   type="checkbox"
                   checked={poisoned}
+                  disabled={disabled}
                   onChange={(e) => onPoisonedChange(e.target.checked)}
-                  className="size-3.5 rounded border-border text-primary focus:ring-primary/20 accent-primary"
+                  className="size-3.5 rounded border-border text-primary focus:ring-primary/20 accent-primary disabled:opacity-50"
                 />
                 <span>Poisoned (immune undead)</span>
               </label>
@@ -1435,9 +2123,13 @@ function UnitConfigPanel({
             </span>
             <Select
               value={weaponIndex.toString()}
+              disabled={disabled}
               onValueChange={(val) => onWeaponIndexChange(Number(val))}
             >
-              <SelectTrigger className="w-full bg-background/50 border-border text-xs">
+              <SelectTrigger
+                disabled={disabled}
+                className="w-full bg-background/50 border-border text-xs disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 <SelectValue placeholder="Auto-Select Weapon" />
               </SelectTrigger>
               <SelectContent className="bg-card border border-border text-card-foreground">
