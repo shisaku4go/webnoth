@@ -412,7 +412,7 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
                     <pixiGraphics
                       x={pos.x}
                       y={pos.y}
-                      interactive={true}
+                      eventMode="static"
                       onPointerOver={() => {
                         const name = getTerrainName(baseCode, overlayCode);
                         setHoveredHex({ x: cIdx, y: rIdx, code: cell });
