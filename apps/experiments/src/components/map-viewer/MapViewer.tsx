@@ -1,5 +1,6 @@
 import { Application, extend } from '@pixi/react';
 import { terrains } from '@webnoth/wesnoth-data/terrains';
+import { Minus, Plus } from 'lucide-react';
 import {
   Assets,
   Container,
@@ -72,11 +73,12 @@ export function getTerrainName(baseCode: string, overlayCode?: string): string {
 export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
   const [textures, setTextures] = useState<Record<string, Texture>>({});
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [_error, setError] = useState<string | null>(null);
 
   // Zoom and Offset state for Pan & Zoom
   const [zoom, setZoom] = useState(0.8);
   const [offset, setOffset] = useState({ x: 50, y: 50 });
+  const [inputValue, setInputValue] = useState(String(Math.round(zoom * 100)));
   const [hoveredHex, setHoveredHex] = useState<{
     x: number;
     y: number;
@@ -84,6 +86,11 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
   } | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Sync input value with zoom level changes
+  useEffect(() => {
+    setInputValue(String(Math.round(zoom * 100)));
+  }, [zoom]);
   const isDragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0 });
 
@@ -180,7 +187,7 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
         y: (rect.height - mapHeight * initialZoom) / 2,
       });
     }
-  }, [grid, mapWidth, mapHeight]);
+  }, [mapWidth, mapHeight]);
 
   // 2. Event Handlers for Zoom and Drag on the DOM Container
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -201,24 +208,51 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
     isDragging.current = false;
   };
 
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const zoomFactor = 1.1;
-    const nextZoom = e.deltaY < 0 ? zoom * zoomFactor : zoom / zoomFactor;
-    const clampedZoom = Math.max(0.15, Math.min(3, nextZoom));
-
+  const changeZoomCentrally = (nextZoom: number) => {
+    const clampedZoom = Math.max(0.15, Math.min(3.0, nextZoom));
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-      // Zoom towards mouse pointer
       setOffset((prev) => ({
-        x: mouseX - ((mouseX - prev.x) / zoom) * clampedZoom,
-        y: mouseY - ((mouseY - prev.y) / zoom) * clampedZoom,
+        x: centerX - ((centerX - prev.x) / zoom) * clampedZoom,
+        y: centerY - ((centerY - prev.y) / zoom) * clampedZoom,
       }));
     }
     setZoom(clampedZoom);
+  };
+
+  const zoomIn = () => {
+    const currentPct = Math.round(zoom * 100);
+    const nextPct = Math.floor(currentPct / 10) * 10 + 10;
+    changeZoomCentrally(nextPct / 100);
+  };
+
+  const zoomOut = () => {
+    const currentPct = Math.round(zoom * 100);
+    const prevPct = Math.ceil(currentPct / 10) * 10 - 10;
+    changeZoomCentrally(prevPct / 100);
+  };
+
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      applyManualZoom();
+    }
+  };
+
+  const handleInputBlur = () => {
+    applyManualZoom();
+  };
+
+  const applyManualZoom = () => {
+    const parsed = Number.parseInt(inputValue, 10);
+    if (!Number.isNaN(parsed)) {
+      const clamped = Math.max(15, Math.min(300, parsed));
+      changeZoomCentrally(clamped / 100);
+    } else {
+      setInputValue(String(Math.round(zoom * 100)));
+    }
   };
 
   const resetView = () => {
@@ -259,8 +293,34 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
     <div className="w-full h-full flex flex-col relative select-none">
       {/* Top Toolbar controls */}
       <div className="absolute top-4 right-4 z-10 flex gap-2">
-        <div className="bg-background/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-border text-xs font-semibold text-muted-foreground shadow-sm flex items-center gap-1.5">
-          <span>Zoom: {Math.round(zoom * 100)}%</span>
+        <div className="bg-background/80 backdrop-blur-md p-1 rounded-lg border border-border text-xs font-semibold text-muted-foreground shadow-sm flex items-center gap-1">
+          <button
+            type="button"
+            onClick={zoomOut}
+            className="hover:bg-accent hover:text-foreground p-1 rounded transition-colors"
+            title="Zoom Out"
+          >
+            <Minus className="size-3.5" />
+          </button>
+          <div className="flex items-center gap-0.5 px-1 bg-muted/50 rounded border border-border/50">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleInputKeyDown}
+              onBlur={handleInputBlur}
+              className="w-8 text-center bg-transparent border-none outline-none focus:ring-0 text-foreground font-semibold text-xs p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+            <span className="text-[10px] text-muted-foreground">%</span>
+          </div>
+          <button
+            type="button"
+            onClick={zoomIn}
+            className="hover:bg-accent hover:text-foreground p-1 rounded transition-colors"
+            title="Zoom In"
+          >
+            <Plus className="size-3.5" />
+          </button>
         </div>
         <button
           type="button"
@@ -272,13 +332,13 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
       </div>
 
       {/* Main Canvas Area */}
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: this container hosts an interactive canvas application */}
       <div
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
-        onWheel={handleWheel}
         className="w-full flex-1 overflow-hidden cursor-grab active:cursor-grabbing relative bg-zinc-950/80 rounded-xl border border-border/80 shadow-inner"
       >
         <Application
