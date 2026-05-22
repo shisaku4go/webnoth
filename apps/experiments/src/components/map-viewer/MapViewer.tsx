@@ -5,6 +5,7 @@ import {
   Assets,
   Container,
   Graphics,
+  Polygon,
   Sprite,
   Text,
   type Texture,
@@ -70,6 +71,8 @@ export function getTerrainName(baseCode: string, overlayCode?: string): string {
   return baseName;
 }
 
+const HEX_HIT_AREA = new Polygon([18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36]);
+
 export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
   const [textures, setTextures] = useState<Record<string, Texture>>({});
   const [loading, setLoading] = useState(true);
@@ -84,6 +87,7 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
     y: number;
     code: string;
   } | null>(null);
+  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -91,6 +95,24 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
   useEffect(() => {
     setInputValue(String(Math.round(zoom * 100)));
   }, [zoom]);
+
+  // Track container size dynamically to keep Pixi stage sized correctly
+  useEffect(() => {
+    if (loading) return;
+    const element = containerRef.current;
+    if (!element) return;
+
+    const observer = new ResizeObserver((entries) => {
+      if (!entries || entries.length === 0) return;
+      const { width, height } = entries[0].contentRect;
+      setDimensions({ width, height });
+    });
+
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+    };
+  }, [loading]);
   const isDragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0 });
 
@@ -342,8 +364,8 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
         className="w-full flex-1 overflow-hidden cursor-grab active:cursor-grabbing relative bg-zinc-950/80 rounded-xl border border-border/80 shadow-inner"
       >
         <Application
-          width={containerRef.current?.clientWidth ?? 800}
-          height={containerRef.current?.clientHeight ?? 600}
+          width={dimensions.width}
+          height={dimensions.height}
           backgroundAlpha={0}
           antialias={true}
         >
@@ -413,7 +435,9 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
                       x={pos.x}
                       y={pos.y}
                       eventMode="static"
+                      hitArea={HEX_HIT_AREA}
                       onPointerOver={() => {
+                        console.log('onPointerOver triggered for:', cIdx, rIdx);
                         const name = getTerrainName(baseCode, overlayCode);
                         setHoveredHex({ x: cIdx, y: rIdx, code: cell });
                         onHoverHex?.({
@@ -424,6 +448,7 @@ export function MapViewer({ grid, items, labels, onHoverHex }: MapViewerProps) {
                         });
                       }}
                       onPointerOut={() => {
+                        console.log('onPointerOut triggered for:', cIdx, rIdx);
                         setHoveredHex(null);
                         onHoverHex?.(null);
                       }}
