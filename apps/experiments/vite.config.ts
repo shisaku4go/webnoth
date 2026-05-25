@@ -26,6 +26,11 @@ function wesnothAssetsPlugin(): Plugin {
         if (!req.url) return next();
         // Delegate to Vite's static file serving
         const filePath = resolve(wesnothAssetsDir, `.${req.url}`);
+        if (!filePath.startsWith(wesnothAssetsDir)) {
+          res.statusCode = 403;
+          res.end('Forbidden');
+          return;
+        }
         res.setHeader('Access-Control-Allow-Origin', '*');
         // Use send to serve static files
         import('node:fs').then((fs) => {
