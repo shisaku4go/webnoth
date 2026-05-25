@@ -24,6 +24,14 @@ function EncyclopediaPage() {
 
   const eras = useMemo(() => getAllEras(), []);
 
+  const erasMap = useMemo(() => {
+    const map = new Map<string, (typeof eras)[number]>();
+    for (const era of eras) {
+      map.set(era.id, era);
+    }
+    return map;
+  }, [eras]);
+
   const factions = useMemo(() => {
     if (selectedEra) {
       return getFactionsByEra(selectedEra);
@@ -40,6 +48,14 @@ function EncyclopediaPage() {
       a.name.localeCompare(b.name),
     );
   }, [selectedEra]);
+
+  const factionsMap = useMemo(() => {
+    const map = new Map<string, (typeof factions)[number]>();
+    for (const f of factions) {
+      map.set(f.id, f);
+    }
+    return map;
+  }, [factions]);
 
   // Compute active units matching selected Era and Faction
   const eraFactionUnits = useMemo(() => {
@@ -201,7 +217,7 @@ function EncyclopediaPage() {
         <div className="rounded-xl border border-border/60 bg-muted/20 p-4 max-w-4xl animate-in fade-in slide-in-from-top-2 duration-300">
           {selectedFaction
             ? (() => {
-                const faction = factions.find((f) => f.id === selectedFaction);
+                const faction = factionsMap.get(selectedFaction);
                 return (
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-2">
@@ -209,7 +225,9 @@ function EncyclopediaPage() {
                         {faction?.name} Faction
                       </span>
                       <span className="text-xs rounded-full bg-primary/10 px-2 py-0.5 text-primary font-medium">
-                        {eras.find((e) => e.id === selectedEra)?.name}
+                        {selectedEra
+                          ? erasMap.get(selectedEra)?.name
+                          : undefined}
                       </span>
                     </div>
                     {faction?.description && (
@@ -222,7 +240,7 @@ function EncyclopediaPage() {
               })()
             : selectedEra &&
               (() => {
-                const era = eras.find((e) => e.id === selectedEra);
+                const era = erasMap.get(selectedEra);
                 return (
                   <div className="flex flex-col gap-2">
                     <span className="text-sm font-semibold text-foreground uppercase tracking-wider">
