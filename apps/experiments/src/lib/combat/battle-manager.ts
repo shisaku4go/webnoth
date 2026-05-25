@@ -31,6 +31,7 @@ const terrainById = new Map<string, WesnothTerrain>(
 );
 const traitById = new Map(globalTraits.map((t) => [t.id, t]));
 const movetypeByName = new Map(movetypes.map((m) => [m.name, m]));
+const timeOfDayById = new Map(globalTimes.map((t) => [t.id, t]));
 
 // Default list of fantasy names for fallback
 const RANDOM_NAMES = [
@@ -474,8 +475,7 @@ export const WesnothBattleManager = {
     );
 
     // Context resolution
-    const tod =
-      globalTimes.find((t) => t.id === options.timeOfDayId) || globalTimes[0];
+    const tod = timeOfDayById.get(options.timeOfDayId) || globalTimes[0];
     const context: CombatContext = {
       terrainId: options.terrainId,
       timeOfDayId: tod.id,
