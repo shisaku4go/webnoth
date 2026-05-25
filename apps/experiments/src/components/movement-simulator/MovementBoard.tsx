@@ -1,7 +1,6 @@
 import { Application, extend } from '@pixi/react';
 import { Badge } from '@webnoth/ui/components/badge';
 import { Button } from '@webnoth/ui/components/button';
-import { Card, CardContent } from '@webnoth/ui/components/card';
 import { Separator } from '@webnoth/ui/components/separator';
 import { multiplayerMaps } from '@webnoth/wesnoth-data/multiplayer';
 import { terrains } from '@webnoth/wesnoth-data/terrains';
@@ -403,7 +402,8 @@ function findPath(
   while (queue.length > 0) {
     // Sort descending to explore paths with more moves remaining first (Dijkstra behavior)
     queue.sort((a, b) => b.movesLeft - a.movesLeft);
-    const curr = queue.shift()!;
+    const curr = queue.shift();
+    if (!curr) break;
 
     if (curr.x === targetX && curr.y === targetY) {
       if (!bestTargetNode || curr.movesLeft > bestTargetNode.movesLeft) {
