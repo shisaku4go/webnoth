@@ -69,8 +69,9 @@ for (const faction of factions) {
   const unitIds = new Set<string>();
   const queue = [...faction.recruit, ...faction.leader];
 
-  while (queue.length > 0) {
-    const id = queue.shift();
+  let i = 0;
+  while (i < queue.length) {
+    const id = queue[i++];
     if (!id || unitIds.has(id)) continue;
 
     unitIds.add(id);
