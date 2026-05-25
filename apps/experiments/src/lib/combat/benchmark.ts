@@ -1,4 +1,4 @@
-import { units } from '@webnoth/wesnoth-data/units';
+import { unitTypes as units } from '@webnoth/wesnoth-data/units';
 import { WesnothBattleManager } from './battle-manager';
 
 // Create a basic benchmark
@@ -7,46 +7,17 @@ const attackerBase = units.find((u) => u.id === 'Orcish Grunt');
 const defenderBase = units.find((u) => u.id === 'Elvish Fighter');
 
 if (!attackerBase || !defenderBase) {
-  console.error('Could not find units!');
-  process.exit(1);
+  throw new Error('Could not find units!');
 }
 
 const N = 100000;
 const start = performance.now();
 
 for (let i = 0; i < N; i++) {
-  WesnothBattleManager.simulateBattle(
-    {
-      id: 'attacker',
-      baseId: attackerBase.id,
-      name: 'Attacker',
-      hp: attackerBase.hitpoints,
-      maxHp: attackerBase.hitpoints,
-      xp: 0,
-      maxXp: attackerBase.experience,
-      traits: [],
-      activeWeaponIndex: -1,
-      statuses: {},
-    },
-    attackerBase,
-    {
-      id: 'defender',
-      baseId: defenderBase.id,
-      name: 'Defender',
-      hp: defenderBase.hitpoints,
-      maxHp: defenderBase.hitpoints,
-      xp: 0,
-      maxXp: defenderBase.experience,
-      traits: [],
-      activeWeaponIndex: -1,
-      statuses: {},
-    },
-    defenderBase,
-    {
-      terrainId: 'flat',
-      timeOfDayId: 'dawn',
-    },
-  );
+  WesnothBattleManager.runSimulation(attackerBase, defenderBase, {
+    terrainId: 'flat',
+    timeOfDayId: 'dawn',
+  });
 }
 
 const end = performance.now();
