@@ -1,8 +1,6 @@
 import { Application, extend } from '@pixi/react';
 import { Badge } from '@webnoth/ui/components/badge';
 import { Button } from '@webnoth/ui/components/button';
-import { Card, CardContent } from '@webnoth/ui/components/card';
-import { ScrollArea } from '@webnoth/ui/components/scroll-area';
 import { Separator } from '@webnoth/ui/components/separator';
 import { multiplayerMaps } from '@webnoth/wesnoth-data/multiplayer';
 import { terrains } from '@webnoth/wesnoth-data/terrains';
@@ -15,7 +13,6 @@ import {
   Maximize2,
   Minus,
   Plus,
-  RefreshCw,
   Users,
 } from 'lucide-react';
 import {
@@ -38,9 +35,9 @@ import { wesnothAssetUrl } from '@/lib/asset-url';
 import {
   getEffectiveMoveCosts,
   getFactionsByEra,
-  getFactionUnits,
   getMovetypeByName,
   getUnitById,
+  type WesnothUnitType,
 } from '@/lib/wesnoth-data';
 
 extend({ Sprite, Container, Graphics, Text });
@@ -110,6 +107,36 @@ export function getAdjacentHexes(
   return candidates.filter(
     (c) => c.x >= 0 && c.x < maxCols && c.y >= 0 && c.y < maxRows,
   );
+}
+
+// Helper: Get animation frames for standing or idle animations
+function getUnitAnimationFrames(
+  unitType?: WesnothUnitType,
+): { image: string; duration?: number }[] {
+  if (!unitType?.animations) return [];
+
+  // Filter standing animations
+  const standingAnims = unitType.animations.filter(
+    (a) => a.type === 'standing',
+  );
+  // Try to find one with multiple frames first
+  const multiFrameStanding = standingAnims.find(
+    (a) => a.frames && a.frames.length > 1,
+  );
+  if (multiFrameStanding) return multiFrameStanding.frames;
+  if (standingAnims.length > 0 && standingAnims[0].frames?.length > 0) {
+    return standingAnims[0].frames;
+  }
+
+  // Otherwise try idle animations
+  const idleAnims = unitType.animations.filter((a) => a.type === 'idle');
+  const multiFrameIdle = idleAnims.find((a) => a.frames && a.frames.length > 1);
+  if (multiFrameIdle) return multiFrameIdle.frames;
+  if (idleAnims.length > 0 && idleAnims[0].frames?.length > 0) {
+    return idleAnims[0].frames;
+  }
+
+  return [];
 }
 
 // Helper: Get movement cost category keys for a terrain code
@@ -338,6 +365,119 @@ function calculateReachableHexes(
   return maxMovesLeft;
 }
 
+// Dijkstra/BFS Pathfinder: Find the exact step-by-step path to the target hex
+function findPath(
+  startX: number,
+  startY: number,
+  targetX: number,
+  targetY: number,
+  unit: UnitState,
+  allUnits: UnitState[],
+  grid: string[][],
+): { x: number; y: number }[] | null {
+  const rows = grid.length;
+  const cols = rows > 0 ? grid[0].length : 0;
+  if (cols === 0) return null;
+
+  const unitType = getUnitById(unit.unitTypeId);
+  const hasSkirmisher = unitType?.abilities?.includes('skirmisher') ?? false;
+
+  interface Node {
+    x: number;
+    y: number;
+    movesLeft: number;
+    parent: Node | null;
+  }
+
+  const queue: Node[] = [
+    { x: startX, y: startY, movesLeft: unit.moves, parent: null },
+  ];
+
+  const maxMovesLeft: Record<string, number> = {
+    [`${startX}_${startY}`]: unit.moves,
+  };
+
+  let bestTargetNode: Node | null = null;
+
+  while (queue.length > 0) {
+    // Sort descending to explore paths with more moves remaining first (Dijkstra behavior)
+    queue.sort((a, b) => b.movesLeft - a.movesLeft);
+    const curr = queue.shift();
+    if (!curr) break;
+
+    if (curr.x === targetX && curr.y === targetY) {
+      if (!bestTargetNode || curr.movesLeft > bestTargetNode.movesLeft) {
+        bestTargetNode = curr;
+      }
+    }
+
+    if (curr.movesLeft <= 0) {
+      continue;
+    }
+
+    const neighbors = getAdjacentHexes(curr.x, curr.y, cols, rows);
+    for (const nb of neighbors) {
+      const nbKey = `${nb.x}_${nb.y}`;
+
+      // Cannot move through enemy units
+      const occupant = allUnits.find((u) => u.x === nb.x && u.y === nb.y);
+      if (occupant && occupant.side !== unit.side) {
+        continue;
+      }
+
+      // Calculate terrain cost
+      const cell = grid[nb.y][nb.x];
+      const terrainKeys = getTerrainKeysForCell(cell);
+      const cost = getUnitMovementCost(unitType, terrainKeys);
+      if (cost === Infinity) {
+        continue;
+      }
+
+      let nextMovesLeft = Math.max(0, curr.movesLeft - cost);
+
+      // ZOC Rule
+      if (
+        !hasSkirmisher &&
+        nextMovesLeft > 0 &&
+        isAdjacentToEnemy(nb.x, nb.y, unit.side, allUnits, cols, rows) &&
+        !(nb.x === targetX && nb.y === targetY) // ZOC doesn't halt if target hex is destination
+      ) {
+        nextMovesLeft = 0;
+      }
+
+      const prevBest = maxMovesLeft[nbKey] ?? -1;
+      if (nextMovesLeft > prevBest) {
+        maxMovesLeft[nbKey] = nextMovesLeft;
+        queue.push({
+          x: nb.x,
+          y: nb.y,
+          movesLeft: nextMovesLeft,
+          parent: curr,
+        });
+      }
+    }
+  }
+
+  if (!bestTargetNode) return null;
+
+  // Reconstruct path
+  const path: { x: number; y: number }[] = [];
+  let currNode: Node | null = bestTargetNode;
+  while (currNode) {
+    path.push({ x: currNode.x, y: currNode.y });
+    currNode = currNode.parent;
+  }
+  return path.reverse();
+}
+
+interface ActiveMovement {
+  unitId: string;
+  path: { x: number; y: number }[];
+  currentStepIndex: number;
+  segmentProgress: number;
+  targetMoves: number;
+}
+
 interface MovementBoardProps {
   eraId: string;
   p1FactionId: string;
@@ -363,6 +503,157 @@ interface UnitState {
   isLeader: boolean;
 }
 
+interface UnitSpriteProps {
+  unit: UnitState;
+  unitType: ReturnType<typeof getUnitById>;
+  textures: Record<string, Texture>;
+  isSelected: boolean;
+  isUnitActive: boolean;
+  ringColor: number;
+  animateUnits: boolean;
+  visualX?: number;
+  visualY?: number;
+  isMoving?: boolean;
+  onSelect: (id: string) => void;
+}
+
+function UnitSprite({
+  unit,
+  unitType,
+  textures,
+  isSelected,
+  isUnitActive,
+  ringColor,
+  animateUnits,
+  visualX,
+  visualY,
+  isMoving,
+  onSelect,
+}: UnitSpriteProps) {
+  const defaultPos = getHexPosition(unit.x, unit.y);
+  const posX = visualX !== undefined ? visualX : defaultPos.x;
+  const posY = visualY !== undefined ? visualY : defaultPos.y;
+
+  // Extract frames
+  const frames = useMemo(() => {
+    return getUnitAnimationFrames(unitType);
+  }, [unitType]);
+
+  const totalDuration = useMemo(() => {
+    return frames.reduce((acc, f) => acc + (f.duration ?? 150), 0);
+  }, [frames]);
+
+  const [frameIndex, setFrameIndex] = useState(0);
+
+  useEffect(() => {
+    if (!animateUnits || frames.length <= 1 || totalDuration === 0) {
+      setFrameIndex(0);
+      return;
+    }
+
+    let active = true;
+    let timerId: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
+      if (!active) return;
+      const currentFrame = frames[frameIndex];
+      const baseDuration = currentFrame.duration ?? 150;
+      // Cycle frames at 2.5x speed when moving to match walking/running velocity
+      const duration = isMoving
+        ? Math.max(30, baseDuration / 2.5)
+        : baseDuration;
+
+      timerId = setTimeout(() => {
+        setFrameIndex((prevIndex) => (prevIndex + 1) % frames.length);
+      }, duration);
+    };
+
+    tick();
+
+    return () => {
+      active = false;
+      clearTimeout(timerId);
+    };
+  }, [frameIndex, frames, totalDuration, animateUnits, isMoving]);
+
+  // Determine current texture
+  const texture = useMemo(() => {
+    if (!unitType) return null;
+
+    // Default (static) texture path
+    const defaultPath = wesnothAssetUrl(unitType.image);
+
+    if (animateUnits && frames.length > 0) {
+      const currentFrame = frames[frameIndex];
+      if (currentFrame?.image) {
+        const framePath = wesnothAssetUrl(currentFrame.image);
+        const animTexture = textures[framePath];
+        if (animTexture?.source) {
+          return animTexture;
+        }
+      }
+    }
+
+    return textures[defaultPath] ?? null;
+  }, [unitType, animateUnits, frames, frameIndex, textures]);
+
+  return (
+    <pixiContainer>
+      {/* Foot Team Ring Indicator */}
+      <pixiGraphics
+        x={posX + 36}
+        y={posY + 54}
+        draw={() => {}}
+        ref={(g: Graphics | null) => {
+          if (!g) return;
+          g.clear();
+          g.drawEllipse(0, 0, 22, 10)
+            .fill({ color: ringColor, alpha: 0.28 })
+            .stroke({
+              width: isSelected ? 2.5 : 1.2,
+              color: isSelected ? 0xf59e0b : ringColor, // Gold border if selected
+              alpha: 0.85,
+            });
+        }}
+      />
+
+      {/* Active state indicator dot */}
+      {isUnitActive && (
+        <pixiGraphics
+          x={posX + 50}
+          y={posY + 12}
+          draw={() => {}}
+          ref={(g: Graphics | null) => {
+            if (!g) return;
+            g.clear();
+            g.drawCircle(0, 0, 3.5)
+              .fill({ color: 0x10b981, alpha: 1.0 }) // Green active dot
+              .stroke({ width: 1, color: 0x000000 });
+          }}
+        />
+      )}
+
+      {/* Unit Sprite */}
+      {texture?.source && (
+        <pixiSprite
+          texture={texture}
+          x={posX + 36}
+          y={posY + 36}
+          anchor={0.5}
+          width={60}
+          height={60}
+          eventMode="static"
+          cursor="pointer"
+          onPointerDown={(e: FederatedPointerEvent) => {
+            e.stopPropagation();
+            onSelect(unit.id);
+          }}
+        />
+      )}
+    </pixiContainer>
+  );
+}
+
 export function MovementBoard({
   eraId,
   p1FactionId,
@@ -376,12 +667,75 @@ export function MovementBoard({
 }: MovementBoardProps) {
   const [textures, setTextures] = useState<Record<string, Texture>>({});
   const [loading, setLoading] = useState(true);
+  const [animateUnits, setAnimateUnits] = useState(true);
+  const [activeMovement, setActiveMovement] = useState<ActiveMovement | null>(
+    null,
+  );
   const [units, setUnits] = useState<UnitState[]>([]);
   const [selectedUnitId, setSelectedUnitId] = useState<string | null>(null);
   const [gold, setGold] = useState<Record<number, number>>({ 1: 100, 2: 100 });
   const [recruitUnitTypeId, setRecruitUnitTypeId] = useState<string | null>(
     null,
   );
+
+  // Smooth movement animation loop
+  useEffect(() => {
+    if (!activeMovement) return;
+
+    let active = true;
+    let lastTime = performance.now();
+    const speed = 0.008; // progress units per millisecond (~125ms per hex segment)
+
+    const frame = (now: number) => {
+      if (!active) return;
+      const dt = now - lastTime;
+      lastTime = now;
+
+      setActiveMovement((prev) => {
+        if (!prev) return null;
+        let nextProgress = prev.segmentProgress + dt * speed;
+        let nextStepIndex = prev.currentStepIndex;
+
+        if (nextProgress >= 1) {
+          nextProgress = 0;
+          nextStepIndex += 1;
+        }
+
+        // If we reached the end of the path
+        if (nextStepIndex >= prev.path.length - 1) {
+          setUnits((unitsPrev) =>
+            unitsPrev.map((u) =>
+              u.id === prev.unitId
+                ? {
+                    ...u,
+                    x: prev.path[prev.path.length - 1].x,
+                    y: prev.path[prev.path.length - 1].y,
+                    moves: prev.targetMoves,
+                  }
+                : u,
+            ),
+          );
+          // Unselect to trigger path recalculated bounds
+          setSelectedUnitId(null);
+          return null;
+        }
+
+        return {
+          ...prev,
+          currentStepIndex: nextStepIndex,
+          segmentProgress: nextProgress,
+        };
+      });
+
+      requestAnimationFrame(frame);
+    };
+
+    requestAnimationFrame(frame);
+
+    return () => {
+      active = false;
+    };
+  }, [activeMovement]);
 
   // Turn management
   const [turn, setTurn] = useState(1);
@@ -598,21 +952,41 @@ export function MovementBoard({
       }
     }
 
-    // Add leader unit sprites
+    // Add leader unit sprites and their animation frames
     if (p1LeaderInfo) {
       imageUrls.add(wesnothAssetUrl(p1LeaderInfo.image));
+      const frames = getUnitAnimationFrames(p1LeaderInfo);
+      for (const f of frames) {
+        if (f.image) {
+          imageUrls.add(wesnothAssetUrl(f.image));
+        }
+      }
     }
     if (p2LeaderInfo) {
       imageUrls.add(wesnothAssetUrl(p2LeaderInfo.image));
+      const frames = getUnitAnimationFrames(p2LeaderInfo);
+      for (const f of frames) {
+        if (f.image) {
+          imageUrls.add(wesnothAssetUrl(f.image));
+        }
+      }
     }
 
-    // Add recruit unit sprites
+    // Add recruit unit sprites and their animation frames
     const p1Faction = getFactionsByEra(eraId).find((f) => f.id === p1FactionId);
     if (p1Faction) {
       for (const id of p1Faction.recruit) {
         const u = getUnitById(id);
-        if (u?.image) {
-          imageUrls.add(wesnothAssetUrl(u.image));
+        if (u) {
+          if (u.image) {
+            imageUrls.add(wesnothAssetUrl(u.image));
+          }
+          const frames = getUnitAnimationFrames(u);
+          for (const f of frames) {
+            if (f.image) {
+              imageUrls.add(wesnothAssetUrl(f.image));
+            }
+          }
         }
       }
     }
@@ -620,8 +994,16 @@ export function MovementBoard({
     if (p2Faction) {
       for (const id of p2Faction.recruit) {
         const u = getUnitById(id);
-        if (u?.image) {
-          imageUrls.add(wesnothAssetUrl(u.image));
+        if (u) {
+          if (u.image) {
+            imageUrls.add(wesnothAssetUrl(u.image));
+          }
+          const frames = getUnitAnimationFrames(u);
+          for (const f of frames) {
+            if (f.image) {
+              imageUrls.add(wesnothAssetUrl(f.image));
+            }
+          }
         }
       }
     }
@@ -784,7 +1166,7 @@ export function MovementBoard({
     }
   };
 
-  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const _handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       applyManualZoom();
     }
@@ -802,6 +1184,7 @@ export function MovementBoard({
 
   // Turn management switching
   const handleEndTurn = () => {
+    if (activeMovement) return;
     let nextSide = activeSide === 1 ? 2 : 1;
     let nextTurn = turn;
     if (nextSide === 1) {
@@ -916,6 +1299,7 @@ export function MovementBoard({
   // Click handler for moving units or updating selection
   const handleTileClick = useCallback(
     (cIdx: number, rIdx: number) => {
+      if (activeMovement) return;
       // Handle recruitment spawn if active
       if (recruitUnitTypeId) {
         const validTiles = getValidRecruitTiles();
@@ -967,13 +1351,36 @@ export function MovementBoard({
         const key = `${cIdx}_${rIdx}`;
         if (key in reachableHexes) {
           const remainingMoves = reachableHexes[key];
-          setUnits((prev) =>
-            prev.map((u) =>
-              u.id === selectedUnit.id
-                ? { ...u, x: cIdx, y: rIdx, moves: remainingMoves }
-                : u,
-            ),
+
+          const path = findPath(
+            selectedUnit.x,
+            selectedUnit.y,
+            cIdx,
+            rIdx,
+            selectedUnit,
+            units,
+            grid,
           );
+
+          if (path && path.length > 1) {
+            setActiveMovement({
+              unitId: selectedUnit.id,
+              path,
+              currentStepIndex: 0,
+              segmentProgress: 0,
+              targetMoves: remainingMoves,
+            });
+          } else {
+            // Fallback to instant move
+            setUnits((prev) =>
+              prev.map((u) =>
+                u.id === selectedUnit.id
+                  ? { ...u, x: cIdx, y: rIdx, moves: remainingMoves }
+                  : u,
+              ),
+            );
+            setSelectedUnitId(null);
+          }
         } else {
           // Clicked an empty tile that is not reachable: clear selection
           setSelectedUnitId(null);
@@ -991,6 +1398,8 @@ export function MovementBoard({
       recruitUnitTypeId,
       getValidRecruitTiles,
       gold,
+      activeMovement,
+      grid,
     ],
   );
 
@@ -1255,70 +1664,52 @@ export function MovementBoard({
 
               {/* 4. Render Team Rings and Units */}
               {units.map((unit) => {
-                const pos = getHexPosition(unit.x, unit.y);
                 const unitType = getUnitById(unit.unitTypeId);
-                const texture = unitType
-                  ? textures[wesnothAssetUrl(unitType.image)]
-                  : null;
-
                 const ringColor = unit.side === 1 ? 0xef4444 : 0x06b6d4; // Red vs Cyan
                 const isSelected = selectedUnitId === unit.id;
                 const isUnitActive = unit.side === activeSide && unit.moves > 0;
 
+                // Check if this unit is currently animating movement
+                const isMoving = activeMovement?.unitId === unit.id;
+                let visualX: number | undefined;
+                let visualY: number | undefined;
+
+                if (isMoving && activeMovement) {
+                  const path = activeMovement.path;
+                  const idx = activeMovement.currentStepIndex;
+                  const progress = activeMovement.segmentProgress;
+
+                  const p0 = path[idx];
+                  const p1 = path[idx + 1];
+
+                  if (p0 && p1) {
+                    const pos0 = getHexPosition(p0.x, p0.y);
+                    const pos1 = getHexPosition(p1.x, p1.y);
+
+                    visualX = pos0.x + (pos1.x - pos0.x) * progress;
+                    visualY = pos0.y + (pos1.y - pos0.y) * progress;
+
+                    // Procedural bobbing effect (sine wave)
+                    const bobY = -6 * Math.sin(Math.PI * progress);
+                    visualY += bobY;
+                  }
+                }
+
                 return (
-                  <pixiContainer key={unit.id}>
-                    {/* Foot Team Ring Indicator */}
-                    <pixiGraphics
-                      x={pos.x + 36}
-                      y={pos.y + 54}
-                      draw={() => {}}
-                      ref={(g: Graphics | null) => {
-                        if (!g) return;
-                        g.clear();
-                        g.drawEllipse(0, 0, 22, 10)
-                          .fill({ color: ringColor, alpha: 0.28 })
-                          .stroke({
-                            width: isSelected ? 2.5 : 1.2,
-                            color: isSelected ? 0xf59e0b : ringColor, // Gold border if selected
-                            alpha: 0.85,
-                          });
-                      }}
-                    />
-
-                    {/* Active state indicator dot */}
-                    {isUnitActive && (
-                      <pixiGraphics
-                        x={pos.x + 50}
-                        y={pos.y + 12}
-                        draw={() => {}}
-                        ref={(g: Graphics | null) => {
-                          if (!g) return;
-                          g.clear();
-                          g.drawCircle(0, 0, 3.5)
-                            .fill({ color: 0x10b981, alpha: 1.0 }) // Green active dot
-                            .stroke({ width: 1, color: 0x000000 });
-                        }}
-                      />
-                    )}
-
-                    {/* Unit Sprite */}
-                    {texture?.source && (
-                      <pixiSprite
-                        texture={texture}
-                        x={pos.x + 36}
-                        y={pos.y + 36}
-                        anchor={0.5}
-                        width={60}
-                        height={60}
-                        eventMode="static"
-                        cursor="pointer"
-                        onPointerDown={(e: FederatedPointerEvent) => {
-                          e.stopPropagation();
-                          setSelectedUnitId(unit.id);
-                        }}
-                      />
-                    )}
-                  </pixiContainer>
+                  <UnitSprite
+                    key={unit.id}
+                    unit={unit}
+                    unitType={unitType}
+                    textures={textures}
+                    isSelected={isSelected}
+                    isUnitActive={isUnitActive && !activeMovement}
+                    ringColor={ringColor}
+                    animateUnits={animateUnits}
+                    visualX={visualX}
+                    visualY={visualY}
+                    isMoving={isMoving}
+                    onSelect={setSelectedUnitId}
+                  />
                 );
               })}
 
@@ -1393,12 +1784,27 @@ export function MovementBoard({
                 {isLeaderOnKeep ? 'On Keep' : 'Not on Keep'}
               </span>
             </div>
+            <div className="flex justify-between items-center text-xs">
+              <span className="text-muted-foreground">Animations:</span>
+              <button
+                type="button"
+                onClick={() => setAnimateUnits(!animateUnits)}
+                className={`text-[10px] font-bold px-2 py-0.5 rounded border transition-all cursor-pointer ${
+                  animateUnits
+                    ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20'
+                    : 'border-border/40 bg-zinc-950/40 text-muted-foreground hover:text-foreground hover:bg-zinc-900'
+                }`}
+              >
+                {animateUnits ? 'Enabled' : 'Disabled'}
+              </button>
+            </div>
             <div className="pt-1">
               <Button
                 variant="secondary"
                 size="sm"
                 onClick={() => handleLocateLeader(activeSide)}
-                className="w-full text-[10px] h-7 font-bold flex items-center justify-center gap-1 cursor-pointer bg-zinc-800 hover:bg-zinc-700 text-emerald-400"
+                disabled={!!activeMovement}
+                className="w-full text-[10px] h-7 font-bold flex items-center justify-center gap-1 cursor-pointer bg-zinc-800 hover:bg-zinc-700 text-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Compass className="size-3" />
                 Locate Leader
@@ -1408,7 +1814,8 @@ export function MovementBoard({
 
           <Button
             onClick={handleEndTurn}
-            className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold cursor-pointer"
+            disabled={!!activeMovement}
+            className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             End Turn
           </Button>
@@ -1508,7 +1915,7 @@ export function MovementBoard({
                       <button
                         key={unitType.id}
                         type="button"
-                        disabled={!canAfford}
+                        disabled={!canAfford || !!activeMovement}
                         onClick={() => {
                           setRecruitUnitTypeId((prev) =>
                             prev === unitType.id ? null : unitType.id,
@@ -1577,7 +1984,8 @@ export function MovementBoard({
         <Button
           variant="outline"
           onClick={onReset}
-          className="w-full text-xs font-bold border-red-500/20 text-red-400 hover:text-red-300 hover:bg-red-500/10 cursor-pointer"
+          disabled={!!activeMovement}
+          className="w-full text-xs font-bold border-red-500/20 text-red-400 hover:text-red-300 hover:bg-red-500/10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ArrowLeft className="size-3.5 mr-1" />
           Exit Simulator
