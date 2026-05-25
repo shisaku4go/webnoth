@@ -101,6 +101,30 @@ describe('WesnothCombatCore Math Formulas', () => {
     // Undead target: no drain
     expect(WesnothCombatCore.calculateDrain(10, drainAttack, true)).toBe(0);
   });
+
+  it('calculateXP should correctly award XP based on kill status and levels', () => {
+    const level0 = { level: 0 } as CombatUnitState;
+    const level1 = { level: 1 } as CombatUnitState;
+    const level2 = { level: 2 } as CombatUnitState;
+
+    // Attacker kills defender
+    // If defender is level 0, attacker gets 4 XP
+    expect(WesnothCombatCore.calculateXP(level1, level0, true, true)).toEqual({ attackerXp: 4, defenderXp: 0 });
+    // If defender is level > 0, attacker gets defender.level * 8 XP
+    expect(WesnothCombatCore.calculateXP(level1, level2, true, true)).toEqual({ attackerXp: 16, defenderXp: 0 });
+
+    // Defender kills attacker
+    // If attacker is level 0, defender gets 4 XP
+    expect(WesnothCombatCore.calculateXP(level0, level1, true, false)).toEqual({ attackerXp: 0, defenderXp: 4 });
+    // If attacker is level > 0, defender gets attacker.level * 8 XP
+    expect(WesnothCombatCore.calculateXP(level2, level1, true, false)).toEqual({ attackerXp: 0, defenderXp: 16 });
+
+    // No kill
+    // Each gets XP equal to the other's level. If level 0, then 0 XP.
+    expect(WesnothCombatCore.calculateXP(level0, level0, false, false)).toEqual({ attackerXp: 0, defenderXp: 0 });
+    expect(WesnothCombatCore.calculateXP(level1, level2, false, false)).toEqual({ attackerXp: 2, defenderXp: 1 });
+    expect(WesnothCombatCore.calculateXP(level2, level0, false, false)).toEqual({ attackerXp: 0, defenderXp: 2 });
+  });
 });
 
 describe('WesnothBattleManager Terrain and Combat Loop', () => {
