@@ -39,4 +39,34 @@ describe('cn utility function', () => {
       ),
     ).toBe('base-class array-class1 array-class2 cond-class1 p-8');
   });
+
+  describe('edge cases', () => {
+    it('should return empty string when no arguments are passed', () => {
+      expect(cn()).toBe('');
+    });
+
+    it('should handle deeply nested arrays', () => {
+      expect(cn(['a', ['b', ['c']]])).toBe('a b c');
+    });
+
+    it('should handle empty arrays and nested empty arrays', () => {
+      expect(cn([], [[[]]])).toBe('');
+    });
+
+    it('should handle empty objects', () => {
+      expect(cn({})).toBe('');
+    });
+
+    it('should ignore strings composed purely of whitespace', () => {
+      expect(cn('   ', '\n\t')).toBe('');
+    });
+
+    it('should correctly merge Tailwind arbitrary values', () => {
+      expect(cn('text-[14px]', 'text-[16px]')).toBe('text-[16px]');
+    });
+
+    it('should handle purely falsy combinations', () => {
+      expect(cn(undefined, null, false, '', 0)).toBe('');
+    });
+  });
 });

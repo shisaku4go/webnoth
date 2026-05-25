@@ -1,20 +1,78 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, it, test, vi } from 'vitest';
 
-// Mock pixi and other UI components to avoid rendering/import issues during pure logic tests
+// Mock @pixi/react to avoid node/React environment import issues
 vi.mock('@pixi/react', () => ({
-  extend: vi.fn(),
   Application: vi.fn(),
+  extend: vi.fn(),
 }));
+
+// Mock pixi.js as it also might cause issues if not fully supported in the test environment
 vi.mock('pixi.js', () => ({
-  Sprite: vi.fn(),
+  Assets: { load: vi.fn() },
   Container: vi.fn(),
   Graphics: vi.fn(),
-  Text: vi.fn(),
   Polygon: vi.fn(),
-  Assets: { load: vi.fn() },
+  Sprite: vi.fn(),
+  Text: vi.fn(),
 }));
 
-import { getHexPosition } from '../MapViewer';
+import { parseCell, getHexPosition } from '../MapViewer';
+
+describe('MapViewer parseCell', () => {
+  it('parses a plain base code', () => {
+    const result = parseCell('Gs');
+    expect(result).toEqual({
+      baseCode: 'Gs',
+      startPos: undefined,
+      overlayCode: undefined,
+    });
+  });
+
+  it('parses a base code with an overlay', () => {
+    const result = parseCell('Gs^Fms');
+    expect(result).toEqual({
+      baseCode: 'Gs',
+      overlayCode: 'Fms',
+      startPos: undefined,
+    });
+  });
+
+  it('parses a starting position and a base code', () => {
+    const result = parseCell('2 Khr');
+    expect(result).toEqual({
+      baseCode: 'Khr',
+      startPos: '2',
+      overlayCode: undefined,
+    });
+  });
+
+  it('parses a starting position, base code, and overlay code', () => {
+    const result = parseCell('3 Gs^Fms');
+    expect(result).toEqual({
+      baseCode: 'Gs',
+      overlayCode: 'Fms',
+      startPos: '3',
+    });
+  });
+
+  it('handles irregular whitespaces', () => {
+    const result = parseCell('  2   Khr  ');
+    expect(result).toEqual({
+      baseCode: 'Khr',
+      startPos: '2',
+      overlayCode: undefined,
+    });
+  });
+
+  it('handles empty string', () => {
+    const result = parseCell('');
+    expect(result).toEqual({
+      baseCode: '',
+      startPos: undefined,
+      overlayCode: undefined,
+    });
+  });
+});
 
 describe('getHexPosition', () => {
   test.each([
