@@ -5,7 +5,7 @@ import type { WesnothProvenance } from '../types.ts';
 
 export const provenance: WesnothProvenance = {
   revision: 'd9530833c676288f906548d7da58c83b45384745',
-  extractedAt: '2026-05-20T00:04:31.139Z',
+  extractedAt: '2026-05-25T20:19:52.760Z',
   sourceFiles: [
     {
       relativePath: 'data/core/macros/abilities.cfg',
@@ -200,15 +200,11 @@ export const provenance: WesnothProvenance = {
       category: 'faction_cfg',
     },
     {
-      relativePath: 'data/core/units/bats/Bat_Blood.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/bats/Bat_Dread.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/bats/Bat_Vampire.cfg',
+      relativePath: 'data/core/units/bats/Bat_Blood.cfg',
       category: 'unit_type',
     },
     {
@@ -220,7 +216,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/boats/Carrack_Pirate.cfg',
+      relativePath: 'data/core/units/bats/Bat_Vampire.cfg',
       category: 'unit_type',
     },
     {
@@ -229,6 +225,10 @@ export const provenance: WesnothProvenance = {
     },
     {
       relativePath: 'data/core/units/boats/Elf_Cutter.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/boats/Carrack_Pirate.cfg',
       category: 'unit_type',
     },
     {
@@ -244,6 +244,14 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/boats/Orc_Barge.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/boats/Legacy_Pirate_Galleon.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/boats/Legacy_Boat.cfg',
       category: 'unit_type',
     },
@@ -252,7 +260,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/boats/Legacy_Pirate_Galleon.cfg',
+      relativePath: 'data/core/units/boats/Orc_Battle-Barge.cfg',
       category: 'unit_type',
     },
     {
@@ -260,15 +268,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/boats/Orc_Barge.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/boats/Orc_Battle-Barge.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/boats/Orc_Rigship.cfg',
+      relativePath: 'data/core/units/boats/Raft.cfg',
       category: 'unit_type',
     },
     {
@@ -276,11 +276,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/boats/Raft.cfg',
+      relativePath: 'data/core/units/boats/Raider_Coastal.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/boats/Raider_Coastal.cfg',
+      relativePath: 'data/core/units/boats/Orc_Rigship.cfg',
       category: 'unit_type',
     },
     {
@@ -288,19 +288,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/boats/Skiff.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/drakes/Arbiter.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/drakes/Armageddon.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/drakes/Blademaster.cfg',
+      relativePath: 'data/core/units/boats/Skiff.cfg',
       category: 'unit_type',
     },
     {
@@ -308,7 +300,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/drakes/Blademaster.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/drakes/Clasher.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/drakes/Armageddon.cfg',
       category: 'unit_type',
     },
     {
@@ -324,19 +324,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/drakes/Flameheart.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/drakes/Flare.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/drakes/Glider.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/drakes/Hurricane.cfg',
+      relativePath: 'data/core/units/drakes/Flare.cfg',
       category: 'unit_type',
     },
     {
@@ -348,15 +340,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/drakes/Hurricane.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/drakes/Flameheart.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/drakes/Thrasher.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/drakes/Warden.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/drakes/Warrior.cfg',
       category: 'unit_type',
     },
     {
@@ -364,7 +356,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dunefolk/Apothecary.cfg',
+      relativePath: 'data/core/units/drakes/Warrior.cfg',
       category: 'unit_type',
     },
     {
@@ -372,7 +364,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/dunefolk/Apothecary.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/dunefolk/Burner.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/drakes/Warden.cfg',
       category: 'unit_type',
     },
     {
@@ -380,11 +380,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/dunefolk/Explorer.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/dunefolk/Cataphract.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dunefolk/Explorer.cfg',
+      relativePath: 'data/core/units/dunefolk/Harrier.cfg',
       category: 'unit_type',
     },
     {
@@ -396,27 +400,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dunefolk/Harrier.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/dunefolk/Herbalist.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dunefolk/Horse_Archer.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/dunefolk/Luminary.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/dunefolk/Marauder.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/dunefolk/Paragon.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/dunefolk/Horse_Archer.cfg',
       category: 'unit_type',
     },
     {
@@ -436,15 +428,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dunefolk/Skirmisher.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/dunefolk/Sky_Hunter.cfg',
+      relativePath: 'data/core/units/dunefolk/Marauder.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/dunefolk/Soldier.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/dunefolk/Skirmisher.cfg',
       category: 'unit_type',
     },
     {
@@ -456,11 +448,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dunefolk/Strider.cfg',
+      relativePath: 'data/core/units/dunefolk/Luminary.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/dunefolk/Sunderer.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/dunefolk/Strider.cfg',
       category: 'unit_type',
     },
     {
@@ -476,7 +472,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dunefolk/Windbolt.cfg',
+      relativePath: 'data/core/units/dunefolk/Sky_Hunter.cfg',
       category: 'unit_type',
     },
     {
@@ -492,7 +488,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dwarves/Dragonguard.cfg',
+      relativePath: 'data/core/units/dwarves/Fighter.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/dunefolk/Windbolt.cfg',
       category: 'unit_type',
     },
     {
@@ -500,15 +500,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dwarves/Fighter.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/dwarves/Guardsman.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dwarves/Lord.cfg',
+      relativePath: 'data/core/units/dwarves/Dragonguard.cfg',
       category: 'unit_type',
     },
     {
@@ -516,11 +512,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dwarves/Pathfinder.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/dwarves/Runemaster.cfg',
+      relativePath: 'data/core/units/dwarves/Lord.cfg',
       category: 'unit_type',
     },
     {
@@ -528,11 +520,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dwarves/Scout.cfg',
+      relativePath: 'data/core/units/dwarves/Pathfinder.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/dwarves/Sentinel.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/dwarves/Scout.cfg',
       category: 'unit_type',
     },
     {
@@ -544,6 +540,10 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/dwarves/Ulfserker.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/dwarves/Thunderer.cfg',
       category: 'unit_type',
     },
@@ -552,7 +552,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/dwarves/Ulfserker.cfg',
+      relativePath: 'data/core/units/dwarves/Runemaster.cfg',
       category: 'unit_type',
     },
     {
@@ -568,11 +568,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/elves/Champion.cfg',
+      relativePath: 'data/core/units/elves/Druid.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/elves/Druid.cfg',
+      relativePath: 'data/core/units/elves/Champion.cfg',
       category: 'unit_type',
     },
     {
@@ -588,7 +588,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/elves/High_Lord.cfg',
+      relativePath: 'data/core/units/elves/Lord.cfg',
       category: 'unit_type',
     },
     {
@@ -596,11 +596,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/elves/Lord.cfg',
+      relativePath: 'data/core/units/elves/High_Lord.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/elves/Marksman.cfg',
+      relativePath: 'data/core/units/elves/Scout.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/elves/Rider.cfg',
       category: 'unit_type',
     },
     {
@@ -616,11 +620,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/elves/Rider.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/elves/Scout.cfg',
+      relativePath: 'data/core/units/elves/Marksman.cfg',
       category: 'unit_type',
     },
     {
@@ -632,15 +632,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/elves/Shyde.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/elves/Sorceress.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/elves/Sylph.cfg',
       category: 'unit_type',
     },
     {
@@ -652,15 +644,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/elves/Shyde.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/goblins/Impaler.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/goblins/Knight.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/goblins/Pillager.cfg',
       category: 'unit_type',
     },
     {
@@ -668,11 +656,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/goblins/Spearman.cfg',
+      relativePath: 'data/core/units/goblins/Knight.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/goblins/Wolf_Rider.cfg',
+      relativePath: 'data/core/units/elves/Sylph.cfg',
       category: 'unit_type',
     },
     {
@@ -692,7 +680,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Horse_Knight.cfg',
+      relativePath: 'data/core/units/goblins/Spearman.cfg',
       category: 'unit_type',
     },
     {
@@ -700,19 +688,31 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Horse_Paladin.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/humans/Horseman.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Bowman.cfg',
+      relativePath: 'data/core/units/humans/Horse_Paladin.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/goblins/Wolf_Rider.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/goblins/Pillager.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/humans/Horse_Knight.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/humans/Loyalist_Cavalier.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/humans/Loyalist_Bowman.cfg',
       category: 'unit_type',
     },
     {
@@ -724,15 +724,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Duelist.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/humans/Loyalist_Fencer.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/humans/Loyalist_General.cfg',
       category: 'unit_type',
     },
     {
@@ -740,7 +732,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Halberdier.cfg',
+      relativePath: 'data/core/units/humans/Loyalist_General.cfg',
       category: 'unit_type',
     },
     {
@@ -748,7 +740,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Iron_Mauler.cfg',
+      relativePath: 'data/core/units/humans/Loyalist_Halberdier.cfg',
       category: 'unit_type',
     },
     {
@@ -756,11 +748,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Lieutenant.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/humans/Loyalist_Longbowman.cfg',
+      relativePath: 'data/core/units/humans/Loyalist_Iron_Mauler.cfg',
       category: 'unit_type',
     },
     {
@@ -768,15 +756,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Master_at_Arms.cfg',
+      relativePath: 'data/core/units/humans/Loyalist_Longbowman.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Pikeman.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/humans/Loyalist_Royal_Guard.cfg',
+      relativePath: 'data/core/units/humans/Loyalist_Duelist.cfg',
       category: 'unit_type',
     },
     {
@@ -784,15 +768,31 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/humans/Loyalist_Pikeman.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/humans/Loyalist_Lieutenant.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/humans/Loyalist_Shock_Trooper.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Spearman.cfg',
+      relativePath: 'data/core/units/humans/Loyalist_Swordsman.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Loyalist_Swordsman.cfg',
+      relativePath: 'data/core/units/humans/Loyalist_Royal_Guard.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/humans/Loyalist_Master_at_Arms.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/humans/Loyalist_Spearman.cfg',
       category: 'unit_type',
     },
     {
@@ -804,7 +804,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Mage_Elder.cfg',
+      relativePath: 'data/core/units/humans/Mage_Red.cfg',
       category: 'unit_type',
     },
     {
@@ -812,7 +812,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Mage_Red.cfg',
+      relativePath: 'data/core/units/humans/Mage_White.cfg',
       category: 'unit_type',
     },
     {
@@ -820,11 +820,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Mage_White.cfg',
+      relativePath: 'data/core/units/humans/Mage_of_Light.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Mage_of_Light.cfg',
+      relativePath: 'data/core/units/humans/Mage_Elder.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/humans/Outlaw_Assassin.cfg',
       category: 'unit_type',
     },
     {
@@ -832,7 +836,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Outlaw_Assassin.cfg',
+      relativePath: 'data/core/units/humans/Outlaw_Fugitive.cfg',
       category: 'unit_type',
     },
     {
@@ -844,7 +848,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Outlaw_Fugitive.cfg',
+      relativePath: 'data/core/units/humans/Outlaw_Rogue.cfg',
       category: 'unit_type',
     },
     {
@@ -852,7 +856,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Outlaw_Rogue.cfg',
+      relativePath: 'data/core/units/humans/Royal_Warrior.cfg',
       category: 'unit_type',
     },
     {
@@ -868,15 +872,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/humans/Peasant.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/humans/Royal_Warrior.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/humans/Woodsman.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/humans/Peasant.cfg',
       category: 'unit_type',
     },
     {
@@ -896,10 +896,6 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/merfolk/Brawler.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/merfolk/Citizen.cfg',
       category: 'unit_type',
     },
@@ -912,11 +908,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/merfolk/Entangler.cfg',
+      relativePath: 'data/core/units/merfolk/Brawler.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/merfolk/Fighter.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/merfolk/Entangler.cfg',
       category: 'unit_type',
     },
     {
@@ -952,6 +952,10 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/monsters/Ant.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/merfolk/Triton.cfg',
       category: 'unit_type',
     },
@@ -960,7 +964,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Ant.cfg',
+      relativePath: 'data/core/units/monsters/Ant_Fire.cfg',
       category: 'unit_type',
     },
     {
@@ -968,15 +972,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Ant_Fire.cfg',
+      relativePath: 'data/core/units/monsters/Ant_Firebane.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/monsters/Ant_Fire_Queen.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Ant_Firebane.cfg',
       category: 'unit_type',
     },
     {
@@ -1000,23 +1000,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Boar_Piglet.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Caribe.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/monsters/Caribe_Hunter.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Caribe_Nibbler.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Cat_Forest.cfg',
+      relativePath: 'data/core/units/monsters/Boar_Piglet.cfg',
       category: 'unit_type',
     },
     {
@@ -1024,11 +1012,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Cat_Redtail.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Crocodile.cfg',
+      relativePath: 'data/core/units/monsters/Cat_Forest.cfg',
       category: 'unit_type',
     },
     {
@@ -1040,11 +1024,19 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Dragonfly_Grand.cfg',
+      relativePath: 'data/core/units/monsters/Caribe.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/monsters/Dragonfly_Naiad.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Crocodile.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Dragonfly_Grand.cfg',
       category: 'unit_type',
     },
     {
@@ -1060,19 +1052,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Fire_Guardian.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/monsters/Fire_Wisp.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Fire_Wraith.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Frost_Stoat.cfg',
+      relativePath: 'data/core/units/monsters/Fire_Guardian.cfg',
       category: 'unit_type',
     },
     {
@@ -1084,11 +1068,23 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/monsters/Fire_Wraith.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Caribe_Nibbler.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Cat_Redtail.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/monsters/Giant_Scorpion.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Giant_Scorpling.cfg',
+      relativePath: 'data/core/units/monsters/Frost_Stoat.cfg',
       category: 'unit_type',
     },
     {
@@ -1097,6 +1093,14 @@ export const provenance: WesnothProvenance = {
     },
     {
       relativePath: 'data/core/units/monsters/Horned_Scarab.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Horse_Great.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Giant_Scorpling.cfg',
       category: 'unit_type',
     },
     {
@@ -1109,10 +1113,6 @@ export const provenance: WesnothProvenance = {
     },
     {
       relativePath: 'data/core/units/monsters/Horse_Dark.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Horse_Great.cfg',
       category: 'unit_type',
     },
     {
@@ -1132,19 +1132,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Kraken.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Mudcrawler.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/monsters/Raven.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Raven_Harbinger.cfg',
       category: 'unit_type',
     },
     {
@@ -1152,15 +1140,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Roc.cfg',
+      relativePath: 'data/core/units/monsters/Mudcrawler.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Rock_Scorpion.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Sand_Scamperer.cfg',
+      relativePath: 'data/core/units/monsters/Kraken.cfg',
       category: 'unit_type',
     },
     {
@@ -1172,7 +1156,31 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/monsters/Roc.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Sand_Scamperer.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/monsters/Seahorse.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Rock_Scorpion.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Raven_Harbinger.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Water_Serpent.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/monsters/Tentacle.cfg',
       category: 'unit_type',
     },
     {
@@ -1184,11 +1192,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Tentacle.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Water_Serpent.cfg',
+      relativePath: 'data/core/units/monsters/Wolf.cfg',
       category: 'unit_type',
     },
     {
@@ -1196,23 +1200,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Wolf.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/monsters/Wolf_Dire.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/monsters/Wolf_Great.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/monsters/Yeti.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/nagas/Dirkfang.cfg',
+      relativePath: 'data/core/units/monsters/Wolf_Dire.cfg',
       category: 'unit_type',
     },
     {
@@ -1236,11 +1228,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/nagas/Ophidian.cfg',
+      relativePath: 'data/core/units/monsters/Yeti.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/nagas/Ringcaster.cfg',
+      relativePath: 'data/core/units/nagas/Ophidian.cfg',
       category: 'unit_type',
     },
     {
@@ -1248,11 +1240,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/nagas/Warrior.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/nagas/Zephyr.cfg',
+      relativePath: 'data/core/units/nagas/Ringcaster.cfg',
       category: 'unit_type',
     },
     {
@@ -1260,7 +1248,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/ogres/Young_Ogre.cfg',
+      relativePath: 'data/core/units/nagas/Zephyr.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/nagas/Dirkfang.cfg',
       category: 'unit_type',
     },
     {
@@ -1268,11 +1260,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/orcs/Assassin.cfg',
+      relativePath: 'data/core/units/nagas/Warrior.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/orcs/Crossbowman.cfg',
+      relativePath: 'data/core/units/ogres/Young_Ogre.cfg',
       category: 'unit_type',
     },
     {
@@ -1280,15 +1272,7 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/orcs/Leader.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/orcs/Nightblade.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/orcs/Ruler.cfg',
+      relativePath: 'data/core/units/orcs/Assassin.cfg',
       category: 'unit_type',
     },
     {
@@ -1296,7 +1280,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/orcs/Slurbow.cfg',
+      relativePath: 'data/core/units/orcs/Ruler.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/orcs/Crossbowman.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/orcs/Nightblade.cfg',
       category: 'unit_type',
     },
     {
@@ -1308,15 +1300,19 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/orcs/Warrior.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/saurians/Ambusher.cfg',
+      relativePath: 'data/core/units/orcs/Leader.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/saurians/Augur.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/orcs/Warrior.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/orcs/Slurbow.cfg',
       category: 'unit_type',
     },
     {
@@ -1348,6 +1344,10 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/saurians/Ambusher.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/saurians/Spearthrower.cfg',
       category: 'unit_type',
     },
@@ -1360,19 +1360,15 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/trolls/Rocklobber.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/trolls/Troll.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/trolls/Troll_Shaman.cfg',
+      relativePath: 'data/core/units/trolls/Warrior.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/trolls/Warrior.cfg',
+      relativePath: 'data/core/units/trolls/Troll_Shaman.cfg',
       category: 'unit_type',
     },
     {
@@ -1381,6 +1377,10 @@ export const provenance: WesnothProvenance = {
     },
     {
       relativePath: 'data/core/units/undead/Corpse_Ghast.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/trolls/Rocklobber.cfg',
       category: 'unit_type',
     },
     {
@@ -1408,18 +1408,6 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/undead/Necro_Dark_Sorcerer.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/undead/Necro_Lich.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/undead/Necromancer.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/undead/Skele_Banebow.cfg',
       category: 'unit_type',
     },
@@ -1432,11 +1420,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/undead/Skele_Chocobone.cfg',
+      relativePath: 'data/core/units/undead/Skele_Death_Knight.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/undead/Skele_Death_Knight.cfg',
+      relativePath: 'data/core/units/undead/Skele_Chocobone.cfg',
       category: 'unit_type',
     },
     {
@@ -1444,11 +1432,19 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/undead/Skele_Deathblade.cfg',
+      relativePath: 'data/core/units/undead/Necromancer.cfg',
       category: 'unit_type',
     },
     {
       relativePath: 'data/core/units/undead/Skele_Draug.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/undead/Skele_Deathblade.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/undead/Necro_Dark_Sorcerer.cfg',
       category: 'unit_type',
     },
     {
@@ -1464,19 +1460,19 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/undead/Skeleton_Rider.cfg',
-      category: 'unit_type',
-    },
-    {
-      relativePath: 'data/core/units/undead/Spirit_Ghost.cfg',
-      category: 'unit_type',
-    },
-    {
       relativePath: 'data/core/units/undead/Spirit_Nightgaunt.cfg',
       category: 'unit_type',
     },
     {
+      relativePath: 'data/core/units/undead/Skeleton_Rider.cfg',
+      category: 'unit_type',
+    },
+    {
       relativePath: 'data/core/units/undead/Spirit_Shadow.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/undead/Spirit_Ghost.cfg',
       category: 'unit_type',
     },
     {
@@ -1488,11 +1484,11 @@ export const provenance: WesnothProvenance = {
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/wose/Ancient.cfg',
+      relativePath: 'data/core/units/wose/Elder.cfg',
       category: 'unit_type',
     },
     {
-      relativePath: 'data/core/units/wose/Elder.cfg',
+      relativePath: 'data/core/units/wose/Ancient.cfg',
       category: 'unit_type',
     },
     {
@@ -1505,6 +1501,10 @@ export const provenance: WesnothProvenance = {
     },
     {
       relativePath: 'data/core/units/wose/Wose_Shaman.cfg',
+      category: 'unit_type',
+    },
+    {
+      relativePath: 'data/core/units/undead/Necro_Lich.cfg',
       category: 'unit_type',
     },
   ],

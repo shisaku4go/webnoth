@@ -174,6 +174,161 @@ function assignPendingKeys(
   }
 }
 
+interface DefineState {
+  inDefine: boolean;
+  defineName: string;
+  defineParams: string[];
+  defineBody: string[];
+}
+
+function tryHandleDefineOrUndef(
+  line: string,
+  state: DefineState,
+  macroDictionary: MacroDictionary,
+): boolean {
+  // Handle #define / #enddef blocks
+  const defineMatch = line.match(/^\s*#define\s+(\S+)(.*)$/);
+  if (defineMatch) {
+    const macroName = defineMatch[1];
+    const rest = defineMatch[2];
+    const { params, bodyStart } = parseDefineLine(rest);
+
+    if (bodyStart.includes('#enddef')) {
+      // Single-line define with inline body: #define MACRO PARAM foo={PARAM}#enddef
+      const body = bodyStart.replace(/\s*#enddef.*$/, '').trim();
+      macroDictionary.set(macroName, { params, body });
+      return true;
+    }
+
+    state.defineParams = params;
+    state.defineName = macroName;
+    state.defineBody = bodyStart.length > 0 ? [bodyStart] : [];
+    state.inDefine = true;
+    return true;
+  }
+
+  if (state.inDefine) {
+    if (line.includes('#enddef')) {
+      const before = line.replace(/\s*#enddef.*$/, '').trim();
+      if (before.length > 0) state.defineBody.push(before);
+      state.inDefine = false;
+      const bodyStr = state.defineBody.join('\n').trim();
+      macroDictionary.set(state.defineName, {
+        params: state.defineParams,
+        body: bodyStr,
+      });
+    } else {
+      state.defineBody.push(line);
+    }
+    return true;
+  }
+
+  // Handle #undef
+  const undefMatch = line.match(/^\s*#undef\s+(\S+)/);
+  if (undefMatch) {
+    macroDictionary.delete(undefMatch[1]);
+    return true;
+  }
+
+  return false;
+}
+
+function tryHandleTag(trimmed: string, stack: WmlNode[]): boolean {
+  // Closing tag: [/tagname]
+  const closeMatch = trimmed.match(/^\[\/(\w+)\]$/);
+  if (closeMatch) {
+    if (stack.length > 1) {
+      stack.pop();
+    }
+    return true;
+  }
+
+  // Merge tag: [+tagname] — append to last child with same tag
+  const mergeMatch = trimmed.match(/^\[\+(\w+)\]$/);
+  if (mergeMatch) {
+    const tagName = mergeMatch[1];
+    const parent = stack[stack.length - 1];
+    const existing = parent.children.findLast((c) => c.tag === tagName);
+    if (existing) {
+      stack.push(existing);
+    } else {
+      // If no existing tag, treat as new
+      const node: WmlNode = {
+        tag: tagName,
+        attributes: {},
+        children: [],
+        macros: [],
+      };
+      parent.children.push(node);
+      stack.push(node);
+    }
+    return true;
+  }
+
+  // Opening tag: [tagname]
+  const openMatch = trimmed.match(/^\[(\w+)\]$/);
+  if (openMatch) {
+    const node: WmlNode = {
+      tag: openMatch[1],
+      attributes: {},
+      children: [],
+      macros: [],
+    };
+    const parent = stack[stack.length - 1];
+    parent.children.push(node);
+    stack.push(node);
+    return true;
+  }
+
+  return false;
+}
+
+function tryHandleMacroInvocation(
+  trimmed: string,
+  stack: WmlNode[],
+  macroDictionary: MacroDictionary,
+): boolean {
+  // Macro invocation: {MACRO_NAME ...}
+  const macroMatch = trimmed.match(/^\{(.+)\}$/);
+  if (macroMatch && !trimmed.includes('=')) {
+    const macroContent = macroMatch[1].trim();
+    const macroName = macroContent.split(/\s+/)[0];
+
+    // Try to expand macros from dictionary
+    const entry = macroDictionary.get(macroName);
+    if (entry) {
+      let expansion = entry.body;
+      const argsStr = macroContent.slice(macroName.length).trim();
+
+      if (entry.params.length > 0 && argsStr.length > 0) {
+        // Parameterized macro: substitute positional arguments
+        const argValues = parseMacroArgs(argsStr);
+        for (let p = 0; p < entry.params.length; p++) {
+          const pName = entry.params[p];
+          const pVal = argValues[p] ?? '';
+          expansion = expansion.split(`{${pName}}`).join(pVal);
+        }
+      }
+      // Re-parse the expanded content
+      const expandedNode = parseWml(expansion, macroDictionary);
+      const currentNode = stack[stack.length - 1];
+      // Merge expanded content into current node
+      for (const child of expandedNode.children) {
+        currentNode.children.push(child);
+      }
+      for (const [key, value] of Object.entries(expandedNode.attributes)) {
+        currentNode.attributes[key] = value;
+      }
+    } else {
+      // Record as unexpanded macro
+      const currentNode = stack[stack.length - 1];
+      currentNode.macros.push(macroContent);
+    }
+    return true;
+  }
+  return false;
+}
+
 /**
  * Parse WML text content into a tree of WmlNode objects.
  */
@@ -190,10 +345,12 @@ export function parseWml(
   };
   const stack: WmlNode[] = [root];
   const lines = content.split('\n');
-  let inDefine = false;
-  let defineName = '';
-  let defineParams: string[] = [];
-  let defineBody: string[] = [];
+  const defineState: DefineState = {
+    inDefine: false,
+    defineName: '',
+    defineParams: [],
+    defineBody: [],
+  };
   let pendingKeys: string[] = [];
   let pendingValue = '';
   let multiLineQuoteOpen = false;
@@ -204,46 +361,7 @@ export function parseWml(
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    // Handle #define / #enddef blocks
-    const defineMatch = line.match(/^\s*#define\s+(\S+)(.*)$/);
-    if (defineMatch) {
-      const macroName = defineMatch[1];
-      const rest = defineMatch[2];
-      const { params, bodyStart } = parseDefineLine(rest);
-
-      if (bodyStart.includes('#enddef')) {
-        // Single-line define with inline body: #define MACRO PARAM foo={PARAM}#enddef
-        const body = bodyStart.replace(/\s*#enddef.*$/, '').trim();
-        macroDictionary.set(macroName, { params, body });
-        continue;
-      }
-
-      defineParams = params;
-      defineName = macroName;
-      defineBody = bodyStart.length > 0 ? [bodyStart] : [];
-      inDefine = true;
-      continue;
-    }
-    if (inDefine) {
-      if (line.includes('#enddef')) {
-        const before = line.replace(/\s*#enddef.*$/, '').trim();
-        if (before.length > 0) defineBody.push(before);
-        inDefine = false;
-        const bodyStr = defineBody.join('\n').trim();
-        macroDictionary.set(defineName, {
-          params: defineParams,
-          body: bodyStr,
-        });
-      } else {
-        defineBody.push(line);
-      }
-      continue;
-    }
-
-    // Handle #undef
-    const undefMatch = line.match(/^\s*#undef\s+(\S+)/);
-    if (undefMatch) {
-      macroDictionary.delete(undefMatch[1]);
+    if (tryHandleDefineOrUndef(line, defineState, macroDictionary)) {
       continue;
     }
 
@@ -332,88 +450,11 @@ export function parseWml(
     const trimmed = line.trim();
     if (trimmed === '') continue;
 
-    // Closing tag: [/tagname]
-    const closeMatch = trimmed.match(/^\[\/(\w+)\]$/);
-    if (closeMatch) {
-      if (stack.length > 1) {
-        stack.pop();
-      }
+    if (tryHandleTag(trimmed, stack)) {
       continue;
     }
 
-    // Merge tag: [+tagname] — append to last child with same tag
-    const mergeMatch = trimmed.match(/^\[\+(\w+)\]$/);
-    if (mergeMatch) {
-      const tagName = mergeMatch[1];
-      const parent = stack[stack.length - 1];
-      const existing = parent.children.findLast((c) => c.tag === tagName);
-      if (existing) {
-        stack.push(existing);
-      } else {
-        // If no existing tag, treat as new
-        const node: WmlNode = {
-          tag: tagName,
-          attributes: {},
-          children: [],
-          macros: [],
-        };
-        parent.children.push(node);
-        stack.push(node);
-      }
-      continue;
-    }
-
-    // Opening tag: [tagname]
-    const openMatch = trimmed.match(/^\[(\w+)\]$/);
-    if (openMatch) {
-      const node: WmlNode = {
-        tag: openMatch[1],
-        attributes: {},
-        children: [],
-        macros: [],
-      };
-      const parent = stack[stack.length - 1];
-      parent.children.push(node);
-      stack.push(node);
-      continue;
-    }
-
-    // Macro invocation: {MACRO_NAME ...}
-    const macroMatch = trimmed.match(/^\{(.+)\}$/);
-    if (macroMatch && !trimmed.includes('=')) {
-      const macroContent = macroMatch[1].trim();
-      const macroName = macroContent.split(/\s+/)[0];
-
-      // Try to expand macros from dictionary
-      const entry = macroDictionary.get(macroName);
-      if (entry) {
-        let expansion = entry.body;
-        const argsStr = macroContent.slice(macroName.length).trim();
-
-        if (entry.params.length > 0 && argsStr.length > 0) {
-          // Parameterized macro: substitute positional arguments
-          const argValues = parseMacroArgs(argsStr);
-          for (let p = 0; p < entry.params.length; p++) {
-            const pName = entry.params[p];
-            const pVal = argValues[p] ?? '';
-            expansion = expansion.split(`{${pName}}`).join(pVal);
-          }
-        }
-        // Re-parse the expanded content
-        const expandedNode = parseWml(expansion, macroDictionary);
-        const currentNode = stack[stack.length - 1];
-        // Merge expanded content into current node
-        for (const child of expandedNode.children) {
-          currentNode.children.push(child);
-        }
-        for (const [key, value] of Object.entries(expandedNode.attributes)) {
-          currentNode.attributes[key] = value;
-        }
-      } else {
-        // Record as unexpanded macro
-        const currentNode = stack[stack.length - 1];
-        currentNode.macros.push(macroContent);
-      }
+    if (tryHandleMacroInvocation(trimmed, stack, macroDictionary)) {
       continue;
     }
 

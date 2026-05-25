@@ -600,6 +600,51 @@ function extractVariant(node: WmlNode): Partial<UnitTypeData> | undefined {
   return Object.keys(cleaned).length > 0 ? cleaned : undefined;
 }
 
+function extractOverrides(node: WmlNode): {
+  movementCostOverrides?: Record<string, number>;
+  defenseOverrides?: Record<string, number>;
+} {
+  const mcOverride = findChild(node, 'movement_costs');
+  const defOverride = findChild(node, 'defense');
+  let movementCostOverrides: Record<string, number> | undefined;
+  let defenseOverrides: Record<string, number> | undefined;
+
+  if (mcOverride) {
+    movementCostOverrides = {};
+    for (const [k, v] of Object.entries(mcOverride.attributes)) {
+      const n = Number(v);
+      if (!Number.isNaN(n)) movementCostOverrides[k] = n;
+    }
+    if (Object.keys(movementCostOverrides).length === 0) {
+      movementCostOverrides = undefined;
+    }
+  }
+  if (defOverride) {
+    defenseOverrides = {};
+    for (const [k, v] of Object.entries(defOverride.attributes)) {
+      const n = Number(v);
+      if (!Number.isNaN(n)) defenseOverrides[k] = n;
+    }
+    if (Object.keys(defenseOverrides).length === 0) {
+      defenseOverrides = undefined;
+    }
+  }
+
+  return { movementCostOverrides, defenseOverrides };
+}
+
+function extractGenderVariants(node: WmlNode): {
+  male?: Partial<UnitTypeData>;
+  female?: Partial<UnitTypeData>;
+} {
+  const maleNode = findChild(node, 'male');
+  const femaleNode = findChild(node, 'female');
+  return {
+    male: maleNode ? extractVariant(maleNode) : undefined,
+    female: femaleNode ? extractVariant(femaleNode) : undefined,
+  };
+}
+
 function extractUnitType(
   node: WmlNode,
   sourceFile: string,
@@ -612,30 +657,7 @@ function extractUnitType(
   const animations = extractAnimations(node);
   const abilities = getListAttr(node, 'abilities_list');
 
-  // Check for inline movement_costs / defense overrides
-  const mcOverride = findChild(node, 'movement_costs');
-  const defOverride = findChild(node, 'defense');
-  let movementCostOverrides: Record<string, number> | undefined;
-  let defenseOverrides: Record<string, number> | undefined;
-
-  if (mcOverride) {
-    movementCostOverrides = {};
-    for (const [k, v] of Object.entries(mcOverride.attributes)) {
-      const n = Number(v);
-      if (!Number.isNaN(n)) movementCostOverrides[k] = n;
-    }
-    if (Object.keys(movementCostOverrides).length === 0)
-      movementCostOverrides = undefined;
-  }
-  if (defOverride) {
-    defenseOverrides = {};
-    for (const [k, v] of Object.entries(defOverride.attributes)) {
-      const n = Number(v);
-      if (!Number.isNaN(n)) defenseOverrides[k] = n;
-    }
-    if (Object.keys(defenseOverrides).length === 0)
-      defenseOverrides = undefined;
-  }
+  const { movementCostOverrides, defenseOverrides } = extractOverrides(node);
 
   // Filter macros: exclude name-generation macros and known-processed ones
   const significantMacros = node.macros.filter(
@@ -647,13 +669,7 @@ function extractUnitType(
       !m.startsWith('wmlscope:'),
   );
 
-  // Variants
-  const male = findChild(node, 'male')
-    ? extractVariant(findChild(node, 'male')!)
-    : undefined;
-  const female = findChild(node, 'female')
-    ? extractVariant(findChild(node, 'female')!)
-    : undefined;
+  const { male, female } = extractGenderVariants(node);
 
   const baseUnitNode = findChild(node, 'base_unit');
   const baseUnitId = baseUnitNode ? getAttr(baseUnitNode, 'id') : undefined;
