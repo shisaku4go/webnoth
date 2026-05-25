@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 // Mock @pixi/react to avoid node/React environment import issues
 vi.mock('@pixi/react', () => ({

@@ -137,17 +137,11 @@ function BattleSimulatorPage() {
 
   // Default selections
   const defaultAttackerId = useMemo(() => {
-    return (
-      allUnits.find((u) => u.id === 'spearman')?.id || allUnits[0]?.id || ''
-    );
+    return getUnitById('spearman')?.id || allUnits[0]?.id || '';
   }, [allUnits]);
 
   const defaultDefenderId = useMemo(() => {
-    return (
-      allUnits.find((u) => u.id === 'walking_corpse')?.id ||
-      allUnits[1]?.id ||
-      ''
-    );
+    return getUnitById('walking_corpse')?.id || allUnits[1]?.id || '';
   }, [allUnits]);
 
   // State managers
@@ -1810,8 +1804,8 @@ function UnitConfigPanel({
   }, [search, allUnits]);
 
   const selectedUnit = useMemo(() => {
-    return allUnits.find((u) => u.id === selectedUnitId);
-  }, [selectedUnitId, allUnits]);
+    return getUnitById(selectedUnitId);
+  }, [selectedUnitId]);
 
   // Compute terrain defense rating for this unit on the selected terrain
   const terrainStats = useMemo(() => {
