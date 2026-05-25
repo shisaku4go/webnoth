@@ -54,7 +54,10 @@ describe('WesnothCombatCore Math Formulas', () => {
     expect(result.breakdown).toContain('Base damage: 10');
 
     // 2. Time of Day alignment bonus (Lawful +25%)
-    const lawfulAttacker = { ...baseAttacker, alignment: 'lawful' } as CombatUnitState;
+    const lawfulAttacker = {
+      ...baseAttacker,
+      alignment: 'lawful',
+    } as CombatUnitState;
     result = WesnothCombatCore.calculateDamage(
       lawfulAttacker,
       baseDefender,
@@ -66,7 +69,10 @@ describe('WesnothCombatCore Math Formulas', () => {
     expect(result.damage).toBe(12); // Math.floor((10 * 12500 + 4999) / 10000) -> 12
 
     // 3. Leadership bonus
-    const leaderAttacker = { ...baseAttacker, traits: ['leadership_25'] } as CombatUnitState;
+    const leaderAttacker = {
+      ...baseAttacker,
+      traits: ['leadership_25'],
+    } as CombatUnitState;
     result = WesnothCombatCore.calculateDamage(
       leaderAttacker,
       baseDefender,
@@ -91,7 +97,10 @@ describe('WesnothCombatCore Math Formulas', () => {
     expect(result.damage).toBe(20); // 10 * 2
 
     // 5. Resistance modifier
-    const resistantDefender = { ...baseDefender, traits: ['resistance_blade_80'] } as CombatUnitState;
+    const resistantDefender = {
+      ...baseDefender,
+      traits: ['resistance_blade_80'],
+    } as CombatUnitState;
     result = WesnothCombatCore.calculateDamage(
       baseAttacker,
       resistantDefender,
@@ -101,10 +110,15 @@ describe('WesnothCombatCore Math Formulas', () => {
       true,
     );
     expect(result.damage).toBe(8); // 10 * 0.8
-    expect(result.breakdown).toContain('Resistance (blade): 80% damage taken (20% resistant)');
+    expect(result.breakdown).toContain(
+      'Resistance (blade): 80% damage taken (20% resistant)',
+    );
 
     // 6. Slowed status
-    const slowedAttacker = { ...baseAttacker, statuses: { slowed: true } } as CombatUnitState;
+    const slowedAttacker = {
+      ...baseAttacker,
+      statuses: { slowed: true },
+    } as CombatUnitState;
     result = WesnothCombatCore.calculateDamage(
       slowedAttacker,
       baseDefender,
@@ -114,7 +128,9 @@ describe('WesnothCombatCore Math Formulas', () => {
       true,
     );
     expect(result.damage).toBe(5); // 10 / 2
-    expect(result.breakdown).toContain('Slowed: damage halved (divisor = 20000)');
+    expect(result.breakdown).toContain(
+      'Slowed: damage halved (divisor = 20000)',
+    );
 
     // 7. Combined modifiers (Lawful +25%, Leadership +25%, Charge x2, Resistance 80%, Slowed)
     const combinedAttacker = {
@@ -232,21 +248,39 @@ describe('WesnothCombatCore Math Formulas', () => {
 
     // Attacker kills defender
     // If defender is level 0, attacker gets 4 XP
-    expect(WesnothCombatCore.calculateXP(level1, level0, true, true)).toEqual({ attackerXp: 4, defenderXp: 0 });
+    expect(WesnothCombatCore.calculateXP(level1, level0, true, true)).toEqual({
+      attackerXp: 4,
+      defenderXp: 0,
+    });
     // If defender is level > 0, attacker gets defender.level * 8 XP
-    expect(WesnothCombatCore.calculateXP(level1, level2, true, true)).toEqual({ attackerXp: 16, defenderXp: 0 });
+    expect(WesnothCombatCore.calculateXP(level1, level2, true, true)).toEqual({
+      attackerXp: 16,
+      defenderXp: 0,
+    });
 
     // Defender kills attacker
     // If attacker is level 0, defender gets 4 XP
-    expect(WesnothCombatCore.calculateXP(level0, level1, true, false)).toEqual({ attackerXp: 0, defenderXp: 4 });
+    expect(WesnothCombatCore.calculateXP(level0, level1, true, false)).toEqual({
+      attackerXp: 0,
+      defenderXp: 4,
+    });
     // If attacker is level > 0, defender gets attacker.level * 8 XP
-    expect(WesnothCombatCore.calculateXP(level2, level1, true, false)).toEqual({ attackerXp: 0, defenderXp: 16 });
+    expect(WesnothCombatCore.calculateXP(level2, level1, true, false)).toEqual({
+      attackerXp: 0,
+      defenderXp: 16,
+    });
 
     // No kill
     // Each gets XP equal to the other's level. If level 0, then 0 XP.
-    expect(WesnothCombatCore.calculateXP(level0, level0, false, false)).toEqual({ attackerXp: 0, defenderXp: 0 });
-    expect(WesnothCombatCore.calculateXP(level1, level2, false, false)).toEqual({ attackerXp: 2, defenderXp: 1 });
-    expect(WesnothCombatCore.calculateXP(level2, level0, false, false)).toEqual({ attackerXp: 0, defenderXp: 2 });
+    expect(WesnothCombatCore.calculateXP(level0, level0, false, false)).toEqual(
+      { attackerXp: 0, defenderXp: 0 },
+    );
+    expect(WesnothCombatCore.calculateXP(level1, level2, false, false)).toEqual(
+      { attackerXp: 2, defenderXp: 1 },
+    );
+    expect(WesnothCombatCore.calculateXP(level2, level0, false, false)).toEqual(
+      { attackerXp: 0, defenderXp: 2 },
+    );
   });
 });
 

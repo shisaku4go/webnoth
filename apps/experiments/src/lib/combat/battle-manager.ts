@@ -15,6 +15,13 @@ import type {
   StrikeEvent,
 } from './types';
 
+// Secure random function
+function secureRandom(): number {
+  const array = new Uint32Array(1);
+  globalThis.crypto.getRandomValues(array);
+  return array[0] / 4294967296;
+}
+
 // Pre-create lookups
 const terrainByCode = new Map<string, WesnothTerrain>(
   globalTerrains.map((t) => [t.code, t]),
@@ -184,10 +191,10 @@ export const WesnothBattleManager = {
     const gender =
       genderOverride ||
       (unit.gender && unit.gender.length > 0
-        ? unit.gender[Math.floor(Math.random() * unit.gender.length)]
+        ? unit.gender[Math.floor(secureRandom() * unit.gender.length)]
         : 'male');
 
-    const name = RANDOM_NAMES[Math.floor(Math.random() * RANDOM_NAMES.length)];
+    const name = RANDOM_NAMES[Math.floor(secureRandom() * RANDOM_NAMES.length)];
 
     // Traits Setup
     let chosenTraits: string[] = [];
@@ -201,7 +208,7 @@ export const WesnothBattleManager = {
         candidateTraits.push('dextrous');
       }
       // Shuffle & pick 2
-      const shuffled = [...candidateTraits].sort(() => 0.5 - Math.random());
+      const shuffled = [...candidateTraits].sort(() => 0.5 - secureRandom());
       chosenTraits = shuffled.slice(0, 2);
     }
 
@@ -601,7 +608,7 @@ export const WesnothBattleManager = {
             true,
           );
 
-          const roll = Math.random() * 100;
+          const roll = secureRandom() * 100;
           const isHit = roll < cthRes.cth;
 
           let damage = 0;
@@ -691,7 +698,7 @@ export const WesnothBattleManager = {
             false,
           );
 
-          const roll = Math.random() * 100;
+          const roll = secureRandom() * 100;
           const isHit = roll < cthRes.cth;
 
           let damage = 0;
