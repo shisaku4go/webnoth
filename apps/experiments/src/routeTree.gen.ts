@@ -9,12 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root';
+import { Route as UnitMovementSimulatorRouteImport } from './routes/unit-movement-simulator';
 import { Route as BattleSimulatorRouteImport } from './routes/battle-simulator';
-import { Route as EncyclopediaUnitIdRouteImport } from './routes/encyclopedia/$unitId';
+import { Route as IndexRouteImport } from './routes/index';
 import { Route as EncyclopediaIndexRouteImport } from './routes/encyclopedia/index';
 import { Route as EncyclopediaMapsRouteImport } from './routes/encyclopedia/maps';
-import { Route as IndexRouteImport } from './routes/index';
-import { Route as UnitMovementSimulatorRouteImport } from './routes/unit-movement-simulator';
+import { Route as EncyclopediaUnitIdRouteImport } from './routes/encyclopedia/$unitId';
 
 const UnitMovementSimulatorRoute = UnitMovementSimulatorRouteImport.update({
   id: '/unit-movement-simulator',
