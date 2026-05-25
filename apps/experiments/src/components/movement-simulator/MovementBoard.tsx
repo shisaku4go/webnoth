@@ -234,6 +234,24 @@ function isAdjacentToEnemy(
   return false;
 }
 
+// Helper: Insert items into queue sorted in ascending order of movesLeft
+function pushSortedDijkstra(
+  queue: { x: number; y: number; movesLeft: number }[],
+  item: { x: number; y: number; movesLeft: number },
+) {
+  let low = 0;
+  let high = queue.length;
+  while (low < high) {
+    const mid = (low + high) >> 1;
+    if (queue[mid].movesLeft < item.movesLeft) {
+      low = mid + 1;
+    } else {
+      high = mid;
+    }
+  }
+  queue.splice(low, 0, item);
+}
+
 // Dijkstra Pathfinder: Calculate all reachable hexes and remaining moves at each
 function calculateReachableHexes(
   unit: UnitState,
@@ -263,8 +281,8 @@ function calculateReachableHexes(
   const hasSkirmisher = unitType?.abilities?.includes('skirmisher') ?? false;
 
   while (queue.length > 0) {
-    queue.sort((a, b) => b.movesLeft - a.movesLeft);
-    const curr = queue.shift()!;
+    const curr = queue.pop();
+    if (!curr) continue;
     const currKey = `${curr.x}_${curr.y}`;
 
     if (curr.movesLeft < (maxMovesLeft[currKey] ?? -1)) {
@@ -308,7 +326,11 @@ function calculateReachableHexes(
       const prevBest = maxMovesLeft[nbKey] ?? -1;
       if (nextMovesLeft > prevBest) {
         maxMovesLeft[nbKey] = nextMovesLeft;
-        queue.push({ x: nb.x, y: nb.y, movesLeft: nextMovesLeft });
+        pushSortedDijkstra(queue, {
+          x: nb.x,
+          y: nb.y,
+          movesLeft: nextMovesLeft,
+        });
       }
     }
   }
@@ -847,7 +869,8 @@ export function MovementBoard({
     const valid: { x: number; y: number }[] = [];
 
     while (queue.length > 0) {
-      const curr = queue.shift()!;
+      const curr = queue.shift();
+      if (!curr) continue;
       const neighbors = getAdjacentHexes(curr.x, curr.y, cols, rows);
 
       for (const nb of neighbors) {
