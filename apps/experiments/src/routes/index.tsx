@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@webnoth/ui/components/card';
-import { BookOpen, Map as MapIcon, Swords } from 'lucide-react';
+import { BookOpen, Footprints, Map as MapIcon, Swords } from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -15,7 +15,7 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   return (
-    <div className="space-y-8 max-w-5xl mx-auto py-6">
+    <div className="space-y-8 max-w-6xl mx-auto py-6">
       <div className="space-y-3">
         <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
           Webnoth Experiments
@@ -26,7 +26,7 @@ function HomePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Battle Simulator Card */}
         <Card className="border-border/60 bg-card/40 backdrop-blur-md overflow-hidden hover:shadow-lg transition-all duration-200 group flex flex-col justify-between">
           <CardHeader className="pb-4">
@@ -100,6 +100,30 @@ function HomePage() {
                 className="w-full cursor-pointer hover:bg-background/80 transition-colors"
               >
                 Open Map Encyclopedia
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        {/* Unit Movement Simulator Card */}
+        <Card className="border-border/60 bg-card/40 backdrop-blur-md overflow-hidden hover:shadow-lg transition-all duration-200 group flex flex-col justify-between">
+          <CardHeader className="pb-4">
+            <div className="size-12 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4 text-emerald-500 group-hover:scale-110 transition-transform duration-200">
+              <Footprints className="size-6" />
+            </div>
+            <CardTitle className="text-xl font-bold">
+              Movement Simulator
+            </CardTitle>
+            <CardDescription className="text-sm mt-1.5 leading-relaxed">
+              Simulate multi-player turn-based unit movements. Verify movement
+              costs, Zones of Control (ZOC), and test recruitment options on
+              real Wesnoth maps.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Link to="/unit-movement-simulator">
+              <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold cursor-pointer transition-colors duration-200">
+                Launch Simulator
               </Button>
             </Link>
           </CardContent>

@@ -193,6 +193,109 @@ export function getEffectiveResistance(
   return result;
 }
 
+const SMALLFOOT_COSTS = {
+  shallow_water: 3,
+  reef: 2,
+  swamp_water: 3,
+  flat: 1,
+  sand: 2,
+  forest: 2,
+  hills: 2,
+  mountains: 3,
+  village: 1,
+  castle: 1,
+  cave: 2,
+  frozen: 3,
+  fungus: 2,
+};
+
+const FALLBACK_MOVEMENT_COSTS: Record<string, Record<string, number>> = {
+  drakefly: {
+    deep_water: 1,
+    shallow_water: 1,
+    reef: 1,
+    swamp_water: 1,
+    flat: 1,
+    sand: 1,
+    forest: 1,
+    hills: 1,
+    mountains: 1,
+    village: 1,
+    castle: 1,
+    cave: 3,
+    frozen: 2,
+    fungus: 2,
+    unwalkable: 1,
+  },
+  drakeglide: {
+    deep_water: 1,
+    shallow_water: 1,
+    reef: 1,
+    swamp_water: 1,
+    flat: 1,
+    sand: 1,
+    forest: 1,
+    hills: 1,
+    mountains: 1,
+    village: 1,
+    castle: 1,
+    cave: 3,
+    frozen: 2,
+    fungus: 2,
+    unwalkable: 1,
+  },
+  flamefly: {
+    deep_water: 1,
+    shallow_water: 1,
+    reef: 1,
+    swamp_water: 1,
+    flat: 1,
+    sand: 1,
+    forest: 1,
+    hills: 1,
+    mountains: 1,
+    village: 1,
+    castle: 1,
+    cave: 3,
+    frozen: 2,
+    fungus: 2,
+    unwalkable: 1,
+  },
+  dwarvishfoot: {
+    shallow_water: 3,
+    reef: 2,
+    swamp_water: 3,
+    flat: 1,
+    sand: 2,
+    forest: 2,
+    hills: 1,
+    mountains: 1,
+    village: 1,
+    castle: 1,
+    cave: 1,
+    frozen: 3,
+    fungus: 1,
+  },
+  mountainfoot: {
+    shallow_water: 3,
+    reef: 2,
+    swamp_water: 3,
+    flat: 1,
+    sand: 2,
+    forest: 2,
+    hills: 1,
+    mountains: 1,
+    village: 1,
+    castle: 1,
+    cave: 1,
+    frozen: 3,
+    fungus: 1,
+  },
+  none: {
+    flat: 1,
+  },
+};
+
 /**
  * Compute effective movement costs (movetype base + unit overrides).
  * Returns Record<terrain, cost>. Missing terrain = impassable.
@@ -201,7 +304,16 @@ export function getEffectiveMoveCosts(
   unit: WesnothUnitType,
 ): Record<string, number> {
   const movetype = movetypeByName.get(unit.movementType);
-  const base = { ...(movetype?.movementCosts ?? {}) };
+  let base = { ...(movetype?.movementCosts ?? {}) };
+
+  if (Object.keys(base).length === 0) {
+    const fallbackName = unit.movementType;
+    if (FALLBACK_MOVEMENT_COSTS[fallbackName]) {
+      base = { ...FALLBACK_MOVEMENT_COSTS[fallbackName] };
+    } else {
+      base = { ...SMALLFOOT_COSTS };
+    }
+  }
 
   if (unit.movementCostOverrides) {
     for (const [terrain, cost] of Object.entries(unit.movementCostOverrides)) {
