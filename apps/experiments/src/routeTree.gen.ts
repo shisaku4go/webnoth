@@ -8,87 +8,87 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root';
-import { Route as UnitMovementSimulatorRouteImport } from './routes/unit-movement-simulator';
-import { Route as BattleSimulatorRouteImport } from './routes/battle-simulator';
-import { Route as IndexRouteImport } from './routes/index';
-import { Route as EncyclopediaIndexRouteImport } from './routes/encyclopedia/index';
-import { Route as EncyclopediaMapsRouteImport } from './routes/encyclopedia/maps';
-import { Route as EncyclopediaUnitIdRouteImport } from './routes/encyclopedia/$unitId';
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as UnitMovementSimulatorRouteImport } from './routes/unit-movement-simulator'
+import { Route as BattleSimulatorRouteImport } from './routes/battle-simulator'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as EncyclopediaIndexRouteImport } from './routes/encyclopedia/index'
+import { Route as EncyclopediaMapsRouteImport } from './routes/encyclopedia/maps'
+import { Route as EncyclopediaUnitIdRouteImport } from './routes/encyclopedia/$unitId'
 
 const UnitMovementSimulatorRoute = UnitMovementSimulatorRouteImport.update({
   id: '/unit-movement-simulator',
   path: '/unit-movement-simulator',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const BattleSimulatorRoute = BattleSimulatorRouteImport.update({
   id: '/battle-simulator',
   path: '/battle-simulator',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const EncyclopediaIndexRoute = EncyclopediaIndexRouteImport.update({
   id: '/encyclopedia/',
   path: '/encyclopedia/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const EncyclopediaMapsRoute = EncyclopediaMapsRouteImport.update({
   id: '/encyclopedia/maps',
   path: '/encyclopedia/maps',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const EncyclopediaUnitIdRoute = EncyclopediaUnitIdRouteImport.update({
   id: '/encyclopedia/$unitId',
   path: '/encyclopedia/$unitId',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/battle-simulator': typeof BattleSimulatorRoute;
-  '/unit-movement-simulator': typeof UnitMovementSimulatorRoute;
-  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute;
-  '/encyclopedia/maps': typeof EncyclopediaMapsRoute;
-  '/encyclopedia/': typeof EncyclopediaIndexRoute;
+  '/': typeof IndexRoute
+  '/battle-simulator': typeof BattleSimulatorRoute
+  '/unit-movement-simulator': typeof UnitMovementSimulatorRoute
+  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
+  '/encyclopedia/maps': typeof EncyclopediaMapsRoute
+  '/encyclopedia/': typeof EncyclopediaIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/battle-simulator': typeof BattleSimulatorRoute;
-  '/unit-movement-simulator': typeof UnitMovementSimulatorRoute;
-  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute;
-  '/encyclopedia/maps': typeof EncyclopediaMapsRoute;
-  '/encyclopedia': typeof EncyclopediaIndexRoute;
+  '/': typeof IndexRoute
+  '/battle-simulator': typeof BattleSimulatorRoute
+  '/unit-movement-simulator': typeof UnitMovementSimulatorRoute
+  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
+  '/encyclopedia/maps': typeof EncyclopediaMapsRoute
+  '/encyclopedia': typeof EncyclopediaIndexRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  '/': typeof IndexRoute;
-  '/battle-simulator': typeof BattleSimulatorRoute;
-  '/unit-movement-simulator': typeof UnitMovementSimulatorRoute;
-  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute;
-  '/encyclopedia/maps': typeof EncyclopediaMapsRoute;
-  '/encyclopedia/': typeof EncyclopediaIndexRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/battle-simulator': typeof BattleSimulatorRoute
+  '/unit-movement-simulator': typeof UnitMovementSimulatorRoute
+  '/encyclopedia/$unitId': typeof EncyclopediaUnitIdRoute
+  '/encyclopedia/maps': typeof EncyclopediaMapsRoute
+  '/encyclopedia/': typeof EncyclopediaIndexRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/battle-simulator'
     | '/unit-movement-simulator'
     | '/encyclopedia/$unitId'
     | '/encyclopedia/maps'
-    | '/encyclopedia/';
-  fileRoutesByTo: FileRoutesByTo;
+    | '/encyclopedia/'
+  fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/battle-simulator'
     | '/unit-movement-simulator'
     | '/encyclopedia/$unitId'
     | '/encyclopedia/maps'
-    | '/encyclopedia';
+    | '/encyclopedia'
   id:
     | '__root__'
     | '/'
@@ -96,62 +96,62 @@ export interface FileRouteTypes {
     | '/unit-movement-simulator'
     | '/encyclopedia/$unitId'
     | '/encyclopedia/maps'
-    | '/encyclopedia/';
-  fileRoutesById: FileRoutesById;
+    | '/encyclopedia/'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  BattleSimulatorRoute: typeof BattleSimulatorRoute;
-  UnitMovementSimulatorRoute: typeof UnitMovementSimulatorRoute;
-  EncyclopediaUnitIdRoute: typeof EncyclopediaUnitIdRoute;
-  EncyclopediaMapsRoute: typeof EncyclopediaMapsRoute;
-  EncyclopediaIndexRoute: typeof EncyclopediaIndexRoute;
+  IndexRoute: typeof IndexRoute
+  BattleSimulatorRoute: typeof BattleSimulatorRoute
+  UnitMovementSimulatorRoute: typeof UnitMovementSimulatorRoute
+  EncyclopediaUnitIdRoute: typeof EncyclopediaUnitIdRoute
+  EncyclopediaMapsRoute: typeof EncyclopediaMapsRoute
+  EncyclopediaIndexRoute: typeof EncyclopediaIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/unit-movement-simulator': {
-      id: '/unit-movement-simulator';
-      path: '/unit-movement-simulator';
-      fullPath: '/unit-movement-simulator';
-      preLoaderRoute: typeof UnitMovementSimulatorRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/unit-movement-simulator'
+      path: '/unit-movement-simulator'
+      fullPath: '/unit-movement-simulator'
+      preLoaderRoute: typeof UnitMovementSimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/battle-simulator': {
-      id: '/battle-simulator';
-      path: '/battle-simulator';
-      fullPath: '/battle-simulator';
-      preLoaderRoute: typeof BattleSimulatorRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/battle-simulator'
+      path: '/battle-simulator'
+      fullPath: '/battle-simulator'
+      preLoaderRoute: typeof BattleSimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/encyclopedia/': {
-      id: '/encyclopedia/';
-      path: '/encyclopedia';
-      fullPath: '/encyclopedia/';
-      preLoaderRoute: typeof EncyclopediaIndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/encyclopedia/'
+      path: '/encyclopedia'
+      fullPath: '/encyclopedia/'
+      preLoaderRoute: typeof EncyclopediaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/encyclopedia/maps': {
-      id: '/encyclopedia/maps';
-      path: '/encyclopedia/maps';
-      fullPath: '/encyclopedia/maps';
-      preLoaderRoute: typeof EncyclopediaMapsRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/encyclopedia/maps'
+      path: '/encyclopedia/maps'
+      fullPath: '/encyclopedia/maps'
+      preLoaderRoute: typeof EncyclopediaMapsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/encyclopedia/$unitId': {
-      id: '/encyclopedia/$unitId';
-      path: '/encyclopedia/$unitId';
-      fullPath: '/encyclopedia/$unitId';
-      preLoaderRoute: typeof EncyclopediaUnitIdRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/encyclopedia/$unitId'
+      path: '/encyclopedia/$unitId'
+      fullPath: '/encyclopedia/$unitId'
+      preLoaderRoute: typeof EncyclopediaUnitIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,7 +162,7 @@ const rootRouteChildren: RootRouteChildren = {
   EncyclopediaUnitIdRoute: EncyclopediaUnitIdRoute,
   EncyclopediaMapsRoute: EncyclopediaMapsRoute,
   EncyclopediaIndexRoute: EncyclopediaIndexRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
