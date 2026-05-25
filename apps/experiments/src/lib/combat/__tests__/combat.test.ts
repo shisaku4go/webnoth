@@ -18,6 +18,129 @@ describe('WesnothCombatCore Math Formulas', () => {
     expect(WesnothCombatCore.roundDamage(0, 10000, 10000)).toBe(0);
   });
 
+  it('calculateDamage should correctly compute final damage and breakdowns based on modifiers', () => {
+    const baseWeapon: WesnothAttack = {
+      name: 'Sword',
+      description: '',
+      type: 'blade',
+      range: 'melee',
+      damage: 10,
+      number: 1,
+    };
+
+    const baseAttacker = {
+      alignment: 'neutral',
+      traits: [],
+      statuses: {},
+    } as unknown as CombatUnitState;
+
+    const baseDefender = {
+      traits: [],
+      statuses: {},
+    } as unknown as CombatUnitState;
+
+    const baseContext = { lawfulBonus: 0 } as any;
+
+    // 1. Basic calculation (no modifiers)
+    let result = WesnothCombatCore.calculateDamage(
+      baseAttacker,
+      baseDefender,
+      baseWeapon,
+      null,
+      baseContext,
+      true,
+    );
+    expect(result.damage).toBe(10);
+    expect(result.breakdown).toContain('Base damage: 10');
+
+    // 2. Time of Day alignment bonus (Lawful +25%)
+    const lawfulAttacker = { ...baseAttacker, alignment: 'lawful' } as CombatUnitState;
+    result = WesnothCombatCore.calculateDamage(
+      lawfulAttacker,
+      baseDefender,
+      baseWeapon,
+      null,
+      { lawfulBonus: 25 } as any,
+      true,
+    );
+    expect(result.damage).toBe(12); // Math.floor((10 * 12500 + 4999) / 10000) -> 12
+
+    // 3. Leadership bonus
+    const leaderAttacker = { ...baseAttacker, traits: ['leadership_25'] } as CombatUnitState;
+    result = WesnothCombatCore.calculateDamage(
+      leaderAttacker,
+      baseDefender,
+      baseWeapon,
+      null,
+      baseContext,
+      true,
+    );
+    expect(result.damage).toBe(12); // 10 * 1.25 -> 12
+    expect(result.breakdown).toContain('Leadership: +25%');
+
+    // 4. Charge weapon special
+    const chargeWeapon = { ...baseWeapon, specials: ['charge'] };
+    result = WesnothCombatCore.calculateDamage(
+      baseAttacker,
+      baseDefender,
+      chargeWeapon,
+      null,
+      baseContext,
+      true, // attacking side
+    );
+    expect(result.damage).toBe(20); // 10 * 2
+
+    // 5. Resistance modifier
+    const resistantDefender = { ...baseDefender, traits: ['resistance_blade_80'] } as CombatUnitState;
+    result = WesnothCombatCore.calculateDamage(
+      baseAttacker,
+      resistantDefender,
+      baseWeapon,
+      null,
+      baseContext,
+      true,
+    );
+    expect(result.damage).toBe(8); // 10 * 0.8
+    expect(result.breakdown).toContain('Resistance (blade): 80% damage taken (20% resistant)');
+
+    // 6. Slowed status
+    const slowedAttacker = { ...baseAttacker, statuses: { slowed: true } } as CombatUnitState;
+    result = WesnothCombatCore.calculateDamage(
+      slowedAttacker,
+      baseDefender,
+      baseWeapon,
+      null,
+      baseContext,
+      true,
+    );
+    expect(result.damage).toBe(5); // 10 / 2
+    expect(result.breakdown).toContain('Slowed: damage halved (divisor = 20000)');
+
+    // 7. Combined modifiers (Lawful +25%, Leadership +25%, Charge x2, Resistance 80%, Slowed)
+    const combinedAttacker = {
+      alignment: 'lawful',
+      traits: ['leadership_25'],
+      statuses: { slowed: true },
+    } as unknown as CombatUnitState;
+    result = WesnothCombatCore.calculateDamage(
+      combinedAttacker,
+      resistantDefender,
+      chargeWeapon,
+      null,
+      { lawfulBonus: 25 } as any,
+      true,
+    );
+    // Multipliers applied sequentially with Math.floor at each step inside calculateDamage:
+    // Start: 10000
+    // ToD (+25%): floor(10000 * 1.25) = 12500
+    // Leadership (+25%): floor(12500 * 1.25) = 15625
+    // Charge (x2): 15625 * 2 = 31250
+    // Resistance (80%): floor(31250 * 0.8) = 25000
+    // Slowed divisor = 20000
+    // Final round: (10 * 25000 + 9999) / 20000 => rounds to 12
+    expect(result.damage).toBe(12);
+  });
+
   it('calculateCTH should clamp values and respect magical/marksman specials', () => {
     const attacker = { traits: [], statuses: {} } as unknown as CombatUnitState;
     const defender = { traits: [], statuses: {} } as unknown as CombatUnitState;
