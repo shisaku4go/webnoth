@@ -148,8 +148,9 @@ vite.config.d.ts
 vite.config.d.ts.map
 vite.config.js.map
 
-# TanStack Router temporary files
+# TanStack Router files
 .tanstack/
+**/routeTree.gen.ts
 
 # Agent files
 .agents
