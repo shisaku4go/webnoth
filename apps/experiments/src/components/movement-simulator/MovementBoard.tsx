@@ -484,15 +484,87 @@ interface ActiveMovement {
   targetMoves: number;
 }
 
+export interface PlayerConfig {
+  side: number;
+  factionId: string;
+  leaderId: string;
+  controller: 'human' | 'none';
+}
+
+export function getPlayerColor(side: number) {
+  const colors: Record<
+    number,
+    { hex: number; css: string; textCss: string; name: string }
+  > = {
+    1: {
+      hex: 0xef4444,
+      css: 'bg-red-500 text-white',
+      textCss: 'text-red-400',
+      name: 'Red',
+    }, // Red
+    2: {
+      hex: 0x06b6d4,
+      css: 'bg-cyan-500 text-white',
+      textCss: 'text-cyan-400',
+      name: 'Cyan',
+    }, // Cyan
+    3: {
+      hex: 0x10b981,
+      css: 'bg-emerald-500 text-white',
+      textCss: 'text-emerald-400',
+      name: 'Green',
+    }, // Green
+    4: {
+      hex: 0x8b5cf6,
+      css: 'bg-purple-500 text-white',
+      textCss: 'text-purple-400',
+      name: 'Purple',
+    }, // Purple
+    5: {
+      hex: 0xf97316,
+      css: 'bg-orange-500 text-white',
+      textCss: 'text-orange-400',
+      name: 'Orange',
+    }, // Orange
+    6: {
+      hex: 0xec4899,
+      css: 'bg-pink-500 text-white',
+      textCss: 'text-pink-400',
+      name: 'Pink',
+    }, // Pink
+    7: {
+      hex: 0xeab308,
+      css: 'bg-yellow-500 text-black',
+      textCss: 'text-yellow-400',
+      name: 'Yellow',
+    }, // Yellow
+    8: {
+      hex: 0xa1a1aa,
+      css: 'bg-zinc-500 text-white',
+      textCss: 'text-zinc-400',
+      name: 'Grey',
+    }, // Grey
+    9: {
+      hex: 0x6366f1,
+      css: 'bg-indigo-500 text-white',
+      textCss: 'text-indigo-400',
+      name: 'Indigo',
+    }, // Indigo
+  };
+  return (
+    colors[side] || {
+      hex: 0x71717a,
+      css: 'bg-zinc-600 text-white',
+      textCss: 'text-zinc-400',
+      name: 'Unknown',
+    }
+  );
+}
+
 interface MovementBoardProps {
   eraId: string;
-  p1FactionId: string;
-  p1LeaderId: string;
-  p2FactionId: string;
-  p2LeaderId: string;
   mapId: string;
-  p1Controller: 'human' | 'none';
-  p2Controller: 'human' | 'none';
+  playerConfigs: PlayerConfig[];
   onReset: () => void;
 }
 
@@ -662,13 +734,8 @@ function UnitSprite({
 
 export function MovementBoard({
   eraId,
-  p1FactionId,
-  p1LeaderId,
-  p2FactionId,
-  p2LeaderId,
   mapId,
-  p1Controller,
-  p2Controller,
+  playerConfigs,
   onReset,
 }: MovementBoardProps) {
   const [textures, setTextures] = useState<Record<string, Texture>>({});
@@ -679,7 +746,13 @@ export function MovementBoard({
   );
   const [units, setUnits] = useState<UnitState[]>([]);
   const [selectedUnitId, setSelectedUnitId] = useState<string | null>(null);
-  const [gold, setGold] = useState<Record<number, number>>({ 1: 100, 2: 100 });
+  const [gold, setGold] = useState<Record<number, number>>(() => {
+    const initialGold: Record<number, number> = {};
+    for (const cfg of playerConfigs) {
+      initialGold[cfg.side] = 100;
+    }
+    return initialGold;
+  });
   const [recruitUnitTypeId, setRecruitUnitTypeId] = useState<string | null>(
     null,
   );
@@ -890,8 +963,6 @@ export function MovementBoard({
 
     // 1. Identify starting coordinates for Leaders (scanning all start positions on the map)
     const initialUnits: UnitState[] = [];
-    const p1LeaderInfo = getUnitById(p1LeaderId);
-    const p2LeaderInfo = getUnitById(p2LeaderId);
 
     const startPositions: { startPos: string; r: number; c: number }[] = [];
     for (let r = 0; r < grid.length; r++) {
@@ -908,36 +979,25 @@ export function MovementBoard({
       a.startPos.localeCompare(b.startPos, undefined, { numeric: true }),
     );
 
-    if (startPositions.length > 0 && p1LeaderInfo) {
-      const p1Pos = startPositions[0];
-      initialUnits.push({
-        id: 'p1-leader',
-        unitTypeId: p1LeaderId,
-        side: 1,
-        x: p1Pos.c,
-        y: p1Pos.r,
-        hitpoints: p1LeaderInfo.hitpoints,
-        maxHitpoints: p1LeaderInfo.hitpoints,
-        moves: p1LeaderInfo.movement,
-        maxMoves: p1LeaderInfo.movement,
-        isLeader: true,
-      });
-    }
-
-    if (startPositions.length > 1 && p2LeaderInfo) {
-      const p2Pos = startPositions[1];
-      initialUnits.push({
-        id: 'p2-leader',
-        unitTypeId: p2LeaderId,
-        side: 2,
-        x: p2Pos.c,
-        y: p2Pos.r,
-        hitpoints: p2LeaderInfo.hitpoints,
-        maxHitpoints: p2LeaderInfo.hitpoints,
-        moves: p2LeaderInfo.movement,
-        maxMoves: p2LeaderInfo.movement,
-        isLeader: true,
-      });
+    for (const cfg of playerConfigs) {
+      const pos = startPositions.find((p) => p.startPos === String(cfg.side));
+      if (pos) {
+        const leaderInfo = getUnitById(cfg.leaderId);
+        if (leaderInfo) {
+          initialUnits.push({
+            id: `p${cfg.side}-leader`,
+            unitTypeId: cfg.leaderId,
+            side: cfg.side,
+            x: pos.c,
+            y: pos.r,
+            hitpoints: leaderInfo.hitpoints,
+            maxHitpoints: leaderInfo.hitpoints,
+            moves: leaderInfo.movement,
+            maxMoves: leaderInfo.movement,
+            isLeader: true,
+          });
+        }
+      }
     }
 
     setUnits(initialUnits);
@@ -963,56 +1023,34 @@ export function MovementBoard({
       }
     }
 
-    // Add leader unit sprites and their animation frames
-    if (p1LeaderInfo) {
-      imageUrls.add(wesnothAssetUrl(p1LeaderInfo.image));
-      const frames = getUnitAnimationFrames(p1LeaderInfo);
-      for (const f of frames) {
-        if (f.image) {
-          imageUrls.add(wesnothAssetUrl(f.image));
+    // Add leader and recruit unit sprites and their animation frames dynamically
+    for (const cfg of playerConfigs) {
+      const leaderInfo = getUnitById(cfg.leaderId);
+      if (leaderInfo) {
+        imageUrls.add(wesnothAssetUrl(leaderInfo.image));
+        const frames = getUnitAnimationFrames(leaderInfo);
+        for (const f of frames) {
+          if (f.image) {
+            imageUrls.add(wesnothAssetUrl(f.image));
+          }
         }
       }
-    }
-    if (p2LeaderInfo) {
-      imageUrls.add(wesnothAssetUrl(p2LeaderInfo.image));
-      const frames = getUnitAnimationFrames(p2LeaderInfo);
-      for (const f of frames) {
-        if (f.image) {
-          imageUrls.add(wesnothAssetUrl(f.image));
-        }
-      }
-    }
 
-    // Add recruit unit sprites and their animation frames
-    const p1Faction = getFactionsByEra(eraId).find((f) => f.id === p1FactionId);
-    if (p1Faction) {
-      for (const id of p1Faction.recruit) {
-        const u = getUnitById(id);
-        if (u) {
-          if (u.image) {
-            imageUrls.add(wesnothAssetUrl(u.image));
-          }
-          const frames = getUnitAnimationFrames(u);
-          for (const f of frames) {
-            if (f.image) {
-              imageUrls.add(wesnothAssetUrl(f.image));
+      const faction = getFactionsByEra(eraId).find(
+        (f) => f.id === cfg.factionId,
+      );
+      if (faction) {
+        for (const id of faction.recruit) {
+          const u = getUnitById(id);
+          if (u) {
+            if (u.image) {
+              imageUrls.add(wesnothAssetUrl(u.image));
             }
-          }
-        }
-      }
-    }
-    const p2Faction = getFactionsByEra(eraId).find((f) => f.id === p2FactionId);
-    if (p2Faction) {
-      for (const id of p2Faction.recruit) {
-        const u = getUnitById(id);
-        if (u) {
-          if (u.image) {
-            imageUrls.add(wesnothAssetUrl(u.image));
-          }
-          const frames = getUnitAnimationFrames(u);
-          for (const f of frames) {
-            if (f.image) {
-              imageUrls.add(wesnothAssetUrl(f.image));
+            const frames = getUnitAnimationFrames(u);
+            for (const f of frames) {
+              if (f.image) {
+                imageUrls.add(wesnothAssetUrl(f.image));
+              }
             }
           }
         }
@@ -1052,15 +1090,7 @@ export function MovementBoard({
     return () => {
       active = false;
     };
-  }, [
-    currentMap,
-    grid,
-    p1LeaderId,
-    p2LeaderId,
-    eraId,
-    p1FactionId,
-    p2FactionId,
-  ]);
+  }, [currentMap, grid, eraId, playerConfigs]);
 
   // Auto-capture village when a unit lands on one
   useEffect(() => {
@@ -1216,16 +1246,25 @@ export function MovementBoard({
   // Turn management switching
   const handleEndTurn = () => {
     if (activeMovement) return;
-    let nextSide = activeSide === 1 ? 2 : 1;
+    const numPlayers = playerConfigs.length;
+    let nextSide = activeSide;
     let nextTurn = turn;
-    if (nextSide === 1) {
-      nextTurn += 1;
-    }
 
-    // Handle skip for 'none' controller
-    const nextController = nextSide === 1 ? p1Controller : p2Controller;
-    if (nextController === 'none') {
-      nextSide = nextSide === 1 ? 2 : 1;
+    const hasHuman = playerConfigs.some((cfg) => cfg.controller === 'human');
+
+    if (hasHuman) {
+      do {
+        nextSide = (nextSide % numPlayers) + 1;
+        if (nextSide === 1) {
+          nextTurn += 1;
+        }
+        const cfg = playerConfigs.find((c) => c.side === nextSide);
+        if (cfg && cfg.controller !== 'none') {
+          break;
+        }
+      } while (nextSide !== activeSide);
+    } else {
+      nextSide = (nextSide % numPlayers) + 1;
       if (nextSide === 1) {
         nextTurn += 1;
       }
@@ -1233,8 +1272,7 @@ export function MovementBoard({
 
     // Calculate and apply income for nextSide starting their turn
     // (excluding Turn 1, as neither player gets income on Turn 1 in Wesnoth)
-    const isFirstTurnForSide =
-      (nextSide === 1 && nextTurn === 1) || (nextSide === 2 && turn === 1);
+    const isFirstTurnForSide = nextTurn === 1;
     if (!isFirstTurnForSide) {
       const nextSideVillages = Object.values(capturedVillages).filter(
         (side) => side === nextSide,
@@ -1257,7 +1295,7 @@ export function MovementBoard({
 
       setGold((prevGold) => ({
         ...prevGold,
-        [nextSide]: prevGold[nextSide] + netIncome,
+        [nextSide]: (prevGold[nextSide] ?? 100) + netIncome,
       }));
     }
 
@@ -1278,8 +1316,12 @@ export function MovementBoard({
     );
   };
 
-  const activePlayerController = activeSide === 1 ? p1Controller : p2Controller;
-  const activePlayerFaction = activeSide === 1 ? p1FactionId : p2FactionId;
+  const activeConfig = useMemo(() => {
+    return playerConfigs.find((c) => c.side === activeSide);
+  }, [playerConfigs, activeSide]);
+
+  const activePlayerController = activeConfig?.controller ?? 'none';
+  const activePlayerFaction = activeConfig?.factionId ?? '';
 
   const activeLeader = useMemo(() => {
     return units.find((u) => u.side === activeSide && u.isLeader);
@@ -1630,8 +1672,7 @@ export function MovementBoard({
                               if (!g) return;
                               g.clear();
                               const side = capturedVillages[`${cIdx}_${rIdx}`];
-                              const teamColor =
-                                side === 1 ? 0xef4444 : 0x06b6d4;
+                              const teamColor = getPlayerColor(side).hex;
 
                               // Subtle hex border in team color
                               g.drawPolygon([
@@ -1811,7 +1852,7 @@ export function MovementBoard({
               {/* 4. Render Team Rings and Units */}
               {units.map((unit) => {
                 const unitType = getUnitById(unit.unitTypeId);
-                const ringColor = unit.side === 1 ? 0xef4444 : 0x06b6d4; // Red vs Cyan
+                const ringColor = getPlayerColor(unit.side).hex;
                 const isSelected = selectedUnitId === unit.id;
                 const isUnitActive = unit.side === activeSide && unit.moves > 0;
 
@@ -1893,11 +1934,7 @@ export function MovementBoard({
               Turn {turn}
             </span>
             <Badge
-              className={
-                activeSide === 1
-                  ? 'bg-red-500 text-white font-semibold'
-                  : 'bg-cyan-500 text-white font-semibold'
-              }
+              className={`${getPlayerColor(activeSide).css} font-semibold`}
             >
               Player {activeSide} Turn
             </Badge>
@@ -2034,11 +2071,7 @@ export function MovementBoard({
                     </div>
                     <div className="text-[10px] text-muted-foreground flex items-center gap-1">
                       <span
-                        className={
-                          selectedUnit.side === 1
-                            ? 'text-red-400 font-semibold'
-                            : 'text-cyan-400 font-semibold'
-                        }
+                        className={`${getPlayerColor(selectedUnit.side).textCss} font-semibold`}
                       >
                         Player {selectedUnit.side}
                       </span>
