@@ -329,6 +329,171 @@ function tryHandleMacroInvocation(
   return false;
 }
 
+interface ParseState {
+  macroDictionary: MacroDictionary;
+  stack: WmlNode[];
+  defineState: DefineState;
+  pendingKeys: string[];
+  pendingValue: string;
+  multiLineQuoteOpen: boolean;
+  skipNewlinesAfterPlus: boolean;
+  inHeredoc: boolean;
+  heredocValue: string;
+}
+
+function handleHeredocContinuation(line: string, state: ParseState): boolean {
+  if (!state.inHeredoc) {
+    return false;
+  }
+
+  const closeIdx = line.indexOf('>>');
+  if (closeIdx >= 0) {
+    state.heredocValue += line.slice(0, closeIdx);
+    const currentNode = state.stack[state.stack.length - 1];
+    // Assign empty string to all keys except the last one
+    for (let k = 0; k < state.pendingKeys.length - 1; k++) {
+      currentNode.attributes[state.pendingKeys[k]] = '';
+    }
+    const lastKey = state.pendingKeys[state.pendingKeys.length - 1];
+    if (lastKey) {
+      let val = state.heredocValue;
+      if (state.macroDictionary) {
+        val = expandConstantMacros(val, state.macroDictionary);
+      }
+      currentNode.attributes[lastKey] = val.trim();
+    }
+    state.inHeredoc = false;
+    state.pendingKeys = [];
+    state.heredocValue = '';
+  } else {
+    state.heredocValue += `${line}\n`;
+  }
+  return true;
+}
+
+function handleMultilineContinuation(line: string, state: ParseState): boolean {
+  if (!state.multiLineQuoteOpen && state.pendingKeys.length === 0) {
+    return false;
+  }
+
+  let appendStr = line;
+  if (state.skipNewlinesAfterPlus) {
+    appendStr = line.trimStart();
+  }
+
+  if (state.multiLineQuoteOpen) {
+    state.pendingValue += `\n${appendStr}`;
+    if (hasClosingQuote(line)) {
+      state.multiLineQuoteOpen = false;
+      // Check if there is a trailing + after the closing quote
+      if (state.pendingValue.trimEnd().endsWith('+')) {
+        state.skipNewlinesAfterPlus = true;
+        return true;
+      }
+      assignPendingKeys(
+        state.stack[state.stack.length - 1],
+        state.pendingKeys,
+        state.pendingValue,
+        state.macroDictionary,
+      );
+      state.pendingKeys = [];
+      state.pendingValue = '';
+      state.skipNewlinesAfterPlus = false;
+    }
+  } else {
+    // Continuing due to trailing +
+    state.pendingValue += appendStr;
+    if (hasOpenQuote(appendStr)) {
+      state.multiLineQuoteOpen = true;
+      state.skipNewlinesAfterPlus = false;
+      return true;
+    }
+    if (state.pendingValue.trimEnd().endsWith('+')) {
+      state.skipNewlinesAfterPlus = true;
+      return true;
+    }
+    assignPendingKeys(
+      state.stack[state.stack.length - 1],
+      state.pendingKeys,
+      state.pendingValue,
+      state.macroDictionary,
+    );
+    state.pendingKeys = [];
+    state.pendingValue = '';
+    state.skipNewlinesAfterPlus = false;
+  }
+  return true;
+}
+
+function handleKeyValueLine(line: string, state: ParseState): boolean {
+  const kvMatch = line.match(/^\s*([\w\s,]+?)\s*=\s*(.*)/);
+  if (!kvMatch) {
+    return false;
+  }
+
+  const keysStr = kvMatch[1];
+  const valueStr = kvMatch[2];
+
+  const keys = keysStr
+    .split(',')
+    .map((k) => k.trim())
+    .filter((k) => k.length > 0);
+  if (keys.length === 0) {
+    return true;
+  }
+
+  // Check for heredoc start: <<
+  const heredocIdx = valueStr.indexOf('<<');
+  if (heredocIdx >= 0) {
+    state.pendingKeys = keys;
+    state.inHeredoc = true;
+    state.heredocValue = `${valueStr.slice(heredocIdx + 2)}\n`;
+    // Check if heredoc closes on the same line (e.g. code = << blah >>)
+    const closeIdx = state.heredocValue.indexOf('>>');
+    if (closeIdx >= 0) {
+      const actualVal = state.heredocValue.slice(0, closeIdx);
+      const currentNode = state.stack[state.stack.length - 1];
+      for (let k = 0; k < keys.length - 1; k++) {
+        currentNode.attributes[keys[k]] = '';
+      }
+      let val = actualVal;
+      if (state.macroDictionary) {
+        val = expandConstantMacros(val, state.macroDictionary);
+      }
+      currentNode.attributes[keys[keys.length - 1]] = val.trim();
+      state.inHeredoc = false;
+      state.pendingKeys = [];
+      state.heredocValue = '';
+    }
+    return true;
+  }
+
+  // Check for unclosed quote
+  if (hasOpenQuote(valueStr)) {
+    state.pendingKeys = keys;
+    state.pendingValue = valueStr;
+    state.multiLineQuoteOpen = true;
+    return true;
+  }
+
+  // Check for trailing +
+  if (valueStr.trimEnd().endsWith('+')) {
+    state.pendingKeys = keys;
+    state.pendingValue = valueStr;
+    state.skipNewlinesAfterPlus = true;
+    return true;
+  }
+
+  // Complete assignment
+  assignPendingKeys(
+    state.stack[state.stack.length - 1],
+    keys,
+    valueStr,
+    state.macroDictionary,
+  );
+  return true;
+}
+
 /**
  * Parse WML text content into a tree of WmlNode objects.
  */
@@ -336,113 +501,51 @@ export function parseWml(
   content: string,
   baseMacroDictionary?: MacroDictionary,
 ): WmlNode {
-  const macroDictionary: MacroDictionary = new Map(baseMacroDictionary);
-  const root: WmlNode = {
-    tag: 'root',
-    attributes: {},
-    children: [],
-    macros: [],
+  const state: ParseState = {
+    macroDictionary: new Map(baseMacroDictionary),
+    stack: [
+      {
+        tag: 'root',
+        attributes: {},
+        children: [],
+        macros: [],
+      },
+    ],
+    defineState: {
+      inDefine: false,
+      defineName: '',
+      defineParams: [],
+      defineBody: [],
+    },
+    pendingKeys: [],
+    pendingValue: '',
+    multiLineQuoteOpen: false,
+    skipNewlinesAfterPlus: false,
+    inHeredoc: false,
+    heredocValue: '',
   };
-  const stack: WmlNode[] = [root];
+
   const lines = content.split('\n');
-  const defineState: DefineState = {
-    inDefine: false,
-    defineName: '',
-    defineParams: [],
-    defineBody: [],
-  };
-  let pendingKeys: string[] = [];
-  let pendingValue = '';
-  let multiLineQuoteOpen = false;
-  let skipNewlinesAfterPlus = false;
-  let inHeredoc = false;
-  let heredocValue = '';
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    if (tryHandleDefineOrUndef(line, defineState, macroDictionary)) {
+    if (
+      tryHandleDefineOrUndef(line, state.defineState, state.macroDictionary)
+    ) {
       continue;
     }
 
     // Skip comments and preprocessor directives (unless in heredoc or multiline string)
-    if (!inHeredoc && !multiLineQuoteOpen && /^\s*#/.test(line)) continue;
-
-    // 1. Heredoc continuation
-    if (inHeredoc) {
-      const closeIdx = line.indexOf('>>');
-      if (closeIdx >= 0) {
-        heredocValue += line.slice(0, closeIdx);
-        const currentNode = stack[stack.length - 1];
-        // Assign empty string to all keys except the last one
-        for (let k = 0; k < pendingKeys.length - 1; k++) {
-          currentNode.attributes[pendingKeys[k]] = '';
-        }
-        const lastKey = pendingKeys[pendingKeys.length - 1];
-        if (lastKey) {
-          let val = heredocValue;
-          if (macroDictionary) {
-            val = expandConstantMacros(val, macroDictionary);
-          }
-          currentNode.attributes[lastKey] = val.trim();
-        }
-        inHeredoc = false;
-        pendingKeys = [];
-        heredocValue = '';
-      } else {
-        heredocValue += `${line}\n`;
-      }
+    if (!state.inHeredoc && !state.multiLineQuoteOpen && /^\s*#/.test(line)) {
       continue;
     }
 
-    // 2. Multiline string quote continuation OR line-ending + continuation
-    if (multiLineQuoteOpen || pendingKeys.length > 0) {
-      let appendStr = line;
-      if (skipNewlinesAfterPlus) {
-        appendStr = line.trimStart();
-      }
+    if (handleHeredocContinuation(line, state)) {
+      continue;
+    }
 
-      if (multiLineQuoteOpen) {
-        pendingValue += `\n${appendStr}`;
-        if (hasClosingQuote(line)) {
-          multiLineQuoteOpen = false;
-          // Check if there is a trailing + after the closing quote
-          if (pendingValue.trimEnd().endsWith('+')) {
-            skipNewlinesAfterPlus = true;
-            continue;
-          }
-          assignPendingKeys(
-            stack[stack.length - 1],
-            pendingKeys,
-            pendingValue,
-            macroDictionary,
-          );
-          pendingKeys = [];
-          pendingValue = '';
-          skipNewlinesAfterPlus = false;
-        }
-      } else {
-        // Continuing due to trailing +
-        pendingValue += appendStr;
-        if (hasOpenQuote(appendStr)) {
-          multiLineQuoteOpen = true;
-          skipNewlinesAfterPlus = false;
-          continue;
-        }
-        if (pendingValue.trimEnd().endsWith('+')) {
-          skipNewlinesAfterPlus = true;
-          continue;
-        }
-        assignPendingKeys(
-          stack[stack.length - 1],
-          pendingKeys,
-          pendingValue,
-          macroDictionary,
-        );
-        pendingKeys = [];
-        pendingValue = '';
-        skipNewlinesAfterPlus = false;
-      }
+    if (handleMultilineContinuation(line, state)) {
       continue;
     }
 
@@ -450,86 +553,26 @@ export function parseWml(
     const trimmed = line.trim();
     if (trimmed === '') continue;
 
-    if (tryHandleTag(trimmed, stack)) {
+    if (tryHandleTag(trimmed, state.stack)) {
       continue;
     }
 
-    if (tryHandleMacroInvocation(trimmed, stack, macroDictionary)) {
+    if (tryHandleMacroInvocation(trimmed, state.stack, state.macroDictionary)) {
       continue;
     }
 
-    // Key=value pair(s) — matches single key or comma-separated keys
-    const kvMatch = line.match(/^\s*([\w\s,]+?)\s*=\s*(.*)/);
-    if (kvMatch) {
-      const keysStr = kvMatch[1];
-      const valueStr = kvMatch[2];
-
-      const keys = keysStr
-        .split(',')
-        .map((k) => k.trim())
-        .filter((k) => k.length > 0);
-      if (keys.length === 0) continue;
-
-      // Check for heredoc start: <<
-      const heredocIdx = valueStr.indexOf('<<');
-      if (heredocIdx >= 0) {
-        pendingKeys = keys;
-        inHeredoc = true;
-        heredocValue = `${valueStr.slice(heredocIdx + 2)}\n`;
-        // Check if heredoc closes on the same line (e.g. code = << blah >>)
-        const closeIdx = heredocValue.indexOf('>>');
-        if (closeIdx >= 0) {
-          const actualVal = heredocValue.slice(0, closeIdx);
-          const currentNode = stack[stack.length - 1];
-          for (let k = 0; k < keys.length - 1; k++) {
-            currentNode.attributes[keys[k]] = '';
-          }
-          let val = actualVal;
-          if (macroDictionary) {
-            val = expandConstantMacros(val, macroDictionary);
-          }
-          currentNode.attributes[keys[keys.length - 1]] = val.trim();
-          inHeredoc = false;
-          pendingKeys = [];
-          heredocValue = '';
-        }
-        continue;
-      }
-
-      // Check for unclosed quote
-      if (hasOpenQuote(valueStr)) {
-        pendingKeys = keys;
-        pendingValue = valueStr;
-        multiLineQuoteOpen = true;
-        continue;
-      }
-
-      // Check for trailing +
-      if (valueStr.trimEnd().endsWith('+')) {
-        pendingKeys = keys;
-        pendingValue = valueStr;
-        skipNewlinesAfterPlus = true;
-        continue;
-      }
-
-      // Complete assignment
-      assignPendingKeys(
-        stack[stack.length - 1],
-        keys,
-        valueStr,
-        macroDictionary,
-      );
+    if (handleKeyValueLine(line, state)) {
       continue;
     }
 
     // Lines with inline macros within other content — record as macros
     if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
-      const currentNode = stack[stack.length - 1];
+      const currentNode = state.stack[state.stack.length - 1];
       currentNode.macros.push(trimmed.slice(1, -1).trim());
     }
   }
 
-  return root;
+  return state.stack[0];
 }
 
 /**
