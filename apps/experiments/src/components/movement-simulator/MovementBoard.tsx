@@ -59,6 +59,11 @@ function isCastle(cell: string): boolean {
   );
 }
 
+function isVillage(cell: string): boolean {
+  const { baseCode, overlayCode } = parseCell(cell);
+  return baseCode.startsWith('V') || (overlayCode?.startsWith('V') ?? false);
+}
+
 const ALIAS_TO_MOVEMENT_KEY: Record<string, string> = {
   Wdt: 'deep_water',
   Wst: 'shallow_water',
@@ -472,6 +477,7 @@ function findPath(
 
 interface ActiveMovement {
   unitId: string;
+  unitSide: number;
   path: { x: number; y: number }[];
   currentStepIndex: number;
   segmentProgress: number;
@@ -677,14 +683,19 @@ export function MovementBoard({
   const [recruitUnitTypeId, setRecruitUnitTypeId] = useState<string | null>(
     null,
   );
+  const [capturedVillages, setCapturedVillages] = useState<
+    Record<string, number>
+  >({});
+
+  const hasActiveMovement = activeMovement !== null;
 
   // Smooth movement animation loop
   useEffect(() => {
-    if (!activeMovement) return;
+    if (!hasActiveMovement) return;
 
     let active = true;
     let lastTime = performance.now();
-    const speed = 0.008; // progress units per millisecond (~125ms per hex segment)
+    const speed = 0.004; // progress units per millisecond (~125ms per hex segment)
 
     const frame = (now: number) => {
       if (!active) return;
@@ -735,7 +746,7 @@ export function MovementBoard({
     return () => {
       active = false;
     };
-  }, [activeMovement]);
+  }, [hasActiveMovement]);
 
   // Turn management
   const [turn, setTurn] = useState(1);
@@ -1051,6 +1062,26 @@ export function MovementBoard({
     p2FactionId,
   ]);
 
+  // Auto-capture village when a unit lands on one
+  useEffect(() => {
+    if (units.length === 0) return;
+    setCapturedVillages((prev) => {
+      let changed = false;
+      const next = { ...prev };
+      for (const u of units) {
+        const cell = grid[u.y]?.[u.x];
+        if (cell && isVillage(cell)) {
+          const key = `${u.x}_${u.y}`;
+          if (next[key] !== u.side) {
+            next[key] = u.side;
+            changed = true;
+          }
+        }
+      }
+      return changed ? next : prev;
+    });
+  }, [units, grid]);
+
   const focusOnHex = useCallback(
     (col: number, row: number, currentZoom = zoom) => {
       const pos = getHexPosition(col, row);
@@ -1200,6 +1231,36 @@ export function MovementBoard({
       }
     }
 
+    // Calculate and apply income for nextSide starting their turn
+    // (excluding Turn 1, as neither player gets income on Turn 1 in Wesnoth)
+    const isFirstTurnForSide =
+      (nextSide === 1 && nextTurn === 1) || (nextSide === 2 && turn === 1);
+    if (!isFirstTurnForSide) {
+      const nextSideVillages = Object.values(capturedVillages).filter(
+        (side) => side === nextSide,
+      ).length;
+
+      const baseIncome = 2;
+      const villageGold = nextSideVillages * 1;
+
+      const nextSideUnits = units.filter((u) => u.side === nextSide);
+      const totalUnitLevel = nextSideUnits
+        .filter((u) => !u.isLeader)
+        .reduce((sum, u) => {
+          const unitType = getUnitById(u.unitTypeId);
+          return sum + (unitType?.level ?? 0);
+        }, 0);
+      const freeUpkeep = nextSideVillages;
+      const upkeep = Math.max(0, totalUnitLevel - freeUpkeep);
+
+      const netIncome = baseIncome + villageGold - upkeep;
+
+      setGold((prevGold) => ({
+        ...prevGold,
+        [nextSide]: prevGold[nextSide] + netIncome,
+      }));
+    }
+
     setActiveSide(nextSide);
     setTurn(nextTurn);
     setSelectedUnitId(null);
@@ -1229,6 +1290,29 @@ export function MovementBoard({
     const cell = grid[activeLeader.y]?.[activeLeader.x];
     return cell ? isKeep(cell) : false;
   }, [activeLeader, grid]);
+
+  // Active player economy calculations
+  const activeSideVillagesCount = useMemo(() => {
+    return Object.values(capturedVillages).filter((side) => side === activeSide)
+      .length;
+  }, [capturedVillages, activeSide]);
+
+  const baseIncome = 2;
+  const villageIncome = activeSideVillagesCount * 1;
+
+  const activeSideUnits = useMemo(() => {
+    return units.filter((u) => u.side === activeSide);
+  }, [units, activeSide]);
+
+  const activeSideTotalUnitLevel = useMemo(() => {
+    return activeSideUnits
+      .filter((u) => !u.isLeader)
+      .reduce((sum, u) => sum + (getUnitById(u.unitTypeId)?.level ?? 0), 0);
+  }, [activeSideUnits]);
+
+  const freeUpkeep = activeSideVillagesCount;
+  const activeSideUpkeep = Math.max(0, activeSideTotalUnitLevel - freeUpkeep);
+  const netTurnIncome = baseIncome + villageIncome - activeSideUpkeep;
 
   const recruitList = useMemo(() => {
     const faction = getFactionsByEra(eraId).find(
@@ -1363,8 +1447,26 @@ export function MovementBoard({
           );
 
           if (path && path.length > 1) {
+            // Capture all villages along the path
+            setCapturedVillages((prev) => {
+              let changed = false;
+              const next = { ...prev };
+              for (const pt of path) {
+                const cell = grid[pt.y]?.[pt.x];
+                if (cell && isVillage(cell)) {
+                  const key = `${pt.x}_${pt.y}`;
+                  if (next[key] !== selectedUnit.side) {
+                    next[key] = selectedUnit.side;
+                    changed = true;
+                  }
+                }
+              }
+              return changed ? next : prev;
+            });
+
             setActiveMovement({
               unitId: selectedUnit.id,
+              unitSide: selectedUnit.side,
               path,
               currentStepIndex: 0,
               segmentProgress: 0,
@@ -1379,6 +1481,13 @@ export function MovementBoard({
                   : u,
               ),
             );
+            const cell = grid[rIdx]?.[cIdx];
+            if (cell && isVillage(cell)) {
+              setCapturedVillages((prev) => ({
+                ...prev,
+                [`${cIdx}_${rIdx}`]: activeSide,
+              }));
+            }
             setSelectedUnitId(null);
           }
         } else {
@@ -1509,6 +1618,43 @@ export function MovementBoard({
                           height={72}
                         />
                       )}
+
+                      {/* Captured Village Indicators */}
+                      {isVillage(cell) &&
+                        capturedVillages[`${cIdx}_${rIdx}`] !== undefined && (
+                          <pixiGraphics
+                            x={pos.x}
+                            y={pos.y}
+                            draw={() => {}}
+                            ref={(g: Graphics | null) => {
+                              if (!g) return;
+                              g.clear();
+                              const side = capturedVillages[`${cIdx}_${rIdx}`];
+                              const teamColor =
+                                side === 1 ? 0xef4444 : 0x06b6d4;
+
+                              // Subtle hex border in team color
+                              g.drawPolygon([
+                                18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
+                              ]).stroke({
+                                width: 1.5,
+                                color: teamColor,
+                                alpha: 0.75,
+                              });
+
+                              // Draw flag flagpole
+                              g.rect(48, 12, 2.5, 24).fill({ color: 0xcccccc });
+
+                              // Draw flag banner
+                              g.moveTo(48, 12)
+                                .lineTo(34, 18)
+                                .lineTo(48, 24)
+                                .closePath()
+                                .fill({ color: teamColor })
+                                .stroke({ width: 0.8, color: 0x000000 });
+                            }}
+                          />
+                        )}
 
                       {startPos && (
                         <pixiText
@@ -1770,11 +1916,52 @@ export function MovementBoard({
                 {activePlayerFaction}
               </span>
             </div>
-            <div className="flex justify-between items-center text-xs">
+            <div className="flex justify-between items-center text-xs border-b border-border/20 pb-1.5">
               <span className="text-muted-foreground">Gold:</span>
               <span className="font-bold text-amber-500">
                 {gold[activeSide]}g
               </span>
+            </div>
+
+            {/* Economy Breakdown */}
+            <div className="space-y-1 bg-zinc-900/40 p-2 rounded border border-border/20 text-[11px] my-1.5">
+              <div className="flex justify-between items-center text-muted-foreground">
+                <span>Villages Owned:</span>
+                <span className="font-semibold text-foreground">
+                  {activeSideVillagesCount}
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-[10px] text-muted-foreground/80 pl-1">
+                <span>• Base Income:</span>
+                <span className="text-emerald-500 font-medium">
+                  +{baseIncome}g
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-[10px] text-muted-foreground/80 pl-1">
+                <span>• Village Income:</span>
+                <span className="text-emerald-500 font-medium">
+                  +{villageIncome}g
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-[10px] text-muted-foreground/80 pl-1">
+                <span>• Unit Upkeep:</span>
+                <span className="text-red-400 font-medium">
+                  -{activeSideUpkeep}g
+                </span>
+              </div>
+              <div className="text-[9px] text-muted-foreground/60 pl-2 leading-none">
+                (Upkeep: {activeSideTotalUnitLevel} lvl, {freeUpkeep} free)
+              </div>
+              <div className="flex justify-between items-center border-t border-border/20 pt-1 mt-1 font-bold">
+                <span className="text-muted-foreground">Net Turn Income:</span>
+                <span
+                  className={
+                    netTurnIncome >= 0 ? 'text-emerald-400' : 'text-red-400'
+                  }
+                >
+                  {netTurnIncome >= 0 ? `+${netTurnIncome}` : netTurnIncome}g
+                </span>
+              </div>
             </div>
             <div className="flex justify-between items-center text-xs">
               <span className="text-muted-foreground">Location:</span>
