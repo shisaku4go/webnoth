@@ -251,15 +251,26 @@ function isAdjacentToEnemy(
   allUnits: UnitState[],
   maxCols: number,
   maxRows: number,
+  playerConfigs: PlayerConfig[],
 ): boolean {
+  const myConfig = playerConfigs.find((c) => c.side === side);
+  const myTeamId = myConfig?.teamId ?? side;
+
   const adj = getAdjacentHexes(col, row, maxCols, maxRows);
   for (const n of adj) {
     const occupant = allUnits.find((u) => u.x === n.x && u.y === n.y);
-    if (occupant && occupant.side !== side) {
-      const occupantType = getUnitById(occupant.unitTypeId);
-      // Only Level 1+ units exert ZOC
-      if (occupantType && occupantType.level > 0) {
-        return true;
+    if (occupant) {
+      const occupantConfig = playerConfigs.find(
+        (c) => c.side === occupant.side,
+      );
+      const occupantTeamId = occupantConfig?.teamId ?? occupant.side;
+
+      if (occupantTeamId !== myTeamId) {
+        const occupantType = getUnitById(occupant.unitTypeId);
+        // Only Level 1+ units exert ZOC
+        if (occupantType && occupantType.level > 0) {
+          return true;
+        }
       }
     }
   }
@@ -289,6 +300,7 @@ function calculateReachableHexes(
   unit: UnitState,
   allUnits: UnitState[],
   grid: string[][],
+  playerConfigs: PlayerConfig[],
 ): Record<string, number> {
   const rows = grid.length;
   const cols = rows > 0 ? grid[0].length : 0;
@@ -350,7 +362,15 @@ function calculateReachableHexes(
       if (
         !hasSkirmisher &&
         nextMovesLeft > 0 &&
-        isAdjacentToEnemy(nb.x, nb.y, unit.side, allUnits, cols, rows)
+        isAdjacentToEnemy(
+          nb.x,
+          nb.y,
+          unit.side,
+          allUnits,
+          cols,
+          rows,
+          playerConfigs,
+        )
       ) {
         nextMovesLeft = 0;
       }
@@ -379,6 +399,7 @@ function findPath(
   unit: UnitState,
   allUnits: UnitState[],
   grid: string[][],
+  playerConfigs: PlayerConfig[],
 ): { x: number; y: number }[] | null {
   const rows = grid.length;
   const cols = rows > 0 ? grid[0].length : 0;
@@ -444,7 +465,15 @@ function findPath(
       if (
         !hasSkirmisher &&
         nextMovesLeft > 0 &&
-        isAdjacentToEnemy(nb.x, nb.y, unit.side, allUnits, cols, rows) &&
+        isAdjacentToEnemy(
+          nb.x,
+          nb.y,
+          unit.side,
+          allUnits,
+          cols,
+          rows,
+          playerConfigs,
+        ) &&
         !(nb.x === targetX && nb.y === targetY) // ZOC doesn't halt if target hex is destination
       ) {
         nextMovesLeft = 0;
@@ -489,6 +518,7 @@ export interface PlayerConfig {
   factionId: string;
   leaderId: string;
   controller: 'human' | 'none';
+  teamId: number;
 }
 
 export function getPlayerColor(side: number) {
@@ -1417,10 +1447,15 @@ export function MovementBoard({
   // Calculations for unit reachable movement range
   const reachableHexes = useMemo(() => {
     if (!selectedUnit) return {};
-    const res = calculateReachableHexes(selectedUnit, units, grid);
+    const res = calculateReachableHexes(
+      selectedUnit,
+      units,
+      grid,
+      playerConfigs,
+    );
     console.log('Reachable hexes for', selectedUnit.id, ':', res);
     return res;
-  }, [selectedUnit, units, grid]);
+  }, [selectedUnit, units, grid, playerConfigs]);
 
   // Click handler for moving units or updating selection
   const handleTileClick = useCallback(
@@ -1486,6 +1521,7 @@ export function MovementBoard({
             selectedUnit,
             units,
             grid,
+            playerConfigs,
           );
 
           if (path && path.length > 1) {
@@ -1551,6 +1587,7 @@ export function MovementBoard({
       gold,
       activeMovement,
       grid,
+      playerConfigs,
     ],
   );
 

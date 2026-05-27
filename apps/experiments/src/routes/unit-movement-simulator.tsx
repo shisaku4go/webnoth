@@ -127,6 +127,7 @@ function UnitMovementSimulatorPage() {
         factionId: faction.id,
         leaderId: defaultLeader,
         controller: 'human',
+        teamId: i,
       });
     }
     setPlayerConfigs(newConfigs);
@@ -164,6 +165,12 @@ function UnitMovementSimulatorPage() {
   ) => {
     setPlayerConfigs((prev) =>
       prev.map((c) => (c.side === side ? { ...c, controller } : c)),
+    );
+  };
+
+  const handlePlayerTeamChange = (side: number, teamId: number) => {
+    setPlayerConfigs((prev) =>
+      prev.map((c) => (c.side === side ? { ...c, teamId } : c)),
     );
   };
 
@@ -463,6 +470,32 @@ function UnitMovementSimulatorPage() {
                           </select>
                         </div>
                       )}
+
+                      <div className="flex flex-col gap-1.5">
+                        <label
+                          htmlFor={`player-${cfg.side}-team`}
+                          className="text-[10px] font-bold text-muted-foreground uppercase"
+                        >
+                          Team
+                        </label>
+                        <select
+                          id={`player-${cfg.side}-team`}
+                          value={cfg.teamId}
+                          onChange={(e) =>
+                            handlePlayerTeamChange(
+                              cfg.side,
+                              parseInt(e.target.value, 10),
+                            )
+                          }
+                          className="w-full rounded-md border border-border bg-zinc-900 px-3 py-2 text-sm text-foreground focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                        >
+                          {playerConfigs.map((c) => (
+                            <option key={c.side} value={c.side}>
+                              Team {c.side}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
                       <div className="flex flex-col gap-1.5">
                         <span className="text-[10px] font-bold text-muted-foreground uppercase">
