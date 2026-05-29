@@ -9,6 +9,9 @@
 //   import { schedules } from '@webnoth/wesnoth-data/schedules';
 //   import { terrains } from '@webnoth/wesnoth-data/terrains';
 
+export type { SoundMapping } from './sounds';
+
+export { sounds } from './sounds';
 export type {
   Alignment,
   AnimationType,

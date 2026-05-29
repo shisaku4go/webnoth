@@ -42,6 +42,8 @@ function wesnothAssetsPlugin(): Plugin {
               jpg: 'image/jpeg',
               jpeg: 'image/jpeg',
               svg: 'image/svg+xml',
+              ogg: 'audio/ogg',
+              wav: 'audio/wav',
             };
             res.setHeader(
               'Content-Type',

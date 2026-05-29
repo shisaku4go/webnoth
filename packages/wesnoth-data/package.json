@@ -8,6 +8,10 @@
       "development": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./sounds": {
+      "development": "./src/sounds.ts",
+      "default": "./src/sounds.ts"
+    },
     "./units": {
       "development": "./src/generated/units.ts",
       "default": "./src/generated/units.ts"
