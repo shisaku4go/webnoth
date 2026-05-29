@@ -711,9 +711,7 @@ function UnitSprite({
       <pixiGraphics
         x={posX + 36}
         y={posY + 54}
-        draw={() => {}}
-        ref={(g: Graphics | null) => {
-          if (!g) return;
+        draw={(g) => {
           g.clear();
           g.drawEllipse(0, 0, 22, 10)
             .fill({ color: ringColor, alpha: 0.28 })
@@ -730,9 +728,7 @@ function UnitSprite({
         <pixiGraphics
           x={posX + 50}
           y={posY + 12}
-          draw={() => {}}
-          ref={(g: Graphics | null) => {
-            if (!g) return;
+          draw={(g) => {
             g.clear();
             g.drawCircle(0, 0, 3.5)
               .fill({ color: 0x10b981, alpha: 1.0 }) // Green active dot
@@ -1704,9 +1700,7 @@ export function MovementBoard({
                           <pixiGraphics
                             x={pos.x}
                             y={pos.y}
-                            draw={() => {}}
-                            ref={(g: Graphics | null) => {
-                              if (!g) return;
+                            draw={(g) => {
                               g.clear();
                               const side = capturedVillages[`${cIdx}_${rIdx}`];
                               const teamColor = getPlayerColor(side).hex;
@@ -1770,9 +1764,7 @@ export function MovementBoard({
                         onPointerOut={() => {
                           setHoveredHex(null);
                         }}
-                        draw={() => {}}
-                        ref={(g: Graphics | null) => {
-                          if (!g) return;
+                        draw={(g) => {
                           g.clear();
                           g.drawPolygon([
                             18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
@@ -1811,15 +1803,15 @@ export function MovementBoard({
                       x={pos.x}
                       y={pos.y}
                       eventMode="none"
-                      draw={() => {}}
-                      ref={(g: Graphics | null) => {
-                        if (!g) return;
+                      draw={(g) => {
                         g.clear();
                         g.drawPolygon([
                           18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
-                        ])
-                          .fill({ color: 0x10b981, alpha: 0.32 })
-                          .stroke({ width: 1.8, color: 0x10b981, alpha: 0.65 });
+                        ]).stroke({
+                          width: 3.5,
+                          color: 0x10b981,
+                          alpha: 0.9,
+                        });
                       }}
                     />
                   );
@@ -1835,15 +1827,15 @@ export function MovementBoard({
                       x={pos.x}
                       y={pos.y}
                       eventMode="none"
-                      draw={() => {}}
-                      ref={(g: Graphics | null) => {
-                        if (!g) return;
+                      draw={(g) => {
                         g.clear();
                         g.drawPolygon([
                           18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
-                        ])
-                          .fill({ color: 0xf59e0b, alpha: 0.35 })
-                          .stroke({ width: 1.8, color: 0xf59e0b, alpha: 0.7 });
+                        ]).stroke({
+                          width: 3.5,
+                          color: 0xf59e0b,
+                          alpha: 0.9,
+                        });
                       }}
                     />
                   );
@@ -1874,9 +1866,7 @@ export function MovementBoard({
                     <pixiGraphics
                       x={pos.x}
                       y={pos.y}
-                      draw={() => {}}
-                      ref={(g: Graphics | null) => {
-                        if (!g) return;
+                      draw={(g) => {
                         g.clear();
                         g.drawPolygon([
                           18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,

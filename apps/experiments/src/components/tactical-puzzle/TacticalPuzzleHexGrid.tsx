@@ -324,12 +324,6 @@ export function TacticalPuzzleHexGrid({
                       ]
                     : null;
 
-                  const isReachable =
-                    reachableHexes[`${cIdx}_${rIdx}`] !== undefined;
-                  const isTarget = adjacentEnemies.some(
-                    (u) => u.x === cIdx && u.y === rIdx,
-                  );
-
                   return (
                     <pixiContainer key={`tile-${rIdx}-${cIdx}`}>
                       {baseTexture?.source && (
@@ -348,46 +342,6 @@ export function TacticalPuzzleHexGrid({
                           y={pos.y}
                           width={72}
                           height={72}
-                        />
-                      )}
-
-                      {/* Reachable/Movement highlight overlays */}
-                      {isReachable && (
-                        <pixiGraphics
-                          x={pos.x}
-                          y={pos.y}
-                          draw={(g) => {
-                            g.clear();
-                            g.stroke({
-                              width: 2.5,
-                              color: 0x10b981,
-                              alpha: 0.85,
-                            }); // Green path outline
-                            g.fill({ color: 0x10b981, alpha: 0.15 });
-                            g.drawPolygon([
-                              18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
-                            ]);
-                          }}
-                        />
-                      )}
-
-                      {/* Adjacent Enemy / Attack Target highlight */}
-                      {isTarget && (
-                        <pixiGraphics
-                          x={pos.x}
-                          y={pos.y}
-                          draw={(g) => {
-                            g.clear();
-                            g.stroke({
-                              width: 3,
-                              color: 0xef4444,
-                              alpha: 0.95,
-                            }); // Red outline for target
-                            g.fill({ color: 0xef4444, alpha: 0.2 });
-                            g.drawPolygon([
-                              18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
-                            ]);
-                          }}
                         />
                       )}
 
@@ -425,6 +379,66 @@ export function TacticalPuzzleHexGrid({
                   );
                 }),
               )}
+
+              {/* 1.5 Highlights (Reachable Hexes & Attack Targets) */}
+              {/* Render reachable hexes in a separate pass to avoid painter's algorithm overlap from adjacent tiles */}
+              {selectedUnitId &&
+                Object.keys(reachableHexes).map((key) => {
+                  const [cStr, rStr] = key.split('_');
+                  const cIdx = Number.parseInt(cStr, 10);
+                  const rIdx = Number.parseInt(rStr, 10);
+                  const pos = getHexPosition(cIdx, rIdx);
+
+                  // Don't draw highlight on the selected unit's own tile
+                  const isOwnTile = units.some(
+                    (u) =>
+                      u.id === selectedUnitId && u.x === cIdx && u.y === rIdx,
+                  );
+                  if (isOwnTile) return null;
+
+                  return (
+                    <pixiGraphics
+                      key={`reachable-highlight-${rIdx}-${cIdx}`}
+                      x={pos.x}
+                      y={pos.y}
+                      eventMode="none"
+                      draw={(g) => {
+                        g.clear();
+                        g.drawPolygon([
+                          18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
+                        ]).stroke({
+                          width: 3.5,
+                          color: 0x10b981,
+                          alpha: 0.9,
+                        });
+                      }}
+                    />
+                  );
+                })}
+
+              {/* Render attack targets / adjacent enemies in a separate pass */}
+              {selectedUnitId &&
+                adjacentEnemies.map((enemy) => {
+                  const pos = getHexPosition(enemy.x, enemy.y);
+                  return (
+                    <pixiGraphics
+                      key={`target-highlight-${enemy.y}-${enemy.x}`}
+                      x={pos.x}
+                      y={pos.y}
+                      eventMode="none"
+                      draw={(g) => {
+                        g.clear();
+                        g.drawPolygon([
+                          18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
+                        ]).stroke({
+                          width: 3.5,
+                          color: 0xef4444,
+                          alpha: 0.95,
+                        });
+                      }}
+                    />
+                  );
+                })}
 
               {/* 2. Combat Jiggle/Slash Effect */}
               {combatEffect && (
