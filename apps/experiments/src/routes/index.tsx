@@ -7,7 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@webnoth/ui/components/card';
-import { BookOpen, Footprints, Map as MapIcon, Swords } from 'lucide-react';
+import {
+  BookOpen,
+  Footprints,
+  Map as MapIcon,
+  Swords,
+  Trophy,
+} from 'lucide-react';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -26,7 +32,30 @@ function HomePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Tactical Puzzles Card */}
+        <Card className="border-border/60 bg-card/40 backdrop-blur-md overflow-hidden hover:shadow-lg transition-all duration-200 group flex flex-col justify-between">
+          <CardHeader className="pb-4">
+            <div className="size-12 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4 text-emerald-500 group-hover:scale-110 transition-transform duration-200">
+              <Trophy className="size-6" />
+            </div>
+            <CardTitle className="text-xl font-bold">
+              Tactical Puzzles
+            </CardTitle>
+            <CardDescription className="text-sm mt-1.5 leading-relaxed">
+              Solve tactical combat scenarios (Tsume-Shogi style) on miniature
+              hex maps with preset squads. Master ZOC and terrain defenses!
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Link to="/tactical-puzzle">
+              <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold cursor-pointer transition-colors duration-200">
+                Play Puzzles
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+
         {/* Battle Simulator Card */}
         <Card className="border-border/60 bg-card/40 backdrop-blur-md overflow-hidden hover:shadow-lg transition-all duration-200 group flex flex-col justify-between">
           <CardHeader className="pb-4">
@@ -44,7 +73,7 @@ function HomePage() {
           </CardHeader>
           <CardContent className="pt-0">
             <Link to="/battle-simulator">
-              <Button className="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold cursor-pointer transition-colors duration-200">
+              <Button className="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-600 hover:to-amber-500 text-white font-bold cursor-pointer transition-colors duration-200">
                 Launch Simulator
               </Button>
             </Link>

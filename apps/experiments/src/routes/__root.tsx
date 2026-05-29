@@ -42,6 +42,13 @@ function RootLayout() {
           >
             Battle Simulator
           </Link>
+          <Link
+            to="/tactical-puzzle"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            activeProps={{ className: 'text-foreground font-medium' }}
+          >
+            Tactical Puzzles
+          </Link>
         </nav>
       </header>
       <main className="container mx-auto px-4 py-6">
