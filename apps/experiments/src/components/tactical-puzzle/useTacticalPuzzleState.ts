@@ -428,8 +428,68 @@ export function useTacticalPuzzleState({
     setActiveSide(2); // CPU Side
     setSelectedUnitId(null);
     setHistory([]);
-    setActionLogs((prev) => [createLog('CPU Turn starts...'), ...prev]);
-  }, [activeSide, activeMovement]);
+
+    const nextUnits = units.map((u) => {
+      if (u.side === 2) {
+        const cell = grid[u.y][u.x];
+        if (isVillage(cell)) {
+          if (u.statuses.poisoned) {
+            return {
+              ...u,
+              moves: u.maxMoves,
+              hasAttacked: false,
+              statuses: {
+                ...u.statuses,
+                poisoned: false,
+              },
+            };
+          }
+          const healAmount = 8;
+          const newHp = Math.min(u.maxHp, u.hp + healAmount);
+          return {
+            ...u,
+            moves: u.maxMoves,
+            hasAttacked: false,
+            hp: newHp,
+          };
+        }
+        return {
+          ...u,
+          moves: u.maxMoves,
+          hasAttacked: false,
+        };
+      }
+      return u;
+    });
+
+    const healLogs: ActionLog[] = [];
+    units.forEach((u) => {
+      if (u.side === 2) {
+        const cell = grid[u.y][u.x];
+        if (isVillage(cell)) {
+          if (u.statuses.poisoned) {
+            healLogs.push(
+              createLog(`✨ CPU ${u.name} was cured of poison at the Village.`),
+            );
+          } else if (u.hp < u.maxHp) {
+            const healed = Math.min(u.maxHp, u.hp + 8) - u.hp;
+            healLogs.push(
+              createLog(
+                `💚 CPU ${u.name} healed +${healed} HP at the Village.`,
+              ),
+            );
+          }
+        }
+      }
+    });
+
+    setUnits(nextUnits);
+    setActionLogs((prev) => [
+      createLog('CPU Turn starts...'),
+      ...healLogs,
+      ...prev,
+    ]);
+  }, [activeSide, activeMovement, grid, units]);
 
   // CPU AI Behavior
   useEffect(() => {
@@ -440,15 +500,63 @@ export function useTacticalPuzzleState({
       // Return turn to player
       setActiveSide(1);
       setTurn((t) => t + 1);
-      setUnits((prevUnits) =>
-        prevUnits.map((u) => ({
-          ...u,
-          moves: u.maxMoves,
-          hasAttacked: false,
-        })),
-      );
+
+      const nextUnits = units.map((u) => {
+        if (u.side === 1) {
+          const cell = grid[u.y][u.x];
+          if (isVillage(cell)) {
+            if (u.statuses.poisoned) {
+              return {
+                ...u,
+                moves: u.maxMoves,
+                hasAttacked: false,
+                statuses: {
+                  ...u.statuses,
+                  poisoned: false,
+                },
+              };
+            }
+            const healAmount = 8;
+            const newHp = Math.min(u.maxHp, u.hp + healAmount);
+            return {
+              ...u,
+              moves: u.maxMoves,
+              hasAttacked: false,
+              hp: newHp,
+            };
+          }
+          return {
+            ...u,
+            moves: u.maxMoves,
+            hasAttacked: false,
+          };
+        }
+        return u;
+      });
+
+      const healLogs: ActionLog[] = [];
+      units.forEach((u) => {
+        if (u.side === 1) {
+          const cell = grid[u.y][u.x];
+          if (isVillage(cell)) {
+            if (u.statuses.poisoned) {
+              healLogs.push(
+                createLog(`✨ ${u.name} was cured of poison at the Village.`),
+              );
+            } else if (u.hp < u.maxHp) {
+              const healed = Math.min(u.maxHp, u.hp + 8) - u.hp;
+              healLogs.push(
+                createLog(`💚 ${u.name} healed +${healed} HP at the Village.`),
+              );
+            }
+          }
+        }
+      });
+
+      setUnits(nextUnits);
       setActionLogs((prev) => [
         createLog(`Turn ${turn + 1}: Player Turn`),
+        ...healLogs,
         ...prev,
       ]);
       return;
