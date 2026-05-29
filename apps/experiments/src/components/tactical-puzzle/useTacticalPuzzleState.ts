@@ -3,6 +3,7 @@ import { getHexPosition } from '@/components/map-viewer/MapViewer';
 import { WesnothBattleManager } from '@/lib/combat/battle-manager';
 import { WesnothCombatCore } from '@/lib/combat/combat-core';
 import type { CombatContext } from '@/lib/combat/types';
+import { soundManager } from '@/lib/sound-manager';
 import {
   type ActiveMovement,
   calculateReachableHexes,
@@ -308,6 +309,8 @@ export function useTacticalPuzzleState({
         ...prev,
       ]);
 
+      soundManager.playUi('click');
+
       setActiveMovement({
         unitId,
         path,
@@ -369,6 +372,28 @@ export function useTacticalPuzzleState({
         stage: 'strike',
       });
 
+      // Play each strike in the simulation sequentially
+      result.logs.forEach((strike, idx) => {
+        setTimeout(() => {
+          soundManager.playAttack(strike.weaponName, strike.isHit);
+
+          const isTargetDefender = strike.defenderName === defender.name;
+          const targetRace = isTargetDefender ? defType.race : attType.race;
+
+          if (strike.isHit) {
+            soundManager.playHit(targetRace);
+          }
+
+          if (strike.isDead) {
+            setTimeout(() => {
+              soundManager.playDie(targetRace);
+            }, 120);
+          }
+        }, idx * 220); // 220ms stagger between strikes
+      });
+
+      const animationDuration = Math.max(500, result.logs.length * 220 + 80);
+
       setTimeout(() => {
         setCombatEffect((prev) => (prev ? { ...prev, stage: 'recoil' } : null));
 
@@ -415,7 +440,7 @@ export function useTacticalPuzzleState({
           }
           setActionLogs((prev) => [...newLogs.reverse(), ...prev]);
           setSelectedUnitId(null);
-        }, 250);
+        }, animationDuration - 250);
       }, 250);
     },
     [units, grid],
@@ -745,6 +770,7 @@ export function useTacticalPuzzleState({
       if (occupant && occupant.side === 1) {
         setSelectedUnitId(occupant.id);
         setPendingCombat(null);
+        soundManager.playUi('select');
         return;
       }
 
@@ -809,6 +835,7 @@ export function useTacticalPuzzleState({
       if (occupant && occupant.side === 2) {
         setSelectedUnitId(occupant.id);
         setPendingCombat(null);
+        soundManager.playUi('select');
         return;
       }
 
