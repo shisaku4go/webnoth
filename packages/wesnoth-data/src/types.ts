@@ -3,7 +3,7 @@
 //
 // TypeScript types representing Wesnoth game data extracted from WML files.
 // These types are designed to be comprehensive enough for:
-//   - Unit encyclopedias (図鑑)
+//   - Unit encyclopedias
 //   - Battle simulators
 //   - Full web-based Wesnoth implementation
 //
@@ -251,7 +251,7 @@ export interface WesnothCampaign {
   scenarios: WesnothMap[];
 }
 
-// === Provenance (出所情報) ===
+// === Provenance (Origin / Extraction Source Info) ===
 
 export interface WesnothProvenance {
   /** Git revision (SHA) of the wesnoth repository used for extraction */

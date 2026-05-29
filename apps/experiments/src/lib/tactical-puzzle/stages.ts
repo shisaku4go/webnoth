@@ -23,7 +23,7 @@ export interface PuzzleStage {
 export const puzzleStages: PuzzleStage[] = [
   {
     id: 'stage_1',
-    name: 'Stage 1: Forest Ambush (森林の遭遇戦)',
+    name: 'Stage 1: Forest Ambush',
     description:
       'You are ambushed in a dense pine forest! Orcish invaders are advancing. Use the high defensive cover of the forest to outmaneuver them.',
     mapName: 'Forest Arena',
@@ -56,7 +56,7 @@ export const puzzleStages: PuzzleStage[] = [
   },
   {
     id: 'stage_2',
-    name: 'Stage 2: Mountain Chokepoint (山岳の関所)',
+    name: 'Stage 2: Mountain Chokepoint',
     description:
       'A critical mountain pass is guarded by an Orcish Assassin and their grunt ally. Dwarvish fighters are extremely resilient on mountainous terrains—hold the line!',
     mapName: 'Mountain Pass',
@@ -90,7 +90,7 @@ export const puzzleStages: PuzzleStage[] = [
   },
   {
     id: 'stage_3',
-    name: 'Stage 3: River Defense (渡河防衛線)',
+    name: 'Stage 3: River Defense',
     description:
       'An Undead force is trying to cross the river. You must hold the riverbank. Do not venture into the water, and exploit the Skeletons vulnerabilities!',
     mapName: 'River Ford',

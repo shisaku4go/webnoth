@@ -74,8 +74,8 @@ Associates campaigns and scenarios with their corresponding map grids.
 
 ### D. Translations (`po/wesnoth-lib/ja.po` etc.)
 Wesnoth uses gettext for localization.
-*   You can parse `po/wesnoth-lib/ja.po` to extract Japanese mappings for terrain names (e.g., `Shallow Water` -> `浅瀬`).
-*   Pre-compile these `.po` files to a JSON dictionary (e.g., `{"Shallow Water": "浅瀬"}`) to use in the browser.
+*   You can parse localization files (e.g., `.po` files) to extract translation mappings for terrain names (e.g., `Shallow Water` -> `Eau peu profonde`).
+*   Pre-compile these `.po` files to a JSON dictionary (e.g., `{"Shallow Water": "Eau peu profonde"}`) to use in the browser.
 
 ---
 

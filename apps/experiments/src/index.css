@@ -1,4 +1,4 @@
 @import "@webnoth/ui/styles/globals.css";
 
-/* apps/experiments 側の @source を追加 */
+/* Add @source for apps/experiments */
 @source "../src";

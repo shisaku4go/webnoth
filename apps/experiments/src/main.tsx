@@ -5,24 +5,24 @@ import ReactDOM from 'react-dom/client';
 import { routeTree } from './routeTree.gen';
 import './index.css';
 
-// TanStack Router のインスタンス作成
+// Create TanStack Router instance
 const router = createRouter({
   routeTree,
   basepath: import.meta.env.BASE_URL.replace(/\/$/, ''),
 });
 
-// TanStack Router の型安全性を登録
+// Register TanStack Router type safety
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router;
   }
 }
 
-// TanStack Query のクライアント作成
+// Create TanStack Query client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5分
+      staleTime: 1000 * 60 * 5, // 5 minutes
     },
   },
 });
