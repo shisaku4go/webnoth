@@ -1098,7 +1098,6 @@ export function TacticalPuzzleBoard({
   const handleHexClick = (cIdx: number, rIdx: number) => {
     if (activeSide !== 1 || activeMovement || combatEffect) return;
 
-    const cell = grid[rIdx][cIdx];
     const occupant = units.find((u) => u.x === cIdx && u.y === rIdx);
 
     // 1. Select player unit (including exhausted)
@@ -1877,7 +1876,7 @@ function UnitAnimatedSprite({
             (!attackWeaponName || a.filterAttack === attackWeaponName),
         ) || unitType.animations.find((a) => a.type === 'attack');
 
-      if (attackAnim && attackAnim.frames && attackAnim.frames.length > 0) {
+      if (attackAnim?.frames && attackAnim.frames.length > 0) {
         return attackAnim.frames;
       }
     }
@@ -1891,11 +1890,7 @@ function UnitAnimatedSprite({
           (a) => a.type === 'idle' && a.frames && a.frames.length > 0,
         );
 
-      if (
-        standingAnim &&
-        standingAnim.frames &&
-        standingAnim.frames.length > 0
-      ) {
+      if (standingAnim?.frames && standingAnim.frames.length > 0) {
         return standingAnim.frames;
       }
     }

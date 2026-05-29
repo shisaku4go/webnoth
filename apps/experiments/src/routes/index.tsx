@@ -73,7 +73,7 @@ function HomePage() {
           </CardHeader>
           <CardContent className="pt-0">
             <Link to="/battle-simulator">
-              <Button className="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-600 to-amber-500 text-white font-bold cursor-pointer transition-colors duration-200">
+              <Button className="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-600 hover:to-amber-500 text-white font-bold cursor-pointer transition-colors duration-200">
                 Launch Simulator
               </Button>
             </Link>
