@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getHexPosition } from '@/components/map-viewer/MapViewer';
 import { WesnothBattleManager } from '@/lib/combat/battle-manager';
 import { WesnothCombatCore } from '@/lib/combat/combat-core';
@@ -76,6 +76,16 @@ export function useTacticalPuzzleState({
   const [activeMovement, setActiveMovement] = useState<ActiveMovement | null>(
     null,
   );
+
+  // Combat timeouts tracking for cleanup
+  const timeoutIdsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => {
+    return () => {
+      timeoutIdsRef.current.forEach(clearTimeout);
+      timeoutIdsRef.current = [];
+    };
+  }, []);
 
   // Combat Prediction State
   const [pendingCombat, setPendingCombat] = useState<{
@@ -355,6 +365,8 @@ export function useTacticalPuzzleState({
         defenderSlowed: defender.statuses.slowed,
         attackerPoisoned: attacker.statuses.poisoned,
         defenderPoisoned: defender.statuses.poisoned,
+        attackerId: attId,
+        defenderId: defId,
       });
 
       const attPos = getHexPosition(attacker.x, attacker.y);
@@ -372,12 +384,16 @@ export function useTacticalPuzzleState({
         stage: 'strike',
       });
 
+      // Clear any pre-existing timeouts before scheduling new ones
+      timeoutIdsRef.current.forEach(clearTimeout);
+      timeoutIdsRef.current = [];
+
       // Play each strike in the simulation sequentially
       result.logs.forEach((strike, idx) => {
-        setTimeout(() => {
+        const strikeTimer = setTimeout(() => {
           soundManager.playAttack(strike.weaponName, strike.isHit);
 
-          const isTargetDefender = strike.defenderName === defender.name;
+          const isTargetDefender = strike.defenderId === defender.id;
           const targetRace = isTargetDefender ? defType.race : attType.race;
 
           if (strike.isHit) {
@@ -385,19 +401,21 @@ export function useTacticalPuzzleState({
           }
 
           if (strike.isDead) {
-            setTimeout(() => {
+            const dieTimer = setTimeout(() => {
               soundManager.playDie(targetRace);
             }, 120);
+            timeoutIdsRef.current.push(dieTimer);
           }
         }, idx * 220); // 220ms stagger between strikes
+        timeoutIdsRef.current.push(strikeTimer);
       });
 
       const animationDuration = Math.max(500, result.logs.length * 220 + 80);
 
-      setTimeout(() => {
+      const recoilTimer = setTimeout(() => {
         setCombatEffect((prev) => (prev ? { ...prev, stage: 'recoil' } : null));
 
-        setTimeout(() => {
+        const endTimer = setTimeout(() => {
           setCombatEffect(null);
 
           setUnits((prevUnits) => {
@@ -441,7 +459,9 @@ export function useTacticalPuzzleState({
           setActionLogs((prev) => [...newLogs.reverse(), ...prev]);
           setSelectedUnitId(null);
         }, animationDuration - 250);
+        timeoutIdsRef.current.push(endTimer);
       }, 250);
+      timeoutIdsRef.current.push(recoilTimer);
     },
     [units, grid],
   );

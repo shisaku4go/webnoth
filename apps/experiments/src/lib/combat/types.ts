@@ -30,6 +30,8 @@ export interface StrikeEvent {
   strikeNumber: number;
   attackerName: string;
   defenderName: string;
+  attackerId?: string;
+  defenderId?: string;
   weaponName: string;
   isHit: boolean;
   damage: number;

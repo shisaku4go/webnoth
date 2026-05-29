@@ -3,7 +3,7 @@ import { wesnothAssetUrl } from '@/lib/asset-url';
 
 class SoundManager {
   private ctx: AudioContext | null = null;
-  private bufferCache = new Map<string, AudioBuffer>();
+  private bufferCache = new Map<string, Promise<AudioBuffer>>();
   private masterGain: GainNode | null = null;
   private isUnlocked = false;
 
@@ -85,31 +85,51 @@ class SoundManager {
   }
 
   /**
-   * Fetch and decode an audio file, caching the resulting AudioBuffer.
+   * Fetch and decode an audio file, caching the resulting AudioBuffer Promise.
    */
-  private async loadBuffer(path: string): Promise<AudioBuffer | null> {
+  private loadBuffer(path: string): Promise<AudioBuffer> {
     this.init();
-    if (!this.ctx) return null;
-
-    const cached = this.bufferCache.get(path);
-    if (cached) return cached;
-
-    const url = wesnothAssetUrl(path);
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch sound: ${url} (status: ${response.status})`,
-        );
-      }
-      const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await this.ctx.decodeAudioData(arrayBuffer);
-      this.bufferCache.set(path, audioBuffer);
-      return audioBuffer;
-    } catch (error) {
-      console.error(`Error loading sound effect at ${path}:`, error);
-      return null;
+    if (!this.ctx) {
+      return Promise.reject(new Error('AudioContext not initialized'));
     }
+
+    const ctx = this.ctx;
+
+    let promise = this.bufferCache.get(path);
+    if (!promise) {
+      promise = (async () => {
+        const url = wesnothAssetUrl(path);
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch sound: ${url} (status: ${response.status})`,
+          );
+        }
+        const arrayBuffer = await response.arrayBuffer();
+        return await ctx.decodeAudioData(arrayBuffer);
+      })();
+      this.bufferCache.set(path, promise);
+
+      // Handle promise rejection by deleting it from cache so future attempts can retry
+      promise.catch(() => {
+        this.bufferCache.delete(path);
+      });
+    }
+    return promise;
+  }
+
+  /**
+   * Preload a list of sound paths.
+   */
+  public async preloadSounds(paths: string[]): Promise<void> {
+    this.init();
+    const promises = paths.map((path) =>
+      this.loadBuffer(path).catch((err) => {
+        console.warn(`Failed to preload sound: ${path}`, err);
+        return null;
+      }),
+    );
+    await Promise.all(promises);
   }
 
   /**
@@ -135,9 +155,13 @@ class SoundManager {
       await this.ctx.resume();
     }
 
-    const buffer = await this.loadBuffer(path);
-    if (buffer) {
-      this.playBuffer(buffer);
+    try {
+      const buffer = await this.loadBuffer(path);
+      if (buffer) {
+        this.playBuffer(buffer);
+      }
+    } catch (error) {
+      console.error(`Error playing sound effect at ${path}:`, error);
     }
   }
 

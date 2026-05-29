@@ -438,6 +438,8 @@ export const WesnothBattleManager = {
       defenderSlowed?: boolean;
       attackerPoisoned?: boolean;
       defenderPoisoned?: boolean;
+      attackerId?: string;
+      defenderId?: string;
     },
   ): BattleResult {
     // 1. Initialize states
@@ -659,6 +661,8 @@ export const WesnothBattleManager = {
             strikeNumber: strikeNumber++,
             attackerName: attacker.name,
             defenderName: defender.name,
+            attackerId: options.attackerId,
+            defenderId: options.defenderId,
             weaponName: aWep.name,
             isHit,
             damage,
@@ -749,6 +753,8 @@ export const WesnothBattleManager = {
             strikeNumber: strikeNumber++,
             attackerName: defender.name,
             defenderName: attacker.name,
+            attackerId: options.defenderId,
+            defenderId: options.attackerId,
             weaponName: dWep.name,
             isHit,
             damage,

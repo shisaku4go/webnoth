@@ -1,5 +1,6 @@
 import { Application, extend, useTick } from '@pixi/react';
 import type { WesnothUnitType } from '@webnoth/wesnoth-data';
+import { sounds } from '@webnoth/wesnoth-data/sounds';
 import { terrains } from '@webnoth/wesnoth-data/terrains';
 import {
   Assets,
@@ -19,6 +20,7 @@ import {
 } from '@/components/map-viewer/MapViewer';
 import { getPlayerColor } from '@/components/movement-simulator/MovementBoard';
 import { wesnothAssetUrl } from '@/lib/asset-url';
+import { soundManager } from '@/lib/sound-manager';
 import type { TacticalUnitState } from '@/lib/tactical-puzzle/pathfinder';
 import type { PuzzleStage } from '@/lib/tactical-puzzle/stages';
 import { getUnitById } from '@/lib/wesnoth-data';
@@ -213,19 +215,62 @@ export function TacticalPuzzleHexGrid({
     }
 
     const urls = Array.from(imageUrls);
-    Promise.all(
-      urls.map((url) =>
-        Assets.load(url).catch((err) => {
-          console.warn(`Failed to load texture: ${url}`, err);
-          return null;
-        }),
+
+    // Collect sound paths to preload for the current stage
+    const soundPaths = new Set<string>();
+    soundPaths.add(sounds.ui.select);
+    soundPaths.add(sounds.ui.click);
+    soundPaths.add(sounds.miss);
+
+    for (const uPlacement of stage.startingUnits) {
+      const type = getUnitById(uPlacement.unitTypeId);
+      if (type) {
+        // Add attack sounds
+        for (const attack of type.attacks) {
+          const name = attack.name.toLowerCase();
+          let attackPath = '';
+          for (const [key, path] of Object.entries(sounds.attacks)) {
+            if (name.includes(key)) {
+              attackPath = path;
+              break;
+            }
+          }
+          if (attackPath) soundPaths.add(attackPath);
+        }
+
+        // Add hit/die sounds for the unit's race
+        const race = type.race.toLowerCase();
+        const hitOptions = sounds.hits[race] || sounds.hits.human;
+        if (hitOptions) {
+          for (const h of hitOptions) {
+            soundPaths.add(h);
+          }
+        }
+        const diePath = sounds.die[race] || sounds.die.human;
+        if (diePath) soundPaths.add(diePath);
+      }
+    }
+
+    const soundPathsList = Array.from(soundPaths);
+
+    Promise.all([
+      // Load image textures
+      Promise.all(
+        urls.map((url) =>
+          Assets.load(url).catch((err) => {
+            console.warn(`Failed to load texture: ${url}`, err);
+            return null;
+          }),
+        ),
       ),
-    ).then((results) => {
+      // Preload sounds
+      soundManager.preloadSounds(soundPathsList),
+    ]).then(([textureResults]) => {
       if (!active) return;
       const map: Record<string, Texture> = {};
       urls.forEach((url, i) => {
-        if (results[i]) {
-          map[url] = results[i];
+        if (textureResults[i]) {
+          map[url] = textureResults[i];
         }
       });
       setTextures(map);
