@@ -366,3 +366,19 @@ export function formatTerrainName(key: string): string {
 export function getTotalUnitCount(): number {
   return unitTypes.filter((u) => !u.doNotList && !u.hideHelp).length;
 }
+
+/**
+ * Return a gender-specific WesnothUnitType by applying female or male overrides.
+ */
+export function getGenderSpecificUnitType(
+  unit: WesnothUnitType,
+  gender?: string,
+): WesnothUnitType {
+  if (gender === 'female' && unit.female) {
+    return { ...unit, ...unit.female } as WesnothUnitType;
+  }
+  if (gender === 'male' && unit.male) {
+    return { ...unit, ...unit.male } as WesnothUnitType;
+  }
+  return unit;
+}

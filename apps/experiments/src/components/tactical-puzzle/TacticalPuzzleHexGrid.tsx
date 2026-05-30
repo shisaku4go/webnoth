@@ -23,7 +23,7 @@ import { wesnothAssetUrl } from '@/lib/asset-url';
 import { soundManager } from '@/lib/sound-manager';
 import type { TacticalUnitState } from '@/lib/tactical-puzzle/pathfinder';
 import type { PuzzleStage } from '@/lib/tactical-puzzle/stages';
-import { getUnitById } from '@/lib/wesnoth-data';
+import { getGenderSpecificUnitType, getUnitById } from '@/lib/wesnoth-data';
 import type {
   CombatEffectState,
   CombatStrikeState,
@@ -36,7 +36,7 @@ const HEX_HIT_AREA = new Polygon([18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36]);
 
 interface UnitAnimatedSpriteProps {
   unitType: WesnothUnitType;
-  textures: Record<string, Texture>;
+  textures: Record<string, Texture | null>;
   isAttacking: boolean;
   attackWeaponName: string | null;
   uX: number;
@@ -147,7 +147,7 @@ function UnitAnimatedSprite({
 interface CombatUnitProps {
   unit: TacticalUnitState;
   selectedUnitId: string | null;
-  textures: Record<string, Texture>;
+  textures: Record<string, Texture | null>;
   combatEffect: CombatEffectState | null;
   combatStrike: CombatStrikeState | null;
   units: TacticalUnitState[];
@@ -163,7 +163,10 @@ function CombatUnit({
   units,
   handleHexClick,
 }: CombatUnitProps) {
-  const type = getUnitById(unit.unitTypeId);
+  const baseType = getUnitById(unit.unitTypeId);
+  const type = baseType
+    ? getGenderSpecificUnitType(baseType, unit.gender)
+    : undefined;
 
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
@@ -250,7 +253,7 @@ function CombatUnit({
         y={54}
         draw={(g) => {
           g.clear();
-          g.drawEllipse(0, 0, 22, 10)
+          g.ellipse(0, 0, 22, 10)
             .fill({ color: colorConfig.hex, alpha: 0.28 })
             .stroke({
               width: isSelected ? 2.5 : 1.2,
@@ -268,11 +271,11 @@ function CombatUnit({
         draw={(g) => {
           g.clear();
           const pct = unit.hp / unit.maxHp;
-          g.fill({ color: 0x27272a, alpha: 0.8 }).drawRect(0, 0, 36, 4); // background
+          g.fill({ color: 0x27272a, alpha: 0.8 }).rect(0, 0, 36, 4); // background
           g.fill({
             color: pct > 0.4 ? 0x22c55e : 0xef4444,
             alpha: 1.0,
-          }).drawRect(0, 0, 36 * pct, 4); // filled
+          }).rect(0, 0, 36 * pct, 4); // filled
         }}
       />
 
@@ -284,7 +287,7 @@ function CombatUnit({
           y={12}
           draw={(g) => {
             g.clear();
-            g.drawCircle(0, 0, 3).fill({ color: 0x22c55e });
+            g.circle(0, 0, 3).fill({ color: 0x22c55e });
           }}
         />
       )}
@@ -338,7 +341,7 @@ export function TacticalPuzzleHexGrid({
   setHoveredHex,
   handleHexClick,
 }: TacticalPuzzleHexGridProps) {
-  const [textures, setTextures] = useState<Record<string, Texture>>({});
+  const [textures, setTextures] = useState<Record<string, Texture | null>>({});
   const [loading, setLoading] = useState(true);
 
   const grid = stage.grid;
@@ -371,16 +374,52 @@ export function TacticalPuzzleHexGrid({
       }
     }
 
-    // Load unit images
+    // Collect all reachable unit types recursively (starting units + their advancements)
+    const allReachableUnitTypeIds = new Set<string>();
+    const collectUnitTypes = (typeId: string) => {
+      if (allReachableUnitTypeIds.has(typeId)) return;
+      allReachableUnitTypeIds.add(typeId);
+      const type = getUnitById(typeId);
+      if (type?.advancesTo) {
+        for (const adv of type.advancesTo) {
+          if (adv && adv !== 'null') {
+            collectUnitTypes(adv);
+          }
+        }
+      }
+    };
+
     for (const uPlacement of stage.startingUnits) {
-      const type = getUnitById(uPlacement.unitTypeId);
+      collectUnitTypes(uPlacement.unitTypeId);
+    }
+
+    // Load unit images for all collected unit types
+    for (const typeId of allReachableUnitTypeIds) {
+      const type = getUnitById(typeId);
       if (type) {
-        imageUrls.add(wesnothAssetUrl(type.image));
-        if (type.animations) {
-          for (const anim of type.animations) {
+        // Base / male variant assets
+        const maleType = type.male ? { ...type, ...type.male } : type;
+        imageUrls.add(wesnothAssetUrl(maleType.image));
+        if (maleType.animations) {
+          for (const anim of maleType.animations) {
             for (const f of anim.frames ?? []) {
               if (f.image) {
                 imageUrls.add(wesnothAssetUrl(f.image));
+              }
+            }
+          }
+        }
+
+        // Female variant assets
+        if (type.female) {
+          const femaleType = { ...type, ...type.female };
+          imageUrls.add(wesnothAssetUrl(femaleType.image));
+          if (femaleType.animations) {
+            for (const anim of femaleType.animations) {
+              for (const f of anim.frames ?? []) {
+                if (f.image) {
+                  imageUrls.add(wesnothAssetUrl(f.image));
+                }
               }
             }
           }
@@ -396,8 +435,8 @@ export function TacticalPuzzleHexGrid({
     soundPaths.add(sounds.ui.click);
     soundPaths.add(sounds.miss);
 
-    for (const uPlacement of stage.startingUnits) {
-      const type = getUnitById(uPlacement.unitTypeId);
+    for (const typeId of allReachableUnitTypeIds) {
+      const type = getUnitById(typeId);
       if (type) {
         // Add attack sounds
         for (const attack of type.attacks) {
@@ -441,7 +480,7 @@ export function TacticalPuzzleHexGrid({
       soundManager.preloadSounds(soundPathsList),
     ]).then(([textureResults]) => {
       if (!active) return;
-      const map: Record<string, Texture> = {};
+      const map: Record<string, Texture | null> = {};
       urls.forEach((url, i) => {
         if (textureResults[i]) {
           map[url] = textureResults[i];
@@ -455,6 +494,61 @@ export function TacticalPuzzleHexGrid({
       active = false;
     };
   }, [grid, stage.startingUnits]);
+
+  // Dynamic background loading for any missing unit textures (e.g. from level-up or squad carryover)
+  const unitImagesToLoad = useMemo(() => {
+    const urls: string[] = [];
+    for (const u of units) {
+      const baseType = getUnitById(u.unitTypeId);
+      if (baseType) {
+        const type = getGenderSpecificUnitType(baseType, u.gender);
+        const uUrl = wesnothAssetUrl(type.image);
+        if (!(uUrl in textures)) {
+          urls.push(uUrl);
+        }
+        if (type.animations) {
+          for (const anim of type.animations) {
+            for (const f of anim.frames ?? []) {
+              if (f.image) {
+                const fUrl = wesnothAssetUrl(f.image);
+                if (!(fUrl in textures)) {
+                  urls.push(fUrl);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return urls;
+  }, [units, textures]);
+
+  useEffect(() => {
+    if (unitImagesToLoad.length === 0) return;
+
+    let active = true;
+    Promise.all(
+      unitImagesToLoad.map((url) =>
+        Assets.load(url).catch((err) => {
+          console.warn(`Failed to load dynamic texture: ${url}`, err);
+          return null;
+        }),
+      ),
+    ).then((results) => {
+      if (!active) return;
+      setTextures((prev) => {
+        const next = { ...prev };
+        unitImagesToLoad.forEach((url, i) => {
+          next[url] = results[i]; // Store even if it fails (null) to prevent infinite reloading loops
+        });
+        return next;
+      });
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [unitImagesToLoad]);
 
   return (
     <div className="flex-1 min-h-[500px] h-[550px] relative rounded-xl border border-border/80 shadow-lg overflow-hidden bg-zinc-950 flex flex-col">
@@ -544,9 +638,7 @@ export function TacticalPuzzleHexGrid({
                             alpha: 0.15,
                           });
                           g.fill({ color: 0xffffff, alpha: 0.0001 });
-                          g.drawPolygon([
-                            18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
-                          ]);
+                          g.poly([18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36]);
                         }}
                       />
                     </pixiContainer>
@@ -578,7 +670,7 @@ export function TacticalPuzzleHexGrid({
                       eventMode="none"
                       draw={(g) => {
                         g.clear();
-                        g.drawPolygon([
+                        g.poly([
                           18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
                         ]).stroke({
                           width: 3.5,
@@ -602,7 +694,7 @@ export function TacticalPuzzleHexGrid({
                       eventMode="none"
                       draw={(g) => {
                         g.clear();
-                        g.drawPolygon([
+                        g.poly([
                           18, 0, 54, 0, 72, 36, 54, 72, 18, 72, 0, 36,
                         ]).stroke({
                           width: 3.5,

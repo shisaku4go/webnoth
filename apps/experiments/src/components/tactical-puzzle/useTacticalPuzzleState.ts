@@ -57,14 +57,313 @@ export const createLog = (text: string): ActionLog => ({
   text,
 });
 
+export interface PendingAdvancement {
+  unitId: string;
+  unitName: string;
+  options: string[]; // e.g. ["Elvish Captain", "Elvish Hero"]
+  currentType: string;
+}
+
+function advanceUnitState(
+  u: TacticalUnitState,
+  newTypeId: string,
+  overflowXp: number,
+): TacticalUnitState {
+  const newUnitType = getUnitById(newTypeId);
+  if (!newUnitType) return u;
+
+  const baseState = WesnothBattleManager.initializeUnitState(
+    newUnitType,
+    u.traits.filter((t) => !t.startsWith('resistance_')),
+    u.gender,
+  );
+
+  return {
+    ...u,
+    ...baseState,
+    id: u.id,
+    side: u.side,
+    x: u.x,
+    y: u.y,
+    moves: newUnitType.movement,
+    maxMoves: newUnitType.movement,
+    hasAttacked: u.hasAttacked,
+    xp: overflowXp,
+    maxXp: baseState.maxXp,
+    maxHp: baseState.maxHp,
+    hp: baseState.maxHp,
+    statuses: {
+      poisoned: false,
+      slowed: false,
+      petrified: false,
+    },
+  };
+}
+
+function applyXpAndCheckLevelUp(
+  u: TacticalUnitState,
+  xpGained: number,
+  onAutoAdvanceLog: (msg: string) => void,
+): {
+  unit: TacticalUnitState;
+  pendingChoice?: { unitId: string; options: string[] };
+} {
+  const newXp = u.xp + xpGained;
+  if (newXp >= u.maxXp) {
+    const unitType = getUnitById(u.unitTypeId);
+    const advancesTo = unitType?.advancesTo || [];
+    const validAdvances = advancesTo.filter((id) => id && id !== 'null');
+
+    if (validAdvances.length === 0) {
+      // Max level reached
+      return {
+        unit: {
+          ...u,
+          xp: u.maxXp,
+        },
+      };
+    }
+
+    if (u.side === 2) {
+      // CPU units auto-advance to first option
+      const newTypeId = validAdvances[0];
+      const advancedUnit = advanceUnitState(u, newTypeId, newXp - u.maxXp);
+      onAutoAdvanceLog(
+        `✨ CPU ${u.name} advanced to ${getUnitById(newTypeId)?.name}!`,
+      );
+      return { unit: advancedUnit };
+    }
+
+    if (validAdvances.length === 1) {
+      // Player unit auto-advances if only one option
+      const newTypeId = validAdvances[0];
+      const advancedUnit = advanceUnitState(u, newTypeId, newXp - u.maxXp);
+      onAutoAdvanceLog(
+        `✨ ${u.name} advanced to ${getUnitById(newTypeId)?.name}!`,
+      );
+      return { unit: advancedUnit };
+    }
+
+    // Player unit has multiple choice
+    return {
+      unit: {
+        ...u,
+        xp: newXp, // temporarily hold newXp
+      },
+      pendingChoice: {
+        unitId: u.id,
+        options: validAdvances,
+      },
+    };
+  }
+
+  return {
+    unit: {
+      ...u,
+      xp: newXp,
+    },
+  };
+}
+
+function applyTurnStartHealing(
+  unitsList: TacticalUnitState[],
+  side: number,
+  grid: string[][],
+  cols: number,
+  rows: number,
+): { nextUnits: TacticalUnitState[]; logs: ActionLog[] } {
+  const healers = unitsList.filter((u) => {
+    if (u.side !== side) return false;
+    const type = getUnitById(u.unitTypeId);
+    return (
+      type?.abilities?.some((a) => a === 'heals' || a.startsWith('heals_')) ??
+      false
+    );
+  });
+
+  const healLogs: ActionLog[] = [];
+  const nextUnits = unitsList.map((u) => {
+    if (u.side !== side) return u;
+
+    const cell = grid[u.y][u.x];
+    const inVillage = isVillage(cell);
+    const type = getUnitById(u.unitTypeId);
+    const hasRegenerate = type?.abilities?.includes('regenerates') ?? false;
+
+    // 0. Regeneration healing/curing
+    if (hasRegenerate) {
+      if (u.statuses.poisoned) {
+        healLogs.push(
+          createLog(
+            `✨ ${side === 1 ? '' : 'CPU '}${u.name} regenerated and was cured of poison.`,
+          ),
+        );
+        return {
+          ...u,
+          statuses: { ...u.statuses, poisoned: false },
+        };
+      }
+
+      if (u.hp < u.maxHp) {
+        const healAmount = 8;
+        const healed = Math.min(u.maxHp, u.hp + healAmount) - u.hp;
+        if (healed > 0) {
+          healLogs.push(
+            createLog(
+              `💚 ${side === 1 ? '' : 'CPU '}${u.name} regenerated +${healed} HP.`,
+            ),
+          );
+          return {
+            ...u,
+            hp: Math.min(u.maxHp, u.hp + healAmount),
+          };
+        }
+      }
+      return u;
+    }
+
+    // 1. Village healing/curing
+    if (inVillage) {
+      if (u.statuses.poisoned) {
+        healLogs.push(
+          createLog(
+            `✨ ${side === 1 ? '' : 'CPU '}${u.name} was cured of poison at the Village.`,
+          ),
+        );
+        return {
+          ...u,
+          statuses: { ...u.statuses, poisoned: false },
+        };
+      }
+
+      if (u.hp < u.maxHp) {
+        const healAmount = 8;
+        const healed = Math.min(u.maxHp, u.hp + healAmount) - u.hp;
+        healLogs.push(
+          createLog(
+            `💚 ${side === 1 ? '' : 'CPU '}${u.name} healed +${healed} HP at the Village.`,
+          ),
+        );
+        return {
+          ...u,
+          hp: Math.min(u.maxHp, u.hp + healAmount),
+        };
+      }
+      return u;
+    }
+
+    // 2. Healer healing/curing
+    if (healers.length > 0) {
+      const adj = getAdjacentHexes(u.x, u.y, cols, rows);
+      const adjacentHealers = healers.filter(
+        (h) => h.id !== u.id && adj.some((a) => a.x === h.x && a.y === h.y),
+      );
+
+      if (adjacentHealers.length > 0) {
+        let maxHealPower = 0;
+        let hasCures = false;
+
+        for (const h of adjacentHealers) {
+          const type = getUnitById(h.unitTypeId);
+          if (type?.abilities) {
+            for (const ability of type.abilities) {
+              if (ability.startsWith('heals_')) {
+                const amt = parseInt(ability.split('_')[1], 10);
+                if (!Number.isNaN(amt) && amt > maxHealPower) {
+                  maxHealPower = amt;
+                }
+              } else if (ability === 'heals') {
+                if (4 > maxHealPower) maxHealPower = 4;
+              }
+              if (ability === 'cures') {
+                hasCures = true;
+              }
+            }
+          }
+        }
+
+        // Handle poison curing/slowing
+        if (u.statuses.poisoned) {
+          if (hasCures) {
+            healLogs.push(
+              createLog(
+                `✨ ${side === 1 ? '' : 'CPU '}${u.name} was cured of poison by the healer.`,
+              ),
+            );
+            return {
+              ...u,
+              statuses: { ...u.statuses, poisoned: false },
+            };
+          } else {
+            // Poison is slowed by heals but not cured
+            healLogs.push(
+              createLog(
+                `✨ ${side === 1 ? '' : 'CPU '}${u.name}'s poison was slowed by the healer.`,
+              ),
+            );
+            return u;
+          }
+        }
+
+        // Handle HP healing
+        if (u.hp < u.maxHp && maxHealPower > 0) {
+          const healed = Math.min(u.maxHp, u.hp + maxHealPower) - u.hp;
+          if (healed > 0) {
+            const healerNames = adjacentHealers
+              .map((h) => {
+                const type = getUnitById(h.unitTypeId);
+                return type?.name || h.name;
+              })
+              .join(' & ');
+            healLogs.push(
+              createLog(
+                `💚 ${side === 1 ? '' : 'CPU '}${u.name} healed +${healed} HP from the ${healerNames}'s presence.`,
+              ),
+            );
+            return {
+              ...u,
+              hp: Math.min(u.maxHp, u.hp + maxHealPower),
+            };
+          }
+        }
+        return u;
+      }
+    }
+
+    // 3. Poison damage if not in a village and not next to any healer
+    if (u.statuses.poisoned) {
+      const dmg = 8;
+      const nextHp = Math.max(1, u.hp - dmg);
+      const lostHp = u.hp - nextHp;
+      if (lostHp > 0) {
+        healLogs.push(
+          createLog(
+            `☠ ${side === 1 ? '' : 'CPU '}${u.name} suffered -${lostHp} HP from poison.`,
+          ),
+        );
+      }
+      return {
+        ...u,
+        hp: nextHp,
+      };
+    }
+
+    return u;
+  });
+
+  return { nextUnits, logs: healLogs };
+}
+
 interface UseTacticalPuzzleStateProps {
   stage: PuzzleStage;
-  onVictory: (xpGained: number) => void;
+  initialPlayerSquad?: TacticalUnitState[] | null;
+  onVictory: (xpGained: number, survivors: TacticalUnitState[]) => void;
   onDefeat: (reason: string) => void;
 }
 
 export function useTacticalPuzzleState({
   stage,
+  initialPlayerSquad,
   onVictory,
   onDefeat,
 }: UseTacticalPuzzleStateProps) {
@@ -73,6 +372,10 @@ export function useTacticalPuzzleState({
   const [activeSide, setActiveSide] = useState<number>(1);
   const [turn, setTurn] = useState<number>(1);
   const [hoveredHex, setHoveredHex] = useState<HoveredHexState | null>(null);
+
+  // Level-up choice selection state
+  const [pendingAdvancement, setPendingAdvancement] =
+    useState<PendingAdvancement | null>(null);
 
   // Undo history stack
   const [history, setHistory] = useState<TacticalUnitState[][]>([]);
@@ -121,31 +424,90 @@ export function useTacticalPuzzleState({
 
   // Reset stage helper
   const resetState = useCallback(() => {
-    const initialized: TacticalUnitState[] = stage.startingUnits.map(
-      (placement, index) => {
-        const unitType = getUnitById(placement.unitTypeId);
-        if (!unitType)
-          throw new Error(`Unit type ${placement.unitTypeId} not found`);
+    let nextNonLeaderIdx = 0;
+    const playerSquad = initialPlayerSquad || [];
+    const leaderUnit = playerSquad.find((u) => u.isLeader);
+    const nonLeaderUnits = playerSquad.filter((u) => !u.isLeader);
 
-        // Initialize combat base state
-        const baseState = WesnothBattleManager.initializeUnitState(
-          unitType,
-          [],
-          'male',
-        );
-        return {
-          ...baseState,
-          id: `unit_${index}_${placement.unitTypeId.replace(/\s+/g, '_')}`,
-          side: placement.side,
-          x: placement.x,
-          y: placement.y,
-          moves: unitType.movement,
-          maxMoves: unitType.movement,
-          isLeader: !!placement.isLeader,
-          hasAttacked: false,
-        };
-      },
-    );
+    const initialized: TacticalUnitState[] = stage.startingUnits
+      .map((placement, index) => {
+        if (placement.side === 2) {
+          // Enemy Unit
+          const unitType = getUnitById(placement.unitTypeId);
+          if (!unitType)
+            throw new Error(`Unit type ${placement.unitTypeId} not found`);
+
+          const baseState = WesnothBattleManager.initializeUnitState(
+            unitType,
+            [],
+          );
+          return {
+            ...baseState,
+            id: `unit_${index}_${placement.unitTypeId.replace(/\s+/g, '_')}`,
+            side: placement.side,
+            x: placement.x,
+            y: placement.y,
+            moves: unitType.movement,
+            maxMoves: unitType.movement,
+            isLeader: !!placement.isLeader,
+            hasAttacked: false,
+          };
+        } else {
+          // Player Unit
+          if (initialPlayerSquad && initialPlayerSquad.length > 0) {
+            // Using carried over squad
+            let squadUnit: (typeof initialPlayerSquad)[0] | undefined;
+            if (placement.isLeader) {
+              squadUnit = leaderUnit;
+            } else {
+              squadUnit = nonLeaderUnits[nextNonLeaderIdx++];
+            }
+
+            if (!squadUnit) return null; // Defeated in previous stage
+
+            const unitType = getUnitById(squadUnit.unitTypeId);
+            if (!unitType)
+              throw new Error(`Unit type ${squadUnit.unitTypeId} not found`);
+
+            return {
+              ...squadUnit,
+              x: placement.x,
+              y: placement.y,
+              moves: unitType.movement,
+              maxMoves: unitType.movement,
+              hasAttacked: false,
+              statuses: {
+                poisoned: false,
+                slowed: false,
+                petrified: false,
+              },
+            } as TacticalUnitState;
+          } else {
+            // Default setup (Tutorial or first stage)
+            const unitType = getUnitById(placement.unitTypeId);
+            if (!unitType)
+              throw new Error(`Unit type ${placement.unitTypeId} not found`);
+
+            const baseState = WesnothBattleManager.initializeUnitState(
+              unitType,
+              [],
+            );
+            return {
+              ...baseState,
+              id: `unit_${index}_${placement.unitTypeId.replace(/\s+/g, '_')}`,
+              side: placement.side,
+              x: placement.x,
+              y: placement.y,
+              moves: unitType.movement,
+              maxMoves: unitType.movement,
+              isLeader: !!placement.isLeader,
+              hasAttacked: false,
+            };
+          }
+        }
+      })
+      .filter((u): u is TacticalUnitState => u !== null);
+
     setUnits(initialized);
     setSelectedUnitId(null);
     setActiveSide(1);
@@ -155,7 +517,8 @@ export function useTacticalPuzzleState({
     setPendingCombat(null);
     setCombatEffect(null);
     setCombatStrike(null);
-  }, [stage]);
+    setPendingAdvancement(null);
+  }, [stage, initialPlayerSquad]);
 
   // Initial unit loading & stage change
   useEffect(() => {
@@ -197,13 +560,19 @@ export function useTacticalPuzzleState({
 
   // Handle undo movement
   const handleUndo = useCallback(() => {
-    if (history.length === 0 || activeMovement || activeSide !== 1) return;
+    if (
+      history.length === 0 ||
+      activeMovement ||
+      activeSide !== 1 ||
+      pendingAdvancement
+    )
+      return;
     const prev = history[history.length - 1];
     setUnits(prev);
     setHistory((prevStack) => prevStack.slice(0, -1));
     setSelectedUnitId(null);
     setActionLogs((prevLogs) => [createLog('Movement undone.'), ...prevLogs]);
-  }, [history, activeMovement, activeSide]);
+  }, [history, activeMovement, activeSide, pendingAdvancement]);
 
   // Movement animation tick loop
   useEffect(() => {
@@ -450,30 +819,77 @@ export function useTacticalPuzzleState({
           setCombatEffect(null);
           setCombatStrike(null);
 
-          setUnits((prevUnits) => {
-            return prevUnits
-              .map((u) => {
-                if (u.id === attId) {
-                  return {
-                    ...u,
-                    hp: result.attacker.hp,
-                    statuses: { ...result.attacker.statuses },
-                    xp: Math.min(u.maxXp, u.xp + result.attackerXpGained),
-                    hasAttacked: true,
-                  };
+          let nextLevelUpChoice: { unitId: string; options: string[] } | null =
+            null;
+          const levelUpLogs: string[] = [];
+          const logAutoAdvance = (msg: string) => {
+            levelUpLogs.push(msg);
+            soundManager.playLevelUp();
+          };
+
+          const nextUnits = units
+            .map((u) => {
+              if (u.id === attId) {
+                const updatedHpStatus = {
+                  ...u,
+                  hp: result.attacker.hp,
+                  statuses: { ...result.attacker.statuses },
+                  hasAttacked: true,
+                };
+                const { unit, pendingChoice } = applyXpAndCheckLevelUp(
+                  updatedHpStatus,
+                  result.attackerXpGained,
+                  logAutoAdvance,
+                );
+                if (pendingChoice) {
+                  nextLevelUpChoice = pendingChoice;
                 }
-                if (u.id === defId) {
-                  return {
-                    ...u,
-                    hp: result.defender.hp,
-                    statuses: { ...result.defender.statuses },
-                    xp: Math.min(u.maxXp, u.xp + result.defenderXpGained),
-                  };
+                return unit;
+              }
+              if (u.id === defId) {
+                const updatedHpStatus = {
+                  ...u,
+                  hp: result.defender.hp,
+                  statuses: { ...result.defender.statuses },
+                };
+                const { unit, pendingChoice } = applyXpAndCheckLevelUp(
+                  updatedHpStatus,
+                  result.defenderXpGained,
+                  logAutoAdvance,
+                );
+                if (pendingChoice) {
+                  nextLevelUpChoice = pendingChoice;
                 }
-                return u;
-              })
-              .filter((u) => u.hp > 0);
-          });
+                return unit;
+              }
+              return u;
+            })
+            .filter((u) => u.hp > 0);
+
+          setUnits(nextUnits);
+
+          if (levelUpLogs.length > 0) {
+            setActionLogs((prev) => [
+              ...levelUpLogs.map((msg) => createLog(msg)),
+              ...prev,
+            ]);
+          }
+
+          if (nextLevelUpChoice) {
+            const choice = nextLevelUpChoice as {
+              unitId: string;
+              options: string[];
+            };
+            const choiceUnit = units.find((u) => u.id === choice.unitId);
+            if (choiceUnit) {
+              setPendingAdvancement({
+                unitId: choice.unitId,
+                unitName: choiceUnit.name,
+                options: choice.options,
+                currentType: choiceUnit.unitTypeId,
+              });
+            }
+          }
 
           const newLogs: ActionLog[] = [];
           for (const log of result.logs) {
@@ -538,36 +954,21 @@ export function useTacticalPuzzleState({
 
   // End Turn function
   const endTurn = useCallback(() => {
-    if (activeSide !== 1 || activeMovement) return;
+    if (activeSide !== 1 || activeMovement || pendingAdvancement) return;
 
     setActiveSide(2); // CPU Side
     setSelectedUnitId(null);
     setHistory([]);
 
-    const nextUnits = units.map((u) => {
+    const { nextUnits, logs: healLogs } = applyTurnStartHealing(
+      units,
+      2,
+      grid,
+      cols,
+      rows,
+    );
+    const finalCpuStartUnits = nextUnits.map((u) => {
       if (u.side === 2) {
-        const cell = grid[u.y][u.x];
-        if (isVillage(cell)) {
-          if (u.statuses.poisoned) {
-            return {
-              ...u,
-              moves: u.maxMoves,
-              hasAttacked: false,
-              statuses: {
-                ...u.statuses,
-                poisoned: false,
-              },
-            };
-          }
-          const healAmount = 8;
-          const newHp = Math.min(u.maxHp, u.hp + healAmount);
-          return {
-            ...u,
-            moves: u.maxMoves,
-            hasAttacked: false,
-            hp: newHp,
-          };
-        }
         return {
           ...u,
           moves: u.maxMoves,
@@ -577,38 +978,23 @@ export function useTacticalPuzzleState({
       return u;
     });
 
-    const healLogs: ActionLog[] = [];
-    units.forEach((u) => {
-      if (u.side === 2) {
-        const cell = grid[u.y][u.x];
-        if (isVillage(cell)) {
-          if (u.statuses.poisoned) {
-            healLogs.push(
-              createLog(`✨ CPU ${u.name} was cured of poison at the Village.`),
-            );
-          } else if (u.hp < u.maxHp) {
-            const healed = Math.min(u.maxHp, u.hp + 8) - u.hp;
-            healLogs.push(
-              createLog(
-                `💚 CPU ${u.name} healed +${healed} HP at the Village.`,
-              ),
-            );
-          }
-        }
-      }
-    });
-
-    setUnits(nextUnits);
+    setUnits(finalCpuStartUnits);
     setActionLogs((prev) => [
       createLog('CPU Turn starts...'),
       ...healLogs,
       ...prev,
     ]);
-  }, [activeSide, activeMovement, grid, units]);
+  }, [activeSide, activeMovement, grid, units, pendingAdvancement, cols, rows]);
 
   // CPU AI Behavior
   useEffect(() => {
-    if (activeSide !== 2 || activeMovement || combatEffect) return;
+    if (
+      activeSide !== 2 ||
+      activeMovement ||
+      combatEffect ||
+      pendingAdvancement
+    )
+      return;
 
     const cpuUnits = units.filter((u) => u.side === 2 && !u.hasAttacked);
     if (cpuUnits.length === 0) {
@@ -616,30 +1002,15 @@ export function useTacticalPuzzleState({
       setActiveSide(1);
       setTurn((t) => t + 1);
 
-      const nextUnits = units.map((u) => {
+      const { nextUnits, logs: healLogs } = applyTurnStartHealing(
+        units,
+        1,
+        grid,
+        cols,
+        rows,
+      );
+      const finalPlayerStartUnits = nextUnits.map((u) => {
         if (u.side === 1) {
-          const cell = grid[u.y][u.x];
-          if (isVillage(cell)) {
-            if (u.statuses.poisoned) {
-              return {
-                ...u,
-                moves: u.maxMoves,
-                hasAttacked: false,
-                statuses: {
-                  ...u.statuses,
-                  poisoned: false,
-                },
-              };
-            }
-            const healAmount = 8;
-            const newHp = Math.min(u.maxHp, u.hp + healAmount);
-            return {
-              ...u,
-              moves: u.maxMoves,
-              hasAttacked: false,
-              hp: newHp,
-            };
-          }
           return {
             ...u,
             moves: u.maxMoves,
@@ -649,26 +1020,7 @@ export function useTacticalPuzzleState({
         return u;
       });
 
-      const healLogs: ActionLog[] = [];
-      units.forEach((u) => {
-        if (u.side === 1) {
-          const cell = grid[u.y][u.x];
-          if (isVillage(cell)) {
-            if (u.statuses.poisoned) {
-              healLogs.push(
-                createLog(`✨ ${u.name} was cured of poison at the Village.`),
-              );
-            } else if (u.hp < u.maxHp) {
-              const healed = Math.min(u.maxHp, u.hp + 8) - u.hp;
-              healLogs.push(
-                createLog(`💚 ${u.name} healed +${healed} HP at the Village.`),
-              );
-            }
-          }
-        }
-      });
-
-      setUnits(nextUnits);
+      setUnits(finalPlayerStartUnits);
       setActionLogs((prev) => [
         createLog(`Turn ${turn + 1}: Player Turn`),
         ...healLogs,
@@ -823,18 +1175,23 @@ export function useTacticalPuzzleState({
     rows,
     turn,
     executeCombat,
+    pendingAdvancement,
   ]);
 
   // Check Game Over Conditions
   useEffect(() => {
     if (units.length === 0) return;
+    if (pendingAdvancement) return; // Wait for level-up choice resolution before checking victory
 
     const cpuRemaining = units.some((u) => u.side === 2);
     if (!cpuRemaining) {
       const totalXp = units
         .filter((u) => u.side === 1)
         .reduce((acc, u) => acc + u.xp, 0);
-      onVictory(totalXp);
+      onVictory(
+        totalXp,
+        units.filter((u) => u.side === 1),
+      );
       return;
     }
 
@@ -847,12 +1204,18 @@ export function useTacticalPuzzleState({
     if (turn > stage.turnLimit) {
       onDefeat('You exceeded the turn limit.');
     }
-  }, [units, turn, stage.turnLimit, onVictory, onDefeat]);
+  }, [units, turn, stage.turnLimit, pendingAdvancement, onVictory, onDefeat]);
 
   // Click handler on hex cell
   const handleHexClick = useCallback(
     (cIdx: number, rIdx: number) => {
-      if (activeSide !== 1 || activeMovement || combatEffect) return;
+      if (
+        activeSide !== 1 ||
+        activeMovement ||
+        combatEffect ||
+        pendingAdvancement
+      )
+        return;
 
       const occupant = units.find((u) => u.x === cIdx && u.y === rIdx);
 
@@ -945,6 +1308,7 @@ export function useTacticalPuzzleState({
       cols,
       rows,
       grid,
+      pendingAdvancement,
     ],
   );
 
@@ -1061,6 +1425,30 @@ export function useTacticalPuzzleState({
     };
   }, [pendingCombat, units, grid]);
 
+  const resolveAdvancement = useCallback(
+    (unitId: string, chosenTypeId: string) => {
+      setUnits((prevUnits) => {
+        return prevUnits.map((u) => {
+          if (u.id === unitId) {
+            const overflowXp = Math.max(0, u.xp - u.maxXp);
+            const advanced = advanceUnitState(u, chosenTypeId, overflowXp);
+            setActionLogs((prev) => [
+              createLog(
+                `✨ ${u.name} advanced to ${getUnitById(chosenTypeId)?.name}!`,
+              ),
+              ...prev,
+            ]);
+            soundManager.playLevelUp();
+            return advanced;
+          }
+          return u;
+        });
+      });
+      setPendingAdvancement(null);
+    },
+    [],
+  );
+
   return {
     units,
     setUnits,
@@ -1090,5 +1478,7 @@ export function useTacticalPuzzleState({
     handleUndo,
     handleHexClick,
     resetState,
+    pendingAdvancement,
+    resolveAdvancement,
   };
 }

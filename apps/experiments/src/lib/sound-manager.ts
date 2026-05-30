@@ -175,6 +175,34 @@ class SoundManager {
   }
 
   /**
+   * Synthesize a level-up chime using oscillators.
+   */
+  public playLevelUp() {
+    this.init();
+    const ctx = this.ctx;
+    const masterGain = this.masterGain;
+    if (!ctx || !masterGain) return;
+    try {
+      const now = ctx.currentTime;
+      const notes = [261.63, 329.63, 392.0, 523.25, 659.25, 783.99, 1046.5]; // C4, E4, G4, C5, E5, G5, C6
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+        gain.gain.setValueAtTime(0.12, now + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.35);
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start(now + idx * 0.08);
+        osc.stop(now + idx * 0.08 + 0.4);
+      });
+    } catch (e) {
+      console.error('Failed to synthesize level-up sound:', e);
+    }
+  }
+
+  /**
    * Play an attack sound.
    * If it missed, it will play the miss sound after a small delay.
    */

@@ -9,6 +9,7 @@ import {
 } from '@webnoth/ui/components/card';
 import { Separator } from '@webnoth/ui/components/separator';
 import { ChevronRight, Info, RotateCcw, Swords, Undo } from 'lucide-react';
+import type { TacticalUnitState } from '@/lib/tactical-puzzle/pathfinder';
 import type { PuzzleStage } from '@/lib/tactical-puzzle/stages';
 import { getUnitById } from '@/lib/wesnoth-data';
 import { TacticalPuzzleHexGrid } from './TacticalPuzzleHexGrid';
@@ -16,13 +17,15 @@ import { useTacticalPuzzleState } from './useTacticalPuzzleState';
 
 interface TacticalPuzzleBoardProps {
   stage: PuzzleStage;
-  onVictory: (xpGained: number) => void;
+  initialPlayerSquad?: TacticalUnitState[] | null;
+  onVictory: (xpGained: number, survivors: TacticalUnitState[]) => void;
   onDefeat: (reason: string) => void;
   onReset: () => void;
 }
 
 export function TacticalPuzzleBoard({
   stage,
+  initialPlayerSquad,
   onVictory,
   onDefeat,
   onReset,
@@ -49,7 +52,14 @@ export function TacticalPuzzleBoard({
     endTurn,
     handleUndo,
     handleHexClick,
-  } = useTacticalPuzzleState({ stage, onVictory, onDefeat });
+    pendingAdvancement,
+    resolveAdvancement,
+  } = useTacticalPuzzleState({
+    stage,
+    initialPlayerSquad,
+    onVictory,
+    onDefeat,
+  });
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 items-stretch select-none w-full">
@@ -382,6 +392,91 @@ export function TacticalPuzzleBoard({
                 >
                   Engage!
                 </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Level Up Advancement Choice Dialog overlay */}
+      {pendingAdvancement && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <Card className="w-full max-w-lg border-zinc-800 bg-zinc-950/90 backdrop-blur-md shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <CardHeader className="bg-gradient-to-r from-emerald-950/45 to-teal-950/45 pb-3 border-b border-border/20">
+              <CardTitle className="text-md font-bold flex items-center gap-2 text-foreground">
+                <span className="text-lg">✨</span>
+                Unit Level Up!
+              </CardTitle>
+              <CardDescription className="text-xs text-muted-foreground mt-1">
+                <span className="font-semibold text-emerald-400">
+                  {pendingAdvancement.unitName}
+                </span>{' '}
+                has earned enough experience to advance. Choose a new class:
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-5 space-y-4">
+              <div className="grid grid-cols-1 gap-3">
+                {pendingAdvancement.options.map((optId) => {
+                  const optUnit = getUnitById(optId);
+                  if (!optUnit) return null;
+
+                  return (
+                    <button
+                      key={optId}
+                      type="button"
+                      onClick={() =>
+                        resolveAdvancement(pendingAdvancement.unitId, optId)
+                      }
+                      className="w-full text-left p-4 rounded-xl border border-zinc-850 bg-zinc-900/40 hover:bg-emerald-950/20 hover:border-emerald-500/60 transition group cursor-pointer flex flex-col gap-2"
+                    >
+                      <div className="flex justify-between items-center w-full">
+                        <span className="font-bold text-foreground text-sm group-hover:text-emerald-400 transition-colors">
+                          {optUnit.name}
+                        </span>
+                        <Badge
+                          variant="outline"
+                          className="text-[10px] bg-emerald-500/10 text-emerald-400 border-emerald-500/20 py-0.5 font-bold uppercase"
+                        >
+                          Lvl {optUnit.level}
+                        </Badge>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3 text-[10px] pt-1 border-t border-zinc-800/40 w-full text-muted-foreground">
+                        <div>
+                          HP:{' '}
+                          <span className="text-foreground font-semibold font-mono">
+                            {optUnit.hitpoints}
+                          </span>
+                        </div>
+                        <div>
+                          Moves:{' '}
+                          <span className="text-foreground font-semibold font-mono">
+                            {optUnit.movement}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 w-full text-left pt-1">
+                        <span className="text-[9px] uppercase font-bold text-zinc-500 tracking-wider">
+                          Attacks
+                        </span>
+                        <div className="flex flex-col gap-1">
+                          {optUnit.attacks.map((att) => (
+                            <div
+                              key={att.name}
+                              className="flex justify-between text-[10px] text-zinc-400 font-mono"
+                            >
+                              <span>🗡️ {att.name}</span>
+                              <span>
+                                {att.damage} × {att.number} ({att.range})
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
