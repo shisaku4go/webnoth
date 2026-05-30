@@ -20,10 +20,16 @@ export const sounds: SoundMapping = {
     'throwing knife': 'sounds/combat/throwing-knife.ogg',
     staff: 'sounds/combat/staff.ogg',
     'magic missile': 'sounds/combat/magic-missile-1.ogg',
+    missile: 'sounds/combat/magic-missile-1.ogg', // mage's ranged attack
+    fireball: 'sounds/combat/magic-missile-1.ogg', // mage fallback
+    lightbeam: 'sounds/combat/magic-missile-1.ogg', // mage fallback
     mace: 'sounds/combat/mace.ogg',
     club: 'sounds/combat/mace.ogg', // fallback
     'zombie attack': 'sounds/combat/zombie-attack.wav',
+    bite: 'sounds/combat/zombie-attack.wav', // zombie/beast bite fallback
     'magic dark': 'sounds/combat/magic-dark.ogg',
+    'chill wave': 'sounds/combat/magic-dark.ogg', // dark adept ranged
+    'shadow wave': 'sounds/combat/magic-dark.ogg', // dark adept ranged
     shadow: 'sounds/combat/magic-dark.ogg', // fallback
   },
   hits: {

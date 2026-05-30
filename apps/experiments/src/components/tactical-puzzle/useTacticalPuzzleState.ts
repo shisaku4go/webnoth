@@ -41,6 +41,16 @@ export interface CombatEffectState {
   message?: string;
 }
 
+export interface CombatStrikeState {
+  attackerId: string;
+  defenderId: string;
+  weaponName: string;
+  range: 'melee' | 'ranged';
+  isHit: boolean;
+  strikeIndex: number;
+  timestamp: number;
+}
+
 let logCounter = 0;
 export const createLog = (text: string): ActionLog => ({
   id: `${++logCounter}_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
@@ -100,6 +110,11 @@ export function useTacticalPuzzleState({
     null,
   );
 
+  // Combat Strike state (for individual hits/misses animation)
+  const [combatStrike, setCombatStrike] = useState<CombatStrikeState | null>(
+    null,
+  );
+
   const grid = stage.grid;
   const rows = grid.length;
   const cols = rows > 0 ? grid[0].length : 0;
@@ -139,6 +154,7 @@ export function useTacticalPuzzleState({
     setActionLogs([createLog(`Stage "${stage.name}" initialized. Turn 1.`)]);
     setPendingCombat(null);
     setCombatEffect(null);
+    setCombatStrike(null);
   }, [stage]);
 
   // Initial unit loading & stage change
@@ -406,6 +422,21 @@ export function useTacticalPuzzleState({
             }, 120);
             timeoutIdsRef.current.push(dieTimer);
           }
+
+          const isMainAttacker = strike.attackerId === attId;
+          const resolvedRange = isMainAttacker
+            ? result.attackerWeapon?.range || 'melee'
+            : result.defenderWeapon?.range || 'melee';
+
+          setCombatStrike({
+            attackerId: strike.attackerId ?? '',
+            defenderId: strike.defenderId ?? '',
+            weaponName: strike.weaponName,
+            range: resolvedRange,
+            isHit: strike.isHit,
+            strikeIndex: idx,
+            timestamp: Date.now(),
+          });
         }, idx * 220); // 220ms stagger between strikes
         timeoutIdsRef.current.push(strikeTimer);
       });
@@ -417,6 +448,7 @@ export function useTacticalPuzzleState({
 
         const endTimer = setTimeout(() => {
           setCombatEffect(null);
+          setCombatStrike(null);
 
           setUnits((prevUnits) => {
             return prevUnits
@@ -464,6 +496,44 @@ export function useTacticalPuzzleState({
       timeoutIdsRef.current.push(recoilTimer);
     },
     [units, grid],
+  );
+
+  // Select Attacker Weapon (for Combat Forecast dialog selection)
+  const selectAttackerWeapon = useCallback(
+    (attWepIdx: number) => {
+      setPendingCombat((prev) => {
+        if (!prev) return null;
+        const attacker = units.find((u) => u.id === prev.attackerId);
+        const defender = units.find((u) => u.id === prev.defenderId);
+        if (!attacker || !defender) return prev;
+
+        const attType = getUnitById(attacker.unitTypeId);
+        const defType = getUnitById(defender.unitTypeId);
+        if (!attType || !defType) return prev;
+
+        const attAttacks = WesnothBattleManager.getModifiedAttacks(
+          attType,
+          attacker,
+        );
+        const defAttacks = WesnothBattleManager.getModifiedAttacks(
+          defType,
+          defender,
+        );
+
+        const aWep = attAttacks[attWepIdx];
+        if (!aWep) return prev;
+
+        // Find defender counter index with matching range
+        const defWepIdx = defAttacks.findIndex((w) => w.range === aWep.range);
+
+        return {
+          ...prev,
+          attackerWeaponIndex: attWepIdx,
+          defenderWeaponIndex: defWepIdx,
+        };
+      });
+    },
+    [units],
   );
 
   // End Turn function
@@ -976,6 +1046,8 @@ export function useTacticalPuzzleState({
     return {
       attacker,
       defender,
+      attAttacks,
+      attackerWeaponIndex: pendingCombat.attackerWeaponIndex,
       attWep,
       defWep,
       attCth: attCthRes.cth,
@@ -1006,12 +1078,14 @@ export function useTacticalPuzzleState({
     pendingCombat,
     setPendingCombat,
     combatEffect,
+    combatStrike,
     selectedUnit,
     reachableHexes,
     adjacentEnemies,
     combatForecast,
     moveUnit,
     executeCombat,
+    selectAttackerWeapon,
     endTurn,
     handleUndo,
     handleHexClick,

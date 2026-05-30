@@ -12,7 +12,7 @@ import {
   Text,
   type Texture,
 } from 'pixi.js';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   getHexPosition,
   getTerrainName,
@@ -26,6 +26,7 @@ import type { PuzzleStage } from '@/lib/tactical-puzzle/stages';
 import { getUnitById } from '@/lib/wesnoth-data';
 import type {
   CombatEffectState,
+  CombatStrikeState,
   HoveredHexState,
 } from './useTacticalPuzzleState';
 
@@ -143,6 +144,177 @@ function UnitAnimatedSprite({
   );
 }
 
+interface CombatUnitProps {
+  unit: TacticalUnitState;
+  selectedUnitId: string | null;
+  textures: Record<string, Texture>;
+  combatEffect: CombatEffectState | null;
+  combatStrike: CombatStrikeState | null;
+  units: TacticalUnitState[];
+  handleHexClick: (cIdx: number, rIdx: number) => void;
+}
+
+function CombatUnit({
+  unit,
+  selectedUnitId,
+  textures,
+  combatEffect,
+  combatStrike,
+  units,
+  handleHexClick,
+}: CombatUnitProps) {
+  const type = getUnitById(unit.unitTypeId);
+
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
+  const animationRef = useRef<{
+    startTime: number;
+    dirX: number;
+    dirY: number;
+    duration: number;
+    maxDash: number;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!combatStrike || combatStrike.attackerId !== unit.id) return;
+
+    // Find the defender to calculate the direction
+    const defender = units.find((u) => u.id === combatStrike.defenderId);
+    if (!defender) return;
+
+    const strikerPos = getHexPosition(unit.x, unit.y);
+    const defenderPos = getHexPosition(defender.x, defender.y);
+
+    const dx = defenderPos.x - strikerPos.x;
+    const dy = defenderPos.y - strikerPos.y;
+    const len = Math.sqrt(dx * dx + dy * dy);
+
+    if (len > 0) {
+      const maxDash = combatStrike.range === 'melee' ? 30 : 8;
+      animationRef.current = {
+        startTime: Date.now(),
+        dirX: dx / len,
+        dirY: dy / len,
+        duration: 200, // 200ms animation
+        maxDash,
+      };
+    }
+  }, [combatStrike, unit.id, units, unit.x, unit.y]);
+
+  useTick(() => {
+    if (!animationRef.current) {
+      if (offsetX !== 0 || offsetY !== 0) {
+        setOffsetX(0);
+        setOffsetY(0);
+      }
+      return;
+    }
+
+    const now = Date.now();
+    const elapsed = now - animationRef.current.startTime;
+    const duration = animationRef.current.duration;
+
+    if (elapsed >= duration) {
+      setOffsetX(0);
+      setOffsetY(0);
+      animationRef.current = null;
+      return;
+    }
+
+    const t = elapsed / duration;
+    const progress = Math.sin(t * Math.PI);
+
+    setOffsetX(
+      animationRef.current.dirX * animationRef.current.maxDash * progress,
+    );
+    setOffsetY(
+      animationRef.current.dirY * animationRef.current.maxDash * progress,
+    );
+  });
+
+  if (!type) return null;
+
+  const colorConfig = getPlayerColor(unit.side);
+  const isSelected = selectedUnitId === unit.id;
+
+  const defaultPos = getHexPosition(unit.x, unit.y);
+  const uX = unit.visualX !== undefined ? unit.visualX : defaultPos.x;
+  const uY = unit.visualY !== undefined ? unit.visualY : defaultPos.y;
+
+  return (
+    <pixiContainer x={uX + offsetX} y={uY + offsetY}>
+      {/* Base ring color */}
+      <pixiGraphics
+        key={`base-ring-${unit.id}-${isSelected}`}
+        x={36}
+        y={54}
+        draw={(g) => {
+          g.clear();
+          g.drawEllipse(0, 0, 22, 10)
+            .fill({ color: colorConfig.hex, alpha: 0.28 })
+            .stroke({
+              width: isSelected ? 2.5 : 1.2,
+              color: isSelected ? 0xeab308 : colorConfig.hex,
+              alpha: 0.9,
+            });
+        }}
+      />
+
+      {/* Health bar overlay */}
+      <pixiGraphics
+        key={`hp-bar-${unit.id}-${unit.hp}-${unit.maxHp}`}
+        x={18}
+        y={62}
+        draw={(g) => {
+          g.clear();
+          const pct = unit.hp / unit.maxHp;
+          g.fill({ color: 0x27272a, alpha: 0.8 }).drawRect(0, 0, 36, 4); // background
+          g.fill({
+            color: pct > 0.4 ? 0x22c55e : 0xef4444,
+            alpha: 1.0,
+          }).drawRect(0, 0, 36 * pct, 4); // filled
+        }}
+      />
+
+      {/* Status indicator dots */}
+      {unit.statuses.poisoned && (
+        <pixiGraphics
+          key={`poison-${unit.id}`}
+          x={54}
+          y={12}
+          draw={(g) => {
+            g.clear();
+            g.drawCircle(0, 0, 3).fill({ color: 0x22c55e });
+          }}
+        />
+      )}
+
+      {/* Sprite element with animation support */}
+      <UnitAnimatedSprite
+        unitType={type}
+        textures={textures}
+        isAttacking={
+          combatEffect?.attackerId === unit.id &&
+          combatEffect?.stage === 'strike'
+        }
+        attackWeaponName={
+          combatEffect?.attackerId === unit.id &&
+          combatEffect?.stage === 'strike'
+            ? combatEffect.attackerWeaponName
+            : null
+        }
+        uX={0}
+        uY={0}
+        cursor={unit.side === 1 ? 'pointer' : 'default'}
+        onPointerDown={(e: FederatedPointerEvent) => {
+          e.stopPropagation();
+          handleHexClick(unit.x, unit.y);
+        }}
+      />
+    </pixiContainer>
+  );
+}
+
 interface TacticalPuzzleHexGridProps {
   stage: PuzzleStage;
   units: TacticalUnitState[];
@@ -150,6 +322,7 @@ interface TacticalPuzzleHexGridProps {
   reachableHexes: Record<string, number>;
   adjacentEnemies: TacticalUnitState[];
   combatEffect: CombatEffectState | null;
+  combatStrike: CombatStrikeState | null;
   setHoveredHex: (val: HoveredHexState | null) => void;
   handleHexClick: (cIdx: number, rIdx: number) => void;
 }
@@ -161,6 +334,7 @@ export function TacticalPuzzleHexGrid({
   reachableHexes,
   adjacentEnemies,
   combatEffect,
+  combatStrike,
   setHoveredHex,
   handleHexClick,
 }: TacticalPuzzleHexGridProps) {
@@ -461,97 +635,18 @@ export function TacticalPuzzleHexGrid({
               )}
 
               {/* 3. Unit rendering */}
-              {units.map((unit) => {
-                const type = getUnitById(unit.unitTypeId);
-                if (!type) return null;
-
-                const colorConfig = getPlayerColor(unit.side);
-                const isSelected = selectedUnitId === unit.id;
-
-                const defaultPos = getHexPosition(unit.x, unit.y);
-                const uX =
-                  unit.visualX !== undefined ? unit.visualX : defaultPos.x;
-                const uY =
-                  unit.visualY !== undefined ? unit.visualY : defaultPos.y;
-
-                return (
-                  <pixiContainer key={unit.id}>
-                    {/* Base ring color */}
-                    <pixiGraphics
-                      key={`base-ring-${unit.id}-${isSelected}`}
-                      x={uX + 36}
-                      y={uY + 54}
-                      draw={(g) => {
-                        g.clear();
-                        g.drawEllipse(0, 0, 22, 10)
-                          .fill({ color: colorConfig.hex, alpha: 0.28 })
-                          .stroke({
-                            width: isSelected ? 2.5 : 1.2,
-                            color: isSelected ? 0xeab308 : colorConfig.hex,
-                            alpha: 0.9,
-                          });
-                      }}
-                    />
-
-                    {/* Health bar overlay */}
-                    <pixiGraphics
-                      key={`hp-bar-${unit.id}-${unit.hp}-${unit.maxHp}`}
-                      x={uX + 18}
-                      y={uY + 62}
-                      draw={(g) => {
-                        g.clear();
-                        const pct = unit.hp / unit.maxHp;
-                        g.fill({ color: 0x27272a, alpha: 0.8 }).drawRect(
-                          0,
-                          0,
-                          36,
-                          4,
-                        ); // background
-                        g.fill({
-                          color: pct > 0.4 ? 0x22c55e : 0xef4444,
-                          alpha: 1.0,
-                        }).drawRect(0, 0, 36 * pct, 4); // filled
-                      }}
-                    />
-
-                    {/* Status indicator dots */}
-                    {unit.statuses.poisoned && (
-                      <pixiGraphics
-                        key={`poison-${unit.id}`}
-                        x={uX + 54}
-                        y={uY + 12}
-                        draw={(g) => {
-                          g.clear();
-                          g.drawCircle(0, 0, 3).fill({ color: 0x22c55e });
-                        }}
-                      />
-                    )}
-
-                    {/* Sprite element with animation support */}
-                    <UnitAnimatedSprite
-                      unitType={type}
-                      textures={textures}
-                      isAttacking={
-                        combatEffect?.attackerId === unit.id &&
-                        combatEffect?.stage === 'strike'
-                      }
-                      attackWeaponName={
-                        combatEffect?.attackerId === unit.id &&
-                        combatEffect?.stage === 'strike'
-                          ? combatEffect.attackerWeaponName
-                          : null
-                      }
-                      uX={uX}
-                      uY={uY}
-                      cursor={unit.side === 1 ? 'pointer' : 'default'}
-                      onPointerDown={(e: FederatedPointerEvent) => {
-                        e.stopPropagation();
-                        handleHexClick(unit.x, unit.y);
-                      }}
-                    />
-                  </pixiContainer>
-                );
-              })}
+              {units.map((unit) => (
+                <CombatUnit
+                  key={unit.id}
+                  unit={unit}
+                  selectedUnitId={selectedUnitId}
+                  textures={textures}
+                  combatEffect={combatEffect}
+                  combatStrike={combatStrike}
+                  units={units}
+                  handleHexClick={handleHexClick}
+                />
+              ))}
             </pixiContainer>
           </Application>
         </div>

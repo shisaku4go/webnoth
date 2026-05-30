@@ -39,11 +39,13 @@ export function TacticalPuzzleBoard({
     pendingCombat,
     setPendingCombat,
     combatEffect,
+    combatStrike,
     selectedUnit,
     reachableHexes,
     adjacentEnemies,
     combatForecast,
     executeCombat,
+    selectAttackerWeapon,
     endTurn,
     handleUndo,
     handleHexClick,
@@ -59,6 +61,7 @@ export function TacticalPuzzleBoard({
         reachableHexes={reachableHexes}
         adjacentEnemies={adjacentEnemies}
         combatEffect={combatEffect}
+        combatStrike={combatStrike}
         setHoveredHex={setHoveredHex}
         handleHexClick={handleHexClick}
       />
@@ -252,22 +255,59 @@ export function TacticalPuzzleBoard({
                     HP: {combatForecast.attacker.hp}/
                     {combatForecast.attacker.maxHp}
                   </div>
-                  <div className="pt-2">
+                  <div className="pt-2 space-y-2">
                     <span className="text-[9px] font-bold text-zinc-500 uppercase block">
-                      Selected Strike
+                      Select Weapon
                     </span>
-                    <span className="font-bold text-xs text-foreground">
-                      {combatForecast.attWep.name}
-                    </span>
-                    <div className="text-[10px] font-medium text-muted-foreground flex justify-between pt-1">
-                      <span>Hit Prob: {combatForecast.attCth}%</span>
-                      <span>
-                        Dmg: {combatForecast.attDmg} ×{' '}
-                        {combatForecast.attStrikes}
-                      </span>
+                    <div className="flex flex-col gap-1.5">
+                      {combatForecast.attAttacks.map(
+                        (
+                          wep: {
+                            name: string;
+                            damage: number;
+                            number: number;
+                            range: string;
+                          },
+                          idx: number,
+                        ) => {
+                          const isSelected =
+                            combatForecast.attackerWeaponIndex === idx;
+                          return (
+                            <button
+                              key={`${wep.name}-${idx}`}
+                              type="button"
+                              onClick={() => selectAttackerWeapon(idx)}
+                              className={`w-full text-left p-1.5 rounded-lg border transition text-[11px] cursor-pointer ${
+                                isSelected
+                                  ? 'bg-emerald-500/10 border-emerald-500 text-foreground font-semibold'
+                                  : 'bg-zinc-950/60 border-zinc-800/80 text-muted-foreground hover:bg-zinc-900 hover:text-foreground'
+                              }`}
+                            >
+                              <div className="flex justify-between items-center">
+                                <span className="font-bold truncate max-w-[90px]">
+                                  {wep.name}
+                                </span>
+                                <span className="text-[10px] text-zinc-400 font-mono shrink-0">
+                                  {wep.damage}×{wep.number} ({wep.range})
+                                </span>
+                              </div>
+                            </button>
+                          );
+                        },
+                      )}
                     </div>
-                    <div className="text-[10px] text-amber-400 font-semibold pt-1 border-t border-zinc-800/40 mt-1">
-                      Expected Value: {combatForecast.attEV} HP
+
+                    <div className="pt-2 border-t border-zinc-800/40 space-y-1">
+                      <div className="text-[10px] font-medium text-muted-foreground flex justify-between">
+                        <span>Hit Prob: {combatForecast.attCth}%</span>
+                        <span>
+                          Dmg: {combatForecast.attDmg} ×{' '}
+                          {combatForecast.attStrikes}
+                        </span>
+                      </div>
+                      <div className="text-[10px] text-amber-400 font-semibold pt-0.5">
+                        Expected Value: {combatForecast.attEV} HP
+                      </div>
                     </div>
                   </div>
                 </div>
