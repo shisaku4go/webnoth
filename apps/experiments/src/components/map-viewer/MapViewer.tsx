@@ -16,7 +16,9 @@ import {
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { wesnothAssetUrl } from '@/lib/asset-url';
 
-export { parseCell } from '@/lib/tactical-puzzle/pathfinder';
+import { parseCell } from '@/lib/tactical-puzzle/pathfinder';
+
+export { parseCell };
 
 // Register Pixi elements for React
 extend({ Sprite, Container, Graphics, Text });

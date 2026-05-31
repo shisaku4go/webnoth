@@ -608,6 +608,7 @@ export function useTacticalPuzzleState({
                         getUnitMovementCost(
                           getUnitById(u.unitTypeId),
                           getTerrainKeysForCell(grid[dest.y][dest.x]),
+                          u.statuses.slowed,
                         ),
                       visualX: undefined,
                       visualY: undefined,
@@ -694,7 +695,11 @@ export function useTacticalPuzzleState({
       const unitType = getUnitById(unit.unitTypeId);
       for (let i = 1; i < path.length; i++) {
         const terrainKeys = getTerrainKeysForCell(grid[path[i].y][path[i].x]);
-        totalCost += getUnitMovementCost(unitType, terrainKeys);
+        totalCost += getUnitMovementCost(
+          unitType,
+          terrainKeys,
+          unit.statuses.slowed,
+        );
       }
 
       setActionLogs((prev) => [
@@ -866,6 +871,69 @@ export function useTacticalPuzzleState({
             })
             .filter((u) => u.hp > 0);
 
+          // Check for plague kills
+          let spawnedPlagueUnit: TacticalUnitState | null = null;
+          if (result.winner === 'attacker') {
+            const hasPlague =
+              result.attackerWeapon?.specials?.includes('plague');
+            const defenderIsUndead =
+              defType.race === 'undead' || defender.traits.includes('undead');
+            const inVillage = isVillage(grid[defender.y][defender.x]);
+            if (hasPlague && !defenderIsUndead && !inVillage) {
+              const corpseType = getUnitById('Walking Corpse');
+              if (corpseType) {
+                const baseState = WesnothBattleManager.initializeUnitState(
+                  corpseType,
+                  [],
+                );
+                spawnedPlagueUnit = {
+                  ...baseState,
+                  id: `plague_${Date.now()}_Walking_Corpse`,
+                  side: attacker.side,
+                  x: defender.x,
+                  y: defender.y,
+                  moves: 0,
+                  maxMoves: corpseType.movement,
+                  isLeader: false,
+                  hasAttacked: true,
+                };
+              }
+            }
+          } else if (result.winner === 'defender') {
+            const hasPlague =
+              result.defenderWeapon?.specials?.includes('plague');
+            const attackerIsUndead =
+              attType.race === 'undead' || attacker.traits.includes('undead');
+            const inVillage = isVillage(grid[attacker.y][attacker.x]);
+            if (hasPlague && !attackerIsUndead && !inVillage) {
+              const corpseType = getUnitById('Walking Corpse');
+              if (corpseType) {
+                const baseState = WesnothBattleManager.initializeUnitState(
+                  corpseType,
+                  [],
+                );
+                spawnedPlagueUnit = {
+                  ...baseState,
+                  id: `plague_${Date.now()}_Walking_Corpse`,
+                  side: defender.side,
+                  x: attacker.x,
+                  y: attacker.y,
+                  moves: 0,
+                  maxMoves: corpseType.movement,
+                  isLeader: false,
+                  hasAttacked: true,
+                };
+              }
+            }
+          }
+
+          if (spawnedPlagueUnit) {
+            nextUnits.push(spawnedPlagueUnit);
+            levelUpLogs.push(
+              `🧟 A Walking Corpse rose from the remains of ${result.winner === 'attacker' ? defender.name : attacker.name}!`,
+            );
+          }
+
           setUnits(nextUnits);
 
           if (levelUpLogs.length > 0) {
@@ -975,6 +1043,15 @@ export function useTacticalPuzzleState({
           hasAttacked: false,
         };
       }
+      if (u.side === 1) {
+        return {
+          ...u,
+          statuses: {
+            ...u.statuses,
+            slowed: false,
+          },
+        };
+      }
       return u;
     });
 
@@ -1015,6 +1092,15 @@ export function useTacticalPuzzleState({
             ...u,
             moves: u.maxMoves,
             hasAttacked: false,
+          };
+        }
+        if (u.side === 2) {
+          return {
+            ...u,
+            statuses: {
+              ...u.statuses,
+              slowed: false,
+            },
           };
         }
         return u;
@@ -1095,6 +1181,7 @@ export function useTacticalPuzzleState({
           const cost = getUnitMovementCost(
             cpuType,
             getTerrainKeysForCell(grid[tile.y][tile.x]),
+            activeCpu.statuses.slowed,
           );
           if (accumulatedCost + cost <= activeCpu.moves) {
             accumulatedCost += cost;

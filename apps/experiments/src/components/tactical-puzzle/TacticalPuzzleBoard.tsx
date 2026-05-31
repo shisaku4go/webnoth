@@ -175,6 +175,24 @@ export function TacticalPuzzleBoard({
                       <div className="text-[10px] text-muted-foreground">
                         {getUnitById(selectedUnit.unitTypeId)?.name}
                       </div>
+                      {/* Active status badges */}
+                      <div className="flex flex-wrap gap-1 mt-1.5">
+                        {selectedUnit.statuses.poisoned && (
+                          <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20 text-[8px] py-0 px-1 font-bold">
+                            Poisoned (-8 HP)
+                          </Badge>
+                        )}
+                        {selectedUnit.statuses.slowed && (
+                          <Badge className="bg-sky-500/10 text-sky-400 border-sky-500/20 text-[8px] py-0 px-1 font-bold">
+                            Slowed (1/2 Move & Dmg)
+                          </Badge>
+                        )}
+                        {selectedUnit.statuses.petrified && (
+                          <Badge className="bg-stone-500/10 text-stone-400 border-stone-500/20 text-[8px] py-0 px-1 font-bold">
+                            Petrified
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                     <span
                       className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${selectedUnit.hasAttacked ? 'bg-red-500/10 text-red-400 border border-red-500/25' : 'bg-green-500/10 text-green-400 border border-green-500/25'}`}

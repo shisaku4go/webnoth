@@ -173,6 +173,7 @@ export function getTerrainKeysForCell(cell: string): string[] {
 export function getUnitMovementCost(
   unitType: ReturnType<typeof getUnitById>,
   terrainKeys: string[],
+  slowed = false,
 ): number {
   if (!unitType) return Infinity;
 
@@ -206,7 +207,7 @@ export function getUnitMovementCost(
     maxCost = Math.max(maxCost, cost);
   }
 
-  return maxCost;
+  return slowed ? maxCost * 2 : maxCost;
 }
 
 /**
@@ -280,7 +281,11 @@ export function calculateReachableHexes(
 
       const cell = grid[nb.y][nb.x];
       const terrainKeys = getTerrainKeysForCell(cell);
-      const cost = getUnitMovementCost(unitType, terrainKeys);
+      const cost = getUnitMovementCost(
+        unitType,
+        terrainKeys,
+        unit.statuses.slowed,
+      );
       if (cost === Infinity) continue;
 
       let nextMovesLeft = Math.max(0, curr.movesLeft - cost);
@@ -368,7 +373,11 @@ export function findPath(
 
       const cell = grid[nb.y][nb.x];
       const terrainKeys = getTerrainKeysForCell(cell);
-      const cost = getUnitMovementCost(unitType, terrainKeys);
+      const cost = getUnitMovementCost(
+        unitType,
+        terrainKeys,
+        unit.statuses.slowed,
+      );
       if (cost === Infinity) continue;
 
       let nextMovesLeft = Math.max(0, curr.movesLeft - cost);

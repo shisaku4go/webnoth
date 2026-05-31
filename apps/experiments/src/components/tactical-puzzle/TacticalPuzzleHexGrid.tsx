@@ -43,6 +43,7 @@ interface UnitAnimatedSpriteProps {
   uY: number;
   onPointerDown: (e: FederatedPointerEvent) => void;
   cursor: string;
+  statuses: { poisoned: boolean; slowed: boolean; petrified: boolean };
 }
 
 function UnitAnimatedSprite({
@@ -54,6 +55,7 @@ function UnitAnimatedSprite({
   uY,
   onPointerDown,
   cursor,
+  statuses,
 }: UnitAnimatedSpriteProps) {
   const [frameIdx, setFrameIdx] = useState(0);
   const [_elapsed, setElapsed] = useState(0);
@@ -129,6 +131,16 @@ function UnitAnimatedSprite({
 
   if (!texture?.source) return null;
 
+  // Resolve tint based on status ailments
+  let tint = 0xffffff;
+  if (statuses.petrified) {
+    tint = 0x888888;
+  } else if (statuses.poisoned) {
+    tint = 0x88ff88;
+  } else if (statuses.slowed) {
+    tint = 0x88d8ff;
+  }
+
   return (
     <pixiSprite
       texture={texture}
@@ -140,6 +152,7 @@ function UnitAnimatedSprite({
       eventMode="static"
       cursor={cursor}
       onPointerDown={onPointerDown}
+      tint={tint}
     />
   );
 }
@@ -291,6 +304,28 @@ function CombatUnit({
           }}
         />
       )}
+      {unit.statuses.slowed && (
+        <pixiGraphics
+          key={`slowed-${unit.id}`}
+          x={54}
+          y={20}
+          draw={(g) => {
+            g.clear();
+            g.circle(0, 0, 3).fill({ color: 0x38bdf8 });
+          }}
+        />
+      )}
+      {unit.statuses.petrified && (
+        <pixiGraphics
+          key={`petrified-${unit.id}`}
+          x={54}
+          y={28}
+          draw={(g) => {
+            g.clear();
+            g.circle(0, 0, 3).fill({ color: 0xa8a29e });
+          }}
+        />
+      )}
 
       {/* Sprite element with animation support */}
       <UnitAnimatedSprite
@@ -313,6 +348,7 @@ function CombatUnit({
           e.stopPropagation();
           handleHexClick(unit.x, unit.y);
         }}
+        statuses={unit.statuses}
       />
     </pixiContainer>
   );
