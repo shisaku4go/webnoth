@@ -7,8 +7,26 @@ import {
   CardHeader,
   CardTitle,
 } from '@webnoth/ui/components/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@webnoth/ui/components/dialog';
 import { Separator } from '@webnoth/ui/components/separator';
-import { ChevronRight, Info, RotateCcw, Swords, Undo } from 'lucide-react';
+import {
+  Check,
+  ChevronRight,
+  Copy,
+  Info,
+  RotateCcw,
+  Sparkles,
+  Swords,
+  Undo,
+} from 'lucide-react';
+import { useState } from 'react';
+import { generateTacticalContext } from '@/lib/tactical-puzzle/ai-tactician';
 import type { TacticalUnitState } from '@/lib/tactical-puzzle/pathfinder';
 import type { PuzzleStage } from '@/lib/tactical-puzzle/stages';
 import { getUnitById } from '@/lib/wesnoth-data';
@@ -60,6 +78,19 @@ export function TacticalPuzzleBoard({
     onVictory,
     onDefeat,
   });
+
+  const [isAiDiagOpen, setIsAiDiagOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyPrompt = (promptText: string) => {
+    navigator.clipboard.writeText(promptText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const aiPromptText = isAiDiagOpen
+    ? generateTacticalContext(stage, units, turn, actionLogs)
+    : '';
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 items-stretch select-none w-full">
@@ -205,6 +236,14 @@ export function TacticalPuzzleBoard({
             >
               End Turn
               <ChevronRight className="size-4" />
+            </Button>
+            <Button
+              onClick={() => setIsAiDiagOpen(true)}
+              variant="outline"
+              className="w-full border-emerald-500/20 text-emerald-400 hover:bg-emerald-950/20 hover:text-emerald-300 font-bold h-10 cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              <Sparkles className="size-4" />
+              Consult AI Tactician
             </Button>
           </div>
         </div>
@@ -482,6 +521,95 @@ export function TacticalPuzzleBoard({
           </Card>
         </div>
       )}
+
+      {/* AI Tactician Modal */}
+      <Dialog open={isAiDiagOpen} onOpenChange={setIsAiDiagOpen}>
+        <DialogContent className="max-w-2xl bg-zinc-950/95 border-zinc-800 text-zinc-100 shadow-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+              <Sparkles className="size-5 text-emerald-400" />
+              AI Tactician Advisor
+            </DialogTitle>
+            <DialogDescription className="text-zinc-400 text-xs mt-1 leading-relaxed">
+              Copy the game status context below and paste it into a Generative
+              AI (e.g. Gemini, ChatGPT, Claude) to get step-by-step tactical
+              advice on how to clear this stage.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4 py-2">
+            <div className="relative">
+              <textarea
+                value={aiPromptText}
+                readOnly
+                className="w-full h-80 p-3 bg-black/60 border border-zinc-800/80 rounded-lg font-mono text-[10px] text-zinc-300 resize-none outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50"
+              />
+              <div className="absolute top-2 right-2 flex gap-1">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => handleCopyPrompt(aiPromptText)}
+                  className="h-8 px-2.5 text-xs font-bold flex items-center gap-1 cursor-pointer bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-zinc-200"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="size-3 text-green-400" />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="size-3" />
+                      Copy Prompt
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
+
+            <div className="p-3 bg-zinc-900/40 border border-zinc-800/50 rounded-lg">
+              <h4 className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">
+                💡 How to use:
+              </h4>
+              <p className="text-[11px] text-zinc-400 leading-normal">
+                1. Click the "Copy Prompt" button above to copy the formatted
+                tactical context.
+                <br />
+                2. Open your preferred AI assistant in your browser (e.g.,{' '}
+                <a
+                  href="https://gemini.google.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-emerald-400 hover:underline"
+                >
+                  Gemini
+                </a>
+                ,{' '}
+                <a
+                  href="https://chatgpt.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-emerald-400 hover:underline"
+                >
+                  ChatGPT
+                </a>
+                ).
+                <br />
+                3. Paste the prompt and press Enter. The AI will act as a
+                military strategist to guide your moves.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-2 border-t border-zinc-800/40">
+            <Button
+              onClick={() => setIsAiDiagOpen(false)}
+              className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs cursor-pointer px-6"
+            >
+              Done
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

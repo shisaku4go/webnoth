@@ -16,6 +16,8 @@ import {
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { wesnothAssetUrl } from '@/lib/asset-url';
 
+export { parseCell } from '@/lib/tactical-puzzle/pathfinder';
+
 // Register Pixi elements for React
 extend({ Sprite, Container, Graphics, Text });
 
@@ -32,29 +34,6 @@ export function getHexPosition(col: number, row: number) {
   const x = col * 54;
   const y = row * 72 + (col % 2 === 1 ? 36 : 0);
   return { x, y };
-}
-
-// Parse WML map cell (e.g. "Gs^Fms" or "2 Khr")
-export function parseCell(cell: string): {
-  startPos?: string;
-  baseCode: string;
-  overlayCode?: string;
-} {
-  const trimmed = cell.trim();
-  const parts = trimmed.split(/\s+/);
-  let terrainPart = trimmed;
-  let startPos: string | undefined;
-
-  if (parts.length > 1) {
-    startPos = parts[0];
-    terrainPart = parts[1];
-  }
-
-  const tParts = terrainPart.split('^');
-  const baseCode = tParts[0];
-  const overlayCode = tParts[1];
-
-  return { startPos, baseCode, overlayCode };
 }
 
 // Get human readable name of a terrain code

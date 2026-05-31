@@ -1,10 +1,32 @@
 import { terrains } from '@webnoth/wesnoth-data/terrains';
-import { parseCell } from '@/components/map-viewer/MapViewer';
 import {
   getEffectiveMoveCosts,
   getMovetypeByName,
   getUnitById,
 } from '@/lib/wesnoth-data';
+
+// Parse WML map cell (e.g. "Gs^Fms" or "2 Khr")
+export function parseCell(cell: string): {
+  startPos?: string;
+  baseCode: string;
+  overlayCode?: string;
+} {
+  const trimmed = cell.trim();
+  const parts = trimmed.split(/\s+/);
+  let terrainPart = trimmed;
+  let startPos: string | undefined;
+
+  if (parts.length > 1) {
+    startPos = parts[0];
+    terrainPart = parts[1];
+  }
+
+  const tParts = terrainPart.split('^');
+  const baseCode = tParts[0];
+  const overlayCode = tParts[1];
+
+  return { startPos, baseCode, overlayCode };
+}
 
 export interface TacticalUnitState {
   id: string;
